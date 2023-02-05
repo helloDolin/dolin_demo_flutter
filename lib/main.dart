@@ -1,7 +1,58 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:dolin_demo_flutter/pages/arena.dart';
+import 'package:dolin_demo_flutter/pages/async.dart';
+import 'package:dolin_demo_flutter/pages/customPaint.dart';
+import 'package:dolin_demo_flutter/pages/home.dart';
+import 'package:dolin_demo_flutter/pages/scrollView.dart';
+import 'package:dolin_demo_flutter/pages/unknow.dart';
+import 'package:provider/provider.dart';
+
+void main() async {
+  // 捕获 Flutter 应用中的未处理异常
+  runZonedGuarded<void>(
+    () async {
+      // 某些插件（如sqflite）需要使用WidgetsFlutterBinding.ensureInitialized（）方法，因为它们需要访问特定于平台的通道才能正常工作。这就是为什么ensureInitialized（）方法经常放在Flutter应用的main（）函数中
+      WidgetsFlutterBinding.ensureInitialized();
+      FlutterError.onError = (details) {
+        // Zone.current.handleUncaughtError(details.exception, details.stack);
+        Zone.current.handleUncaughtError(
+            details.exception, StackTrace.fromString(details.stack.toString()));
+      };
+      // debugPaintSizeEnabled = true; // 打开 Debug Painting 调试开关
+      runApp(MyApp());
+    },
+    (error, stackTrace) {
+      // captureException(
+      //   exception: error,
+      //   stackTrace: stackTrace,
+      // );
+    },
+  );
+
+  // runZoned<Future<Null>>(() async {
+  //   debugPaintSizeEnabled = true; // 打开 Debug Painting 调试开关
+  //   runApp(MyApp());
+  // }, onError: (error, stackTrace) async {
+  //   //Do sth for error
+  // });
+}
+
+// 定义需要共享的数据模型，通过混入 ChangeNotifier 管理听众
+class CounterModel with ChangeNotifier {
+  int _count = 0;
+  // 读方法
+  int get counter => _count;
+  // 写方法
+  void increment() {
+    _count++;
+    notifyListeners(); // 通知听众刷新
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -10,9 +61,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    // iOS 浅色主题
+    final ThemeData kIOSTheme = ThemeData(
+        brightness: Brightness.light, // 亮色主题
+        accentColor: Colors.white, //(按钮)Widget 前景色为白色
+        primaryColor: Colors.blue, // 主题色为蓝色
+        iconTheme: IconThemeData(color: Colors.grey), //icon 主题为灰色
+        textTheme:
+            TextTheme(bodyText2: TextStyle(color: Colors.black)) // 文本主题为黑色
+        );
+    // Android 深色主题
+    final ThemeData kAndroidTheme = ThemeData(
+        brightness: Brightness.dark, // 深色主题
+        accentColor: Colors.black, //(按钮)Widget 前景色为黑色
+        primaryColor: Colors.cyan, // 主题色 Wie 青色
+        iconTheme: IconThemeData(color: Colors.blue), //icon 主题色为蓝色
+        textTheme:
+            TextTheme(bodyText2: TextStyle(color: Colors.red)) // 文本主题色为红色
+        );
+
+    final DefaultThemeData = ThemeData(
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -22,94 +90,42 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        // brightness: Brightness.dark, // 明暗模式为暗色
+        primarySwatch: Colors.cyan, // 导航栏颜色
+        primaryColor: Colors.cyan, // 主色调为青色
+        iconTheme: IconThemeData(color: Colors.yellow), // 设置 icon 主题色为黄色
+        textTheme:
+            TextTheme(bodyText2: TextStyle(color: Colors.black87)) // 设置文本颜色为红色
+        );
+    // 既然 Provider 是 InheritedWidget 的语法糖，
+    // 因此它也是一个 Widget。所以，我们直接在 MaterialApp 的外
+    // 层使用 Provider 进行包装，就可以把数据资源依赖注入到应用中
+    return ScreenUtilInit(
+        designSize: const Size(360, 690),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return ChangeNotifierProvider.value(
+              value: CounterModel(),
+              child: MaterialApp(
+                debugShowCheckedModeBanner: true,
+                title: 'Flutter Demo',
+                theme: defaultTargetPlatform == TargetPlatform.iOS
+                    ? kIOSTheme
+                    : kAndroidTheme, // 根据平台选择不同主题
+                // 路由表实际上是一个 Map<String,WidgetBuilder>
+                routes: {
+                  '/': (context) => HomePage(),
+                  '/scrollViewPage': (context) => const ScrollViewPage(),
+                  '/customPaintPage': (context) => const CustomPaintPage(),
+                  '/arenaPage': (context) => const ArenaPage(),
+                  '/asyncPage': (context) => const AsyncPage(),
+                },
+                // 错误路由处理，统一返回 UnknownPage
+                onUnknownRoute: (RouteSettings setting) =>
+                    MaterialPageRoute(builder: (context) => const UnKnowPage()),
+                initialRoute: '/',
+              ));
+        });
   }
 }
