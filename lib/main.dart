@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:ui';
 
+import 'package:dolin_demo_flutter/util/fps.dart';
+import 'package:dolin_demo_flutter/util/pv_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dolin_demo_flutter/pages/arena.dart';
@@ -17,30 +19,29 @@ void main() async {
   // 捕获 Flutter 应用中的未处理异常
   runZonedGuarded<void>(
     () async {
-      // 某些插件（如sqflite）需要使用WidgetsFlutterBinding.ensureInitialized（）方法，因为它们需要访问特定于平台的通道才能正常工作。这就是为什么ensureInitialized（）方法经常放在Flutter应用的main（）函数中
-      WidgetsFlutterBinding.ensureInitialized();
-      FlutterError.onError = (details) {
-        // Zone.current.handleUncaughtError(details.exception, details.stack);
+      // 某些插件（如sqflite）需要使用WidgetsFlutterBinding.ensureInitialized（）方法
+      // 因为它们需要访问特定于平台的通道才能正常工作。这就是为什么ensureInitialized（）方法经常放在Flutter应用的main（）函数中
+      // WidgetsFlutterBinding就是一个胶水类，用于初始化其他with的minxin类
+      WidgetsFlutterBinding.ensureInitialized()
+          .addTimingsCallback(onReportTimings); // 设置帧回调函数并保存原始帧回调函数
+
+      FlutterError.onError = (FlutterErrorDetails details) async {
+        // 将异常转发至 Zone
         Zone.current.handleUncaughtError(
             details.exception, StackTrace.fromString(details.stack.toString()));
       };
+
       // debugPaintSizeEnabled = true; // 打开 Debug Painting 调试开关
-      runApp(MyApp());
+      runApp(const MyApp());
+
+      // orginalCallback = window.onReportTimings;
+      // window.onReportTimings = onReportTimings;
     },
-    (error, stackTrace) {
-      // captureException(
-      //   exception: error,
-      //   stackTrace: stackTrace,
-      // );
+    (error, stackTrace) async {
+      // 拦截异常
+      await reportError(error, stackTrace);
     },
   );
-
-  // runZoned<Future<Null>>(() async {
-  //   debugPaintSizeEnabled = true; // 打开 Debug Painting 调试开关
-  //   runApp(MyApp());
-  // }, onError: (error, stackTrace) async {
-  //   //Do sth for error
-  // });
 }
 
 // 定义需要共享的数据模型，通过混入 ChangeNotifier 管理听众
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
             TextTheme(bodyText2: TextStyle(color: Colors.red)) // 文本主题色为红色
         );
 
-    final DefaultThemeData = ThemeData(
+    final ThemeData defaultThemeData = ThemeData(
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -93,9 +94,9 @@ class MyApp extends StatelessWidget {
         // brightness: Brightness.dark, // 明暗模式为暗色
         primarySwatch: Colors.cyan, // 导航栏颜色
         primaryColor: Colors.cyan, // 主色调为青色
-        iconTheme: IconThemeData(color: Colors.yellow), // 设置 icon 主题色为黄色
-        textTheme:
-            TextTheme(bodyText2: TextStyle(color: Colors.black87)) // 设置文本颜色为红色
+        iconTheme: const IconThemeData(color: Colors.yellow), // 设置 icon 主题色为黄色
+        textTheme: const TextTheme(
+            bodyText2: TextStyle(color: Colors.black87)) // 设置文本颜色为红色
         );
     // 既然 Provider 是 InheritedWidget 的语法糖，
     // 因此它也是一个 Widget。所以，我们直接在 MaterialApp 的外
@@ -108,6 +109,9 @@ class MyApp extends StatelessWidget {
           return ChangeNotifierProvider.value(
               value: CounterModel(),
               child: MaterialApp(
+                navigatorObservers: [
+                  MyObserver(),
+                ],
                 debugShowCheckedModeBanner: true,
                 title: 'Flutter Demo',
                 theme: defaultTargetPlatform == TargetPlatform.iOS
