@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -49,11 +51,11 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
                           _isShowAll = !_isShowAll;
                         });
                       },
-                      child: Text('展开'),
+                      child: const Text('展开'),
                     )),
               ],
             ),
-            Cake()
+            const Cake()
           ],
         ),
       ),
@@ -101,10 +103,12 @@ class WheelPainter extends CustomPainter {
 
 // 将饼图包装成一个新的控件
 class Cake extends StatelessWidget {
+  const Cake({super.key});
+
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      size: Size(200, 200),
+      size: const Size(200, 200),
       painter: WheelPainter(),
     );
   }

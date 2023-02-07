@@ -1,10 +1,9 @@
+import 'package:dolin_demo_flutter/util/randomColor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../main.dart';
-
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -19,28 +18,30 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(_title),
       ),
-      body: Column(
-        children: [
-          Card('scrollView', () {
-            Navigator.pushNamed(context, '/scrollViewPage',
-                arguments: {'key': 'value'}).then((value) {
-              if (value != null) {
-                setState(() {
-                  _title = value.toString();
+      body: SingleChildScrollView(
+          padding: const EdgeInsets.only(top: 10),
+          child: Column(
+            children: [
+              Card('scrollView', () {
+                Navigator.pushNamed(context, '/scrollViewPage',
+                    arguments: {'key': 'value'}).then((value) {
+                  if (value != null) {
+                    setState(() {
+                      _title = value.toString();
+                    });
+                  }
                 });
-              }
-            });
-          }),
-          Card('customPaintPage', () {
-            // final _counter = Provider.of<CounterModel>(context, listen: true);
-            // print(_counter.counter);
-            Navigator.pushNamed(context, '/customPaintPage');
-          }),
-          Card('asyncPage', () {
-            Navigator.pushNamed(context, '/asyncPage');
-          }),
-        ],
-      ),
+              }),
+              Card('customPaintPage', () {
+                // final _counter = Provider.of<CounterModel>(context, listen: true);
+                // print(_counter.counter);
+                Navigator.pushNamed(context, '/customPaintPage');
+              }),
+              Card('asyncPage', () {
+                Navigator.pushNamed(context, '/asyncPage');
+              }),
+            ],
+          )),
     );
   }
 }
@@ -55,10 +56,11 @@ class Card extends StatelessWidget {
     return GestureDetector(
         onTap: onTap,
         child: Container(
-          margin: const EdgeInsets.only(bottom: 10),
+          margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.red, width: 0.5),
+            border: Border.all(color: getRandomColor(), width: 0.5),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
           height: 44,

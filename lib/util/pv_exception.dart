@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 int exceptionCount = 0;
-Future<Null> reportError(dynamic error, dynamic stackTrace) async {
+Future<void> reportError(dynamic error, dynamic stackTrace) async {
   exceptionCount++; //累加异常次数
 }
 

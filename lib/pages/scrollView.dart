@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import '../util/number.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,30 +41,30 @@ class _ScrollViewPageState extends State<ScrollViewPage> {
     super.dispose();
   }
 
-  void printScreenInformation() {
-    print(30.rpx);
+  void debugPrintScreenInformation() {
+    debugPrint(30.rpx.toString());
 
-    print('设备宽度:${ScreenUtil().screenWidth}'); //Device width
-    print('设备高度:${ScreenUtil().screenHeight}'); //Device height
-    print('设备的像素密度:${ScreenUtil().pixelRatio}'); //Device pixel density
-    print(
+    debugPrint('设备宽度:${ScreenUtil().screenWidth}'); //Device width
+    debugPrint('设备高度:${ScreenUtil().screenHeight}'); //Device height
+    debugPrint('设备的像素密度:${ScreenUtil().pixelRatio}'); //Device pixel density
+    debugPrint(
       '底部安全区距离:${ScreenUtil().bottomBarHeight}dp',
     ); //Bottom safe zone distance，suitable for buttons with full screen
-    print(
+    debugPrint(
       '状态栏高度:${ScreenUtil().statusBarHeight}dp',
     ); //Status bar height , Notch will be higher Unit px
-    print('实际宽度的dp与设计稿px的比例:${ScreenUtil().scaleWidth}');
-    print('实际高度的dp与设计稿px的比例:${ScreenUtil().scaleHeight}');
-    // print(
+    debugPrint('实际宽度的dp与设计稿px的比例:${ScreenUtil().scaleWidth}');
+    debugPrint('实际高度的dp与设计稿px的比例:${ScreenUtil().scaleHeight}');
+    // debugPrint(
     //   '宽度和字体相对于设计稿放大的比例:${ScreenUtil().scaleWidth * ScreenUtil().pixelRatio}',
     // );
-    // print(
+    // debugPrint(
     //   '高度相对于设计稿放大的比例:${ScreenUtil().scaleHeight * ScreenUtil().pixelRatio}',
     // );
-    print('系统的字体缩放比例:${ScreenUtil().textScaleFactor}');
+    debugPrint('系统的字体缩放比例:${ScreenUtil().textScaleFactor}');
 
-    print('屏幕宽度的0.5:${0.5.sw}');
-    print('屏幕高度的0.5:${0.5.sh}');
+    debugPrint('屏幕宽度的0.5:${0.5.sw}');
+    debugPrint('屏幕高度的0.5:${0.5.sh}');
   }
 
   @override
@@ -75,12 +77,12 @@ class _ScrollViewPageState extends State<ScrollViewPage> {
           children: [
             InkWell(
               onTap: () {
-                // if (_isToTop) {
-                //   printScreenInformation();
-                //   _controller.animateTo(.0,
-                //       duration: const Duration(milliseconds: 200),
-                //       curve: Curves.ease); // 做一个滚动到顶部的动画
-                // }
+                if (_isToTop) {
+                  debugPrintScreenInformation();
+                  _controller.animateTo(.0,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.ease); // 做一个滚动到顶部的动画
+                }
                 Navigator.pop(context, 'scrollView 回调');
               },
               child: const Padding(
@@ -94,14 +96,14 @@ class _ScrollViewPageState extends State<ScrollViewPage> {
                       // 注册通知回调
                       if (scrollNotification is ScrollStartNotification) {
                         // 滚动开始
-                        print('Scroll Start');
+                        debugPrint('Scroll Start');
                       } else if (scrollNotification
                           is ScrollUpdateNotification) {
                         // 滚动位置更新
-                        print('Scroll Update');
+                        debugPrint('Scroll Update');
                       } else if (scrollNotification is ScrollEndNotification) {
                         // 滚动结束
-                        print('Scroll End');
+                        debugPrint('Scroll End');
                       }
                       return true;
                     },

@@ -13,7 +13,7 @@ class _ArenaPageState extends State<ArenaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ArenaPage'),
+        title: const Text('ArenaPage'),
       ),
       body: Column(
         children: [
@@ -26,7 +26,7 @@ class _ArenaPageState extends State<ArenaPage> {
                       MultipleTapGestureRecognizer>(
                 () => MultipleTapGestureRecognizer(),
                 (MultipleTapGestureRecognizer instance) {
-                  instance.onTap = () => print('parent tapped '); // 点击回调
+                  instance.onTap = () => debugPrint('parent tapped '); // 点击回调
                 },
               )
             },
@@ -35,7 +35,7 @@ class _ArenaPageState extends State<ArenaPage> {
               child: Center(
                 child: GestureDetector(
                   // 子视图可以继续使用 GestureDetector
-                  onTap: () => print('Child tapped'),
+                  onTap: () => debugPrint('Child tapped'),
                   child: Container(
                     color: Colors.blueAccent,
                     width: 200.0,
