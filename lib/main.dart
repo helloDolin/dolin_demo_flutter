@@ -1,16 +1,12 @@
 import 'dart:async';
 
+import 'package:dolin_demo_flutter/config.dart';
 import 'package:dolin_demo_flutter/util/fps.dart';
 import 'package:dolin_demo_flutter/util/pv_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:dolin_demo_flutter/pages/arena.dart';
-import 'package:dolin_demo_flutter/pages/async.dart';
-import 'package:dolin_demo_flutter/pages/customPaint.dart';
-import 'package:dolin_demo_flutter/pages/home.dart';
-import 'package:dolin_demo_flutter/pages/scrollView.dart';
 import 'package:dolin_demo_flutter/pages/unknow.dart';
 import 'package:provider/provider.dart';
 
@@ -60,8 +56,8 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return ChangeNotifierProvider.value(
-              value: CounterModel(),
+          return ChangeNotifierProvider(
+              create: (_) => CounterModel(),
               child: MaterialApp(
                 navigatorObservers: [
                   MyObserver(),
@@ -71,14 +67,7 @@ class MyApp extends StatelessWidget {
                 theme: defaultTargetPlatform == TargetPlatform.iOS
                     ? kIOSTheme
                     : kAndroidTheme, // 根据平台选择不同主题
-                routes: {
-                  // 路由表实际上是一个 Map<String,WidgetBuilder>
-                  '/': (context) => const HomePage(),
-                  '/scrollViewPage': (context) => const ScrollViewPage(),
-                  '/customPaintPage': (context) => const CustomPaintPage(),
-                  '/arenaPage': (context) => const ArenaPage(),
-                  '/asyncPage': (context) => const AsyncPage(),
-                },
+                routes: appRoutes,
                 // 错误路由处理，统一返回 UnknownPage
                 onUnknownRoute: (RouteSettings setting) =>
                     MaterialPageRoute(builder: (context) => const UnKnowPage()),

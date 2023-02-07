@@ -1,3 +1,4 @@
+import 'package:dolin_demo_flutter/model/counter.dart';
 import 'package:dolin_demo_flutter/util/randomColor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('homne build');
     return Scaffold(
       appBar: AppBar(
         title: Text(_title),
@@ -33,13 +35,13 @@ class _HomePageState extends State<HomePage> {
                 });
               }),
               Card('customPaintPage', () {
-                // final _counter = Provider.of<CounterModel>(context, listen: true);
-                // print(_counter.counter);
                 Navigator.pushNamed(context, '/customPaintPage');
               }),
               Card('asyncPage', () {
                 Navigator.pushNamed(context, '/asyncPage');
               }),
+              Text(
+                  'couter count 为：${Provider.of<CounterModel>(context).counter.toString()}')
             ],
           )),
     );

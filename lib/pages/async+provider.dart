@@ -60,19 +60,20 @@ class _AsyncPageState extends State<AsyncPage> {
 
   @override
   Widget build(BuildContext context) {
+    final counter = Provider.of<CounterModel>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('AsyncPage'),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // test3();
-            final _counter = Provider.of<CounterModel>(context, listen: true);
-            _counter.increment;
-          },
-          child: const Text('test'),
-        ),
+        child: Text(counter.counter.toString()),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          counter.increment();
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

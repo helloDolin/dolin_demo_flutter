@@ -9,7 +9,7 @@ final ThemeData kIOSTheme = ThemeData(
     primaryColor: Colors.blue, // 主题色为蓝色
     iconTheme: const IconThemeData(color: Colors.grey), //icon 主题为灰色
     textTheme: const TextTheme(
-        bodyText2: TextStyle(color: Colors.black, fontSize: 16)) // 文本主题为红色
+        bodyText2: TextStyle(color: Colors.black, fontSize: 25)) // 文本主题为红色
     );
 
 // Android 深色主题
