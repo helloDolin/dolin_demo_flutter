@@ -2,6 +2,7 @@
 
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 // CustomPaint 是用以承接自绘控件的容器，并不负责真正的绘制
@@ -15,6 +16,28 @@ class CustomPaintPage extends StatefulWidget {
 
 class _CustomPaintPageState extends State<CustomPaintPage> {
   bool _isShowAll = false;
+  final String showText =
+      '做这个demo思路来源于微信team的：微信iOS卡顿监控系统。主要思路:通过监测Runloop的kCFRunLoopAfterWaiting，用一个子线程去检查，一次循环是否时间太长。其中主要涉及到了runloop的原理。关于整个原理：深入理解RunLoop讲解的比较仔细。';
+
+  // ignore: slash_for_doc_comments
+  /**
+   * @name: getTextPainter
+   * @description: 获取TextPainter小控件属性
+   * @param {*}
+   * @return {*}
+  */
+  getTextPainter(BuildContext context, String text, TextStyle style,
+      double maxWidth, int maxLines) {
+    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final TextPainter textPainter = TextPainter(
+        locale: WidgetsBinding.instance.window.locale,
+        text: TextSpan(text: text, style: style),
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        textDirection: TextDirection.ltr)
+      ..layout(minWidth: 0, maxWidth: maxWidth);
+    return textPainter;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +53,20 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
               width: 100,
               height: 100,
             ),
+            RichText(
+                text: TextSpan(
+                    text: 'recognizer 为手势识别者，可设置点击事件，',
+                    style: const TextStyle(fontSize: 17.0, color: Colors.black),
+                    children: <TextSpan>[
+                  TextSpan(
+                      text: '点我试试',
+                      style:
+                          const TextStyle(fontSize: 17.0, color: Colors.blue),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          debugPrint('123');
+                        })
+                ])),
             Stack(
               children: [
                 if (_isShowAll)

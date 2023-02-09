@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return ChangeNotifierProvider(
+          return ChangeNotifierProvider<CounterModel>(
               create: (_) => CounterModel(),
               child: MaterialApp(
                 navigatorObservers: [

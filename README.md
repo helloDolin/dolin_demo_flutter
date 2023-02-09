@@ -253,7 +253,16 @@ Flutter 实例的初始化成本非常高昂，每启动一个 Flutter 实例，
 
 我们既可以用 Provider 来实现静态的数据读传递，也可以使用 ChangeNotifierProvider 来实现动态的数据读写传递，还可以通过 MultiProvider 来实现多个数据资源的共享。
 
-在具体使用数据时，Provider.of 和 Consumer 都可以实现数据的读取，并且 Consumer 还可以控制 UI 刷新的粒度，避免与数据无关的组件的无谓刷新。
+在具体使用数据时，Provider.of 和 Consumer 都可以实现数据的读取，并且 Consumer 还可以控制 UI 刷新的粒度，避免与数据无关的组件的无谓刷新
+
+常用的提供者：
+* ChangeNotifierProvider （值改变会更新 UI）
+* Provider（值改变不会更新 UI）
+* ChangeNotifierProxyProvider （有依赖关系的 provider）
+
+常用的消费者：
+* Provider.of
+* Consumer
 
 ## 编译模式
 Dart 提供的编译常数
