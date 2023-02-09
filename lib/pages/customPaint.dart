@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // CustomPaint 是用以承接自绘控件的容器，并不负责真正的绘制
 
@@ -16,8 +17,11 @@ class CustomPaintPage extends StatefulWidget {
 
 class _CustomPaintPageState extends State<CustomPaintPage> {
   bool _isShowAll = false;
-  final String showText =
+  final String _showText =
       '做这个demo思路来源于微信team的：微信iOS卡顿监控系统。主要思路:通过监测Runloop的kCFRunLoopAfterWaiting，用一个子线程去检查，一次循环是否时间太长。其中主要涉及到了runloop的原理。关于整个原理：深入理解RunLoop讲解的比较仔细。';
+  final TextStyle _showTextStyle =
+      const TextStyle(fontSize: 17.0, color: Colors.black);
+  final int _showTextMaxLines = 3;
 
   // ignore: slash_for_doc_comments
   /**
@@ -40,6 +44,21 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
   }
 
   @override
+  void initState() {
+    // 第一帧绘制结束回调
+    WidgetsBinding.instance.addPostFrameCallback((Duration d) {
+      debugPrint('第一帧回调$d');
+      TextPainter textP = getTextPainter(context, _showText, _showTextStyle,
+          ScreenUtil().screenWidth, _showTextMaxLines);
+      debugPrint(textP.size.toString());
+      _isShowAll = textP.didExceedMaxLines;
+      setState(() {});
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,45 +72,21 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
               width: 100,
               height: 100,
             ),
-            RichText(
-                text: TextSpan(
-                    text: 'recognizer 为手势识别者，可设置点击事件，',
-                    style: const TextStyle(fontSize: 17.0, color: Colors.black),
-                    children: <TextSpan>[
-                  TextSpan(
-                      text: '点我试试',
-                      style:
-                          const TextStyle(fontSize: 17.0, color: Colors.blue),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          debugPrint('123');
-                        })
-                ])),
-            Stack(
-              children: [
-                if (_isShowAll)
-                  const Text(
-                    '我的思路这样，先自定义一个statefulwidget，里面用过一个变量控制两个text，因为text是statelesswidget，无法动态去刷新，一个widget设置Maxlines=2，另一个不设置，more是一个floatbutton，点击事件里面实现setstate改变先前定义的变量就行了',
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                if (!_isShowAll)
-                  const Text(
-                    '我的思路这样，先自定义一个statefulwidget，里面用过一个变量控制两个text，因为text是statelesswidget，无法动态去刷新，一个widget设置Maxlines=2，另一个不设置，more是一个floatbutton，点击事件里面实现setstate改变先前定义的变量就行了',
-                  ),
-                Positioned(
-                    bottom: 3,
-                    right: 3,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          _isShowAll = !_isShowAll;
-                        });
-                      },
-                      child: const Text('展开'),
-                    )),
-              ],
-            ),
+            if (_isShowAll)
+              RichText(
+                  text: TextSpan(
+                      text: _showText,
+                      style: _showTextStyle,
+                      children: <TextSpan>[
+                    TextSpan(
+                        text: _isShowAll ? '隐藏' : '展开',
+                        style:
+                            const TextStyle(fontSize: 17.0, color: Colors.blue),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            debugPrint('123');
+                          })
+                  ])),
             const Cake()
           ],
         ),
