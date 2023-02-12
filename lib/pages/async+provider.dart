@@ -73,6 +73,7 @@ class _AsyncPageState extends State<AsyncPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          test3();
           counter.increment();
         },
         child: const Icon(Icons.add),

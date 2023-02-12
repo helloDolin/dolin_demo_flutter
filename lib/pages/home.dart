@@ -38,7 +38,10 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pushNamed(context, '/customPaintPage');
               }),
               Card('asyncPage', () {
-                Navigator.pushNamed(context, '/asyncPage');
+                Navigator.pushNamed(context, '/async+provider');
+              }),
+              Card('arenaPage', () {
+                Navigator.pushNamed(context, '/arenaPage');
               }),
               Text(
                   'couter count 为：${Provider.of<CounterModel>(context).counter.toString()}')
