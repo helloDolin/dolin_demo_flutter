@@ -1,3 +1,4 @@
+import 'package:dolin_demo_flutter/pages/bloc_practice/blocPage.dart';
 import 'package:flutter/material.dart';
 import 'package:dolin_demo_flutter/pages/arena.dart';
 import 'package:dolin_demo_flutter/pages/async+provider.dart';
@@ -12,4 +13,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/customPaintPage': (context) => const CustomPaintPage(),
   '/arenaPage': (context) => const ArenaPage(),
   '/async+provider': (context) => const AsyncPage(),
+  '/blocPage': (context) => const BlocPage(),
 };

@@ -18,8 +18,8 @@ void onReportTimings(List<FrameTiming> timings) {
   if (lastFrames.length > maxframes) {
     lastFrames.removeRange(0, lastFrames.length - maxframes);
   }
-
-  debugPrint("fps : $fps");
+  // 暂时注释掉，影响看控制台打印内容
+  // debugPrint("fps : $fps");
 }
 
 double get fps {
