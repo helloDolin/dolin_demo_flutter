@@ -60,38 +60,6 @@ class _AsyncPageState extends State<AsyncPage> {
     debugPrint('f12');
   }
 
-  // async*是“异步生成器函数”，它必须始终返回Stream<T>，并使用yield将值add到流中。不能在async*函数中使用return关键字
-  // sync*是一个dart语法关键字。它标注在函数{ 之前，其方法必须返回一个 Iterable<T>对象 👿 的码为\u{1f47f}。下面是使用sync*生成后10个emoji迭代(Iterable)对象的方法
-  Iterable<String> getEmoji(int count) sync* {
-    Runes first = Runes('\u{1f47f}');
-    for (int i = 0; i < count; i++) {
-      yield String.fromCharCodes(first.map((e) => e + i));
-    }
-  }
-
-  // yield*后面的表达式是一个Iterable<T>对象
-  Iterable<String> getEmojiWithTime(int count) sync* {
-    yield* getEmoji(count)
-        .map((e) => '$e -- ${DateTime.now().toIso8601String()}');
-  }
-
-  // async*是一个dart语法关键字。它标注在函数{ 之前，其方法必须返回一个 Stream<T>对象
-  // 下面fetchEmojis被async*标注，所以返回的必然是Stream对象
-  // 注意被async*标注的函数，可以在其内部使用yield、yield*、await关键字
-  Stream<String> fetchEmojis(int count) async* {
-    for (int i = 0; i < count; i++) {
-      yield await fetchEmoji(i);
-    }
-  }
-
-  Future<String> fetchEmoji(int count) async {
-    Runes first = Runes('\u{1f47f}');
-    print('加载开始--${DateTime.now().toIso8601String()}');
-    await Future.delayed(Duration(seconds: 2)); //模拟耗时
-    print('加载结束--${DateTime.now().toIso8601String()}');
-    return String.fromCharCodes(first.map((e) => e + count));
-  }
-
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<CounterModel>(context, listen: true);
@@ -105,12 +73,8 @@ class _AsyncPageState extends State<AsyncPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // getEmoji(10).forEach(print);
-          // getEmojiWithTime(10).forEach(print);
-          fetchEmojis(10).listen(print);
-
-          // test3();
-          // counter.increment();
+          test3();
+          counter.increment();
         },
         child: const Icon(Icons.add),
       ),

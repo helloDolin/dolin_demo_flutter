@@ -5,6 +5,7 @@ import 'package:dolin_demo_flutter/pages/async+provider.dart';
 import 'package:dolin_demo_flutter/pages/customPaint.dart';
 import 'package:dolin_demo_flutter/pages/home.dart';
 import 'package:dolin_demo_flutter/pages/scrollView.dart';
+import 'package:dolin_demo_flutter/pages/yield_study/page.dart' as yield_study;
 
 // 路由表实际上是一个 Map<String,WidgetBuilder>
 final Map<String, WidgetBuilder> appRoutes = {
@@ -14,4 +15,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/arenaPage': (context) => const ArenaPage(),
   '/async+provider': (context) => const AsyncPage(),
   '/blocPage': (context) => const BlocPage(),
+  '/yiledStudy': (context) => const yield_study.Page(),
 };

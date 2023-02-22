@@ -11,6 +11,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
   final Ticker _ticker;
   static const int _duration = 60;
 
+  // 订阅
   StreamSubscription<int>? _tickerSubscription;
 
   // 后面的部分:称为"初始化列表.它是一个,分离的表达式列表,可以访问构造函数参数,
