@@ -31,7 +31,7 @@ class Page extends StatelessWidget {
 
   Stream<int> generate2(int count) async* {
     for (int i = 0; i < count; i++) {
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(const Duration(seconds: 1));
       yield i;
     }
   }
@@ -40,7 +40,7 @@ class Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('yield study'),
+        title: const Text('yield study'),
       ),
       body: Column(
         children: [
@@ -48,8 +48,8 @@ class Page extends StatelessWidget {
               onPressed: () {
                 getList(10).forEach(print);
               },
-              child: Text('yield 同步')),
-          SizedBox(
+              child: const Text('yield 同步')),
+          const SizedBox(
             height: 30,
           ),
           ElevatedButton(
@@ -57,7 +57,7 @@ class Page extends StatelessWidget {
                 // getList2(10).forEach(print);
                 getList2(10).listen(print);
               },
-              child: Text('yield 异步'))
+              child: const Text('yield 异步'))
         ],
       ),
     );
