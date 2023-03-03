@@ -109,13 +109,17 @@ iOS 的布局更少，只有 Frame 布局和自动布局两种
 
 对于主轴而言，Flutter 默认是让父容器决定其长度，即尽可能大，类似 Android 中的 match_parent
 
-Column：宽度等于子元素最大宽度
+Column：宽度等于子元素最大宽度，可以通过设置交叉轴 stretch，让交叉轴方向宽拉长
 Container：紧包裹子元素 
 
 松约束：区间值 eg： width >=0 <= 屏幕宽
 紧约束：ConstrainedBox：constraints 约束
 
 unbounded 组件：Row Column ListView
+
+Spacer() 留白，撑开
+
+Align：alignment:const FractionalOffset(0.5.0.5) // 居中，（0,0）左上角
 
 ![image][主轴_max_min]
 
