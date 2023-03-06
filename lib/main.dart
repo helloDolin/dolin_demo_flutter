@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dolin_demo_flutter/config.dart';
+import 'package:dolin_demo_flutter/routes.dart';
 import 'package:dolin_demo_flutter/util/fps.dart';
 import 'package:dolin_demo_flutter/util/pv_exception.dart';
 import 'package:flutter/foundation.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dolin_demo_flutter/pages/unknow.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'model/counter.dart';
@@ -58,7 +59,8 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return ChangeNotifierProvider<CounterModel>(
               create: (_) => CounterModel(),
-              child: MaterialApp(
+              child: GetMaterialApp(
+                  home: MaterialApp(
                 navigatorObservers: [
                   MyObserver(),
                 ],
@@ -72,7 +74,7 @@ class MyApp extends StatelessWidget {
                 onUnknownRoute: (RouteSettings setting) =>
                     MaterialPageRoute(builder: (context) => const UnKnowPage()),
                 initialRoute: '/',
-              ));
+              )));
         });
   }
 }

@@ -49,6 +49,9 @@ class _HomePageState extends State<HomePage> {
               Card('yiledStudy', () {
                 Navigator.pushNamed(context, '/yiledStudy');
               }),
+              Card('GetXStudy', () {
+                Navigator.pushNamed(context, '/getxStudy');
+              }),
               Text(
                   'couter count 为：${Provider.of<CounterModel>(context).counter.toString()}')
             ],
