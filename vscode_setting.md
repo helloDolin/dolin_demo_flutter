@@ -8,7 +8,7 @@ cmd + shift + p
     "dart.flutterSdkPath": "/Users/liaoshaolin/dev/flutter_sdk/3.3.10",
     "workbench.iconTheme": "material-icon-theme",
     "files.autoSaveDelay": 3000,
-    "dart.runPubGetOnPubspecChanges": false,
+    "dart.runPubGetOnPubspecChanges": "never",
     // off 为： 提示补全代码，只能按 Tab 完成（防止按 Enter 自动补全括号的烦恼）
     "editor.acceptSuggestionOnEnter": "on",
     // 关闭自动补全括号

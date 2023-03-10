@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import 'package:dolin_demo_flutter/model/counter.dart';
+import 'package:dolin_demo_flutter/models/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

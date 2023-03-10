@@ -48,6 +48,7 @@ class ShoppingCart extends Meta with PrintHelper {
 
   ShoppingCart.withCode({name, required this.code})
       : date = DateTime.now(),
+        assert(name != null, '123'),
         super(name, 0);
 
   // 默认初始化函数，转发至 withCode 函数
