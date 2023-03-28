@@ -1,22 +1,12 @@
 import 'dart:async';
 
-import 'package:dolin_demo_flutter/style/theme.dart';
-import 'package:dolin_demo_flutter/pages/unknow.dart';
-import 'package:dolin_demo_flutter/routers/routes.dart';
-import 'package:dolin_demo_flutter/util/app_module.dart';
-import 'package:dolin_demo_flutter/util/fps.dart';
-import 'package:dolin_demo_flutter/util/pv_exception.dart';
+import 'package:dolin_demo_flutter/app/util/fps.dart';
+import 'package:dolin_demo_flutter/app/util/pv_exception.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
-import 'models/counter.dart';
-
-import 'module/login/module.dart' as login;
-import 'module/signin/module.dart' as signin;
+import 'app/routes/app_pages.dart';
 
 void main() async {
   // 捕获 Flutter 应用中的未处理异常
@@ -37,70 +27,25 @@ void main() async {
         // 如果是线上环境，将 debugPrint 指定为空的执行体, 所以它什么也不做
         debugPrint = (String? message, {int? wrapWidth}) {};
       }
-      // debugPaintSizeEnabled = true; // 打开 Debug Painting 调试开关
-      runApp(const MyApp());
+      runApp(
+        // UI 适配不同终端
+        ScreenUtilInit(
+            designSize: const Size(1080, 2400), // 设计搞中的宽高
+            minTextAdapt: true,
+            splitScreenMode: true,
+            builder: (context, child) {
+              return GetMaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: "Application",
+                initialRoute: AppPages.INITIAL,
+                getPages: AppPages.routes,
+              );
+            }),
+      );
     },
     (error, stackTrace) async {
       // 拦截异常
       await reportError(error, stackTrace);
     },
   );
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> with AppModule {
-  @override
-  void initState() {
-    super.initState();
-    registerModule(this);
-    initModules();
-  }
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    print('main onInit');
-  }
-
-  @override
-  void onRegister() {
-    registerModule(login.Module());
-    registerModule(signin.Module());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        designSize: const Size(375, 812),
-        builder: (context, child) {
-          return ChangeNotifierProvider<CounterModel>(
-              create: (_) => CounterModel(),
-              child: GetMaterialApp(
-                  title: 'dolin_demo_flutter', // 安卓这个字段有用
-                  theme: AppTheme.light,
-                  debugShowCheckedModeBanner: true,
-                  // initialRoute: AppPages.INITIAL,
-                  home: MaterialApp(
-                    navigatorObservers: [
-                      MyObserver(),
-                    ],
-                    debugShowCheckedModeBanner: true,
-                    // theme: defaultTargetPlatform == TargetPlatform.iOS
-                    //     ? kIOSTheme
-                    //     : kAndroidTheme, // 根据平台选择不同主题
-                    routes: appRoutes,
-                    // 错误路由处理，统一返回 UnknownPage
-                    onUnknownRoute: (RouteSettings setting) =>
-                        MaterialPageRoute(
-                            builder: (context) => const UnKnowPage()),
-                    initialRoute: '/',
-                  )));
-        });
-  }
 }
