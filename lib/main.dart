@@ -39,6 +39,11 @@ void main() async {
                 title: "Application",
                 initialRoute: AppPages.INITIAL,
                 getPages: AppPages.routes,
+                theme: ThemeData(
+                  primaryColor: Colors.black38,
+                  primaryColorLight: Colors.black38,
+                  primaryColorDark: Colors.white,
+                ),
               );
             }),
       );

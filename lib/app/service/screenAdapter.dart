@@ -1,24 +1,24 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScreenAdapter {
-  static width(num v) {
+  static double width(num v) {
     return v.w;
   }
 
-  static height(num v) {
+  static double height(num v) {
     return v.h;
   }
 
-  static fontSize(num v) {
+  static double fontSize(num v) {
     return v.sp;
   }
 
-  static getScreenWidth() {
+  static double getScreenWidth() {
     // return ScreenUtil().screenWidth;
     return 1.sw;
   }
 
-  static getScreenHeight() {
+  static double getScreenHeight() {
     // return ScreenUtil().screenHeight;
     return 1.sh;
   }

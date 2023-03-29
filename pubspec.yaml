@@ -20,6 +20,8 @@ dependencies:
   flutter_staggered_grid_view: ^0.6.2
   # 屏幕适配
   flutter_screenutil: ^5.7.0
+  # 监听 widget 展示到屏幕，埋点用
+  visibility_detector: ^0.4.0+2
 
   flutter:
     sdk: flutter
