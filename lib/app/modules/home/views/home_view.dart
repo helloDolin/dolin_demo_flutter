@@ -35,6 +35,9 @@ class HomeView extends GetView<HomeController> {
                 color: Colors.red,
                 child: const Icon(IconFonts.xiaomi),
               ),
+              const TextField(
+                decoration: InputDecoration(hintText: '测试国际化'),
+              ),
               const ListTile(title: Text('1111111111')),
               const ListTile(title: Text('1111111111')),
               const ListTile(title: Text('1111111111')),
