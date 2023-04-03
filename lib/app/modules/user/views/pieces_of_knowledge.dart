@@ -40,6 +40,9 @@ class _PiecesOfKnowledgeState extends State<PiecesOfKnowledge> {
                   const Text('SKU:standard product unit,标准化产品单元'),
                   SizedBox(height: ScreenAdapter.height(20)),
                   const Text('GetBottomSheet 更新数据需要使用 GetBuilder'),
+                  SizedBox(height: ScreenAdapter.height(20)),
+                  const Text(
+                      'ListView 里边嵌套 GridView，GridView 的 shrikWrap 要设置为 true，否则需要手动设置其高度'),
                   VisibilityDetector(
                     key: const Key('my-widget-key'),
                     onVisibilityChanged: (visibilityInfo) {

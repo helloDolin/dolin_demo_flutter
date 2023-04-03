@@ -23,6 +23,12 @@ flutter create -i objc -a java dolin_demo_flutter
 
 # 知识点总结
 
+## flutter 性能优化
+https://juejin.cn/post/7145730792948252686  from:58
+
+## dart practice
+dart create project_name
+
 ## 设计思路
 声明式编程不同于原生命令式
 

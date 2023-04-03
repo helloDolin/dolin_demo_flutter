@@ -11,7 +11,7 @@ class TabsView extends GetView<TabsController> {
     return Obx(() => Scaffold(
           body: PageView(
               controller: controller.pageController,
-              onPageChanged: ((value) => controller.setCurrentIndex(value)),
+              // onPageChanged: ((value) => controller.setCurrentIndex(value)),
               physics: const NeverScrollableScrollPhysics(), // 禁止左右滑动
               children: controller.pages),
           bottomNavigationBar: Theme(

@@ -13,7 +13,7 @@ class CategoryView extends GetView<CategoryController> {
         title: const Text('CategoryView'),
         centerTitle: true,
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'CategoryView is working',
           style: TextStyle(fontSize: 20),

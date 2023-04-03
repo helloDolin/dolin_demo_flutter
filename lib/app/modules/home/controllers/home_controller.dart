@@ -9,6 +9,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     scrollController.addListener(() {
+      print(opcity.value);
       if (scrollController.position.pixels <= 100) {
         double num = scrollController.position.pixels / 100;
         if (num <= 0.0) {
@@ -33,5 +34,17 @@ class HomeController extends GetxController {
       }
     });
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    print('HomeController onReady');
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    print('HomeController onReady');
+    super.onClose();
   }
 }

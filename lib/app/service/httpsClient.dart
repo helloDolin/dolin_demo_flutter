@@ -20,4 +20,14 @@ class HttpsClient {
       return null;
     }
   }
+
+  Future post(String apiUrl, {Map? data}) async {
+    try {
+      var res = await dio.post(apiUrl, data: data);
+      return res;
+    } catch (e) {
+      print('请求超时');
+      return null;
+    }
+  }
 }

@@ -22,6 +22,12 @@ dependencies:
   flutter_screenutil: ^5.7.0
   # 监听 widget 展示到屏幕，埋点用
   visibility_detector: ^0.4.0+2
+  # 验证码输入
+  pin_code_fields: ^7.4.0
+  # 省市区选择器
+  city_pickers: ^1.2.1
+  # 加密
+  crypto: ^3.0.2
 
   flutter:
     sdk: flutter
