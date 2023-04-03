@@ -22,6 +22,7 @@ class TabsView extends GetView<TabsController> {
                 highlightColor: Colors.transparent,
               ),
               child: BottomNavigationBar(
+                backgroundColor: Colors.white,
                 fixedColor: Colors.red,
                 currentIndex: controller.currentIndex.value,
                 selectedFontSize: 12,

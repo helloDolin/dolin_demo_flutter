@@ -9,17 +9,16 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     scrollController.addListener(() {
-      print(opcity.value);
+      print(
+          'scrollController.position.pixels:${scrollController.position.pixels}');
       if (scrollController.position.pixels <= 100) {
         double num = scrollController.position.pixels / 100;
         if (num <= 0.0) {
           num = 0.0;
-        } else if (num >= 0.9) {
+        } else if (num >= 0.8) {
           num = 1;
         }
-
         opcity.value = num;
-        print(opcity.value);
       }
       if (scrollController.position.pixels > 10 &&
           scrollController.position.pixels < 20) {
