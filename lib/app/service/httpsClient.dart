@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class HttpsClient {
-  static String domain = '';
+  static String domain = 'https://api.wmdb.tv/api/v1/top';
 
   static Dio dio = Dio();
 
