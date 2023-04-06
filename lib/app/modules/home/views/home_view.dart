@@ -12,30 +12,6 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
 
-  Widget _item(Douban250 model) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-              width: double.infinity,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/placeholder.png',
-                  image: model.shareImage,
-                  fit: BoxFit.fitWidth,
-                ),
-              )),
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text('片名：${model.originalName ?? ''}')),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return KeepAliveWrapper(
@@ -98,7 +74,7 @@ class HomeView extends GetView<HomeController> {
                       color: getRandomColor().withOpacity(0.3),
                     ),
                     itemBuilder: (c, i) {
-                      return Obx(() => _item(controller.doubanList[i]));
+                      return Item(model: controller.doubanList[i], index: i);
                     },
                     itemCount: controller.doubanList.length,
                   ),
@@ -109,8 +85,9 @@ class HomeView extends GetView<HomeController> {
 }
 
 class Item extends StatelessWidget {
-  const Item({super.key, required this.model});
+  const Item({super.key, required this.model, required this.index});
   final Douban250 model;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +104,18 @@ class Item extends StatelessWidget {
                   placeholder: 'assets/images/placeholder.png',
                   image: model.shareImage,
                   fit: BoxFit.fitWidth,
-                  placeholderErrorBuilder: (context, error, stackTrace) =>
-                      Container(
-                    child: const Text('图片加载失败'),
+                  imageErrorBuilder: (context, error, stackTrace) =>
+                      const SizedBox(
+                    child: Text('图片加载失败'),
                   ),
                 ),
               )),
           Padding(
               padding: const EdgeInsets.all(10),
               child: Text('片名：${model.originalName ?? ''}')),
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Text('排名：${index + 1}')),
         ],
       ),
     );

@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   RxBool flag = false.obs;
   RxDouble opcity = 1.0.obs;
   RxList<Douban250> doubanList = <Douban250>[].obs;
-  int pageIndex = 0;
+  int skip = 0;
   final pageSize = 5;
   RxString pageTitle = 'IMDB250'.obs;
   String source = 'Imdb';
@@ -36,14 +36,14 @@ class HomeController extends GetxController {
   }
 
   void onRefresh() async {
-    pageIndex = 0;
+    skip = 0;
     doubanList.value = [];
     await reqDouban250Refersh();
     refreshController.refreshCompleted();
   }
 
   void onLoading() async {
-    pageIndex += 1;
+    skip += pageSize;
     await reqDouban250More();
     refreshController.loadComplete();
   }
@@ -92,7 +92,7 @@ class HomeController extends GetxController {
 
   reqDouban250Refersh() async {
     String apiUrl =
-        'https://api.wmdb.tv/api/v1/top?type=$source&skip=$pageIndex&limit=$pageSize&lang=Cn';
+        'https://api.wmdb.tv/api/v1/top?type=$source&skip=$skip&limit=$pageSize&lang=Cn';
     print(apiUrl);
     final res = await HttpsClient().get(apiUrl);
     if (res != null) {
@@ -104,14 +104,13 @@ class HomeController extends GetxController {
 
   reqDouban250More() async {
     String apiUrl =
-        'https://api.wmdb.tv/api/v1/top?type=Imdb&skip=$pageIndex&limit=$pageSize&lang=Cn';
+        'https://api.wmdb.tv/api/v1/top?type=$source&skip=$skip&limit=$pageSize&lang=Cn';
     print(apiUrl);
     final res = await HttpsClient().get(apiUrl);
     if (res != null) {
       List<Douban250> douban250List = douban250FromList(res.data);
       doubanList.addAll(douban250List);
       update();
-      print(doubanList.length);
     }
   }
 }

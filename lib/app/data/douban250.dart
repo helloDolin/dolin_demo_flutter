@@ -63,7 +63,6 @@ class Douban250 {
     if (data!.isNotEmpty) {
       Datum obj = data![0];
       if (obj.poster != null) {
-        print(obj.poster);
         return obj.poster!;
       }
       return '';
