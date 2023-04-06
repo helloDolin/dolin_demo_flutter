@@ -1,3 +1,4 @@
+import 'package:dolin_demo_flutter/app/modules/home/views/fixTabBarView.dart';
 import 'package:dolin_demo_flutter/app/modules/home/views/tab_list_view.dart';
 import 'package:dolin_demo_flutter/app/service/screenAdapter.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,10 @@ class HomeView extends GetView<HomeController> {
       width: double.infinity,
       height: ScreenAdapter.height(96),
       child: TabBar(
+          onTap: (value) {
+            controller.pageController.jumpToPage(value);
+            controller.tabIndexChanged(value);
+          },
           controller: controller.tabController,
           isScrollable: true,
           labelColor: Colors.black,
@@ -39,8 +44,12 @@ class HomeView extends GetView<HomeController> {
 
   Widget _content() {
     return Flexible(
-        child: TabBarView(
-      controller: controller.tabController,
+        child: FixTabBarView(
+      tabChange: (index) {
+        controller.tabIndexChanged(index);
+      },
+      tabController: controller.tabController,
+      pageController: controller.pageController,
       children: controller.categoryList.map((map) {
         return TabListView(
           source: map['source']!,
@@ -70,8 +79,8 @@ class HomeView extends GetView<HomeController> {
               ),
               centerTitle: true,
               // appbar 设置透明
-              backgroundColor:
-                  Colors.white.withOpacity(controller.opcity.value),
+              // backgroundColor:
+              //     Colors.white.withOpacity(controller.opcity.value),
               elevation: 0,
             )),
       ),

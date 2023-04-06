@@ -2,6 +2,7 @@ import 'package:dolin_demo_flutter/app/data/douban250.dart';
 import 'package:dolin_demo_flutter/app/service/httpsClient.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TabListView extends StatefulWidget {
@@ -16,6 +17,9 @@ class _TabListViewState extends State<TabListView>
     with AutomaticKeepAliveClientMixin {
   late List<Douban250> _listData;
   late RefreshController _refreshController;
+  late ScrollController _scrollController;
+  bool _isShowUpIcon = false;
+
   int skip = 0;
   final pageSize = 5;
 
@@ -23,12 +27,32 @@ class _TabListViewState extends State<TabListView>
   void initState() {
     _listData = [];
     _refreshController = RefreshController(initialRefresh: true);
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      print(
+          'scrollController.position.pixels:${_scrollController.position.pixels}');
+      if (_scrollController.position.pixels > 200 &&
+          _isShowUpIcon == false &&
+          mounted) {
+        setState(() {
+          _isShowUpIcon = true;
+        });
+      }
+      if (_scrollController.position.pixels < 200 &&
+          _isShowUpIcon == true &&
+          mounted) {
+        setState(() {
+          _isShowUpIcon = false;
+        });
+      }
+    });
     super.initState();
   }
 
   @override
   void dispose() {
     _refreshController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -66,43 +90,58 @@ class _TabListViewState extends State<TabListView>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: true,
-      header: const WaterDropHeader(),
-      footer: CustomFooter(
-        builder: (context, mode) {
-          Widget body;
-          if (mode == LoadStatus.idle) {
-            body = const Text("上拉加载");
-          } else if (mode == LoadStatus.loading) {
-            body = const CupertinoActivityIndicator();
-          } else if (mode == LoadStatus.failed) {
-            body = const Text("加载失败！点击重试！");
-          } else if (mode == LoadStatus.canLoading) {
-            body = const Text("松手,加载更多!");
-          } else {
-            body = const Text("没有更多数据了!");
-          }
-          return SizedBox(
-            height: 55.0,
-            child: Center(child: body),
-          );
-        },
-      ),
-      controller: _refreshController,
-      onRefresh: _onRefresh,
-      onLoading: _onLoading,
-      child: ListView.separated(
-        separatorBuilder: (context, index) => Container(
-          height: 10,
-          color: getRandomColor().withOpacity(0.3),
+    return Stack(
+      children: [
+        SmartRefresher(
+          enablePullDown: true,
+          enablePullUp: true,
+          header: const WaterDropHeader(),
+          footer: CustomFooter(
+            builder: (context, mode) {
+              Widget body;
+              if (mode == LoadStatus.idle) {
+                body = const Text("上拉加载");
+              } else if (mode == LoadStatus.loading) {
+                body = const CupertinoActivityIndicator();
+              } else if (mode == LoadStatus.failed) {
+                body = const Text("加载失败！点击重试！");
+              } else if (mode == LoadStatus.canLoading) {
+                body = const Text("松手,加载更多!");
+              } else {
+                body = const Text("没有更多数据了!");
+              }
+              return SizedBox(
+                height: 55.0,
+                child: Center(child: body),
+              );
+            },
+          ),
+          controller: _refreshController,
+          onRefresh: _onRefresh,
+          onLoading: _onLoading,
+          child: ListView.separated(
+            controller: _scrollController,
+            separatorBuilder: (context, index) => Container(
+              height: 10,
+              color: getRandomColor().withOpacity(0.3),
+            ),
+            itemBuilder: (c, i) {
+              return Item(model: _listData[i], index: i);
+            },
+            itemCount: _listData.length,
+          ),
         ),
-        itemBuilder: (c, i) {
-          return Item(model: _listData[i], index: i);
-        },
-        itemCount: _listData.length,
-      ),
+        Positioned(
+            bottom: 0,
+            right: 0,
+            child: _isShowUpIcon
+                ? ElevatedButton(
+                    onPressed: () {
+                      _scrollController.jumpTo(0);
+                    },
+                    child: const Icon(Icons.arrow_upward_outlined))
+                : const SizedBox.shrink()),
+      ],
     );
   }
 
