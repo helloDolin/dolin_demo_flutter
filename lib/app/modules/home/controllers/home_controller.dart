@@ -1,56 +1,25 @@
-import 'package:dolin_demo_flutter/app/data/douban250.dart';
-import 'package:dolin_demo_flutter/app/service/httpsClient.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   final ScrollController scrollController = ScrollController();
-  final RefreshController refreshController =
-      RefreshController(initialRefresh: false);
   RxBool flag = false.obs;
   RxDouble opcity = 1.0.obs;
-  RxList<Douban250> doubanList = <Douban250>[].obs;
   int skip = 0;
   final pageSize = 5;
   RxString pageTitle = 'IMDB250'.obs;
-  String source = 'Imdb';
 
-  String getSwitchTitle() {
-    if (pageTitle.value == '豆瓣250') {
-      return '切换至IMDB250';
-    } else {
-      return '切换至豆瓣250';
-    }
-  }
-
-  void switch2DoubanOrImdb() {
-    if (pageTitle.value == '豆瓣250') {
-      pageTitle.value = 'IMDB250';
-      source = 'Imdb';
-    } else {
-      pageTitle.value = '豆瓣250';
-      source = 'Douban';
-    }
-    onRefresh();
-  }
-
-  void onRefresh() async {
-    skip = 0;
-    doubanList.value = [];
-    await reqDouban250Refersh();
-    refreshController.refreshCompleted();
-  }
-
-  void onLoading() async {
-    skip += pageSize;
-    await reqDouban250More();
-    refreshController.loadComplete();
-  }
+  late TabController tabController;
+  List<Map<String, String>> categoryList = [
+    {'title': '豆瓣', 'source': 'Douban'},
+    {'title': 'IMDB', 'source': 'Imdb'},
+  ];
 
   @override
   void onInit() {
-    reqDouban250Refersh();
+    tabController = TabController(
+        initialIndex: 0, length: categoryList.length, vsync: this);
     scrollController.addListener(() {
       print(
           'scrollController.position.pixels:${scrollController.position.pixels}');
@@ -88,29 +57,5 @@ class HomeController extends GetxController {
   void onClose() {
     print('HomeController onReady');
     super.onClose();
-  }
-
-  reqDouban250Refersh() async {
-    String apiUrl =
-        'https://api.wmdb.tv/api/v1/top?type=$source&skip=$skip&limit=$pageSize&lang=Cn';
-    print(apiUrl);
-    final res = await HttpsClient().get(apiUrl);
-    if (res != null) {
-      List<Douban250> douban250List = douban250FromList(res.data);
-      doubanList.value = douban250List;
-      update();
-    }
-  }
-
-  reqDouban250More() async {
-    String apiUrl =
-        'https://api.wmdb.tv/api/v1/top?type=$source&skip=$skip&limit=$pageSize&lang=Cn';
-    print(apiUrl);
-    final res = await HttpsClient().get(apiUrl);
-    if (res != null) {
-      List<Douban250> douban250List = douban250FromList(res.data);
-      doubanList.addAll(douban250List);
-      update();
-    }
   }
 }
