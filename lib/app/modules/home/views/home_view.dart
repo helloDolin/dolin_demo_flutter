@@ -65,13 +65,12 @@ class HomeView extends GetView<HomeController> {
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 50),
         child: Obx(() => AppBar(
-              actions: const [
-                // TextButton(
-                //   onPressed: () {
-                //     controller.switch2DoubanOrImdb();
-                //   },
-                //   child: Text(controller.getSwitchTitle()),
-                // ),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      Get.toNamed('/search');
+                    },
+                    icon: const Icon(Icons.search_rounded))
               ],
               title: Text(
                 controller.pageTitle.value,
