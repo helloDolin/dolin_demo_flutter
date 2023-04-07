@@ -73,8 +73,8 @@ class _TabListViewState extends State<TabListView>
   void reqDouban250({bool isRefresh = false}) async {
     String apiUrl =
         'https://api.wmdb.tv/api/v1/top?type=${widget.source}&skip=$skip&limit=$pageSize&lang=Cn';
-    print(apiUrl);
-    final res = await HttpsClient().get(apiUrl);
+
+    final res = await HttpsClient.instance.get(apiUrl);
     if (res != null) {
       List<Douban250> douban250List = douban250FromList(res.data);
       if (isRefresh) {
