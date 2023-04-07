@@ -17,7 +17,7 @@ class UserView extends GetView<UserController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UserView'),
+        title: const Text('我的'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

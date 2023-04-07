@@ -4,6 +4,7 @@ class HttpsClient {
   /// 单例
   static final HttpsClient _instance = HttpsClient._internal();
   static HttpsClient get instance => _instance;
+  Dio? _dio;
 
   /// 工厂构造函数
   factory HttpsClient() {
@@ -12,23 +13,26 @@ class HttpsClient {
 
   /// 构造函数私有化，防止被误创建
   HttpsClient._internal() {
-    var options = BaseOptions(
-      baseUrl: 'https://api.wmdb.tv/api/v1/top',
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
-    );
-    dio = Dio(options);
+    if (_dio == null) {
+      BaseOptions options = BaseOptions(
+        baseUrl: 'https://api.wmdb.tv/api/v1/top',
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5),
+        headers: {},
+        contentType: 'application/json; charset=utf-8',
+        responseType: ResponseType.json,
+      );
+      _dio = Dio(options);
+    }
   }
 
-  late Dio dio;
-
-  Future get(apiUrl) async {
+  Future get(apiUrl, {Map<String, dynamic>? data}) async {
     try {
       print('''
 =============apiUrl=================
 $apiUrl
 ''');
-      var res = await dio.get(apiUrl);
+      var res = await _dio!.get(apiUrl, queryParameters: data);
       return res;
     } catch (e) {
       print('请求超时');
@@ -36,13 +40,13 @@ $apiUrl
     }
   }
 
-  Future post(String apiUrl, {Map? data}) async {
+  Future post(String apiUrl, {Map<String, dynamic>? data}) async {
     try {
       print('''
 =============apiUrl=================
 $apiUrl
 ''');
-      var res = await dio.post(apiUrl, data: data);
+      var res = await _dio!.post(apiUrl, data: data);
       return res;
     } catch (e) {
       print('请求超时');
