@@ -70,7 +70,9 @@ class HomeView extends GetView<HomeController> {
                     onPressed: () {
                       Get.toNamed('/search');
                     },
-                    icon: const Icon(Icons.search_rounded))
+                    icon: const Icon(
+                      Icons.search_rounded,
+                    ))
               ],
               title: Text(
                 controller.pageTitle.value,

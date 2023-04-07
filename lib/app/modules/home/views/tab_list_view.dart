@@ -141,7 +141,10 @@ class _TabListViewState extends State<TabListView>
             child: _isShowUpIcon
                 ? ElevatedButton(
                     onPressed: () {
-                      _scrollController.jumpTo(0);
+                      // 解决 jumpTo 有时不准确的问题
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _scrollController.jumpTo(0);
+                      });
                     },
                     child: const Icon(Icons.arrow_upward_outlined))
                 : const SizedBox.shrink()),
