@@ -24,19 +24,19 @@ class UserView extends GetView<UserController> {
           padding: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
-              Card('arena_practice', () {
-                Get.to(const ArenaPage());
-              }),
-              Card('async_practice', () {
-                Get.to(const AsyncPage());
-              }),
-              Card('cutomer_paint_view', () {
+              Card('手绘 Widget', () {
                 Get.to(const CustomPaintPage());
               }),
-              Card('PiecesOfKnowledge', () {
+              Card('手势竞技场', () {
+                Get.to(const ArenaPage());
+              }),
+              Card('异步练习', () {
+                Get.to(const AsyncPage());
+              }),
+              Card('小知识点总结', () {
                 Get.to(const PiecesOfKnowledge());
               }),
-              Card('RadiusSummary', () {
+              Card('各种圆角总结', () {
                 Get.to(const RadiusSummary());
               }),
             ],

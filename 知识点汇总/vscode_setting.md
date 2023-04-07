@@ -22,6 +22,12 @@ cmd + shift + p
     "editor.codeActionsOnSave": {
         "source.fixAll": true // 自动修复
     },
+     // 折叠隐藏文件
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "pubspec.yaml": "pubspec.lock,pubspec_overrides.yaml,.packages,.flutter-plugins,.flutter-plugins-dependencies,.metadata",
+        // "*.dart": "${capture}.g.dart"
+    }
 
 }
 ```

@@ -3,6 +3,12 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - photo_manager (2.0.0):
+    - Flutter
+    - FlutterMacOS
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -17,6 +23,8 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
@@ -31,6 +39,10 @@ EXTERNAL SOURCES:
     :path: Flutter
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
+  photo_manager:
+    :path: ".symlinks/plugins/photo_manager/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   video_player_avfoundation:
@@ -43,6 +55,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
