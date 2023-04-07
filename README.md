@@ -1,7 +1,9 @@
 # dolin_demo_flutter
 ## 仓库简介
-
-目的：Flutter 学习、总结
+目的：Flutter 学习、总结、提高
+截图：
+![123](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/home.png)
+![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/mine.png)
 * 项目主要使用 GetX 进行状态管理与路由跳转
 * 使用 GetX cli 创建核心页面
 * 知识点汇总文件里存放 VSCode 设置、极客时间美团 flutter 文章总结、flutter 面试问题汇总等
