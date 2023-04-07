@@ -27,20 +27,20 @@ class _PiecesOfKnowledgeState extends State<PiecesOfKnowledge> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10),
-          width: ScreenAdapter.width(1080),
+          width: ScreenAdapter.width(375),
           child: DefaultTextStyle.merge(
               style: textStyle,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('identical(a, b),判断两个对象是否为同一对象判断两个对象是否为同一对象'),
-                  SizedBox(height: ScreenAdapter.height(20)),
+                  SizedBox(height: ScreenAdapter.height(10)),
                   const Text('SPU:stock keeping unit,库存量单位，标准化产品单元'),
-                  SizedBox(height: ScreenAdapter.height(20)),
+                  SizedBox(height: ScreenAdapter.height(10)),
                   const Text('SKU:standard product unit,标准化产品单元'),
-                  SizedBox(height: ScreenAdapter.height(20)),
+                  SizedBox(height: ScreenAdapter.height(10)),
                   const Text('GetBottomSheet 更新数据需要使用 GetBuilder'),
-                  SizedBox(height: ScreenAdapter.height(20)),
+                  SizedBox(height: ScreenAdapter.height(10)),
                   const Text(
                       'ListView 里边嵌套 GridView，GridView 的 shrikWrap 要设置为 true，否则需要手动设置其高度'),
                   VisibilityDetector(
@@ -53,7 +53,7 @@ class _PiecesOfKnowledgeState extends State<PiecesOfKnowledge> {
                     },
                     child: Container(
                       color: Colors.amberAccent,
-                      height: ScreenAdapter.height(2000),
+                      height: ScreenAdapter.height(1000),
                     ),
                   ),
                 ],

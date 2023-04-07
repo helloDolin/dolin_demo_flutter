@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
   Widget _tabBar() {
     return SizedBox(
       width: double.infinity,
-      height: ScreenAdapter.height(96),
+      height: ScreenAdapter.height(25),
       child: TabBar(
           onTap: (value) {
             controller.pageController.jumpToPage(value);
@@ -30,10 +30,10 @@ class HomeView extends GetView<HomeController> {
           indicator: UnderlineIndicator(
               strokeCap: StrokeCap.square,
               borderSide: BorderSide(
-                  color: Colors.black, width: ScreenAdapter.height(5)),
+                  color: Colors.black, width: ScreenAdapter.height(3)),
               insets: EdgeInsets.only(
-                  left: ScreenAdapter.width(40),
-                  right: ScreenAdapter.width(40))),
+                  left: ScreenAdapter.width(10),
+                  right: ScreenAdapter.width(10))),
           tabs: controller.categoryList
               .map((map) => Tab(
                     text: map['title'],

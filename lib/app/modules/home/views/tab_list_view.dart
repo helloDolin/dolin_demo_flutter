@@ -30,8 +30,8 @@ class _TabListViewState extends State<TabListView>
     _refreshController = RefreshController(initialRefresh: true);
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      print(
-          'scrollController.position.pixels:${_scrollController.position.pixels}');
+      // print(
+      //     'scrollController.position.pixels:${_scrollController.position.pixels}');
       if (_scrollController.position.pixels > 200 &&
           _isShowUpIcon == false &&
           mounted) {

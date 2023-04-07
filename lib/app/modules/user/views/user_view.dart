@@ -60,7 +60,7 @@ class Card extends StatelessWidget {
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
             border: Border.all(
-                color: getRandomColor(), width: ScreenAdapter.height(2)),
+                color: getRandomColor(), width: ScreenAdapter.height(1)),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
           height: 44,

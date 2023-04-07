@@ -8,7 +8,7 @@ import 'app/routes/app_pages.dart';
 
 void main() {
   DLAPPDefend().run(ScreenUtilInit(
-      designSize: const Size(1080, 2400), // 设计搞中的宽高
+      designSize: const Size(375, 667), // iPhone 6，4.7英寸，750*1334 分辨率
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
