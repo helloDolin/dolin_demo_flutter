@@ -621,10 +621,11 @@ packages:
   underline_indicator:
     dependency: "direct main"
     description:
-      name: underline_indicator
-      sha256: "2f721b87edaf66ff3f5329ba93cf5e3d21b454b1b6516748890e0657cc305c9f"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: "475141bc0bbcd4dfd267f31ba29948890f73fcb9"
+      url: "https://github.com/helloDolin/underline_indicator.git"
+    source: git
     version: "0.0.4"
   vector_math:
     dependency: transitive

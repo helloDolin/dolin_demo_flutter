@@ -1,6 +1,7 @@
+import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
 
-import 'color.dart';
+import 'app_color.dart';
 
 class AppTheme {
   static const horizontalMargin = 16.0;
@@ -15,24 +16,21 @@ class AppTheme {
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondary: AppColor.accentColor,
     ),
-    appBarTheme: const AppBarTheme(
-      elevation: 0,
-      centerTitle: true,
-      backgroundColor: Colors.white,
-      iconTheme: IconThemeData(
-        color: AppColor.primaryText,
-      ),
-      titleTextStyle: TextStyle(
-        color: AppColor.primaryText,
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-      ),
-      toolbarTextStyle: TextStyle(
-        color: AppColor.primaryText,
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-      ),
-    ),
+    appBarTheme: AppBarTheme(
+        iconTheme: const IconThemeData(color: AppColor.primaryText),
+        centerTitle: true,
+        color: Colors.white,
+        elevation: ScreenAdapter.height(1),
+        titleTextStyle: const TextStyle(
+          color: AppColor.primaryText,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+        toolbarTextStyle: const TextStyle(
+          color: AppColor.primaryText,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        )),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColor.scaffoldBackground,
       unselectedLabelStyle: TextStyle(fontSize: 12),
@@ -41,7 +39,7 @@ class AppTheme {
       selectedItemColor: AppColor.accentColor,
     ),
     tabBarTheme: const TabBarTheme(
-      indicatorSize: TabBarIndicatorSize.label,
+      // indicatorSize: TabBarIndicatorSize.label,
       labelColor: AppColor.accentColor,
       unselectedLabelColor: AppColor.secondaryText,
     ),

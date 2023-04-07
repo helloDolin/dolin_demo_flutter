@@ -5,7 +5,7 @@ class AppColor {
   static const Color scaffoldBackground = Color(0xFFFFFFFF);
 
   /// 主要背景颜色
-  // static const Color primaryBackground = Color(0xFF5C78FF);
+  static const Color primaryBackground = Color(0xFF5C78FF);
 
   /// 主要文本颜色
   static const Color primaryText = Color(0xFF333333);

@@ -1,5 +1,6 @@
+import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:dolin_demo_flutter/app/data/douban250.dart';
-import 'package:dolin_demo_flutter/app/service/httpsClient.dart';
+import 'package:dolin_demo_flutter/app/https/httpsClient.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -173,7 +174,7 @@ class Item extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/images/placeholder.png',
+                  placeholder: AppAssets.placeholderPng,
                   image: model.shareImage,
                   fit: BoxFit.fitWidth,
                   imageErrorBuilder: (context, error, stackTrace) =>

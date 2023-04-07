@@ -39,6 +39,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+# 依赖覆写，可用于修改库中 bug
+dependency_overrides:
+  underline_indicator:
+    git:
+      url: https://github.com/helloDolin/underline_indicator.git
+      ref: master
+
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

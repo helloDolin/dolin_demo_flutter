@@ -3,7 +3,7 @@ import 'package:dolin_demo_flutter/app/modules/user/views/async_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/pieces_of_knowledge.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
-import 'package:dolin_demo_flutter/app/service/screenAdapter.dart';
+import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
 import 'package:flutter/material.dart';
 

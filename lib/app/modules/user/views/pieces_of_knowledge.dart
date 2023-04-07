@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/service/screenAdapter.dart';
+import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 

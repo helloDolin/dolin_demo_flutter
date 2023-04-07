@@ -1,6 +1,6 @@
 import 'package:dolin_demo_flutter/app/modules/home/views/fixTabBarView.dart';
 import 'package:dolin_demo_flutter/app/modules/home/views/tab_list_view.dart';
-import 'package:dolin_demo_flutter/app/service/screenAdapter.dart';
+import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';

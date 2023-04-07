@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class RadiusSummary extends StatelessWidget {
@@ -23,7 +24,7 @@ class RadiusSummary extends StatelessWidget {
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(50)),
               image: DecorationImage(
-                image: AssetImage('assets/images/qingmai.png'),
+                image: AssetImage(AppAssets.qingmaiPng),
                 fit: BoxFit.cover,
               ),
             ),
@@ -37,7 +38,7 @@ class RadiusSummary extends StatelessWidget {
                 topRight: Radius.circular(50),
               ),
               child: Image.asset(
-                'assets/images/qingmai.png',
+                AppAssets.qingmaiPng,
                 width: 300,
                 height: 300,
                 fit: BoxFit.cover,
@@ -45,7 +46,7 @@ class RadiusSummary extends StatelessWidget {
           // ClipOval
           ClipOval(
             child: Image.asset(
-              'assets/images/qingmai.png',
+              AppAssets.qingmaiPng,
               width: 300,
               height: 300,
               fit: BoxFit.cover,
@@ -57,7 +58,7 @@ class RadiusSummary extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/qingmai.png'),
+                  image: AssetImage(AppAssets.qingmaiPng),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -71,7 +72,7 @@ class RadiusSummary extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(50)),
             clipBehavior: Clip.antiAlias,
             child: Image.asset(
-              'assets/images/qingmai.png',
+              AppAssets.qingmaiPng,
               width: 300,
               height: 300,
               fit: BoxFit.cover,
