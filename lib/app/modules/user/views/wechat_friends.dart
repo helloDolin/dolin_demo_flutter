@@ -210,12 +210,16 @@ class _WechatFriendsState extends State<WechatFriends>
                                   const Text(
                                     '赞',
                                     style: TextStyle(
-                                        color: Colors.black, fontSize: 12),
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        decoration: TextDecoration.none),
                                   ),
                                 if (w > ScreenAdapter.width(150))
                                   const Text('评论',
                                       style: TextStyle(
-                                          color: Colors.black, fontSize: 12)),
+                                          color: Colors.black,
+                                          fontSize: 12,
+                                          decoration: TextDecoration.none)),
                               ],
                             );
                           },
