@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // CustomPaint 是用以承接自绘控件的容器，并不负责真正的绘制
 
@@ -16,13 +15,6 @@ class CustomPaintPage extends StatefulWidget {
 }
 
 class _CustomPaintPageState extends State<CustomPaintPage> {
-  bool _isShowAll = false;
-  final String _showText =
-      '做这个demo思路来源于微信team的：微信iOS卡顿监控系统。主要思路:通过监测Runloop的kCFRunLoopAfterWaiting，用一个子线程去检查，一次循环是否时间太长。其中主要涉及到了runloop的原理。关于整个原理：深入理解RunLoop讲解的比较仔细。';
-  final TextStyle _showTextStyle =
-      const TextStyle(fontSize: 17.0, color: Colors.black);
-  final int _showTextMaxLines = 3;
-
   // ignore: slash_for_doc_comments
   /**
    * @name: getTextPainter
@@ -48,11 +40,6 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
     // 第一帧绘制结束回调
     WidgetsBinding.instance.addPostFrameCallback((Duration d) {
       debugPrint('第一帧回调$d');
-      TextPainter textP = getTextPainter(context, _showText, _showTextStyle,
-          ScreenUtil().screenWidth, _showTextMaxLines);
-      debugPrint(textP.size.toString());
-      _isShowAll = textP.didExceedMaxLines;
-      setState(() {});
     });
 
     super.initState();
@@ -66,29 +53,7 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
       ),
       body: Center(
         child: Column(
-          children: [
-            const Image(
-              image: AssetImage('assets/images/alert.png'),
-              width: 100,
-              height: 100,
-            ),
-            if (_isShowAll)
-              RichText(
-                  text: TextSpan(
-                      text: _showText,
-                      style: _showTextStyle,
-                      children: <TextSpan>[
-                    TextSpan(
-                        text: _isShowAll ? '隐藏' : '展开',
-                        style:
-                            const TextStyle(fontSize: 17.0, color: Colors.blue),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            debugPrint('123');
-                          })
-                  ])),
-            const Cake()
-          ],
+          children: const [Cake()],
         ),
       ),
     );
