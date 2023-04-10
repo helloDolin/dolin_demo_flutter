@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/user_controller.dart';
+import 'layout_practice.dart';
 
 class UserView extends GetView<UserController> {
   const UserView({Key? key}) : super(key: key);
@@ -42,6 +43,9 @@ class UserView extends GetView<UserController> {
               }),
               Card('微信朋友圈', () {
                 Get.to(const WechatFriends());
+              }),
+              Card('LayoutPractice', () {
+                Get.to(() => const LayoutPractice());
               }),
             ],
           )),

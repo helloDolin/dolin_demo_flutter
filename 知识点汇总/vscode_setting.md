@@ -28,6 +28,9 @@ cmd + shift + p
         "pubspec.yaml": "pubspec.lock,pubspec_overrides.yaml,.packages,.flutter-plugins,.flutter-plugins-dependencies,.metadata",
         // "*.dart": "${capture}.g.dart"
     }
+     "[python]": {
+        "editor.formatOnType": true
+    },
 
 }
 ```
