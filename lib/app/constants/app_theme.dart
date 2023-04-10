@@ -31,6 +31,9 @@ class AppTheme {
           fontSize: 18,
           fontWeight: FontWeight.w500,
         )),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.transparent,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColor.scaffoldBackground,
       unselectedLabelStyle: TextStyle(fontSize: 12),

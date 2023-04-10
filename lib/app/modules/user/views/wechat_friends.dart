@@ -1,9 +1,7 @@
-import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/global.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class WechatFriends extends StatefulWidget {
   const WechatFriends({super.key});
@@ -26,6 +24,8 @@ class _WechatFriendsState extends State<WechatFriends>
 
   late AnimationController _animationController;
   late Animation<double> _sizeTween;
+
+  bool _isShowBottomView = false;
 
   final String _testTitle = '''一名优秀的大前端工程师应该具备以下特征：
 在技术层面应该抛开对开发框架的站队，除了应用层 API 之外，能够更多地关注其底层原理、设计思路和通用理念，对中短期技术发展方向有大致思路，并思考如何与过往的开发经验相结合，融汇进属于自己的知识体系抽象网络；
@@ -142,6 +142,19 @@ class _WechatFriendsState extends State<WechatFriends>
           ),
         ),
       ),
+      bottomSheet: _isShowBottomView
+          ? Container(
+              alignment: Alignment.center,
+              height: 100,
+              child: const Text('123132'),
+            )
+          : null,
+      // bottomNavigationBar: _isShowBottomView
+      //     ? Container(
+      //         height: 100,
+      //         color: Colors.red,
+      //       )
+      //     : null,
     );
   }
 
@@ -326,7 +339,10 @@ class _WechatFriendsState extends State<WechatFriends>
                 ),
                 InkWell(
                     onTap: () {
-                      Get.to(const RadiusSummary());
+                      // Get.to(const RadiusSummary());
+                      setState(() {
+                        _isShowBottomView = !_isShowBottomView;
+                      });
                     },
                     child: SizedBox(
                       width: ScreenAdapter.width(50),
