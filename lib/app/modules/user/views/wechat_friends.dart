@@ -1,6 +1,9 @@
+import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
+import 'package:dolin_demo_flutter/global.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class WechatFriends extends StatefulWidget {
   const WechatFriends({super.key});
@@ -10,7 +13,7 @@ class WechatFriends extends StatefulWidget {
 }
 
 class _WechatFriendsState extends State<WechatFriends>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver, RouteAware {
   // 层管理
   OverlayState? _overlayState;
   // 遮罩层
@@ -40,8 +43,17 @@ class _WechatFriendsState extends State<WechatFriends>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Global.routerObserver
+        .subscribe(this, ModalRoute.of(context) as PageRoute); // 路由订阅
+  }
+
+  @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+
     _overlayState = Overlay.of(context);
 
     _animationController = AnimationController(
@@ -53,7 +65,45 @@ class _WechatFriendsState extends State<WechatFriends>
   @override
   void dispose() {
     _animationController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    Global.routerObserver.unsubscribe(this);
     super.dispose();
+  }
+
+  @override
+  void didPush() {
+    super.didPush();
+    print('didPush');
+  }
+
+  @override
+  void didPushNext() {
+    super.didPushNext();
+    print('didPushNext');
+  }
+
+  @override
+  void didPop() {
+    super.didPop();
+    print('didPop');
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    print('didPopNext');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print('didChangeAppLifecycleState $state');
+    if (state == AppLifecycleState.inactive) {
+      print('前台不可见');
+    }
+    if (state == AppLifecycleState.resumed) {
+      print('前台可见');
+    }
   }
 
   @override
@@ -274,12 +324,16 @@ class _WechatFriendsState extends State<WechatFriends>
                         )
                       ]),
                 ),
-                SizedBox(
-                  width: ScreenAdapter.width(50),
-                  height: ScreenAdapter.width(50),
-                  child: Image.network(
-                      'https://avatars.githubusercontent.com/u/12538263?s=100&v=4'),
-                ),
+                InkWell(
+                    onTap: () {
+                      Get.to(const RadiusSummary());
+                    },
+                    child: SizedBox(
+                      width: ScreenAdapter.width(50),
+                      height: ScreenAdapter.width(50),
+                      child: Image.network(
+                          'https://avatars.githubusercontent.com/u/12538263?s=100&v=4'),
+                    )),
               ],
             ))
       ],
@@ -379,9 +433,9 @@ class _ExpandableTextState extends State<ExpandableText> {
         textSize.width,
         textSize.height,
       ));
-      print(position);
+      print('position:$position');
       final endOffset = textPainter.getOffsetBefore(position.offset);
-      print(endOffset);
+      print('endOffset:$endOffset');
 
       if (textPainter.didExceedMaxLines) {
         print('超出最大');

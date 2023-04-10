@@ -19,6 +19,8 @@ dependencies:
   pull_to_refresh: ^2.0.0
   underline_indicator: ^0.0.4
 
+  # 动画
+  animate_do: ^3.0.2
   # 照片选择
   wechat_assets_picker: ^8.4.1
   # 瀑布流

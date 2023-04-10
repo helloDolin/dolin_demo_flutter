@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'app/constants/constants.dart';
 import 'app/routes/app_pages.dart';
+import 'global.dart';
 
 void main() {
   DLAPPDefend().run(ScreenUtilInit(
@@ -18,6 +19,7 @@ void main() {
             title: "dolin_demo_flutter",
             initialRoute: AppPages.INITIAL,
             getPages: AppPages.routes,
+            navigatorObservers: [Global.routerObserver],
             // 国际化
             localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
