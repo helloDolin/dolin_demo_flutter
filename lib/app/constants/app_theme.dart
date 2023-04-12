@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'app_color.dart';
 
 class AppTheme {
-  static const horizontalMargin = 16.0;
-  static const radius = 10.0;
-
+  static ThemeData dark = ThemeData(
+      brightness: Brightness.dark,
+      appBarTheme: const AppBarTheme().copyWith(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        color: Colors.black,
+      ));
   static ThemeData light = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColor.scaffoldBackground,

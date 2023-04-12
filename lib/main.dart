@@ -30,6 +30,8 @@ void main() {
               Locale('zh', 'CH'),
               Locale('en', 'US'),
             ],
+            themeMode: ThemeMode.system,
+            darkTheme: AppTheme.dark,
             theme: AppTheme.light);
       }));
 }
