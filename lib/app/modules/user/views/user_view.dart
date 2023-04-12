@@ -1,6 +1,7 @@
 import 'package:dolin_demo_flutter/app/modules/user/views/arena_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/async_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.dart';
+import 'package:dolin_demo_flutter/app/modules/user/views/dart_summary/dart_summary.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/pieces_of_knowledge.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/wechat_friends.dart';
@@ -26,6 +27,9 @@ class UserView extends GetView<UserController> {
           padding: const EdgeInsets.only(top: 10),
           child: Column(
             children: [
+              Card('Dart 温故知新', () {
+                Get.to(const DartSummaryPage());
+              }),
               Card('手绘 Widget', () {
                 Get.to(const CustomPaintPage());
               }),

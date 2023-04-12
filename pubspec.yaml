@@ -18,6 +18,7 @@ dependencies:
   fluttertoast: ^8.2.1
   pull_to_refresh: ^2.0.0
   underline_indicator: ^0.0.4
+  dart_code_viewer2: ^1.0.1
 
   # 动画
   animate_do: ^3.0.2
