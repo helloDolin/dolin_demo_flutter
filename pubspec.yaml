@@ -27,6 +27,8 @@ dependencies:
   pin_code_fields: ^7.4.0 # 验证码输入
   city_pickers: ^1.2.1 # 省市区选择器
   crypto: ^3.0.2 # 加密
+  device_info_plus: ^8.2.0
+
   flutter:
     sdk: flutter
   flutter_localizations:

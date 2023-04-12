@@ -2,6 +2,7 @@ import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:dolin_demo_flutter/app/data/douban250.dart';
 import 'package:dolin_demo_flutter/app/https/httpsClient.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
+import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -26,6 +27,9 @@ class _TabListViewState extends State<TabListView>
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      print('第一帧绘制结束');
+    });
     _listData = [];
     _refreshController = RefreshController(initialRefresh: true);
     _scrollController = ScrollController();
@@ -142,10 +146,7 @@ class _TabListViewState extends State<TabListView>
             child: _isShowUpIcon
                 ? ElevatedButton(
                     onPressed: () {
-                      // 解决 jumpTo 有时不准确的问题
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        _scrollController.jumpTo(0);
-                      });
+                      _scrollController.jumpTo(0);
                     },
                     child: const Icon(Icons.arrow_upward_outlined))
                 : const SizedBox.shrink()),
@@ -170,13 +171,16 @@ class Item extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-              width: double.infinity,
+              width: ScreenAdapter.getScreenWidth(),
+              height:
+                  ScreenAdapter.getScreenWidth() * 880 / 540, // 图片尺寸：540 * 880
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: FadeInImage.assetNetwork(
                   placeholder: AppAssets.placeholderPng,
+                  placeholderFit: BoxFit.cover,
                   image: model.shareImage,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                   imageErrorBuilder: (context, error, stackTrace) =>
                       const SizedBox(
                     child: Text('图片加载失败'),

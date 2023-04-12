@@ -55,6 +55,17 @@ class UserView extends GetView<UserController> {
               Card('WebView', () {
                 Get.to(() => const WebView());
               }),
+              Card('获取设备信息', () {
+                controller.getDeviceInfo();
+              }),
+              Obx(() => Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20.0, right: 20.0, top: 0),
+                    child: Text(
+                      controller.deviceData.value,
+                      style: const TextStyle(wordSpacing: 3, fontSize: 16),
+                    ),
+                  ))
             ],
           )),
     );
