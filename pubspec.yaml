@@ -29,6 +29,8 @@ dependencies:
   crypto: ^3.0.2 # 加密
   device_info_plus: ^8.2.0
   url_launcher: ^6.1.10
+  chewie: ^1.4.0 # 视频播放
+  video_player: ^2.6.1
 
   flutter:
     sdk: flutter

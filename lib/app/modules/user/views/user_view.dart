@@ -6,6 +6,7 @@ import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.da
 import 'package:dolin_demo_flutter/app/modules/user/views/dart_summary/dart_summary.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/pieces_of_knowledge.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
+import 'package:dolin_demo_flutter/app/modules/user/views/video.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/webView.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/wechat_friends.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
@@ -55,6 +56,9 @@ class UserView extends GetView<UserController> {
               Card('LayoutPractice', () {
                 Get.to(() => const LayoutPractice());
               }),
+              Card('VideoPage', () {
+                Get.to(() => const VideoPage());
+              }),
               Card('WebView', () {
                 Get.to(() => const WebView());
               }),
@@ -65,9 +69,10 @@ class UserView extends GetView<UserController> {
               }),
               Obx(() => Offstage(
                     offstage: controller.deviceData.value.isEmpty,
-                    child: Padding(
+                    child: Container(
+                      // color: Colors.red,
                       padding: const EdgeInsets.only(
-                          left: 20.0, right: 20.0, top: 0),
+                          left: 20.0, right: 20.0, bottom: 10),
                       child: Text(
                         controller.deviceData.value,
                         style: const TextStyle(wordSpacing: 3, fontSize: 16),
