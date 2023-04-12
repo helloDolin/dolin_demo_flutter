@@ -10,33 +10,23 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
+  get: 4.6.5 # getx
+  flutter_screenutil: ^5.7.0 # 屏幕适配
   dio: 5.1.0
   shared_preferences: ^2.0.18
-  get: 4.6.5
   flutter_html: ^2.2.1
   flutter_swiper_view: ^1.1.8
   fluttertoast: ^8.2.1
   pull_to_refresh: ^2.0.0
   underline_indicator: ^0.0.4
-  dart_code_viewer2: ^1.0.1
-
-  # 动画
-  animate_do: ^3.0.2
-  # 照片选择
-  wechat_assets_picker: ^8.4.1
-  # 瀑布流
-  flutter_staggered_grid_view: ^0.6.2
-  # 屏幕适配
-  flutter_screenutil: ^5.7.0
-  # 监听 widget 展示到屏幕，埋点用
-  visibility_detector: ^0.4.0+2
-  # 验证码输入
-  pin_code_fields: ^7.4.0
-  # 省市区选择器
-  city_pickers: ^1.2.1
-  # 加密
-  crypto: ^3.0.2
-
+  flutter_inappwebview: ^5.7.2+3 # webView
+  animate_do: ^3.0.2 # 动画
+  wechat_assets_picker: ^8.4.1 # 照片选择
+  flutter_staggered_grid_view: ^0.6.2 # 瀑布流
+  visibility_detector: ^0.4.0+2 # 监听 widget 展示到屏幕，埋点用
+  pin_code_fields: ^7.4.0 # 验证码输入
+  city_pickers: ^1.2.1 # 省市区选择器
+  crypto: ^3.0.2 # 加密
   flutter:
     sdk: flutter
   flutter_localizations:

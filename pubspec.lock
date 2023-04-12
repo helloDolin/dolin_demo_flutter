@@ -97,14 +97,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  dart_code_viewer2:
-    dependency: "direct main"
-    description:
-      name: dart_code_viewer2
-      sha256: "9c2034c6840491db1cdec92aa0a20544f905d614ec5c1d270f0359efa1f1ba33"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   dio:
     dependency: "direct main"
     description:
@@ -166,6 +158,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  flutter_inappwebview:
+    dependency: "direct main"
+    description:
+      name: flutter_inappwebview
+      sha256: f73505c792cf083d5566e1a94002311be497d984b5607f25be36d685cf6361cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.7.2+3"
   flutter_layout_grid:
     dependency: transitive
     description:

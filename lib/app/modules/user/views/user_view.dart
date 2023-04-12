@@ -4,6 +4,7 @@ import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.da
 import 'package:dolin_demo_flutter/app/modules/user/views/dart_summary/dart_summary.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/pieces_of_knowledge.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
+import 'package:dolin_demo_flutter/app/modules/user/views/webView.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/wechat_friends.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
@@ -50,6 +51,9 @@ class UserView extends GetView<UserController> {
               }),
               Card('LayoutPractice', () {
                 Get.to(() => const LayoutPractice());
+              }),
+              Card('WebView', () {
+                Get.to(() => const WebView());
               }),
             ],
           )),
