@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dolin_demo_flutter/app/modules/user/views/arena_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/async_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.dart';
@@ -9,6 +11,7 @@ import 'package:dolin_demo_flutter/app/modules/user/views/wechat_friends.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:get/get.dart';
 
@@ -56,16 +59,62 @@ class UserView extends GetView<UserController> {
                 Get.to(() => const WebView());
               }),
               Card('获取设备信息', () {
-                controller.getDeviceInfo();
+                controller.deviceData.value.isEmpty
+                    ? controller.getDeviceInfo()
+                    : controller.deviceData.value = '';
               }),
-              Obx(() => Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20.0, right: 20.0, top: 0),
-                    child: Text(
-                      controller.deviceData.value,
-                      style: const TextStyle(wordSpacing: 3, fontSize: 16),
+              Obx(() => Offstage(
+                    offstage: controller.deviceData.value.isEmpty,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20.0, right: 20.0, top: 0),
+                      child: Text(
+                        controller.deviceData.value,
+                        style: const TextStyle(wordSpacing: 3, fontSize: 16),
+                      ),
                     ),
-                  ))
+                  )),
+              Card('打开浏览器', () async {
+                final Uri uri = Uri.parse('https://www.baidu.com');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                }
+              }),
+              Card('打电话', () async {
+                final Uri uri = Uri.parse('tel:10086');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                }
+              }),
+              Card('发短信', () async {
+                final Uri uri = Uri.parse('sms:10086');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                }
+              }),
+              Card('打开微信', () async {
+                final Uri uri = Uri.parse('weixin://');
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                }
+              }),
+              Card('高德地图-导航北大', () async {
+                String title = "北京大学";
+                String latitude = "39.992806";
+                String longitude = "116.310905";
+                Uri uri = Uri.parse(
+                    '${Platform.isAndroid ? 'android' : 'ios'}amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2&poiname=$title');
+                print(uri);
+                try {
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri);
+                  } else {
+                    print('无法调起高德地图');
+                  }
+                } catch (e) {
+                  print('无法调起高德地图');
+                }
+              }),
             ],
           )),
     );

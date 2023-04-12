@@ -2,6 +2,19 @@
     package="com.example.dolin_demo_flutter">
     <!-- 安卓 webView 权限 -->
    <uses-permission android:name="android.permission.INTERNET"/>
+   <!-- 打电话，发短信 -->
+   <!-- Provide required visibility configuration for API level 30 and above --> 
+   <queries> <!-- If your app checks for SMS support --> 
+        <intent> 
+            <action android:name="android.intent.action.VIEW" /> 
+            <data android:scheme="sms" /> 
+        </intent> <!-- If your app checks for call support --> 
+        <intent> 
+            <action android:name="android.intent.action.VIEW" /> 
+            <data android:scheme="tel" /> 
+        </intent> 
+    </queries> 
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
    <application
         android:label="dolin_demo_flutter"
         android:name="${applicationName}"
