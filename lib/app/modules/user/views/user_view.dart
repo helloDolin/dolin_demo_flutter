@@ -157,6 +157,13 @@ class Card extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 根据明暗调整颜色
+    final bgRadomColor = getRandomColor();
+    final brightnessValue = bgRadomColor.computeLuminance();
+    final titleColor = brightnessValue > 0.5 ? Colors.black : Colors.white;
+    final borderColor = brightnessValue > 0.5
+        ? const Color.fromARGB(255, 9, 130, 31)
+        : Colors.black;
     return GestureDetector(
         onTap: onTap,
         child: Container(
@@ -164,11 +171,15 @@ class Card extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
-            border: Border.all(
-                color: getRandomColor(), width: ScreenAdapter.height(1)),
+            color: bgRadomColor,
+            border:
+                Border.all(color: borderColor, width: ScreenAdapter.height(1)),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
-          child: Text(title),
+          child: Text(
+            title,
+            style: TextStyle(color: titleColor),
+          ),
         ));
   }
 }
