@@ -31,6 +31,7 @@ dependencies:
   url_launcher: ^6.1.10
   chewie: ^1.4.0 # 视频播放
   video_player: ^2.6.1
+  barcode_scan2: ^4.2.4 # 扫码
 
   flutter:
     sdk: flutter

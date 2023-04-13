@@ -5,6 +5,7 @@ class UserController extends GetxController {
   //TODO: Implement UserController
 
   RxString deviceData = ''.obs;
+  RxString scan_code = ''.obs;
 
   void getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();

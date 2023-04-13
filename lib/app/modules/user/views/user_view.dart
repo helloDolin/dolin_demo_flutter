@@ -18,6 +18,7 @@ import 'package:get/get.dart';
 
 import '../controllers/user_controller.dart';
 import 'layout_practice.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
 
 class UserView extends GetView<UserController> {
   const UserView({Key? key}) : super(key: key);
@@ -120,6 +121,29 @@ class UserView extends GetView<UserController> {
                   print('无法调起高德地图');
                 }
               }),
+              Obx(() => Card(
+                      controller.scan_code.value.isEmpty
+                          ? '扫码'
+                          : controller.scan_code.value, () async {
+                    var options = const ScanOptions(
+                      // set the options
+                      autoEnableFlash: true,
+                      strings: {
+                        'cancel': '取消',
+                        'flash_on': '打开闪光灯',
+                        'flash_off': '关闭闪光灯'
+                      },
+                    );
+
+                    var result = await BarcodeScanner.scan(options: options);
+                    controller.scan_code.value = result.rawContent;
+
+                    print(result
+                        .type); // The result type (barcode, cancelled, failed)
+                    print(result.rawContent); // The barcode content
+                    print(result.format); // The barcode format (as enum)
+                    print(result.formatNote); // If a unkn
+                  })),
             ],
           )),
     );
@@ -137,14 +161,13 @@ class Card extends StatelessWidget {
         onTap: onTap,
         child: Container(
           margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
-          padding: const EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.all(10),
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
             border: Border.all(
                 color: getRandomColor(), width: ScreenAdapter.height(1)),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
-          height: 44,
           child: Text(title),
         ));
   }
