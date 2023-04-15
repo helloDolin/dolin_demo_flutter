@@ -14,10 +14,16 @@ class SearchView extends GetView<SearchController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          'SearchView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+        child: Obx(() => Text(
+              controller.searchPushCount.value.toString(),
+              style: const TextStyle(fontSize: 20),
+            )),
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () => Get.offNamed('/search', arguments: {
+          'searchPushCount': controller.searchPushCount.value += 1
+        }),
+        child: const Text('to search'),
       ),
     );
   }

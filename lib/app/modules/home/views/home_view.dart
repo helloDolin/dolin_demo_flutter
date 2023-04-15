@@ -66,13 +66,36 @@ class HomeView extends GetView<HomeController> {
         preferredSize: const Size(double.infinity, 50),
         child: Obx(() => AppBar(
               actions: [
-                IconButton(
-                    onPressed: () {
-                      Get.toNamed('/search');
-                    },
-                    icon: const Icon(
-                      Icons.search_rounded,
-                    ))
+                SizedBox(
+                  width: 40,
+                  child: IconButton(
+                      onPressed: () {
+                        Get.toNamed('/search',
+                            arguments: {'searchPushCount': 1});
+                      },
+                      icon: const Icon(
+                        Icons.search,
+                      )),
+                ),
+                SizedBox(
+                  width: 46,
+                  child: TextButton(
+                      onPressed: () async {
+                        // Get.toNamed('/tabs/list', arguments: {'id': 123});
+                        // Get.toNamed('/tabs/list?id=123');
+                        final res = await Get.toNamed('/tabs/list/666');
+                        print(res);
+                      },
+                      child: const Text('列表')),
+                ),
+                SizedBox(
+                  width: 46,
+                  child: TextButton(
+                      onPressed: () {
+                        Get.toNamed('/tabs/list/detail');
+                      },
+                      child: const Text('详情')),
+                )
               ],
               title: Text(
                 controller.pageTitle.value,

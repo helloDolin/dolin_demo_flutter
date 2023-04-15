@@ -41,6 +41,8 @@ class _PiecesOfKnowledgeState extends State<PiecesOfKnowledge> {
                   SizedBox(height: ScreenAdapter.height(10)),
                   const Text('GetBottomSheet 更新数据需要使用 GetBuilder'),
                   SizedBox(height: ScreenAdapter.height(10)),
+                  const Text('toStringAsFixed(2) 保留两位小数'),
+                  SizedBox(height: ScreenAdapter.height(10)),
                   const Text(
                       'ListView 里边嵌套 GridView，GridView 的 shrikWrap 要设置为 true，否则需要手动设置其高度'),
                   VisibilityDetector(

@@ -1,23 +1,12 @@
 import 'package:get/get.dart';
 
 class SearchController extends GetxController {
-  //TODO: Implement SearchController
+  RxInt searchPushCount = 0.obs;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    final count = Get.arguments['searchPushCount'];
+    searchPushCount.value = count;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

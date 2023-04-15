@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'app/constants/constants.dart';
+import 'app/modules/unknowPage.dart';
 import 'app/routes/app_pages.dart';
 import 'app/util/translation_tool.dart';
 import 'global.dart';
@@ -16,28 +17,29 @@ void main() {
       splitScreenMode: true,
       builder: (context, child) {
         return GetMaterialApp(
-            // showPerformanceOverlay: true,
-            debugShowCheckedModeBanner: false,
-            title: "dolin_demo_flutter",
-            initialRoute: AppPages.INITIAL,
-            getPages: AppPages.routes,
-            navigatorObservers: [Global.routerObserver],
-            // 本地化
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate
-            ],
-            translations: Messages(), // 你的翻译
-            locale: ui.window.locale, // 将会按照此处指定的语言翻译
-            fallbackLocale:
-                const Locale('en', 'US'), // 添加一个回调语言选项，以备上面指定的语言翻译不存在
-            supportedLocales: const [
-              Locale('zh', 'CH'),
-              Locale('en', 'US'),
-            ],
-            themeMode: ThemeMode.system,
-            darkTheme: AppTheme.dark,
-            theme: AppTheme.light);
+          // showPerformanceOverlay: true,
+          debugShowCheckedModeBanner: false,
+          title: "dolin_demo_flutter",
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+          navigatorObservers: [Global.routerObserver],
+          // 本地化
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate
+          ],
+          translations: Messages(), // 你的翻译
+          locale: ui.window.locale, // 将会按照此处指定的语言翻译
+          fallbackLocale: const Locale('en', 'US'), // 添加一个回调语言选项，以备上面指定的语言翻译不存在
+          supportedLocales: const [
+            Locale('zh', 'CH'),
+            Locale('en', 'US'),
+          ],
+          themeMode: ThemeMode.system,
+          darkTheme: AppTheme.dark,
+          theme: AppTheme.light,
+          unknownRoute: GetPage(name: '/404', page: () => const UnknowPage()),
+        );
       }));
 }
