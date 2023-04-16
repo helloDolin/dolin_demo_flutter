@@ -2,20 +2,30 @@ import 'dart:math';
 
 import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class RadiusSummary extends StatelessWidget {
-  const RadiusSummary({super.key});
+  RadiusSummary({super.key});
+  final count1 = 0.obs;
+  final count2 = 0.obs;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('圆角组合'),
+        title: Obx(() {
+          print('count1');
+          return Text(count1.value.toString());
+        }),
       ),
       body: SafeArea(
           child: SingleChildScrollView(
               child: Column(
         children: [
+          Obx(() {
+            print('count2');
+            return Text(count2.value.toString());
+          }),
           const SizedBox(
             width: double.infinity,
           ),
@@ -80,6 +90,22 @@ class RadiusSummary extends StatelessWidget {
           )
         ],
       ))),
+      floatingActionButton: Row(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              count1.value++;
+            },
+            child: const Icon(Icons.add),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              count2.value++;
+            },
+            child: const Icon(Icons.add_box),
+          ),
+        ],
+      ),
     );
   }
 }

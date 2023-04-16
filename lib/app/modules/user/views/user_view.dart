@@ -49,7 +49,7 @@ class UserView extends GetView<UserController> {
                 Get.to(const PiecesOfKnowledge());
               }),
               Card('各种圆角总结', () {
-                Get.to(const RadiusSummary());
+                Get.to(RadiusSummary());
               }),
               Card('微信朋友圈', () {
                 Get.to(const WechatFriends());

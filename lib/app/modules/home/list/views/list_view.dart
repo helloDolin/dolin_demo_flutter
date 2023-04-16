@@ -24,6 +24,12 @@ class ListView extends GetView<ListController> {
             style: TextStyle(fontSize: 20),
           ),
         ),
+        floatingActionButton: ElevatedButton(
+          onPressed: () {
+            Get.toNamed('/tabs/list/detail');
+          },
+          child: const Text('详情'),
+        ),
       ),
     );
   }
