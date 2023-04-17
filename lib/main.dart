@@ -36,6 +36,10 @@ void main() {
           child: GetMaterialApp(
             // showPerformanceOverlay: true,
             debugShowCheckedModeBanner: false,
+            routingCallback: (routing) {
+              print('===================😄😄😄===================');
+              print(routing?.current ?? '');
+            },
             title: "dolin_demo_flutter",
             initialRoute: AppPages.INITIAL,
             getPages: AppPages.routes,
