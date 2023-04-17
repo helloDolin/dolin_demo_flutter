@@ -1,3 +1,4 @@
+import 'package:dolin_demo_flutter/app/store/user.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -57,8 +58,9 @@ class LoginView extends GetView<LoginController> {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      print(
-                          'username:${controller.username} \t password:${controller.password}');
+                      final token =
+                          'username:${controller.username}_password:${controller.password}';
+                      UserStore.to.setToken(token);
                     },
                     child: const Text('登录')),
               )

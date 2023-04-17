@@ -1,18 +1,19 @@
 import 'package:dolin_demo_flutter/app/routes/app_pages.dart';
+import 'package:dolin_demo_flutter/app/store/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DeatailMiddleWare extends GetMiddleware {
   @override
-  // TODO: implement priority
   int? get priority => -1;
   // 重定向，当正在搜索被调用路由的页面时，将调用该函数
   @override
   RouteSettings? redirect(String? route) {
+    // 登录时返回 null，正常跳转
+    if (UserStore.to.isLogin || route == Routes.LOGIN) {
+      return null;
+    }
     // 未登录时跳登录页面
-    // final authService = Get.find<AuthService>();
-    // return authService.authed.value ? null : RouteSettings(name: '/login')
-    // return null; // 返回 null，正常跳转
     return const RouteSettings(name: Routes.LOGIN);
   }
 

@@ -58,7 +58,13 @@ void main() {
             darkTheme: AppTheme.dark,
             theme: AppTheme.light,
             unknownRoute: GetPage(name: '/404', page: () => const UnknowPage()),
+            enableLog: true,
+            logWriterCallback: write,
           ),
         );
       }));
+}
+
+void write(String text, {bool isError = false}) {
+  Future.microtask(() => print('** $text. isError: [$isError]'));
 }
