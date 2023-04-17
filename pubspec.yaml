@@ -13,6 +13,8 @@ dependencies:
   get: 4.6.5 # getx
   flutter_screenutil: ^5.7.0 # 屏幕适配
   dio: 5.1.0
+  dio_cookie_manager: ^3.0.0
+  cookie_jar: ^4.0.1
   shared_preferences: ^2.0.18
   flutter_html: ^2.2.1
   flutter_swiper_view: ^1.1.8
@@ -32,6 +34,7 @@ dependencies:
   chewie: ^1.4.0 # 视频播放
   video_player: ^2.6.1
   barcode_scan2: ^4.2.4 # 扫码
+  uni_links: ^0.5.1 # Deep Links (Android) and Universal Links and Custom URL schemes (iOS)
 
   flutter:
     sdk: flutter

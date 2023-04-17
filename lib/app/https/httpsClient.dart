@@ -1,4 +1,6 @@
+import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 
 class HttpsClient {
   /// 单例
@@ -23,16 +25,19 @@ class HttpsClient {
         responseType: ResponseType.json,
       );
       _dio = Dio(options);
+      // Cookie管理
+      CookieJar cookieJar = CookieJar();
+      _dio!.interceptors.add(CookieManager(cookieJar));
     }
   }
 
   Future get(apiUrl, {Map<String, dynamic>? data}) async {
     try {
+      var res = await _dio!.get(apiUrl, queryParameters: data);
       print('''
 =============apiUrl=================
-$apiUrl
+${res.realUri}
 ''');
-      var res = await _dio!.get(apiUrl, queryParameters: data);
       return res;
     } catch (e) {
       print('请求超时');

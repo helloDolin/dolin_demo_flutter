@@ -1,9 +1,8 @@
+import 'package:dolin_demo_flutter/app/apis/movie.dart';
 import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:dolin_demo_flutter/app/data/douban250.dart';
-import 'package:dolin_demo_flutter/app/https/httpsClient.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -62,33 +61,37 @@ class _TabListViewState extends State<TabListView>
   }
 
   void _onRefresh() {
-    skip = 0;
-    _listData = [];
-    reqDouban250(isRefresh: true);
-    _refreshController.refreshCompleted();
+    reqData(isRefresh: true).then((_) {
+      _refreshController.refreshCompleted();
+    }).catchError((_) {
+      _refreshController.refreshFailed();
+    });
   }
 
   void _onLoading() {
-    skip += pageSize;
-    reqDouban250(isRefresh: false);
-    _refreshController.loadComplete();
+    if (_listData.length % pageSize == 0) {
+      reqData(isRefresh: false).then((_) {
+        _refreshController.loadComplete();
+      }).catchError((_) {
+        _refreshController.loadFailed();
+      });
+    } else {
+      _refreshController.loadNoData();
+    }
   }
 
-  void reqDouban250({bool isRefresh = false}) async {
-    String apiUrl =
-        'https://api.wmdb.tv/api/v1/top?type=${widget.source}&skip=$skip&limit=$pageSize&lang=Cn';
-
-    final res = await HttpsClient.instance.get(apiUrl);
-    if (res != null) {
-      List<Douban250> douban250List = douban250FromList(res.data);
-      if (isRefresh) {
-        _listData = douban250List;
-      } else {
-        _listData.addAll(douban250List);
-      }
-      if (mounted) {
-        setState(() {});
-      }
+  Future<void> reqData({bool isRefresh = false}) async {
+    final res = await MovieAPI.movieList(widget.source, pageSize, skip);
+    if (isRefresh) {
+      skip = 0;
+      _listData.clear();
+    } else {
+      skip += pageSize;
+    }
+    if (mounted) {
+      setState(() {
+        _listData.addAll(res);
+      });
     }
   }
 
@@ -100,27 +103,27 @@ class _TabListViewState extends State<TabListView>
         SmartRefresher(
           enablePullDown: true,
           enablePullUp: true,
-          header: const WaterDropHeader(),
-          footer: CustomFooter(
-            builder: (context, mode) {
-              Widget body;
-              if (mode == LoadStatus.idle) {
-                body = const Text("上拉加载");
-              } else if (mode == LoadStatus.loading) {
-                body = const CupertinoActivityIndicator();
-              } else if (mode == LoadStatus.failed) {
-                body = const Text("加载失败！点击重试！");
-              } else if (mode == LoadStatus.canLoading) {
-                body = const Text("松手,加载更多!");
-              } else {
-                body = const Text("没有更多数据了!");
-              }
-              return SizedBox(
-                height: 55.0,
-                child: Center(child: body),
-              );
-            },
-          ),
+          // header: const WaterDropHeader(),
+          // footer: CustomFooter(
+          //   builder: (context, mode) {
+          //     Widget body;
+          //     if (mode == LoadStatus.idle) {
+          //       body = const Text("上拉加载");
+          //     } else if (mode == LoadStatus.loading) {
+          //       body = const CupertinoActivityIndicator();
+          //     } else if (mode == LoadStatus.failed) {
+          //       body = const Text("加载失败！点击重试！");
+          //     } else if (mode == LoadStatus.canLoading) {
+          //       body = const Text("松手,加载更多!");
+          //     } else {
+          //       body = const Text("没有更多数据了!");
+          //     }
+          //     return SizedBox(
+          //       height: 55.0,
+          //       child: Center(child: body),
+          //     );
+          //   },
+          // ),
           controller: _refreshController,
           onRefresh: _onRefresh,
           onLoading: _onLoading,
