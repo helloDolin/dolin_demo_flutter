@@ -5,6 +5,7 @@ Flutter 学习、总结、提高
 ## 截图
 ![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/home.png)
 ![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/mine.png)
+![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/wechat_friends.png)
 
 ## 简介
 * 项目主要使用 GetX 进行状态管理与路由跳转
