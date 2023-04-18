@@ -53,6 +53,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  build_runner: ^2.3.3 # 如果修改了某个变量的名称或者是类型，那么也要修改对应的序列化函数，大量的代码很容易出错
+  json_serializable: ^6.6.1
+
 flutter:
   assets:
     - assets/images/

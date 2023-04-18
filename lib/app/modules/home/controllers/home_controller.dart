@@ -34,12 +34,6 @@ class HomeController extends GetxController
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-    _startTimer();
-  }
-
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       print(DateTime.now());
