@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class UserController extends GetxController {
   //TODO: Implement UserController
 
   RxString deviceData = ''.obs;
+  RxString pacakgeData = ''.obs;
+
   RxString scan_code = ''.obs;
 
   void getDeviceInfo() async {
@@ -24,5 +27,19 @@ utsname-release:    ${deviceInfo.utsname.release ?? ''}
 utsname-version:    ${deviceInfo.utsname.version ?? ''}
 utsname-machine:    ${deviceInfo.utsname.machine ?? ''}''';
     }
+  }
+
+  void getPackageInflo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+    String appName = packageInfo.appName;
+    String packageName = packageInfo.packageName;
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    pacakgeData.value = '''appName:$appName
+packageName:$packageName
+version:$version
+buildNumber:$buildNumber    
+''';
   }
 }

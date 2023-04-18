@@ -83,6 +83,23 @@ class UserView extends GetView<UserController> {
                         ),
                       ),
                     )),
+                Card('PackageInfo', () {
+                  controller.pacakgeData.value.isEmpty
+                      ? controller.getPackageInflo()
+                      : controller.pacakgeData.value = '';
+                }),
+                Obx(() => Offstage(
+                      offstage: controller.pacakgeData.value.isEmpty,
+                      child: Container(
+                        // color: Colors.red,
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20.0, bottom: 10),
+                        child: Text(
+                          controller.pacakgeData.value,
+                          style: const TextStyle(wordSpacing: 3, fontSize: 16),
+                        ),
+                      ),
+                    )),
                 Card('打开浏览器', () async {
                   final Uri uri = Uri.parse('https://www.baidu.com');
                   if (await canLaunchUrl(uri)) {
