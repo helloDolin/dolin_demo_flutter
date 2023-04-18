@@ -1,3 +1,4 @@
+import 'package:dolin_demo_flutter/app/common_widgets/index.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/global.dart';
 import 'package:flutter/gestures.dart';
@@ -202,12 +203,18 @@ class _WechatFriendsState extends State<WechatFriends>
                       spacing: 10,
                       runSpacing: 10,
                       children: photoUrlList!
-                          .map((e) => SizedBox(
-                                width: width,
-                                height: width,
-                                child: Image.network(
-                                  e,
-                                  fit: BoxFit.cover,
+                          .map((e) => InkWell(
+                                onTap: () {
+                                  openGallery(context, photoUrlList.indexOf(e),
+                                      photoUrlList);
+                                },
+                                child: SizedBox(
+                                  width: width,
+                                  height: width,
+                                  child: Image.network(
+                                    e,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ))
                           .toList(),

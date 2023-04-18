@@ -1,4 +1,5 @@
 import 'package:dolin_demo_flutter/app/apis/movie.dart';
+import 'package:dolin_demo_flutter/app/common_widgets/index.dart';
 import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:dolin_demo_flutter/app/data/douban250.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
@@ -168,35 +169,41 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-              width: ScreenAdapter.getScreenWidth(),
-              height:
-                  ScreenAdapter.getScreenWidth() * 880 / 540, // 图片尺寸：540 * 880
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: FadeInImage.assetNetwork(
-                  placeholder: AppAssets.placeholderPng,
-                  placeholderFit: BoxFit.cover,
-                  image: model.shareImage,
-                  fit: BoxFit.cover,
-                  imageErrorBuilder: (context, error, stackTrace) =>
-                      const SizedBox(
-                    child: Text('图片加载失败'),
+    return InkWell(
+      onTap: () {
+        openGallery(context, 0, [model.shareImage]);
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+                width: ScreenAdapter.getScreenWidth(),
+                height: ScreenAdapter.getScreenWidth() *
+                    880 /
+                    540, // 图片尺寸：540 * 880
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: AppAssets.placeholderPng,
+                    placeholderFit: BoxFit.cover,
+                    image: model.shareImage,
+                    fit: BoxFit.cover,
+                    imageErrorBuilder: (context, error, stackTrace) =>
+                        const SizedBox(
+                      child: Text('图片加载失败'),
+                    ),
                   ),
-                ),
-              )),
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text('片名：${model.originalName ?? ''}')),
-          Padding(
-              padding: const EdgeInsets.all(10),
-              child: Text('排名：${index + 1}')),
-        ],
+                )),
+            Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text('片名：${model.originalName ?? ''}')),
+            Padding(
+                padding: const EdgeInsets.all(10),
+                child: Text('排名：${index + 1}')),
+          ],
+        ),
       ),
     );
   }

@@ -36,6 +36,7 @@ dependencies:
   barcode_scan2: ^4.2.4 # 扫码
   uni_links: ^0.5.1 # Deep Links (Android) and Universal Links and Custom URL schemes (iOS)
   package_info_plus: ^3.1.0
+  photo_view: ^0.14.0
 
   flutter:
     sdk: flutter
