@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +10,7 @@ class HomeController extends GetxController
   RxString pageTitle = '豆瓣250'.obs;
   late TabController tabController;
   late PageController pageController;
+  late Timer _timer;
 
   List<Map<String, String>> categoryList = [
     {'title': '豆瓣', 'source': 'Douban'},
@@ -26,18 +29,28 @@ class HomeController extends GetxController
     tabController = TabController(
         initialIndex: 0, length: categoryList.length, vsync: this);
     pageController = PageController(initialPage: 0);
+    print('home controller onInit');
+
     super.onInit();
   }
 
   @override
   void onReady() {
-    print('HomeController onReady');
     super.onReady();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      print(DateTime.now());
+    });
   }
 
   @override
   void onClose() {
     print('HomeController onReady');
+    _timer.cancel();
+
     super.onClose();
   }
 }

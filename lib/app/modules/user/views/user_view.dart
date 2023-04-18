@@ -4,6 +4,7 @@ import 'package:dolin_demo_flutter/app/modules/user/views/arena_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/async_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/dart_summary/dart_summary.dart';
+import 'package:dolin_demo_flutter/app/modules/user/views/in_common_use_widget.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/pieces_of_knowledge.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/video.dart';
@@ -170,6 +171,9 @@ class UserView extends GetView<UserController> {
                     isDismissible: true,
                     duration: const Duration(seconds: 3),
                   );
+                }),
+                Card('常用组件', () {
+                  Get.to(() => const InCommonUseWidgetPage());
                 }),
               ],
             )),

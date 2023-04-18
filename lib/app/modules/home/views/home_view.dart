@@ -23,6 +23,7 @@ class HomeView extends GetView<HomeController> {
           labelColor: Colors.black,
           labelStyle:
               const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          // labelPadding: const EdgeInsets.symmetric(horizontal: 20),
           unselectedLabelColor: Colors.grey,
           unselectedLabelStyle: const TextStyle(
             fontSize: 14,
