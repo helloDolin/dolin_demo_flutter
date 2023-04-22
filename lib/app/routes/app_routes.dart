@@ -8,6 +8,10 @@ abstract class Routes {
   static const LIST = _Paths.LIST;
   static const DETAIL = _Paths.DETAIL;
   static const LOGIN = _Paths.LOGIN;
+  static const SETTINGS = _Paths.SETTINGS;
+  static const DEVICE_INFO = _Paths.SETTINGS + _Paths.DEVICE_INFO;
+  static const WATCH_INFO =
+      _Paths.SETTINGS + _Paths.DEVICE_INFO + _Paths.WATCH_INFO;
 }
 
 abstract class _Paths {
@@ -18,4 +22,7 @@ abstract class _Paths {
   static const LIST_ID = '/list/:id';
   static const DETAIL = '/detail';
   static const LOGIN = '/login';
+  static const SETTINGS = '/settings';
+  static const DEVICE_INFO = '/device-info';
+  static const WATCH_INFO = '/watch-info';
 }

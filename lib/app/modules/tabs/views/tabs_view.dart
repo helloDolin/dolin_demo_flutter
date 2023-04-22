@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/tabs_controller.dart';
 
 class TabsView extends GetView<TabsController> {
   const TabsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Scaffold(
+    return Obx(
+      () => Scaffold(
         body: PageView(
             controller: controller.pageController,
             // onPageChanged: ((value) => controller.setCurrentIndex(value)),
@@ -58,17 +60,19 @@ class TabsView extends GetView<TabsController> {
             backgroundColor:
                 controller.currentIndex.value == 2 ? Colors.red : Colors.grey,
             onPressed: () {
-              controller.setCurrentIndex(2);
-              controller.pageController.jumpToPage(2);
+              // controller.setCurrentIndex(2);
+              // controller.pageController.jumpToPage(2);
+              Get.toNamed(Routes.SETTINGS);
             },
             child: const Icon(
-              Icons.room_service,
+              Icons.check_circle,
               color: Colors.white,
             ),
           ),
         ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerDocked));
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+    );
   }
 }
 
