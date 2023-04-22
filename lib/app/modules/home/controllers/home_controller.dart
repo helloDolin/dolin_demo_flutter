@@ -26,6 +26,11 @@ class HomeController extends GetxController
     pageTitle.value = '${title}250';
   }
 
+  void doSomeThing() {
+    pageController.jumpToPage(1);
+    tabIndexChanged(1);
+  }
+
   @override
   void onInit() {
     tabController = TabController(

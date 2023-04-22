@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/tabs_controller.dart';
 
 class TabsView extends GetView<TabsController> {
@@ -66,18 +67,18 @@ class TabsView extends GetView<TabsController> {
             onPressed: () {
               // controller.setCurrentIndex(2);
               // controller.pageController.jumpToPage(2);
-              // Get.toNamed(Routes.SETTINGS);
+              Get.toNamed(Routes.SETTINGS);
 
               // var locale = const Locale('en', 'US');
               // Get.updateLocale(locale);
-              if (controller.b) {
-                var locale = const Locale('en', 'US');
-                Get.updateLocale(locale);
-              } else {
-                var locale = const Locale('zh', 'CN');
-                Get.updateLocale(locale);
-              }
-              controller.b = !controller.b;
+              // if (controller.b) {
+              //   var locale = const Locale('en', 'US');
+              //   Get.updateLocale(locale);
+              // } else {
+              //   var locale = const Locale('zh', 'CN');
+              //   Get.updateLocale(locale);
+              // }
+              // controller.b = !controller.b;
             },
             child: const Icon(
               Icons.check_circle,
