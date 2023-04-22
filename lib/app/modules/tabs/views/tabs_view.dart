@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../../../routes/app_pages.dart';
+import '../../../../generated/locales.g.dart';
 import '../controllers/tabs_controller.dart';
 
 class TabsView extends GetView<TabsController> {
@@ -37,15 +37,19 @@ class TabsView extends GetView<TabsController> {
             },
             items: [
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.home), label: 'home'.tr),
+                  icon: const Icon(Icons.home), label: LocaleKeys.tabs_home.tr),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.category), label: 'category'.tr),
+                  icon: const Icon(Icons.category),
+                  label: LocaleKeys.tabs_category.tr),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.room_service), label: 'service'.tr),
+                  icon: const Icon(Icons.room_service),
+                  label: LocaleKeys.tabs_service.tr),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.shopping_cart), label: 'cart'.tr),
+                  icon: const Icon(Icons.shopping_cart),
+                  label: LocaleKeys.tabs_cart.tr),
               BottomNavigationBarItem(
-                  icon: const Icon(Icons.people), label: 'mine'.tr),
+                  icon: const Icon(Icons.people),
+                  label: LocaleKeys.tabs_mine.tr),
             ],
           ),
         ),
@@ -62,7 +66,18 @@ class TabsView extends GetView<TabsController> {
             onPressed: () {
               // controller.setCurrentIndex(2);
               // controller.pageController.jumpToPage(2);
-              Get.toNamed(Routes.SETTINGS);
+              // Get.toNamed(Routes.SETTINGS);
+
+              // var locale = const Locale('en', 'US');
+              // Get.updateLocale(locale);
+              if (controller.b) {
+                var locale = const Locale('en', 'US');
+                Get.updateLocale(locale);
+              } else {
+                var locale = const Locale('zh', 'CN');
+                Get.updateLocale(locale);
+              }
+              controller.b = !controller.b;
             },
             child: const Icon(
               Icons.check_circle,

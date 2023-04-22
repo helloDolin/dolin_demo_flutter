@@ -1,0 +1,13 @@
+{
+    "tabs": {
+        "home_page": {
+            "douban": "豆瓣",
+            "imdb": "IMDB"
+        },
+        "home": "首页",
+        "category": "分类",
+        "service": "服务",
+        "cart": "购物车",
+        "mine": "我的"
+    }
+}

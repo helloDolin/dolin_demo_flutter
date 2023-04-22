@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../generated/locales.g.dart';
+
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
   int skip = 0;
@@ -13,8 +15,8 @@ class HomeController extends GetxController
   late Timer _timer;
 
   List<Map<String, String>> categoryList = [
-    {'title': '豆瓣', 'source': 'Douban'},
-    {'title': 'IMDB', 'source': 'Imdb'},
+    {'title': LocaleKeys.tabs_home_page_douban.tr, 'source': 'Douban'},
+    {'title': LocaleKeys.tabs_home_page_imdb.tr, 'source': 'Imdb'},
   ];
 
   // tabIndex 变化
