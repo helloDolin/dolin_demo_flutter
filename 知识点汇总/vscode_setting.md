@@ -1,3 +1,6 @@
+// 可单独对项目进行 setting
+// shift + control + p
+
 {
     // IDE 颜色主题
     "workbench.colorTheme": "Default Light+",
