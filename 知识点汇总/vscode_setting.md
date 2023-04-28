@@ -1,4 +1,5 @@
 // 可单独对项目进行 setting
+
 // shift + control + p
 
 {
@@ -42,5 +43,8 @@
         "web": true,
         "windows": true,
         "build": true
-    }
+    },
+    // 当前活跃括号高亮
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
 }
