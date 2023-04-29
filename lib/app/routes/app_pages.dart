@@ -16,6 +16,8 @@ import '../modules/settings/device_info/watch_info/views/watch_info_view.dart';
 import '../modules/settings/views/settings_view.dart';
 import '../modules/tabs/bindings/tabs_binding.dart';
 import '../modules/tabs/views/tabs_view.dart';
+import '../modules/user/rate_textfield/bindings/rate_textfield_binding.dart';
+import '../modules/user/rate_textfield/views/rate_textfield_view.dart';
 
 part 'app_routes.dart';
 
@@ -78,5 +80,16 @@ class AppPages {
         ),
       ],
     ),
+    GetPage(
+        name: _Paths.USER,
+        page: () => const RateTextfieldView(),
+        binding: RateTextfieldBinding(),
+        children: [
+          GetPage(
+            name: _Paths.RATE_TEXTFIELD,
+            page: () => const RateTextfieldView(),
+            binding: RateTextfieldBinding(),
+          ),
+        ]),
   ];
 }

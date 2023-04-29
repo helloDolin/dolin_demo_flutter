@@ -12,6 +12,7 @@ abstract class Routes {
   static const DEVICE_INFO = _Paths.SETTINGS + _Paths.DEVICE_INFO;
   static const WATCH_INFO =
       _Paths.SETTINGS + _Paths.DEVICE_INFO + _Paths.WATCH_INFO;
+  static const RATE_TEXTFIELD = _Paths.USER + _Paths.RATE_TEXTFIELD;
 }
 
 abstract class _Paths {
@@ -25,4 +26,6 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const DEVICE_INFO = '/device-info';
   static const WATCH_INFO = '/watch-info';
+  static const USER = '/user';
+  static const RATE_TEXTFIELD = '/rate-textfield';
 }

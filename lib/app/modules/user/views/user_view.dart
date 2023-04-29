@@ -18,6 +18,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:get/get.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/user_controller.dart';
 import 'layout_practice.dart';
 import 'package:barcode_scan2/barcode_scan2.dart';
@@ -36,6 +37,9 @@ class UserView extends GetView<UserController> {
             padding: const EdgeInsets.only(top: 10),
             child: Column(
               children: [
+                Card('TextField', () {
+                  Get.toNamed(Routes.RATE_TEXTFIELD);
+                }),
                 Card('Dart 温故知新', () {
                   Get.to(const DartSummaryPage());
                 }),
@@ -142,9 +146,9 @@ class UserView extends GetView<UserController> {
                   }
                 }),
                 Obx(() => Card(
-                        controller.scan_code.value.isEmpty
+                        controller.scanCode.value.isEmpty
                             ? '扫码'
-                            : controller.scan_code.value, () async {
+                            : controller.scanCode.value, () async {
                       var options = const ScanOptions(
                         // set the options
                         autoEnableFlash: true,
@@ -156,7 +160,7 @@ class UserView extends GetView<UserController> {
                       );
 
                       var result = await BarcodeScanner.scan(options: options);
-                      controller.scan_code.value = result.rawContent;
+                      controller.scanCode.value = result.rawContent;
 
                       print(result
                           .type); // The result type (barcode, cancelled, failed)
