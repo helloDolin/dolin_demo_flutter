@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:ui' as ui;
 
 import 'package:get/get.dart';
 
+import '../../../../common_widgets/dl_appbar.dart';
 import '../../../../common_widgets/rate_textfield.dart';
 import '../controllers/rate_textfield_controller.dart';
 
@@ -10,21 +13,27 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('RateTextfieldView'),
-        centerTitle: true,
-        actions: [
-          TextButton(
-              onPressed: () {
-                controller.inputText.value = '1236767';
-              },
-              child: const Text('inputText'))
-        ],
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Obx(() => SizedBox(
+      backgroundColor: Colors.red,
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      appBar: const DLAppBar(),
+
+      // AppBar(
+      //   title: const Text('RateTextfieldView'),
+      //   centerTitle: true,
+      //   actions: [
+      //     TextButton(
+      //         onPressed: () {
+      //           controller.inputText.value = '1236767';
+      //         },
+      //         child: const Text('inputText'))
+      //   ],
+      // ),
+      body: ListView(
+        children: [
+          Obx(() => Container(
+                color: Colors.yellow,
+                child: SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: RateTextField(
@@ -34,24 +43,40 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
                       controller.inputText.value = text;
                     },
                   ),
-                )),
-            const SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: RateTextField(
-                maxLength: 10,
-                text: '嘿嘿',
-              ),
+                ),
+              )),
+          const SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: RateTextField(
+              maxLength: 10,
+              text: '嘿嘿',
             ),
-            const SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: RateTextField(
-                maxLength: 10,
-                text: '',
-              ),
+          ),
+          const SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: RateTextField(
+              maxLength: 10,
+              text: '',
             ),
-          ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: TextButton(
+          onPressed: () {
+            print(Get.pixelRatio);
+            print(Get.size);
+            print(Get.statusBarHeight / Get.pixelRatio);
+            print(kToolbarHeight);
+            print(ui.window.padding);
+
+            print(ScreenUtil().screenWidth);
+            print(ScreenUtil().statusBarHeight);
+            print(ScreenUtil().bottomBarHeight);
+          },
+          child: const Text('test'),
         ),
       ),
     );

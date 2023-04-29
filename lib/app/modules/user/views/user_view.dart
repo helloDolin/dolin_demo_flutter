@@ -32,6 +32,7 @@ class UserView extends GetView<UserController> {
         appBar: AppBar(
           title: const Text('我的'),
           centerTitle: true,
+          // bottom: const DLAppBar(),
         ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.only(top: 10),

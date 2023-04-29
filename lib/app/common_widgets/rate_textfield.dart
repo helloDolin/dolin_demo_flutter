@@ -40,9 +40,11 @@ class _RateTextFieldState extends State<RateTextField> {
   void didUpdateWidget(covariant RateTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.text != widget.text) {
-      setState(() {
-        _setController();
-      });
+      if (mounted) {
+        setState(() {
+          _setController();
+        });
+      }
     }
   }
 
