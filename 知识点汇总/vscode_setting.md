@@ -1,11 +1,11 @@
-输入命令：
-cmd + shift + p 
+// 可单独对项目进行 setting
 
-```json
+// shift + control + p
+
 {
     // IDE 颜色主题
     "workbench.colorTheme": "Default Light+",
-    "dart.flutterSdkPath": "/Users/liaoshaolin/dev/flutter_sdk/3.3.10",
+    // "dart.flutterSdkPath": "C:\\dev\\3.7.11",
     "workbench.iconTheme": "material-icon-theme",
     "files.autoSaveDelay": 3000,
     "dart.runPubGetOnPubspecChanges": "never",
@@ -20,17 +20,31 @@ cmd + shift + p
     "explorer.confirmDelete": false,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
+        "source.organizeImports": true, // 组织 import
         "source.fixAll": true // 自动修复
     },
-     // 折叠隐藏文件
+    "editor.wordWrap": "on",
+    "json.format.enable": true,
+    "window.zoomLevel": 1,
+    // 折叠文件
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-        "pubspec.yaml": "pubspec.lock,pubspec_overrides.yaml,.packages,.flutter-plugins,.flutter-plugins-dependencies,.metadata",
+        "pubspec.yaml": "pubspec.lock,pubspec_overrides.yaml,.packages,.flutter-plugins,.flutter-plugins-dependencies,.metadata,hs_err_pid20052.log,hs_err_pid19516.log,hs_err_pid16240.log,flutter_native_splash.yaml,common_tips.md,analysis_options.yaml,README.md,.gitignore",
         // "*.dart": "${capture}.g.dart"
-    }
-     "[python]": {
-        "editor.formatOnType": true
     },
-
+    // 排除文件
+    "files.exclude": {
+        ".dart_tool": true,
+        "android": true,
+        "ios": true,
+        "linux": true,
+        "macos": true,
+        "test": true,
+        "web": true,
+        "windows": true,
+        "build": true
+    },
+    // 当前活跃括号高亮
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
 }
-```
