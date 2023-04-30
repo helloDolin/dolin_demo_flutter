@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class RateTextField extends StatefulWidget {
-  const RateTextField(
+class DLTextField extends StatefulWidget {
+  const DLTextField(
       {super.key,
       this.text = '',
       required this.maxLength,
@@ -14,10 +14,10 @@ class RateTextField extends StatefulWidget {
   final Function(String)? onChanged;
 
   @override
-  State<RateTextField> createState() => _RateTextFieldState();
+  State<DLTextField> createState() => _DLTextFieldState();
 }
 
-class _RateTextFieldState extends State<RateTextField> {
+class _DLTextFieldState extends State<DLTextField> {
   final TextEditingController _controller = TextEditingController();
   late List<TextInputFormatter> _textInputFormatterList;
 
@@ -37,7 +37,7 @@ class _RateTextFieldState extends State<RateTextField> {
   }
 
   @override
-  void didUpdateWidget(covariant RateTextField oldWidget) {
+  void didUpdateWidget(covariant DLTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.text != widget.text) {
       if (mounted) {

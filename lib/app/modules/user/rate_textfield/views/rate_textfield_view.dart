@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../common_widgets/dl_appbar.dart';
-import '../../../../common_widgets/rate_textfield.dart';
+import '../../../../common_widgets/dl_rate_textfield.dart';
 import '../controllers/rate_textfield_controller.dart';
 
 class RateTextfieldView extends GetView<RateTextfieldController> {
@@ -36,7 +36,7 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
                 child: SizedBox(
                   width: double.infinity,
                   height: 50,
-                  child: RateTextField(
+                  child: DLTextField(
                     maxLength: 10,
                     text: controller.inputText.value,
                     onChanged: (text) {
@@ -48,7 +48,7 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
           const SizedBox(
             width: double.infinity,
             height: 50,
-            child: RateTextField(
+            child: DLTextField(
               maxLength: 10,
               text: '嘿嘿',
             ),
@@ -56,7 +56,7 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
           const SizedBox(
             width: double.infinity,
             height: 50,
-            child: RateTextField(
+            child: DLTextField(
               maxLength: 10,
               text: '',
             ),

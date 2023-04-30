@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HLSearchBar extends StatefulWidget implements PreferredSizeWidget {
-  const HLSearchBar(
+class DLSearchBar extends StatefulWidget implements PreferredSizeWidget {
+  const DLSearchBar(
       {Key? key,
       this.hideCancelBtn = false,
       this.hint,
@@ -45,13 +45,13 @@ class HLSearchBar extends StatefulWidget implements PreferredSizeWidget {
   final VoidCallback? tapLeftBackBtn;
   final ValueChanged<String>? onSubmmit;
   @override
-  _HLSearchBarState createState() => _HLSearchBarState();
+  _DLSearchBarState createState() => _DLSearchBarState();
 
   @override
   final Size preferredSize;
 }
 
-class _HLSearchBarState extends State<HLSearchBar> {
+class _DLSearchBarState extends State<DLSearchBar> {
   bool _showClear = false; // 是否展示 × 号
   final double _searchBarHeight = 30; // 搜索框高度
   final TextEditingController _controller = TextEditingController();
@@ -63,7 +63,7 @@ class _HLSearchBarState extends State<HLSearchBar> {
   }
 
   @override
-  void didUpdateWidget(HLSearchBar oldWidget) {
+  void didUpdateWidget(DLSearchBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.defaultText!.isNotEmpty) {
       _controller.value = TextEditingValue(

@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/common_widgets/index.dart';
+import 'package:dolin_demo_flutter/app/common_widgets/gallery/index.dart';
 import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/global.dart';
 import 'package:flutter/gestures.dart';

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/arena_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/async_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.dart';
@@ -11,17 +12,15 @@ import 'package:dolin_demo_flutter/app/modules/user/views/video.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/webView.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/wechat_friends.dart';
 import 'package:dolin_demo_flutter/app/util/keepAliveWrapper.dart';
-import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
+import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/user_controller.dart';
 import 'layout_practice.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
 
 class UserView extends GetView<UserController> {
   const UserView({Key? key}) : super(key: key);
@@ -32,7 +31,28 @@ class UserView extends GetView<UserController> {
         appBar: AppBar(
           title: const Text('我的'),
           centerTitle: true,
-          // bottom: const DLAppBar(),
+          leading: IconButton(
+            onPressed: () {
+              Get.toNamed(Routes.SETTINGS);
+            },
+            icon: const Icon(Icons.settings),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  var locale = const Locale('en', 'US');
+                  Get.updateLocale(locale);
+                  if (controller.b) {
+                    var locale = const Locale('en', 'US');
+                    Get.updateLocale(locale);
+                  } else {
+                    var locale = const Locale('zh', 'CN');
+                    Get.updateLocale(locale);
+                  }
+                  controller.b = !controller.b;
+                },
+                child: const Text('切换语言')),
+          ],
         ),
         body: SingleChildScrollView(
             padding: const EdgeInsets.only(top: 10),

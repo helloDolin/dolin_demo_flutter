@@ -1,5 +1,5 @@
 import 'package:dolin_demo_flutter/app/apis/movie.dart';
-import 'package:dolin_demo_flutter/app/common_widgets/index.dart';
+import 'package:dolin_demo_flutter/app/common_widgets/gallery/index.dart';
 import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:dolin_demo_flutter/app/data/douban250.dart';
 import 'package:dolin_demo_flutter/app/util/randomColor.dart';
