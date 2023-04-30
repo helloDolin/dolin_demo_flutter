@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../generated/locales.g.dart';
+import '../views/dev_view.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -45,6 +46,12 @@ class HomeController extends GetxController
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       print(DateTime.now());
     });
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    insertDevView();
   }
 
   @override

@@ -193,10 +193,6 @@ class UserView extends GetView<UserController> {
                   Get.changeTheme(
                       Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
                 }),
-                Card('切换语言', () {
-                  var locale = const Locale('en', 'US');
-                  Get.updateLocale(locale);
-                }),
                 Card('get dialog', () {
                   Get.defaultDialog(
                       onConfirm: () => print("Ok"),
