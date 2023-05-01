@@ -5,8 +5,8 @@ abstract class Routes {
   Routes._();
   static const TABS = _Paths.TABS;
   static const SEARCH = _Paths.SEARCH;
-  static const LIST = _Paths.LIST;
-  static const DETAIL = _Paths.DETAIL;
+  static const LIST = _Paths.TABS + _Paths.LIST;
+  static const DETAIL = _Paths.TABS + _Paths.LIST + _Paths.DETAIL;
   static const LOGIN = _Paths.LOGIN;
   static const SETTINGS = _Paths.SETTINGS;
   static const DEVICE_INFO = _Paths.SETTINGS + _Paths.DEVICE_INFO;

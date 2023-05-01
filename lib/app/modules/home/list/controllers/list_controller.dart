@@ -1,11 +1,14 @@
 import 'package:get/get.dart';
 
 class ListController extends SuperController {
+  RxString id = ''.obs;
+
   @override
   void onInit() {
     super.onInit();
     final param = Get.arguments;
     final param2 = Get.parameters;
+    id.value = param['id'].toString();
     print('onInit');
     print(param);
     print(param2);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../controllers/detail_controller.dart';
 
 class DetailView extends GetView<DetailController> {
@@ -13,11 +13,20 @@ class DetailView extends GetView<DetailController> {
         title: const Text('DetailView'),
         centerTitle: true,
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'DetailView is working',
-          style: TextStyle(fontSize: 20),
+          controller.count.toString(),
+          style: const TextStyle(fontSize: 20),
         ),
+      ),
+      floatingActionButton: TextButton(
+        onPressed: () {
+          // offName + preventDuplicates为false，controller 才会每次初始化
+          // Get.offNamed(Routes.DETAIL, preventDuplicates: false);
+          Get.offNamed(Routes.DETAIL,
+              preventDuplicates: false, arguments: {'id': 789});
+        },
+        child: const Text('detail'),
       ),
     );
   }

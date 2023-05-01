@@ -4,6 +4,7 @@ import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';
+
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -82,10 +83,10 @@ class HomeView extends GetView<HomeController> {
                   width: 46,
                   child: TextButton(
                       onPressed: () async {
-                        // Get.toNamed('/tabs/list', arguments: {'id': 123});
+                        Get.toNamed('/tabs/list', arguments: {'id': 123});
                         // Get.toNamed('/tabs/list?id=123');
-                        final res = await Get.toNamed('/tabs/list/666');
-                        print(res);
+                        // final res = await Get.toNamed('/tabs/list/666');
+                        // print(res);
                       },
                       child: const Text('列表')),
                 ),

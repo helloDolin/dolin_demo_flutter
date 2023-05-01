@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/list_controller.dart';
@@ -18,10 +17,10 @@ class ListView extends GetView<ListController> {
           title: const Text('ListView'),
           centerTitle: true,
         ),
-        body: const Center(
+        body: Center(
           child: Text(
-            'controller.count.value.toString()',
-            style: TextStyle(fontSize: 20),
+            'id: ${controller.id.value}',
+            style: const TextStyle(fontSize: 20),
           ),
         ),
         floatingActionButton: ElevatedButton(
