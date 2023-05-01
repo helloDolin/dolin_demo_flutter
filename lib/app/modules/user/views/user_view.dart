@@ -68,7 +68,9 @@ class UserView extends GetView<UserController> {
                   Get.to(const CustomPaintPage());
                 }),
                 Card('手势竞技场', () {
-                  Get.to(const ArenaPage());
+                  Get.to(const ArenaPage(
+                    title: 'hello',
+                  ));
                 }),
                 Card('异步练习', () {
                   Get.to(const AsyncPage());

@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ArenaPage extends StatefulWidget {
-  const ArenaPage({Key? key}) : super(key: key);
+  const ArenaPage({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   State<ArenaPage> createState() => _ArenaPageState();
@@ -13,7 +15,7 @@ class _ArenaPageState extends State<ArenaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ArenaPage'),
+        title: Text(widget.title),
       ),
       body: Column(
         children: [
@@ -46,6 +48,16 @@ class _ArenaPageState extends State<ArenaPage> {
             ),
           )
         ],
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          Get.to(
+              () => const ArenaPage(
+                    title: 'hello1',
+                  ),
+              preventDuplicates: false);
+        },
+        child: const Text('自己跳自己'),
       ),
     );
   }
