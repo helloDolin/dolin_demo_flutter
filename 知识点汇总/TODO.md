@@ -1,12 +1,11 @@
 # TODO:
-summary 提交 json mock
 
-textField 封装
+# DONE:
+✅textField 封装
+✅json_serializable 是否会自动添加 as（是）
+✅appBar 自定义
+✅Overlay dev ball（Draggable）
 
-json_serializable 是否会自动添加 as 
 
-appBar 自定义
-
-Overlay dev ball（Draggable）
 
 
