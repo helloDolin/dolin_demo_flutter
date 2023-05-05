@@ -25,7 +25,12 @@ class _DLTextFieldState extends State<DLTextField> {
   void initState() {
     _setController();
     _textInputFormatterList = [
-      LengthLimitingTextInputFormatter(widget.maxLength)
+      LengthLimitingTextInputFormatter(widget.maxLength),
+      // 金额正则表达式
+      FilteringTextInputFormatter.allow(
+          RegExp('^\\-?([1-9]\\d*|0)(\\.\\d{0,2})?')),
+      //RegExp(r'^[0-9]+(.[0-9]{0,2})?$')
+      //
     ];
     super.initState();
   }
