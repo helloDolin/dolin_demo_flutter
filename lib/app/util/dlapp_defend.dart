@@ -67,3 +67,11 @@ class DLAPPDefend {
     print("catch error:$error");
   }
 }
+
+// 设计 logger 系统，记录所有的异常
+    ///可以获取所有的print日志信息
+    // zoneSpecification: ZoneSpecification(
+    //     print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+    //   parent.print(zone, 'line: $line');
+    //   Logger.log('line: $line', tag: 'print');
+    // }),
