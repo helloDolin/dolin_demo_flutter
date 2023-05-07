@@ -1,7 +1,5 @@
-import 'dart:ui' as ui;
-
+import 'package:dolin_demo_flutter/app/util/randomColor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../../common_widgets/dl_appbar.dart';
@@ -13,36 +11,21 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
+      // extendBodyBehindAppBar: true,
+      // extendBody: true,
       appBar: const DLAppBar(),
-
-      // AppBar(
-      //   title: const Text('RateTextfieldView'),
-      //   centerTitle: true,
-      //   actions: [
-      //     TextButton(
-      //         onPressed: () {
-      //           controller.inputText.value = '1236767';
-      //         },
-      //         child: const Text('inputText'))
-      //   ],
-      // ),
       body: ListView(
         children: [
-          Obx(() => Container(
-                color: Colors.yellow,
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: DLTextField(
-                    maxLength: 10,
-                    text: controller.inputText.value,
-                    onChanged: (text) {
-                      controller.inputText.value = text;
-                    },
-                  ),
+          const Title('自定义 TextField'),
+          Obx(() => SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: DLTextField(
+                  maxLength: 10,
+                  text: controller.inputText.value,
+                  onChanged: (text) {
+                    controller.inputText.value = text;
+                  },
                 ),
               )),
           const SizedBox(
@@ -61,24 +44,81 @@ class RateTextfieldView extends GetView<RateTextfieldController> {
               text: '',
             ),
           ),
+
+          // 表单
+          const SizedBox(
+            height: 50,
+          ),
+          const Title('表单验证'),
+
+          Form(
+            key: controller.formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                    // hintText: '电话',
+                    labelText: '电话 label',
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return '请输入正确的手机号码';
+                    }
+                    RegExp reg = RegExp(r'^1\d{10}$');
+                    if (!reg.hasMatch(value)) {
+                      return '请输入正确的手机号码';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(hintText: '用户名'),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return '请输入用户名';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          const Title('UI 信息'),
+
+          Text(controller.uiInfo.value)
         ],
       ),
       bottomNavigationBar: SafeArea(
         child: TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.amber),
+          ),
           onPressed: () {
-            print(Get.pixelRatio);
-            print(Get.size);
-            print(Get.statusBarHeight / Get.pixelRatio);
-            print(kToolbarHeight);
-            print(ui.window.padding);
-
-            print(ScreenUtil().screenWidth);
-            print(ScreenUtil().statusBarHeight);
-            print(ScreenUtil().bottomBarHeight);
+            if (controller.formKey.currentState!.validate()) {
+              print('valid pass');
+            }
           },
-          child: const Text('test'),
+          child: const Text('验证表单是否通过'),
         ),
       ),
+    );
+  }
+}
+
+class Title extends StatelessWidget {
+  const Title(this.title, {super.key});
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: getRandomColor(),
+      padding: const EdgeInsets.all(10),
+      child: Text(title),
     );
   }
 }

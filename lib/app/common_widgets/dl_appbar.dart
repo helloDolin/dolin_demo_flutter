@@ -9,19 +9,18 @@ class DLAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        color: Colors.blue,
         child: Stack(
           children: [
             Container(
               alignment: Alignment.centerLeft,
-              // color: Colors.red,
               child: IconButton(
                 onPressed: () {
                   Get.back();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back,
-                  color: Colors.black,
+                  color: Colors.blueAccent,
+                  size: 32.w,
                 ),
               ),
             ),
