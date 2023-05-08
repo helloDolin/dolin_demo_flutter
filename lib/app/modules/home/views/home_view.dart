@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
 import '../controllers/home_controller.dart';
+import '../detail_page.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -94,7 +95,10 @@ class HomeView extends GetView<HomeController> {
                   width: 46,
                   child: TextButton(
                       onPressed: () {
-                        Get.toNamed('/tabs/list/detail');
+                        // Get.toNamed('/tabs/list/detail');
+                        Get.to(const DetailPage(
+                          id: 1,
+                        ));
                       },
                       child: const Text('详情')),
                 )
