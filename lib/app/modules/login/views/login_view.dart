@@ -1,7 +1,7 @@
-import 'package:dolin_demo_flutter/app/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../services/user.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -20,11 +20,35 @@ class LoginView extends GetView<LoginController> {
           actions: [
             IconButton(
                 onPressed: () {
-                  // Get.offAllNamed('/tabs', arguments: {
-                  //   'username': controller.username,
-                  //   'password': controller.password,
-                  // });
-                  Get.back();
+                  Get.dialog(AlertDialog(
+                    title: const Text('暂不登录'),
+                    content: Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 400,
+                        maxWidth: 500,
+                      ),
+                      child: const SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Text('确定暂不登录'),
+                        ),
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: (() => Get.back(result: false)),
+                        child: const Text("取消"),
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          Get.back(result: true);
+                          Get.back();
+                        }),
+                        child: const Text("确定"),
+                      ),
+                      // ...?actions,
+                    ],
+                  ));
                 },
                 icon: const Icon(Icons.close))
           ],

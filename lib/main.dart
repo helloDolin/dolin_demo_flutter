@@ -1,4 +1,3 @@
-import 'package:dolin_demo_flutter/app/util/dlapp_defend.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +8,9 @@ import 'app/constants/constants.dart';
 import 'app/language/translation_service.dart';
 import 'app/modules/unknowPage.dart';
 import 'app/routes/app_pages.dart';
+import 'app/util/log.dart';
+import 'app/util/pv_exception.dart';
+import 'dlapp_defend.dart';
 import 'global.dart';
 
 void main() {
@@ -38,14 +40,12 @@ void main() {
               // showPerformanceOverlay: true,
               debugShowCheckedModeBanner: false,
               routingCallback: (routing) {
-                print(
-                    '===================😄😄😄=================== routingCallback');
-                print(routing?.current ?? '');
+                Log.i('😄😄😄 routingCallback ${routing?.current ?? ''}');
               },
               title: "dolin_demo_flutter",
               initialRoute: AppPages.INITIAL,
               getPages: AppPages.routes,
-              navigatorObservers: [Global.routerObserver, GetXRouterObserver()],
+              navigatorObservers: [Global.routerObserver, MyObserver()],
               // 本地化
               localizationsDelegates: const [
                 GlobalMaterialLocalizations.delegate,
@@ -66,7 +66,7 @@ void main() {
               unknownRoute:
                   GetPage(name: '/404', page: () => const UnknowPage()),
               enableLog: true,
-              logWriterCallback: write,
+              // logWriterCallback: write,
               // 字体大小不跟随系统变化
               builder: (context, child) {
                 return MediaQuery(

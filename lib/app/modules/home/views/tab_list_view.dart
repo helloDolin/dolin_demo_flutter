@@ -27,9 +27,6 @@ class _TabListViewState extends State<TabListView>
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      print('第一帧绘制结束');
-    });
     _listData = [];
     _refreshController = RefreshController(initialRefresh: true);
     _scrollController = ScrollController();

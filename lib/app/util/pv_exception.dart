@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
 
 int exceptionCount = 0;
 Future<void> reportError(dynamic error, dynamic stackTrace) async {

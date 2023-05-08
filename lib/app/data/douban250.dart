@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final douban250 = douban250FromJson(jsonString);
-
 import 'dart:convert';
 
 List<Douban250> douban250FromList(List list) {
@@ -13,7 +9,6 @@ List<Douban250> douban250FromList(List list) {
   }
   return res;
 }
-//List<Douban250>.from(json.decode(str).map((x) => Douban250.fromJson(x)));
 
 String douban250ToJson(List<Douban250> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

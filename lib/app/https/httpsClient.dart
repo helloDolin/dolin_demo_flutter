@@ -1,6 +1,6 @@
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
-// import 'package:cookie_jar/cookie_jar.dart';
-// import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:dolin_demo_flutter/app/services/user.dart';
 import 'package:get/get.dart' hide FormData, Response;
 
@@ -8,14 +8,16 @@ import '../routes/app_pages.dart';
 import 'custom_error.dart';
 import 'custom_interceptor.dart';
 
+// import 'package:cookie_jar/cookie_jar.dart';
+// import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 class HttpsClient {
+  /// 工厂构造函数
+  factory HttpsClient() => _instance;
+
   /// 单例
   static final HttpsClient _instance = HttpsClient._internal();
   static HttpsClient get instance => _instance;
   late Dio _dio;
-
-  /// 工厂构造函数
-  factory HttpsClient() => _instance;
 
   /// 构造函数私有化，防止被误创建
   HttpsClient._internal() {
@@ -109,18 +111,5 @@ class HttpsClient {
       }
       throw CustomError(message: "请求失败,请检查网络");
     }
-  }
-}
-
-// 异常处理
-class ErrorEntity implements Exception {
-  int code = -1;
-  String message = "";
-  ErrorEntity({required this.code, required this.message});
-
-  @override
-  String toString() {
-    if (message == "") return "Exception";
-    return "Exception: code $code, $message";
   }
 }
