@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dolin_demo_flutter/app/services/storage.dart';
-import 'package:dolin_demo_flutter/app/store/user.dart';
+import 'package:dolin_demo_flutter/app/services/user.dart';
 import 'package:dolin_demo_flutter/app/util/fps.dart';
 import 'package:dolin_demo_flutter/app/util/pv_exception.dart';
 import 'package:flutter/foundation.dart';

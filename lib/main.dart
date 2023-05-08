@@ -35,41 +35,44 @@ void main() {
               mass: 1.9), // 自定义回弹动画,三个属性值意义请查询flutter api
 
           child: GetMaterialApp(
-            // showPerformanceOverlay: true,
-            debugShowCheckedModeBanner: false,
-            routingCallback: (routing) {
-              print('===================😄😄😄===================');
-              print(routing?.current ?? '');
-            },
-            title: "dolin_demo_flutter",
-            initialRoute: AppPages.INITIAL,
-            getPages: AppPages.routes,
-            navigatorObservers: [Global.routerObserver, GetXRouterObserver()],
-            // 本地化
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate
-            ],
-            translations: Messages(), // 你的翻译
-            locale: Get.deviceLocale, // ui.window.locale, // 将会按照此处指定的语言翻译
-            fallbackLocale:
-                const Locale('en', 'US'), // 添加一个回调语言选项，以备上面指定的语言翻译不存在
-            supportedLocales: const [
-              Locale('zh', 'CH'),
-              Locale('en', 'US'),
-            ],
-            themeMode: ThemeMode.system,
-            darkTheme: AppTheme.dark,
-            theme: AppTheme.light,
-            unknownRoute: GetPage(name: '/404', page: () => const UnknowPage()),
-            enableLog: true,
-            logWriterCallback: write,
-            // 字体大小不跟随系统变化
-            builder: (context, child) => MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: child!),
-          ),
+              // showPerformanceOverlay: true,
+              debugShowCheckedModeBanner: false,
+              routingCallback: (routing) {
+                print(
+                    '===================😄😄😄=================== routingCallback');
+                print(routing?.current ?? '');
+              },
+              title: "dolin_demo_flutter",
+              initialRoute: AppPages.INITIAL,
+              getPages: AppPages.routes,
+              navigatorObservers: [Global.routerObserver, GetXRouterObserver()],
+              // 本地化
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate
+              ],
+              translations: Messages(), // 你的翻译
+              locale: Get.deviceLocale, // ui.window.locale, // 将会按照此处指定的语言翻译
+              fallbackLocale:
+                  const Locale('en', 'US'), // 添加一个回调语言选项，以备上面指定的语言翻译不存在
+              supportedLocales: const [
+                Locale('zh', 'CH'),
+                Locale('en', 'US'),
+              ],
+              themeMode: ThemeMode.system,
+              darkTheme: AppTheme.dark,
+              theme: AppTheme.light,
+              unknownRoute:
+                  GetPage(name: '/404', page: () => const UnknowPage()),
+              enableLog: true,
+              logWriterCallback: write,
+              // 字体大小不跟随系统变化
+              builder: (context, child) {
+                return MediaQuery(
+                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                    child: child!);
+              }),
         );
       }));
 }

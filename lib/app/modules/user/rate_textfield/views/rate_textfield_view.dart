@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../common_widgets/dl_appbar.dart';
-import '../../../../common_widgets/dl_rate_textfield.dart';
+import '../../../../common_widgets/dl_textfield.dart';
 import '../controllers/rate_textfield_controller.dart';
 
 class RateTextfieldView extends GetView<RateTextfieldController> {
