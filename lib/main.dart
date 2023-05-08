@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'app/constants/constants.dart';
 import 'app/language/translation_service.dart';
 import 'app/modules/unknowPage.dart';
@@ -64,6 +65,10 @@ void main() {
             unknownRoute: GetPage(name: '/404', page: () => const UnknowPage()),
             enableLog: true,
             logWriterCallback: write,
+            // 字体大小不跟随系统变化
+            builder: (context, child) => MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: child!),
           ),
         );
       }));

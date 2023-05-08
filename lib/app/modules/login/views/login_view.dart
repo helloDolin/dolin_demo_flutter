@@ -1,6 +1,5 @@
-import 'package:dolin_demo_flutter/app/store/user.dart';
+import 'package:dolin_demo_flutter/app/services/user.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/login_controller.dart';
