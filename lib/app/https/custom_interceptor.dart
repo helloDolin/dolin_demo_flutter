@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 
+import '../log/log.dart';
 import '../services/user.dart';
-import '../util/log.dart';
 import 'custom_error.dart';
 
 /// 自定义拦截器

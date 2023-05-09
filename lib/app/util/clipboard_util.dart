@@ -1,9 +1,9 @@
 //复制粘贴
-import 'package:dolin_demo_flutter/app/util/toast.dart';
+import 'package:dolin_demo_flutter/app/util/toast_util.dart';
 import 'package:flutter/services.dart';
 
 /// 剪切板工具
-class ClipboardTool {
+class ClipboardUtil {
   // 复制内容
   static setData(String data) {
     if (data != '') {

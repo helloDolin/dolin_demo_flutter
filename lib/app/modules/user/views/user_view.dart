@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:dolin_demo_flutter/app/common_widgets/keepAliveWrapper.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/arena_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/async_practice.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/customer_paint_view.dart';
@@ -11,10 +12,9 @@ import 'package:dolin_demo_flutter/app/modules/user/views/radius_%20summary.dart
 import 'package:dolin_demo_flutter/app/modules/user/views/video.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/webView.dart';
 import 'package:dolin_demo_flutter/app/modules/user/views/wechat_friends.dart';
-import 'package:dolin_demo_flutter/app/util/keepAliveWrapper.dart';
-import 'package:dolin_demo_flutter/app/util/randomColor.dart';
-import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
+import 'package:dolin_demo_flutter/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -244,8 +244,7 @@ class Card extends StatelessWidget {
           alignment: Alignment.centerLeft,
           decoration: BoxDecoration(
             color: bgRadomColor,
-            border:
-                Border.all(color: borderColor, width: ScreenAdapter.height(1)),
+            border: Border.all(color: borderColor, width: 1.h),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
           child: Text(

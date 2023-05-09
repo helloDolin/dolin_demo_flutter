@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../log/log.dart';
+
 int exceptionCount = 0;
 Future<void> reportError(dynamic error, dynamic stackTrace) async {
   exceptionCount++; //累加异常次数
@@ -20,5 +22,6 @@ class MyObserver extends NavigatorObserver {
 // 页面异常率
 double pageException() {
   if (totalPV == 0) return 0;
+  Log.w((exceptionCount / totalPV).toString());
   return exceptionCount / totalPV;
 }

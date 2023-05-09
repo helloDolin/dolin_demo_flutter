@@ -39,6 +39,7 @@ class _DetailPageState extends State<DetailPage> {
               tag: widget.id.toString(),
               builder: (controller) => Text(controller.count.value.toString()),
             ),
+            Obx(() => Text(controller.count.value.toString())),
             TextButton(
                 onPressed: () {
                   controller.add();

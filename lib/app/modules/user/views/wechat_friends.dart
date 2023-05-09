@@ -1,8 +1,8 @@
 import 'package:dolin_demo_flutter/app/common_widgets/gallery/index.dart';
-import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:dolin_demo_flutter/global.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WechatFriends extends StatefulWidget {
   const WechatFriends({super.key});
@@ -21,7 +21,7 @@ class _WechatFriendsState extends State<WechatFriends>
   Offset _btnOffset = Offset.zero;
 
   // 菜单宽度
-  final double kMenuWidth = ScreenAdapter.width(200);
+  final double kMenuWidth = 200.w;
 
   late AnimationController _animationController;
   late Animation<double> _sizeTween;
@@ -167,8 +167,8 @@ class _WechatFriendsState extends State<WechatFriends>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: ScreenAdapter.width(50),
-            height: ScreenAdapter.width(50),
+            width: 50.w,
+            height: 50.w,
             child: Image.network(imgUrl!),
           ),
           const SizedBox(
@@ -266,7 +266,7 @@ class _WechatFriendsState extends State<WechatFriends>
                       left: _btnOffset.dx - _sizeTween.value,
                       child: Container(
                         width: _sizeTween.value,
-                        height: ScreenAdapter.height(20),
+                        height: 20.h,
                         color: Colors.white,
                         child: LayoutBuilder(
                           builder: (BuildContext context,
@@ -276,7 +276,7 @@ class _WechatFriendsState extends State<WechatFriends>
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                if (w > ScreenAdapter.width(100))
+                                if (w > 100.w)
                                   const Text(
                                     '赞',
                                     style: TextStyle(
@@ -284,7 +284,7 @@ class _WechatFriendsState extends State<WechatFriends>
                                         fontSize: 12,
                                         decoration: TextDecoration.none),
                                   ),
-                                if (w > ScreenAdapter.width(150))
+                                if (w > 150.w)
                                   const Text('评论',
                                       style: TextStyle(
                                           color: Colors.black,
@@ -314,9 +314,9 @@ class _WechatFriendsState extends State<WechatFriends>
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: ScreenAdapter.height(15)),
+          margin: EdgeInsets.only(bottom: 15.h),
           width: double.infinity,
-          height: ScreenAdapter.height(200),
+          height: 200.h,
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(
@@ -324,7 +324,7 @@ class _WechatFriendsState extends State<WechatFriends>
                   fit: BoxFit.cover)),
         ),
         Positioned(
-            right: ScreenAdapter.width(10),
+            right: 10.w,
             bottom: 0,
             child: Row(
               children: [
@@ -333,7 +333,7 @@ class _WechatFriendsState extends State<WechatFriends>
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: ScreenAdapter.fontSize(18),
+                      fontSize: 18.sp,
                       letterSpacing: 3,
                       height: 1,
                       shadows: const [
@@ -352,8 +352,8 @@ class _WechatFriendsState extends State<WechatFriends>
                       });
                     },
                     child: SizedBox(
-                      width: ScreenAdapter.width(50),
-                      height: ScreenAdapter.width(50),
+                      width: 50.w,
+                      height: 50.w,
                       child: Image.network(
                           'https://avatars.githubusercontent.com/u/12538263?s=100&v=4'),
                     )),
@@ -381,7 +381,7 @@ class _WechatFriendsState extends State<WechatFriends>
                 borderRadius: BorderRadius.all(Radius.circular(3))),
             alignment: Alignment.center,
             padding: const EdgeInsets.symmetric(horizontal: 3),
-            height: ScreenAdapter.height(20),
+            height: 20.h,
             key: btnKey,
             child: const Icon(Icons.more_horiz_outlined),
           ),

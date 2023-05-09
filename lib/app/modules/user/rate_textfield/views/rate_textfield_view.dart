@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/util/randomColor.dart';
+import 'package:dolin_demo_flutter/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

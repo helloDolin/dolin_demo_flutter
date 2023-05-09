@@ -1,5 +1,5 @@
-import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_color.dart';
 
@@ -25,7 +25,7 @@ class AppTheme {
         iconTheme: const IconThemeData(color: AppColor.primaryText),
         centerTitle: true,
         color: Colors.white,
-        elevation: ScreenAdapter.height(0.5),
+        elevation: 0.5.h,
         titleTextStyle: const TextStyle(
           color: AppColor.primaryText,
           fontSize: 18,

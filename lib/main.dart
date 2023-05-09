@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'app/constants/constants.dart';
-import 'app/language/translation_service.dart';
+import 'app/log/log.dart';
 import 'app/modules/unknowPage.dart';
 import 'app/routes/app_pages.dart';
-import 'app/util/log.dart';
-import 'app/util/pv_exception.dart';
+import 'app/util/pv_exception_util.dart';
 import 'dlapp_defend.dart';
+import 'generated/locales.g.dart';
 import 'global.dart';
 
 void main() {
@@ -79,4 +79,9 @@ void main() {
 
 void write(String text, {bool isError = false}) {
   Future.microtask(() => print('** $text. isError: [$isError]'));
+}
+
+class Messages extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => AppTranslation.translations;
 }

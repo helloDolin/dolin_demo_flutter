@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:dolin_demo_flutter/app/services/user.dart';
-import 'package:dolin_demo_flutter/app/util/fps.dart';
+import 'package:dolin_demo_flutter/app/util/fps_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'app/log/log.dart';
+import 'app/services/app_settings_service.dart';
 import 'app/services/storage_service.dart';
-import 'app/util/log.dart';
 
 // import 'package:flutter_bugly/flutter_bugly.dart';
 
@@ -38,6 +39,9 @@ class DLAPPDefend {
   Future initServices() async {
     await Get.put<StorageService>(StorageService()).init(); // 注意：put 后 init
     Get.put<UserStore>(UserStore());
+
+    /// 初始化设置服务
+    Get.put(AppSettingsService());
   }
 
   /// 设置 debugPrint

@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:dolin_demo_flutter/app/services/user.dart';
 import 'package:get/get.dart' hide FormData, Response;
 
-import '../routes/app_pages.dart';
 import 'custom_error.dart';
 import 'custom_interceptor.dart';
 
@@ -44,7 +43,7 @@ class HttpsClient {
       headers['Authorization'] = 'DOLIN-${UserStore.to.token}';
     } else {
       // 登录
-      Get.toNamed(Routes.LOGIN);
+      // Get.toNamed(Routes.LOGIN);
     }
     return headers;
   }

@@ -64,6 +64,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/statement.txt
   uses-material-design: true
   fonts:
     - family: iconFonts

@@ -23,6 +23,8 @@ class TabsView extends GetView<TabsController> {
             highlightColor: Colors.transparent,
           ),
           child: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
             iconSize: 22,
             backgroundColor: Colors.white,
             fixedColor: Colors.red,

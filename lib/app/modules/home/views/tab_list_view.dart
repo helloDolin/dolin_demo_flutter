@@ -2,9 +2,9 @@ import 'package:dolin_demo_flutter/app/apis/movie.dart';
 import 'package:dolin_demo_flutter/app/common_widgets/gallery/index.dart';
 import 'package:dolin_demo_flutter/app/constants/constants.dart';
 import 'package:dolin_demo_flutter/app/data/douban250.dart';
-import 'package:dolin_demo_flutter/app/util/randomColor.dart';
-import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
+import 'package:dolin_demo_flutter/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TabListView extends StatefulWidget {
@@ -176,10 +176,8 @@ class Item extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-                width: ScreenAdapter.getScreenWidth(),
-                height: ScreenAdapter.getScreenWidth() *
-                    880 /
-                    540, // 图片尺寸：540 * 880
+                width: ScreenUtil().screenWidth,
+                height: ScreenUtil().screenWidth * 880 / 540, // 图片尺寸：540 * 880
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: FadeInImage.assetNetwork(

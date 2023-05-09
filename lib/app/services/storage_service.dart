@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../util/log.dart';
+import '../log/log.dart';
 
 class StorageService extends GetxService {
   static StorageService get instance => Get.find<StorageService>();

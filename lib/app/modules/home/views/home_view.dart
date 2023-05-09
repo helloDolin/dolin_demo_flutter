@@ -1,7 +1,7 @@
 import 'package:dolin_demo_flutter/app/modules/home/views/fixTabBarView.dart';
 import 'package:dolin_demo_flutter/app/modules/home/views/tab_list_view.dart';
-import 'package:dolin_demo_flutter/app/util/screenAdapter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
@@ -14,7 +14,7 @@ class HomeView extends GetView<HomeController> {
   Widget _tabBar() {
     return SizedBox(
       width: double.infinity,
-      height: ScreenAdapter.height(25),
+      height: 25.h,
       child: TabBar(
           onTap: (value) {
             controller.pageController.jumpToPage(value);
@@ -33,10 +33,13 @@ class HomeView extends GetView<HomeController> {
           indicator: UnderlineIndicator(
               strokeCap: StrokeCap.square,
               borderSide: BorderSide(
-                  color: Colors.black, width: ScreenAdapter.height(3)),
+                color: Colors.black,
+                width: 3.h,
+              ),
               insets: EdgeInsets.only(
-                  left: ScreenAdapter.width(10),
-                  right: ScreenAdapter.width(10))),
+                left: 10.w,
+                right: 10.w,
+              )),
           tabs: controller.categoryList
               .map((map) => Tab(
                     text: map['title'],
