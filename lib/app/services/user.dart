@@ -22,6 +22,7 @@ class UserStore extends GetxController {
   void onInit() {
     super.onInit();
     token = StorageService.instance.getValue('user_token', '');
+    isLogin.value = token.isNotEmpty;
     var profileOffline = StorageService.instance.getValue('user_profile', '');
     if (profileOffline.isNotEmpty) {
       _profile(UserLoginResponseEntity.fromJson(jsonDecode(profileOffline)));
