@@ -8,7 +8,7 @@ class DeatailMiddleWare extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     // 登录时返回 null，正常跳转
-    if (UserStore.to.isLogin || route == Routes.LOGIN) {
+    if (UserStore.to.isLogin.value || route == Routes.LOGIN) {
       return null;
     }
     // 未登录时跳登录页面

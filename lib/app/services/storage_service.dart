@@ -10,6 +10,12 @@ class StorageService extends GetxService {
   /// 首次运行
   static const String kFirstRun = "FirstRun";
 
+  /// 显示模式
+  /// * [0] 跟随系统
+  /// * [1] 浅色模式
+  /// * [2] 深色模式
+  static const String kThemeMode = "ThemeMode";
+
   late Box settingsBox;
 
   Future init() async {

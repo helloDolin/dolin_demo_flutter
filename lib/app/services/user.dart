@@ -9,13 +9,12 @@ class UserStore extends GetxController {
   static UserStore get to => Get.find();
 
   // 是否登录
-  final _isLogin = false.obs;
+  RxBool isLogin = false.obs;
   // 令牌 token
   String token = '';
   // 用户 profile
   final _profile = UserLoginResponseEntity().obs;
 
-  bool get isLogin => token.isNotEmpty; //_isLogin.value;
   UserLoginResponseEntity get profile => _profile.value;
   bool get hasToken => token.isNotEmpty;
 
@@ -33,6 +32,7 @@ class UserStore extends GetxController {
   Future<void> setToken(String value) async {
     await StorageService.instance.setValue('user_token', value);
     token = value;
+    isLogin.value = true;
   }
 
   // 获取 profile
@@ -40,21 +40,19 @@ class UserStore extends GetxController {
     if (token.isEmpty) return;
     var result = await UserAPI.profile();
     _profile(result);
-    _isLogin.value = true;
     StorageService.instance.setValue('user_profile', jsonEncode(result));
   }
 
   // 保存 profile
   Future<void> saveProfile(UserLoginResponseEntity profile) async {
-    _isLogin.value = true;
     StorageService.instance.setValue('user_profile', jsonEncode(profile));
   }
 
   // 注销
   Future<void> onLogout() async {
-    if (_isLogin.value) await UserAPI.logout();
+    if (isLogin.value) await UserAPI.logout();
     await StorageService.instance.removeValue('user_token');
-    _isLogin.value = false;
+    isLogin.value = false;
     token = '';
   }
 }

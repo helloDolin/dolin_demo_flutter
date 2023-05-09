@@ -30,7 +30,7 @@ class _WebViewState extends State<WebView> {
                 });
               },
               initialUrlRequest:
-                  URLRequest(url: Uri.parse('https://www.baidu.com')),
+                  URLRequest(url: Uri.parse('https://github.com/helloDolin')),
               onProgressChanged:
                   (InAppWebViewController controller, int progress) {
                 if (progress == 100) {

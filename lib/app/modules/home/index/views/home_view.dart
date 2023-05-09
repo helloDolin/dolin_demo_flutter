@@ -32,7 +32,6 @@ class HomeView extends GetView<HomeController> {
               ],
               title: Text(
                 controller.pageTitle.value,
-                style: const TextStyle(color: Colors.black),
               ),
               centerTitle: true,
               // backgroundColor:
@@ -57,36 +56,31 @@ class HomeView extends GetView<HomeController> {
     return SizedBox(
       width: double.infinity,
       height: 25.h,
-      child: TabBar(
-          onTap: (value) {
-            controller.pageController.jumpToPage(value);
-            controller.tabIndexChanged(value);
-          },
-          controller: controller.tabController,
-          isScrollable: true,
-          labelColor: Colors.black,
-          labelStyle:
-              const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          // labelPadding: const EdgeInsets.symmetric(horizontal: 20),
-          unselectedLabelColor: Colors.grey,
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 14,
-          ),
-          indicator: UnderlineIndicator(
-              strokeCap: StrokeCap.square,
-              borderSide: BorderSide(
-                color: Colors.black,
-                width: 3.h,
-              ),
-              insets: EdgeInsets.only(
-                left: 10.w,
-                right: 10.w,
-              )),
-          tabs: controller.categoryList
-              .map((map) => Tab(
-                    text: map['title'],
-                  ))
-              .toList()),
+      child: Container(
+        color: Theme.of(Get.context!).bottomNavigationBarTheme.backgroundColor,
+        child: TabBar(
+            onTap: (value) {
+              controller.pageController.jumpToPage(value);
+              controller.tabIndexChanged(value);
+            },
+            controller: controller.tabController,
+            isScrollable: true,
+            indicator: UnderlineIndicator(
+                strokeCap: StrokeCap.square,
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 3.h,
+                ),
+                insets: EdgeInsets.only(
+                  left: 10.w,
+                  right: 10.w,
+                )),
+            tabs: controller.categoryList
+                .map((map) => Tab(
+                      text: map['title'],
+                    ))
+                .toList()),
+      ),
     );
   }
 

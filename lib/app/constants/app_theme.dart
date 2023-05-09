@@ -5,13 +5,32 @@ import 'app_color.dart';
 
 class AppTheme {
   static ThemeData dark = ThemeData(
-      brightness: Brightness.dark,
-      appBarTheme: const AppBarTheme().copyWith(
-        iconTheme: const IconThemeData(
+    brightness: Brightness.dark,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    appBarTheme: const AppBarTheme().copyWith(
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
+        titleTextStyle: const TextStyle(
           color: Colors.white,
-        ),
-        color: Colors.black,
-      ));
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        )),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.black,
+      unselectedLabelStyle: TextStyle(fontSize: 10),
+      selectedLabelStyle: TextStyle(fontSize: 12),
+      unselectedItemColor: Color(0xffA2A5B9),
+      selectedItemColor: Colors.white,
+    ),
+    tabBarTheme: const TabBarTheme(
+      labelColor: Colors.white,
+      labelStyle: TextStyle(fontSize: 14),
+      unselectedLabelColor: AppColor.secondaryText,
+      unselectedLabelStyle: TextStyle(fontSize: 12),
+    ),
+  );
+
   static ThemeData light = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColor.scaffoldBackground,
@@ -24,7 +43,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
         iconTheme: const IconThemeData(color: AppColor.primaryText),
         centerTitle: true,
-        color: Colors.white,
+        backgroundColor: Colors.white,
         elevation: 0.5.h,
         titleTextStyle: const TextStyle(
           color: AppColor.primaryText,
@@ -41,15 +60,16 @@ class AppTheme {
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColor.scaffoldBackground,
-      unselectedLabelStyle: TextStyle(fontSize: 12),
+      unselectedLabelStyle: TextStyle(fontSize: 10),
       selectedLabelStyle: TextStyle(fontSize: 12),
       unselectedItemColor: Color(0xffA2A5B9),
-      selectedItemColor: AppColor.accentColor,
+      selectedItemColor: Colors.black,
     ),
     tabBarTheme: const TabBarTheme(
-      // indicatorSize: TabBarIndicatorSize.label,
-      labelColor: AppColor.accentColor,
+      labelColor: Colors.black,
+      labelStyle: TextStyle(fontSize: 14),
       unselectedLabelColor: AppColor.secondaryText,
+      unselectedLabelStyle: TextStyle(fontSize: 12),
     ),
   );
 }
