@@ -1,13 +1,12 @@
 {
-    "tabs": {
-        "home_page": {
-            "douban": "DouBan",
-            "imdb": "IMDB"
-        },
+    "index": {
         "home": "Home",
-        "category": "Category",
-        "service": "Service",
-        "cart": "Cart",
+        "comic": "Comic",
+        "practice": "Practice",
         "mine": "Mine"
+    },
+    "home": {
+        "douban": "DouBan",
+        "imdb": "IMDB"
     }
 }

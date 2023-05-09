@@ -6,11 +6,46 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "160001",
+      "name": "home",
+      "font_class": "home",
+      "unicode": "f0174",
+      "unicode_decimal": 983412
+    },
+    {
+      "icon_id": "161453",
+      "name": "mine",
+      "font_class": "mine",
+      "unicode": "f0182",
+      "unicode_decimal": 983426
+    },
+    {
       "icon_id": "1403435",
       "name": "小米",
       "font_class": "xiaomi",
       "unicode": "e832",
       "unicode_decimal": 59442
+    },
+    {
+      "icon_id": "3153821",
+      "name": "practice",
+      "font_class": "practice",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "9186713",
+      "name": "朋友圈",
+      "font_class": "pengyouquan",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "11476999",
+      "name": "comic漫画app图标21",
+      "font_class": "icon-test",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
     }
   ]
 }

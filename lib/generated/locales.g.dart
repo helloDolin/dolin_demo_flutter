@@ -11,32 +11,29 @@ class AppTranslation {
 
 class LocaleKeys {
   LocaleKeys._();
-  static const tabs_home_page_douban = 'tabs_home_page_douban';
-  static const tabs_home_page_imdb = 'tabs_home_page_imdb';
-  static const tabs_home = 'tabs_home';
-  static const tabs_category = 'tabs_category';
-  static const tabs_service = 'tabs_service';
-  static const tabs_cart = 'tabs_cart';
-  static const tabs_mine = 'tabs_mine';
+  static const index_home = 'index_home';
+  static const index_comic = 'index_comic';
+  static const index_practice = 'index_practice';
+  static const index_mine = 'index_mine';
+  static const home_douban = 'home_douban';
+  static const home_imdb = 'home_imdb';
 }
 
 class Locales {
   static const zh_CN = {
-    'tabs_home_page_douban': '豆瓣',
-    'tabs_home_page_imdb': 'IMDB',
-    'tabs_home': '首页',
-    'tabs_category': '分类',
-    'tabs_service': '服务',
-    'tabs_cart': '购物车',
-    'tabs_mine': '我的',
+    'index_home': '首页',
+    'index_comic': '漫画',
+    'index_practice': '练习',
+    'index_mine': '我的',
+    'home_douban': '豆瓣',
+    'home_imdb': 'IMDB',
   };
   static const en_US = {
-    'tabs_home_page_douban': 'DouBan',
-    'tabs_home_page_imdb': 'IMDB',
-    'tabs_home': 'Home',
-    'tabs_category': 'Category',
-    'tabs_service': 'Service',
-    'tabs_cart': 'Cart',
-    'tabs_mine': 'Mine',
+    'index_home': 'Home',
+    'index_comic': 'Comic',
+    'index_practice': 'Practice',
+    'index_mine': 'Mine',
+    'home_douban': 'DouBan',
+    'home_imdb': 'IMDB',
   };
 }

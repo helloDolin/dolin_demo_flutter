@@ -3,29 +3,24 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
-  static const TABS = _Paths.TABS;
-  static const SEARCH = _Paths.SEARCH;
-  static const LIST = _Paths.TABS + _Paths.LIST;
-  static const DETAIL = _Paths.TABS + _Paths.LIST + _Paths.DETAIL;
-  static const LOGIN = _Paths.LOGIN;
-  static const SETTINGS = _Paths.SETTINGS;
-  static const DEVICE_INFO = _Paths.SETTINGS + _Paths.DEVICE_INFO;
-  static const WATCH_INFO =
-      _Paths.SETTINGS + _Paths.DEVICE_INFO + _Paths.WATCH_INFO;
-  static const RATE_TEXTFIELD = _Paths.USER + _Paths.RATE_TEXTFIELD;
+  static const INDEX = _Paths.INDEX;
+  static const COMIC = _Paths.COMIC;
+  static const PRACTICE = _Paths.PRACTICE;
+  static const MINE = _Paths.MINE;
+  static const HOME = _Paths.HOME;
+  static const DETAIL = _Paths.HOME + _Paths.DETAIL;
+  static const TEXT_FIELD = _Paths.PRACTICE + _Paths.TEXT_FIELD;
+  static const LOGIN = _Paths.MINE + _Paths.LOGIN;
 }
 
 abstract class _Paths {
   _Paths._();
-  static const TABS = '/tabs';
-  static const SEARCH = '/search';
-  static const LIST = '/list';
-  static const LIST_ID = '/list/:id';
+  static const INDEX = '/index';
+  static const COMIC = '/comic';
+  static const PRACTICE = '/practice';
+  static const MINE = '/mine';
+  static const HOME = '/home';
   static const DETAIL = '/detail';
+  static const TEXT_FIELD = '/text-field';
   static const LOGIN = '/login';
-  static const SETTINGS = '/settings';
-  static const DEVICE_INFO = '/device-info';
-  static const WATCH_INFO = '/watch-info';
-  static const USER = '/user';
-  static const RATE_TEXTFIELD = '/rate-textfield';
 }
