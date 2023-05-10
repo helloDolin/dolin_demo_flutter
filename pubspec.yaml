@@ -43,7 +43,6 @@ dependencies:
   extended_image: ^7.0.2 #拓展Image
   flutter_smart_dialog: ^4.9.0+6
   lottie: ^2.3.2
-  flutter_launcher_icons: ^0.13.1
 
   flutter:
     sdk: flutter
@@ -64,6 +63,7 @@ dev_dependencies:
 
   build_runner: ^2.3.3 # 如果修改了某个变量的名称或者是类型，那么也要修改对应的序列化函数，大量的代码很容易出错
   json_serializable: ^6.6.1
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   assets:

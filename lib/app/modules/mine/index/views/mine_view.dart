@@ -143,39 +143,43 @@ class MineView extends GetView<MineController> {
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(50),
-                  ),
-                  child: Image.network(
-                    'https://avatars.githubusercontent.com/u/12538263?s=100&v=4',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "未登录",
-                      style: TextStyle(height: 1.0),
+            child: SizedBox(
+              height: 100,
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(50),
                     ),
-                    Text(
-                      "点击前往登录",
-                      style: TextStyle(fontSize: 11, color: Colors.grey),
+                    child: Image.network(
+                      'https://avatars.githubusercontent.com/u/12538263?s=100&v=4',
+                      fit: BoxFit.cover,
                     ),
-                  ],
-                ),
-                const Spacer(),
-                const Icon(
-                  Icons.chevron_right,
-                  color: Colors.grey,
-                )
-              ],
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "未登录",
+                        style: TextStyle(height: 1.0),
+                      ),
+                      Text(
+                        "点击前往登录",
+                        style: TextStyle(fontSize: 11, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  const Icon(
+                    Icons.chevron_right,
+                    color: Colors.grey,
+                  )
+                ],
+              ),
             ),
           ),
         )));
@@ -188,41 +192,44 @@ class MineView extends GetView<MineController> {
           onTap: () {
             Get.to(() => const WebView());
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(25),
+          child: SizedBox(
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(25),
+                    ),
+                    child: Image.network(
+                      'https://avatars.githubusercontent.com/u/12538263?s=100&v=4',
+                      fit: BoxFit.cover,
+                      width: 50,
+                      height: 50,
+                    ),
                   ),
-                  child: Image.network(
-                    'https://avatars.githubusercontent.com/u/12538263?s=100&v=4',
-                    fit: BoxFit.cover,
-                    width: 50,
-                    height: 50,
+                  const SizedBox(
+                    width: 10,
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text.rich(TextSpan(
-                    text: 'DOLIN',
-                    style: TextStyle(fontSize: 20),
-                    children: [
-                      WidgetSpan(
-                          child: Icon(
-                        Icons.sports_basketball,
-                        color: Colors.blueGrey,
-                        size: 24,
-                      )),
-                    ])),
-                const Spacer(),
-                const Icon(
-                  Icons.chevron_right,
-                  color: Colors.grey,
-                )
-              ],
+                  const Text.rich(TextSpan(
+                      text: 'DOLIN',
+                      style: TextStyle(fontSize: 20),
+                      children: [
+                        WidgetSpan(
+                            child: Icon(
+                          Icons.sports_basketball,
+                          color: Colors.blueGrey,
+                          size: 24,
+                        )),
+                      ])),
+                  const Spacer(),
+                  const Icon(
+                    Icons.chevron_right,
+                    color: Colors.grey,
+                  )
+                ],
+              ),
             ),
           ),
         )));
