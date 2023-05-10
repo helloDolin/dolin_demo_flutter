@@ -15,7 +15,7 @@ dependencies:
   dio: 5.1.0
   dio_cookie_manager: ^3.0.0
   cookie_jar: ^4.0.1
-  flutter_html: ^2.2.1
+  # flutter_html: ^2.2.1
   flutter_swiper_view: ^1.1.8
   fluttertoast: ^8.2.1
   pull_to_refresh: ^2.0.0
@@ -43,6 +43,7 @@ dependencies:
   extended_image: ^7.0.2 #拓展Image
   flutter_smart_dialog: ^4.9.0+6
   lottie: ^2.3.2
+  flutter_launcher_icons: ^0.13.1
 
   flutter:
     sdk: flutter
