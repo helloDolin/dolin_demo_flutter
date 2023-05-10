@@ -13,6 +13,8 @@
         "show_theme": "Show The Theme",
         "more_setting": "More Settings",
         "disclaimer": "Disclaimer",
-        "switch_language": "Switch The Language"
+        "switch_language": "Switch The Language",
+        "check_update": "Check Update",
+        "about_app": "About APP"
     }
 }

@@ -21,6 +21,8 @@ class LocaleKeys {
   static const mine_more_setting = 'mine_more_setting';
   static const mine_disclaimer = 'mine_disclaimer';
   static const mine_switch_language = 'mine_switch_language';
+  static const mine_check_update = 'mine_check_update';
+  static const mine_about_app = 'mine_about_app';
 }
 
 class Locales {
@@ -35,6 +37,8 @@ class Locales {
     'mine_more_setting': '更多设置',
     'mine_disclaimer': '免责声明',
     'mine_switch_language': '切换语言',
+    'mine_check_update': '检查更新',
+    'mine_about_app': '关于 APP',
   };
   static const en_US = {
     'index_home': 'Home',
@@ -47,5 +51,7 @@ class Locales {
     'mine_more_setting': 'More Settings',
     'mine_disclaimer': 'Disclaimer',
     'mine_switch_language': 'Switch The Language',
+    'mine_check_update': 'Check Update',
+    'mine_about_app': 'About APP',
   };
 }

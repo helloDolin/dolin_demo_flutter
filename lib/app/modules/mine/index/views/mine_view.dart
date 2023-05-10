@@ -71,7 +71,7 @@ class MineView extends GetView<MineController> {
           const Divider(height: 0.5),
           ListTile(
             leading: const Icon(Icons.system_update),
-            title: const Text("检查更新"),
+            title: Text(LocaleKeys.mine_check_update.tr),
             trailing: const Icon(
               Icons.chevron_right,
               color: Colors.grey,
@@ -81,7 +81,7 @@ class MineView extends GetView<MineController> {
           const Divider(height: 0.5),
           ListTile(
             leading: const Icon(Icons.read_more),
-            title: const Text("关于APP"),
+            title: Text(LocaleKeys.mine_about_app.tr),
             trailing: const Icon(
               Icons.chevron_right,
               color: Colors.grey,

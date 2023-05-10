@@ -14,7 +14,9 @@ class MineController extends GetxController {
   void onInit() {
     String langCode = Get.locale!.languageCode;
     if (langCode == 'zh') {
-      curLanguage.value = '中文';
+      curLanguage.value = 'Change to English';
+    } else if (langCode == 'en') {
+      curLanguage.value = '切换为中文';
     }
     super.onInit();
   }
@@ -25,11 +27,11 @@ class MineController extends GetxController {
     if (langCode == 'zh') {
       const locale = Locale('en', 'US');
       Get.updateLocale(locale);
-      curLanguage.value = '中文';
+      curLanguage.value = '切换为中文';
     } else {
       const locale = Locale('zh', 'CN');
       Get.updateLocale(locale);
-      curLanguage.value = 'English';
+      curLanguage.value = 'Change to English';
     }
   }
 
