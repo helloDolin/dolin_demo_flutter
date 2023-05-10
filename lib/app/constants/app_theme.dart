@@ -28,7 +28,7 @@ class AppTheme {
       labelStyle: TextStyle(fontSize: 14),
       unselectedLabelColor: AppColor.secondaryText,
       unselectedLabelStyle: TextStyle(fontSize: 12),
-      indicatorSize: TabBarIndicatorSize.label,
+      // indicatorSize: TabBarIndicatorSize.label,
       indicatorColor: Colors.white,
     ),
   );
@@ -72,7 +72,7 @@ class AppTheme {
       labelStyle: TextStyle(fontSize: 14),
       unselectedLabelColor: AppColor.secondaryText,
       unselectedLabelStyle: TextStyle(fontSize: 12),
-      indicatorSize: TabBarIndicatorSize.label,
+      // indicatorSize: TabBarIndicatorSize.label,
       indicatorColor: Colors.black,
     ),
   );

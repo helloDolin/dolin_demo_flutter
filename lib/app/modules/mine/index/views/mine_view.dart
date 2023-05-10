@@ -21,8 +21,6 @@ class MineView extends GetView<MineController> {
             _logined(),
             // 未登录
             _noLogin(),
-            // TODO:两个分组完善，切换语言挪到这边
-            // TODO：登录未登录显示 bugfix
             // 第一个分组
             _group1(),
             // 第二个分组
@@ -40,9 +38,9 @@ class MineView extends GetView<MineController> {
         vertical: 8,
       ),
       decoration: BoxDecoration(
-        border: Border.all(width: 0.5, color: Colors.amberAccent),
+        border: Border.all(width: 0.5, color: Colors.cyan),
         color: const Color(0xFF0B82F1).withAlpha(15),
-        borderRadius: const BorderRadius.all(Radius.circular(2)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         children: [
@@ -57,6 +55,7 @@ class MineView extends GetView<MineController> {
               DialogUtil.showStatement();
             },
           ),
+          const Divider(height: 0.5),
           Obx(() => ListTile(
                 leading: const Icon(Icons.language),
                 title: Text(
@@ -69,6 +68,26 @@ class MineView extends GetView<MineController> {
                   controller.changeLang();
                 },
               )),
+          const Divider(height: 0.5),
+          ListTile(
+            leading: const Icon(Icons.system_update),
+            title: const Text("检查更新"),
+            trailing: const Icon(
+              Icons.chevron_right,
+              color: Colors.grey,
+            ),
+            onTap: controller.checkUpdate,
+          ),
+          const Divider(height: 0.5),
+          ListTile(
+            leading: const Icon(Icons.read_more),
+            title: const Text("关于APP"),
+            trailing: const Icon(
+              Icons.chevron_right,
+              color: Colors.grey,
+            ),
+            onTap: controller.about,
+          ),
         ],
       ),
     );
@@ -81,9 +100,9 @@ class MineView extends GetView<MineController> {
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        border: Border.all(width: 0.5, color: Colors.amberAccent),
+        border: Border.all(width: 0.5, color: Colors.cyan),
         color: const Color(0xFF0B82F1).withAlpha(15),
-        borderRadius: const BorderRadius.all(Radius.circular(2)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         children: [
@@ -98,6 +117,7 @@ class MineView extends GetView<MineController> {
               controller.setTheme();
             },
           ),
+          const Divider(height: 0.5),
           ListTile(
             leading: const Icon(Icons.settings),
             title: Text(LocaleKeys.mine_more_setting.tr),

@@ -17,6 +17,7 @@ class SettingsView extends GetView<SettingsController> {
               alignment: Alignment.center,
               child: TabBar(
                 isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
                 indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
                 tabs: const [
                   Tab(
