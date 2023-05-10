@@ -14,6 +14,21 @@ class AppSettingsService extends GetxController {
     super.onInit();
   }
 
+  /// 显示字体大小跟随系统
+  var useSystemFontSize = false.obs;
+  void setUseSystemFontSize(bool e) {
+    useSystemFontSize.value = e;
+    StorageService.instance.setValue(StorageService.kUseSystemFontSize, e);
+  }
+
+  /// 下载是否允许使用流量
+  RxBool downloadAllowCellular = true.obs;
+  void setDownloadAllowCellular(bool value) {
+    downloadAllowCellular.value = value;
+    StorageService.instance
+        .setValue(StorageService.kDownloadAllowCellular, value);
+  }
+
   void setNoFirstRun() {
     StorageService.instance.setValue(StorageService.kFirstRun, false);
   }

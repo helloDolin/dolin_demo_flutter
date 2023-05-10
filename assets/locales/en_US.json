@@ -8,5 +8,11 @@
     "home": {
         "douban": "DouBan",
         "imdb": "IMDB"
+    },
+    "mine": {
+        "show_theme": "Show The Theme",
+        "more_setting": "More Settings",
+        "disclaimer": "Disclaimer",
+        "switch_language": "Switch The Language"
     }
 }

@@ -29,7 +29,7 @@ class DialogUtil {
           ),
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: selectable ? SelectableText(content) : Text(content),
             ),
           ),

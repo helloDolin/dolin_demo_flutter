@@ -16,6 +16,12 @@ class StorageService extends GetxService {
   /// * [2] 深色模式
   static const String kThemeMode = "ThemeMode";
 
+  /// 显示字体大小跟随系统
+  static const String kUseSystemFontSize = "UseSystemFontSize";
+
+  /// 下载是否允许使用流量
+  static const String kDownloadAllowCellular = "DownloadAllowCellular";
+
   late Box settingsBox;
 
   Future init() async {

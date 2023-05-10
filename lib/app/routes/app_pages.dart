@@ -1,5 +1,3 @@
-import 'package:dolin_demo_flutter/app/modules/mine/login/bindings/login_binding.dart';
-import 'package:dolin_demo_flutter/app/modules/mine/login/views/login_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/comic/bindings/comic_binding.dart';
@@ -12,6 +10,10 @@ import '../modules/index/bindings/index_binding.dart';
 import '../modules/index/views/index_view.dart';
 import '../modules/mine/index/bindings/mine_binding.dart';
 import '../modules/mine/index/views/mine_view.dart';
+import '../modules/mine/login/bindings/login_binding.dart';
+import '../modules/mine/login/views/login_view.dart';
+import '../modules/mine/settings/bindings/settings_binding.dart';
+import '../modules/mine/settings/views/settings_view.dart';
 import '../modules/practice/index/bindings/practice_binding.dart';
 import '../modules/practice/index/views/practice_view.dart';
 import '../modules/practice/text_field/bindings/text_field_binding.dart';
@@ -56,6 +58,11 @@ class AppPages {
             name: _Paths.LOGIN,
             page: () => const LoginView(),
             binding: LoginBinding(),
+          ),
+          GetPage(
+            name: _Paths.SETTINGS,
+            page: () => const SettingsView(),
+            binding: SettingsBinding(),
           ),
         ]),
     GetPage(

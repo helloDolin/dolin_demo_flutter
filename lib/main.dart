@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'app/constants/constants.dart';
 import 'app/log/log.dart';
 import 'app/modules/unknowPage.dart';
 import 'app/routes/app_pages.dart';
+import 'app/services/app_settings_service.dart';
 import 'app/util/pv_exception_util.dart';
 import 'dlapp_defend.dart';
 import 'generated/locales.g.dart';
@@ -67,12 +70,18 @@ void main() {
                   GetPage(name: '/404', page: () => const UnknowPage()),
               enableLog: true,
               // logWriterCallback: write,
-              // 字体大小不跟随系统变化
-              builder: (context, child) {
-                return MediaQuery(
-                    data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                    child: child!);
-              }),
+              builder: FlutterSmartDialog.init(
+                loadingBuilder: ((msg) => const AppLoaddingWidget()),
+                builder: (context, child) => Obx(
+                  () => MediaQuery(
+                    data: AppSettingsService.instance.useSystemFontSize.value
+                        ? MediaQuery.of(context)
+                        : MediaQuery.of(context)
+                            .copyWith(textScaleFactor: 1.0), // 字体大小不跟随系统变化
+                    child: child!,
+                  ),
+                ),
+              )),
         );
       }));
 }
@@ -84,4 +93,21 @@ void write(String text, {bool isError = false}) {
 class Messages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => AppTranslation.translations;
+}
+
+class AppLoaddingWidget extends StatelessWidget {
+  const AppLoaddingWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: LottieBuilder.asset(
+          'assets/lotties/loadding.json',
+          width: 200,
+        ),
+      ),
+    );
+  }
 }

@@ -8,5 +8,11 @@
     "home": {
         "douban": "豆瓣",
         "imdb": "IMDB"
+    },
+    "mine": {
+        "show_theme": "显示主题",
+        "more_setting": "更多设置",
+        "disclaimer": "免责声明",
+        "switch_language": "切换语言"
     }
 }

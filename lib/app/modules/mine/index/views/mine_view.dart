@@ -1,6 +1,9 @@
+import 'package:dolin_demo_flutter/app/util/dialog_util.dart';
+import 'package:dolin_demo_flutter/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../routes/app_pages.dart';
 import '../../../../services/user.dart';
 import '../../../practice/webView.dart';
 import '../controllers/mine_controller.dart';
@@ -45,26 +48,27 @@ class MineView extends GetView<MineController> {
         children: [
           ListTile(
             leading: const Icon(Icons.summarize),
-            title: const Text("免责声明"),
+            title: Text(LocaleKeys.mine_disclaimer.tr),
             trailing: const Icon(
               Icons.chevron_right,
               color: Colors.grey,
             ),
             onTap: () {
-              controller.setTheme();
+              DialogUtil.showStatement();
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.flutter_dash),
-            title: const Text("开源主页"),
-            trailing: const Icon(
-              Icons.chevron_right,
-              color: Colors.grey,
-            ),
-            onTap: () {
-              controller.setTheme();
-            },
-          ),
+          Obx(() => ListTile(
+                leading: const Icon(Icons.language),
+                title: Text(
+                    '${LocaleKeys.mine_switch_language.tr} (${controller.curLanguage.value})'),
+                trailing: const Icon(
+                  Icons.chevron_right,
+                  color: Colors.grey,
+                ),
+                onTap: () {
+                  controller.changeLang();
+                },
+              )),
         ],
       ),
     );
@@ -85,7 +89,7 @@ class MineView extends GetView<MineController> {
         children: [
           ListTile(
             leading: const Icon(Icons.sunny),
-            title: const Text("显示主题"),
+            title: Text(LocaleKeys.mine_show_theme.tr),
             trailing: const Icon(
               Icons.chevron_right,
               color: Colors.grey,
@@ -96,13 +100,13 @@ class MineView extends GetView<MineController> {
           ),
           ListTile(
             leading: const Icon(Icons.settings),
-            title: const Text("更多设置"),
+            title: Text(LocaleKeys.mine_more_setting.tr),
             trailing: const Icon(
               Icons.chevron_right,
               color: Colors.grey,
             ),
             onTap: () {
-              controller.setTheme();
+              Get.toNamed(Routes.SETTINGS);
             },
           ),
         ],

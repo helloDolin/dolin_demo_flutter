@@ -17,6 +17,10 @@ class LocaleKeys {
   static const index_mine = 'index_mine';
   static const home_douban = 'home_douban';
   static const home_imdb = 'home_imdb';
+  static const mine_show_theme = 'mine_show_theme';
+  static const mine_more_setting = 'mine_more_setting';
+  static const mine_disclaimer = 'mine_disclaimer';
+  static const mine_switch_language = 'mine_switch_language';
 }
 
 class Locales {
@@ -27,6 +31,10 @@ class Locales {
     'index_mine': '我的',
     'home_douban': '豆瓣',
     'home_imdb': 'IMDB',
+    'mine_show_theme': '显示主题',
+    'mine_more_setting': '更多设置',
+    'mine_disclaimer': '免责声明',
+    'mine_switch_language': '切换语言',
   };
   static const en_US = {
     'index_home': 'Home',
@@ -35,5 +43,9 @@ class Locales {
     'index_mine': 'Mine',
     'home_douban': 'DouBan',
     'home_imdb': 'IMDB',
+    'mine_show_theme': 'Show The Theme',
+    'mine_more_setting': 'More Settings',
+    'mine_disclaimer': 'Disclaimer',
+    'mine_switch_language': 'Switch The Language',
   };
 }
