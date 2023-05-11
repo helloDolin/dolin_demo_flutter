@@ -26,7 +26,7 @@ class StorageService extends GetxService {
 
   Future init() async {
     final dir = await getApplicationSupportDirectory();
-    Log.d('settingsBox path:${dir.path}');
+    Log.d('settingsBox path:\n${dir.path}');
     settingsBox = await Hive.openBox(
       "LocalStorage",
       path: dir.path,

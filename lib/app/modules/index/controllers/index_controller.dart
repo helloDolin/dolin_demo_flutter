@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/modules/comic/views/comic_view.dart';
+import 'package:dolin_demo_flutter/app/modules/comic/index/views/comic_view.dart';
 import 'package:dolin_demo_flutter/app/modules/home/index/views/home_view.dart';
 import 'package:dolin_demo_flutter/app/modules/mine/index/views/mine_view.dart';
 import 'package:dolin_demo_flutter/app/modules/practice/index/views/practice_view.dart';

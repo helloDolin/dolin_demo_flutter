@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/modules/comic/controllers/comic_controller.dart';
+import 'package:dolin_demo_flutter/app/modules/comic/index/controllers/comic_controller.dart';
 import 'package:dolin_demo_flutter/app/modules/home/index/controllers/home_controller.dart';
 import 'package:dolin_demo_flutter/app/modules/mine/index/controllers/mine_controller.dart';
 import 'package:dolin_demo_flutter/app/modules/practice/index/controllers/practice_controller.dart';

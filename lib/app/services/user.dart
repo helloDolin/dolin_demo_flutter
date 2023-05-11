@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:dolin_demo_flutter/app/apis/user.dart';
-import 'package:dolin_demo_flutter/app/data/userModel.dart';
+import 'package:dolin_demo_flutter/app/apis/mine/user.dart';
+import 'package:dolin_demo_flutter/app/data/mine/userModel.dart';
 import 'package:dolin_demo_flutter/app/services/storage_service.dart';
 import 'package:get/get.dart';
 

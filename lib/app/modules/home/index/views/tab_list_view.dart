@@ -1,7 +1,7 @@
-import 'package:dolin_demo_flutter/app/apis/movie.dart';
+import 'package:dolin_demo_flutter/app/apis/home/home.dart';
 import 'package:dolin_demo_flutter/app/common_widgets/gallery/index.dart';
 import 'package:dolin_demo_flutter/app/constants/constants.dart';
-import 'package:dolin_demo_flutter/app/data/douban250.dart';
+import 'package:dolin_demo_flutter/app/data/home/douban250.dart';
 import 'package:dolin_demo_flutter/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,7 +79,7 @@ class _TabListViewState extends State<TabListView>
   }
 
   Future<void> reqData({bool isRefresh = false}) async {
-    final res = await MovieAPI.movieList(widget.source, pageSize, skip);
+    final res = await HomeAPI.movieList(widget.source, pageSize, skip);
     if (isRefresh) {
       skip = 0;
       _listData.clear();

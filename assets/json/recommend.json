@@ -1,0 +1,234 @@
+[
+    {
+        "category_id": 57,
+        "sort": 0,
+        "title": "轮番图",
+        "data": [
+            {
+                "id": 5876,
+                "obj_id": 3488,
+                "title": "双星的天剑使 第2卷",
+                "cover": "https:\/\/images.idmzj.com\/tuijian\/xiaoshuo\/750-480\/346.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "",
+                "status": "连载中"
+            },
+            {
+                "id": 5877,
+                "obj_id": 2811,
+                "title": "侦探已经，死了 第8卷",
+                "cover": "https:\/\/images.idmzj.com\/tuijian\/xiaoshuo\/750-480\/345.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "",
+                "status": "连载中"
+            },
+            {
+                "id": 5878,
+                "obj_id": 3081,
+                "title": "我和女友的妹妹接吻了 第4卷完",
+                "cover": "https:\/\/images.idmzj.com\/tuijian\/xiaoshuo\/750-480\/347.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "",
+                "status": "已完结"
+            },
+            {
+                "id": 5774,
+                "obj_id": 2845,
+                "title": "孤单一人的异世界攻略 第10卷",
+                "cover": "https:\/\/images.idmzj.com\/tuijian\/xiaoshuo\/750-480\/343.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "",
+                "status": "连载中"
+            },
+            {
+                "id": 5773,
+                "obj_id": 3243,
+                "title": "班里的人气偶像黏上了一辈子不想工作的我 第3卷",
+                "cover": "https:\/\/images.idmzj.com\/tuijian\/xiaoshuo\/750-480\/344.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "",
+                "status": "连载中"
+            }
+        ]
+    },
+    {
+        "category_id": 58,
+        "sort": 1,
+        "title": "最新更新",
+        "data": [
+            {
+                "id": 1957,
+                "title": "八男？别闹了！",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/28\/bnbnl68786l.jpg",
+                "status": "连载中",
+                "url": "",
+                "obj_id": 1957,
+                "type": 2
+            },
+            {
+                "id": 2865,
+                "title": "我怎么可能成为你的恋人，不行不行！(※不是不可能！？)",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/24\/cwlr0508l.jpg",
+                "status": "连载中",
+                "url": "",
+                "obj_id": 2865,
+                "type": 2
+            },
+            {
+                "id": 3175,
+                "title": "王者的求婚(国王的求婚)",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/14\/wh1202l.jpg",
+                "status": "连载中",
+                "url": "",
+                "obj_id": 3175,
+                "type": 2
+            }
+        ]
+    },
+    {
+        "category_id": 60,
+        "sort": 3,
+        "title": "动画进行时",
+        "data": [
+            {
+                "id": 5615,
+                "obj_id": 2645,
+                "title": "关于邻家的天使大人不知不觉把我惯成了废人这档子事",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/14\/fr0414l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：佐伯さん",
+                "status": "连载中"
+            },
+            {
+                "id": 3829,
+                "obj_id": 2763,
+                "title": "魔王学院的不适任者",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/23\/mwxy1216l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：秋",
+                "status": "连载中"
+            },
+            {
+                "id": 3945,
+                "obj_id": 1522,
+                "title": "期待在地下城邂逅有错吗",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/13\/zdxcxqxhsfgclsm676l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：大森藤野",
+                "status": "连载中"
+            }
+        ]
+    },
+    {
+        "category_id": 62,
+        "sort": 5,
+        "title": "即将动画化",
+        "data": [
+            {
+                "id": 3941,
+                "obj_id": 1800,
+                "title": "转生史莱姆 2期",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/27\/gywzshcwslmdnjs9l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "1月播出",
+                "status": "连载中"
+            },
+            {
+                "id": 3942,
+                "obj_id": 2486,
+                "title": "好比最终迷宫前的村庄里的少年到新手村生活般的故事",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/11\/sn0514l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "1月播出",
+                "status": "连载中"
+            },
+            {
+                "id": 3943,
+                "obj_id": 2597,
+                "title": "只有我能进入的隐藏迷宫～低调锻炼化身世界最强～ ",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/26\/yc1215l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "1月播出",
+                "status": "连载中"
+            }
+        ]
+    },
+    {
+        "category_id": 63,
+        "sort": 6,
+        "title": "经典必看",
+        "data": [
+            {
+                "id": 1936,
+                "obj_id": 471,
+                "title": "文学少女",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/5\/wxsn68l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：野村美月",
+                "status": "已完结"
+            },
+            {
+                "id": 1938,
+                "obj_id": 244,
+                "title": "狼与香辛料",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/15\/lyxxl6869l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：支仓冻砂",
+                "status": "连载中"
+            },
+            {
+                "id": 1602,
+                "obj_id": 271,
+                "title": "凉宫春日物语",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/12\/160329lianggong.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：谷川流",
+                "status": "连载中"
+            },
+            {
+                "id": 1168,
+                "obj_id": 239,
+                "title": "零之使魔",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/25\/lingzhishimo151117l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：山口升",
+                "status": "已完结"
+            },
+            {
+                "id": 1607,
+                "obj_id": 824,
+                "title": "伯爵与妖精",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/2\/bjyyj8989l.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：谷瑞惠",
+                "status": "已完结"
+            },
+            {
+                "id": 1603,
+                "obj_id": 129,
+                "title": "钢壳都市雷吉欧斯",
+                "cover": "https:\/\/xs.idmzj.com\/img\/webpic\/29\/160329gangke.jpg",
+                "url": "",
+                "type": 2,
+                "sub_title": "作者：雨木シュウスケ",
+                "status": "已完结"
+            }
+        ]
+    }
+]

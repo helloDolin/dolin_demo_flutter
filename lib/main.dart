@@ -3,9 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import 'app/common_widgets/status/app_loading.dart';
 import 'app/constants/constants.dart';
 import 'app/log/log.dart';
 import 'app/modules/unknowPage.dart';
@@ -93,21 +93,4 @@ void write(String text, {bool isError = false}) {
 class Messages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => AppTranslation.translations;
-}
-
-class AppLoaddingWidget extends StatelessWidget {
-  const AppLoaddingWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: LottieBuilder.asset(
-          'assets/lotties/loadding.json',
-          width: 200,
-        ),
-      ),
-    );
-  }
 }

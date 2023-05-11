@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-import '../modules/comic/bindings/comic_binding.dart';
-import '../modules/comic/views/comic_view.dart';
+import '../modules/comic/index/bindings/comic_binding.dart';
+import '../modules/comic/index/views/comic_view.dart';
 import '../modules/home/detail/deatail_middleware.dart';
 import '../modules/home/detail/detail_view.dart';
 import '../modules/home/index/bindings/home_binding.dart';
