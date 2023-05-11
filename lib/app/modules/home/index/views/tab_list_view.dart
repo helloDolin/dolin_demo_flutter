@@ -79,13 +79,15 @@ class _TabListViewState extends State<TabListView>
   }
 
   Future<void> reqData({bool isRefresh = false}) async {
-    final res = await HomeAPI.movieList(widget.source, pageSize, skip);
     if (isRefresh) {
       skip = 0;
       _listData.clear();
     } else {
       skip += pageSize;
     }
+
+    final res = await HomeAPI.movieList(widget.source, pageSize, skip);
+
     if (mounted) {
       setState(() {
         _listData.addAll(res);
