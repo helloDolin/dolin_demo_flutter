@@ -56,31 +56,28 @@ class HomeView extends GetView<HomeController> {
     return SizedBox(
       width: double.infinity,
       height: 25.h,
-      child: Container(
-        color: Theme.of(Get.context!).bottomNavigationBarTheme.backgroundColor,
-        child: TabBar(
-            onTap: (value) {
-              controller.pageController.jumpToPage(value);
-              controller.tabIndexChanged(value);
-            },
-            controller: controller.tabController,
-            isScrollable: true,
-            indicator: UnderlineIndicator(
-                strokeCap: StrokeCap.square,
-                borderSide: BorderSide(
-                  color: Colors.black,
-                  width: 3.h,
-                ),
-                insets: EdgeInsets.only(
-                  left: 10.w,
-                  right: 10.w,
-                )),
-            tabs: controller.categoryList
-                .map((map) => Tab(
-                      text: map['title'],
-                    ))
-                .toList()),
-      ),
+      child: TabBar(
+          onTap: (value) {
+            controller.pageController.jumpToPage(value);
+            controller.tabIndexChanged(value);
+          },
+          controller: controller.tabController,
+          isScrollable: true,
+          indicator: UnderlineIndicator(
+              strokeCap: StrokeCap.square,
+              borderSide: BorderSide(
+                color: Colors.black,
+                width: 3.h,
+              ),
+              insets: EdgeInsets.only(
+                left: 10.w,
+                right: 10.w,
+              )),
+          tabs: controller.categoryList
+              .map((map) => Tab(
+                    text: map['title'],
+                  ))
+              .toList()),
     );
   }
 

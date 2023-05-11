@@ -5,6 +5,7 @@ import 'app_color.dart';
 
 class AppTheme {
   static ThemeData dark = ThemeData(
+    scaffoldBackgroundColor: Colors.black,
     brightness: Brightness.dark,
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
@@ -35,7 +36,7 @@ class AppTheme {
 
   static ThemeData light = ThemeData(
     brightness: Brightness.light,
-    scaffoldBackgroundColor: AppColor.scaffoldBackground,
+    scaffoldBackgroundColor: Colors.white,
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     primaryColor: AppColor.accentColor,

@@ -170,10 +170,6 @@ class PracticeView extends GetView<PracticeController> {
                       print(result.format); // The barcode format (as enum)
                       print(result.formatNote); // If a unkn
                     })),
-                Card('更改主题', () {
-                  Get.changeTheme(
-                      Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
-                }),
                 Card('get dialog', () {
                   Get.defaultDialog(
                       onConfirm: () => print("Ok"),

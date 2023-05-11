@@ -33,12 +33,13 @@ class AppSettingsService extends GetxController {
     StorageService.instance.setValue(StorageService.kFirstRun, false);
   }
 
-  void setTheme(int i) {
+  void setTheme(int i) async {
     themeMode.value = i;
     var mode = ThemeMode.values[i];
 
     StorageService.instance.setValue(StorageService.kThemeMode, i);
     Get.changeThemeMode(mode);
+    // await Get.forceAppUpdate(); 慎用
   }
 
   void changeTheme() {
