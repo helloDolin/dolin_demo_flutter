@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'app/log/log.dart';
+import 'app/modules/debug/log/log.dart';
 import 'app/services/app_settings_service.dart';
 import 'app/services/storage_service.dart';
 

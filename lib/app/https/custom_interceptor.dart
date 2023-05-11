@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 
-import '../log/log.dart';
+import '../modules/debug/log/log.dart';
 import '../services/user.dart';
 import 'custom_error.dart';
 

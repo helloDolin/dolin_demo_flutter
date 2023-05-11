@@ -1,11 +1,14 @@
+import 'package:dolin_demo_flutter/app/modules/debug/log/log.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:logger_flutter_plus/logger_flutter_plus.dart';
 import 'package:path_provider/path_provider.dart';
-
-import '../log/log.dart';
 
 class StorageService extends GetxService {
   static StorageService get instance => Get.find<StorageService>();
+  LogConsoleManager logConsoleManager = LogConsoleManager(
+    isDark: false,
+  );
 
   /// 首次运行
   static const String kFirstRun = "FirstRun";

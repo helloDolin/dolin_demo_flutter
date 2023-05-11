@@ -1,3 +1,4 @@
+import 'package:dolin_demo_flutter/app/modules/debug/log/log_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -54,17 +55,23 @@ class FloatBall extends StatelessWidget {
     // text 属于 Material 风格，不加的话，text 下面会有两条黄线
     return Material(
       color: Colors.transparent,
-      child: Container(
-        alignment: Alignment.center,
-        width: BALL_WIDTH,
-        height: BALL_WIDTH,
-        decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(BALL_WIDTH / 2)),
-            color: Colors.blue),
-        child: const Text(
-          'debug\ninfo',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white, fontSize: 12),
+      child: InkWell(
+        onTap: () {
+          Get.to(() => const LogView());
+        },
+        child: Container(
+          alignment: Alignment.center,
+          width: BALL_WIDTH,
+          height: BALL_WIDTH,
+          decoration: BoxDecoration(
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(BALL_WIDTH / 2)),
+              color: Colors.blue.withOpacity(0.5)),
+          child: const Text(
+            'log\ninfo',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white, fontSize: 12),
+          ),
         ),
       ),
     );

@@ -26,6 +26,8 @@ PODS:
   - photo_manager (2.0.0):
     - Flutter
     - FlutterMacOS
+  - sensors_plus (0.0.1):
+    - Flutter
   - SwiftProtobuf (1.21.0)
   - Toast (4.0.0)
   - uni_links (0.0.1):
@@ -46,6 +48,7 @@ DEPENDENCIES:
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
+  - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
   - uni_links (from `.symlinks/plugins/uni_links/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
@@ -75,6 +78,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   photo_manager:
     :path: ".symlinks/plugins/photo_manager/ios"
+  sensors_plus:
+    :path: ".symlinks/plugins/sensors_plus/ios"
   uni_links:
     :path: ".symlinks/plugins/uni_links/ios"
   url_launcher_ios:
@@ -95,6 +100,7 @@ SPEC CHECKSUMS:
   package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
+  sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
   SwiftProtobuf: afced68785854575756db965e9da52bbf3dc45e7
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a

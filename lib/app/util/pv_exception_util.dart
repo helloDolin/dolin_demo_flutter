@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import '../log/log.dart';
+import '../modules/debug/log/log.dart';
 
 int exceptionCount = 0;
 Future<void> reportError(dynamic error, dynamic stackTrace) async {

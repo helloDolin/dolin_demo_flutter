@@ -7,7 +7,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'app/common_widgets/status/app_loading.dart';
 import 'app/constants/constants.dart';
-import 'app/log/log.dart';
+import 'app/modules/debug/log/log.dart';
 import 'app/modules/unknowPage.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/app_settings_service.dart';
