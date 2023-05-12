@@ -363,6 +363,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_plugin_practice:
+    dependency: "direct main"
+    description:
+      path: flutter_plugin_practice
+      relative: true
+    source: path
+    version: "0.0.2"
   flutter_screenutil:
     dependency: "direct main"
     description:

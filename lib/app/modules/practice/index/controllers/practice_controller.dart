@@ -1,4 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_plugin_practice/flutter_plugin_practice.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -10,7 +11,7 @@ class PracticeController extends GetxController {
 
   RxString scanCode = ''.obs;
 
-  RxString batteryLevel = ''.obs;
+  RxString invokeChannelResult = ''.obs;
 
   void getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
@@ -43,5 +44,16 @@ packageName:$packageName
 version:$version
 buildNumber:$buildNumber    
 ''';
+  }
+
+  void getInvokeChannelInfo() async {
+    FlutterPluginPractice flutterPluginPractice = FlutterPluginPractice();
+
+    final int? getBatteryLevel = await flutterPluginPractice.getBatteryLevel();
+    final String? getPlatformVersion =
+        await flutterPluginPractice.getPlatformVersion();
+
+    invokeChannelResult.value =
+        '电量：${(getBatteryLevel ?? 0).toString()}\n版本：${getPlatformVersion ?? ''}';
   }
 }

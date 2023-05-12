@@ -46,6 +46,10 @@ dependencies:
   flutter_smart_dialog: ^4.9.0+6
   lottie: ^2.3.2
 
+  # 插件练习
+  flutter_plugin_practice:
+    path: ./flutter_plugin_practice
+
   flutter:
     sdk: flutter
   flutter_localizations:

@@ -13,6 +13,8 @@ PODS:
   - flutter_inappwebview/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
+  - flutter_plugin_practice (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -44,6 +46,7 @@ DEPENDENCIES:
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview (from `.symlinks/plugins/flutter_inappwebview/ios`)
+  - flutter_plugin_practice (from `.symlinks/plugins/flutter_plugin_practice/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
@@ -70,6 +73,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_inappwebview:
     :path: ".symlinks/plugins/flutter_inappwebview/ios"
+  flutter_plugin_practice:
+    :path: ".symlinks/plugins/flutter_plugin_practice/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   package_info_plus:
@@ -94,6 +99,7 @@ SPEC CHECKSUMS:
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_inappwebview: bfd58618f49dc62f2676de690fc6dcda1d6c3721
+  flutter_plugin_practice: ca2595c840df67d34fa44e8960643abe6a30f03a
   fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
@@ -108,6 +114,6 @@ SPEC CHECKSUMS:
   video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
 
-PODFILE CHECKSUM: 30b25fbe1e0886286fc69c3627cadd50e0c40bd1
+PODFILE CHECKSUM: 65449de1c0ff49953b87602241da69102744cea3
 
 COCOAPODS: 1.12.0
