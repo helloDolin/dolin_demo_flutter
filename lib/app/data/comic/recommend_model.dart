@@ -4,10 +4,11 @@ part 'recommend_model.g.dart';
 
 @JsonSerializable()
 class RecommendModel {
+  @JsonKey(name: 'category_id')
   int? categoryId;
-  String? title;
   int? sort;
-
+  String? title;
+  List<RecommendItemModel>? data;
   RecommendModel();
   factory RecommendModel.fromJson(Map<String, dynamic> json) =>
       _$RecommendModelFromJson(json);
@@ -21,9 +22,11 @@ class RecommendItemModel {
   int? id;
   String? cover;
   String? title;
+  @JsonKey(name: 'sub_title')
   String? subTitle;
   int? type;
   String? url;
+  @JsonKey(name: 'obj_id')
   int? objId;
   String? status;
   factory RecommendItemModel.fromJson(Map<String, dynamic> json) =>

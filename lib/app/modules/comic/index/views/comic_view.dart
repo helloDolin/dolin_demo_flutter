@@ -1,5 +1,7 @@
 import 'package:dolin_demo_flutter/app/common_widgets/status/app_error.dart';
 import 'package:dolin_demo_flutter/app/common_widgets/status/app_loading.dart';
+import 'package:dolin_demo_flutter/app/constants/app_fonts.dart';
+import 'package:dolin_demo_flutter/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,6 +43,13 @@ class ComicView extends GetView<ComicController> {
               Tab(text: "分类"),
               Tab(text: "排行"),
             ],
+            action: IconButton(
+              onPressed: null,
+              icon: Icon(
+                AppFonts.comic,
+                color: getRandomColor(),
+              ),
+            ),
           ),
           body: TabBarView(
             controller: controller.tabController,

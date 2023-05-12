@@ -8,15 +8,19 @@ part of 'recommend_model.dart';
 
 RecommendModel _$RecommendModelFromJson(Map<String, dynamic> json) =>
     RecommendModel()
-      ..categoryId = json['categoryId'] as int?
+      ..categoryId = json['category_id'] as int?
+      ..sort = json['sort'] as int?
       ..title = json['title'] as String?
-      ..sort = json['sort'] as int?;
+      ..data = (json['data'] as List<dynamic>?)
+          ?.map((e) => RecommendItemModel.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$RecommendModelToJson(RecommendModel instance) =>
     <String, dynamic>{
-      'categoryId': instance.categoryId,
-      'title': instance.title,
+      'category_id': instance.categoryId,
       'sort': instance.sort,
+      'title': instance.title,
+      'data': instance.data,
     };
 
 RecommendItemModel _$RecommendItemModelFromJson(Map<String, dynamic> json) =>
@@ -24,10 +28,10 @@ RecommendItemModel _$RecommendItemModelFromJson(Map<String, dynamic> json) =>
       ..id = json['id'] as int?
       ..cover = json['cover'] as String?
       ..title = json['title'] as String?
-      ..subTitle = json['subTitle'] as String?
+      ..subTitle = json['sub_title'] as String?
       ..type = json['type'] as int?
       ..url = json['url'] as String?
-      ..objId = json['objId'] as int?
+      ..objId = json['obj_id'] as int?
       ..status = json['status'] as String?;
 
 Map<String, dynamic> _$RecommendItemModelToJson(RecommendItemModel instance) =>
@@ -35,9 +39,9 @@ Map<String, dynamic> _$RecommendItemModelToJson(RecommendItemModel instance) =>
       'id': instance.id,
       'cover': instance.cover,
       'title': instance.title,
-      'subTitle': instance.subTitle,
+      'sub_title': instance.subTitle,
       'type': instance.type,
       'url': instance.url,
-      'objId': instance.objId,
+      'obj_id': instance.objId,
       'status': instance.status,
     };
