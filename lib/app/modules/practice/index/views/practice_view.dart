@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:dolin_demo_flutter/generated/locales.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -190,6 +191,26 @@ class PracticeView extends GetView<PracticeController> {
                 Card('常用组件', () {
                   Get.to(() => const InCommonUseWidgetPage());
                 }),
+                Card('Method Channel', () async {
+                  const platform = MethodChannel('samples.flutter.dev/battery');
+                  final int result =
+                      await platform.invokeMethod('getBatteryLevel');
+                  controller.batteryLevel.value = result.toString();
+                }),
+                Obx(() => Offstage(
+                      offstage: controller.batteryLevel.value.isEmpty,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            left: 20.0, right: 20.0, bottom: 10),
+                        child: Text(
+                          '''MethodChannel('samples.flutter.dev/battery')
+invokeMethod('getBatteryLevel')                          
+${controller.batteryLevel.value}
+''',
+                          style: const TextStyle(wordSpacing: 3, fontSize: 16),
+                        ),
+                      ),
+                    )),
               ],
             )),
       ),

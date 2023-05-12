@@ -10,6 +10,8 @@ class PracticeController extends GetxController {
 
   RxString scanCode = ''.obs;
 
+  RxString batteryLevel = ''.obs;
+
   void getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
     final deviceInfo = await deviceInfoPlugin.deviceInfo;
