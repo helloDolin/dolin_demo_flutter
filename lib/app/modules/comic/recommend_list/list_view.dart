@@ -6,6 +6,7 @@ import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
 import '../../../data/comic/recommend_model.dart';
+import '../novel_detail/views/novel_detail_view.dart';
 import 'list_controller.dart';
 
 class ListView extends StatelessWidget {
@@ -64,7 +65,12 @@ class ListView extends StatelessWidget {
             itemBuilder: (context, index) {
               final RecommendItemModel obj = item.data![index];
               return InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => NovelDetailView(
+                        id: obj.id ?? -1,
+                        title: obj.title ?? '详情',
+                      ));
+                },
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

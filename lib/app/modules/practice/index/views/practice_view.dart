@@ -18,7 +18,6 @@ import '../../in_common_use_widget.dart';
 import '../../layout_practice.dart';
 import '../../pieces_of_knowledge.dart';
 import '../../radius_ summary.dart';
-import '../../video.dart';
 import '../../webView.dart';
 import '../../wechat_friends.dart';
 import '../controllers/practice_controller.dart';
@@ -66,9 +65,6 @@ class PracticeView extends GetView<PracticeController> {
                 }),
                 Card('LayoutPractice', () {
                   Get.to(() => const LayoutPractice());
-                }),
-                Card('VideoPage', () {
-                  Get.to(() => const VideoPage());
                 }),
                 Card('WebView', () {
                   Get.to(() => const WebView());

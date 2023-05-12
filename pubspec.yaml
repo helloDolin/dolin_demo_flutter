@@ -31,7 +31,7 @@ dependencies:
   crypto: ^3.0.2 # 加密
   device_info_plus: ^8.2.0
   url_launcher: ^6.1.10
-  chewie: ^1.4.0 # 视频播放
+  # chewie: ^1.4.0 # 视频播放
   video_player: ^2.6.1
   barcode_scan2: ^4.2.4 # 扫码
   uni_links: ^0.5.1 # Deep Links (Android) and Universal Links and Custom URL schemes (iOS)
@@ -45,6 +45,7 @@ dependencies:
   extended_image: ^7.0.2 #拓展Image
   flutter_smart_dialog: ^4.9.0+6
   lottie: ^2.3.2
+  share_plus: ^7.0.0
 
   # 插件练习
   flutter_plugin_practice:

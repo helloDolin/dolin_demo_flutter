@@ -12,6 +12,7 @@ abstract class Routes {
   static const TEXT_FIELD = _Paths.PRACTICE + _Paths.TEXT_FIELD;
   static const LOGIN = _Paths.MINE + _Paths.LOGIN;
   static const SETTINGS = _Paths.MINE + _Paths.SETTINGS;
+  static const NOVEL_DETAIL = _Paths.COMIC + _Paths.NOVEL_DETAIL;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const TEXT_FIELD = '/text-field';
   static const LOGIN = '/login';
   static const SETTINGS = '/settings';
+  static const NOVEL_DETAIL = '/novel-detail';
 }
