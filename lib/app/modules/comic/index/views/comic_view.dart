@@ -57,9 +57,9 @@ class ComicView extends GetView<ComicController> {
             // controller.categores.map((e) => Text(e.tagName ?? '')).toList(),
             children: [
               recommend_list.ListView(),
-              ListView(),
-              ListView(),
-              ListView(),
+              const Text('更新'),
+              const Text('分类'),
+              const Text('排行'),
             ],
           ),
         );

@@ -27,6 +27,13 @@
       "unicode_decimal": 59442
     },
     {
+      "icon_id": "1613827",
+      "name": "回到顶部",
+      "font_class": "huidaodingbu",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
       "icon_id": "3153821",
       "name": "practice",
       "font_class": "practice",

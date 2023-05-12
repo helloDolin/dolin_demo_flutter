@@ -13,4 +13,6 @@ class AppFonts {
       IconData(0xf0182, fontFamily: 'iconFonts', matchTextDirection: true);
   static const IconData wechatFriends =
       IconData(0xe667, fontFamily: 'iconFonts', matchTextDirection: true);
+  static const IconData back2Top =
+      IconData(0xe60f, fontFamily: 'iconFonts', matchTextDirection: true);
 }

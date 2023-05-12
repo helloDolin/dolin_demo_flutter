@@ -1,11 +1,11 @@
 import 'package:dolin_demo_flutter/app/common_widgets/dl_tabbar_view.dart';
-import 'package:dolin_demo_flutter/app/modules/home/index/views/tab_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
 import '../../../../routes/app_pages.dart';
+import '../../movie_list/movie_list_view.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
       body: SafeArea(
           child: Column(
         children: [
-          _tabBar(),
+          _tabBar(context),
           const SizedBox(
             height: 10,
           ),
@@ -52,7 +52,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _tabBar() {
+  Widget _tabBar(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       height: 25.h,
@@ -66,7 +66,7 @@ class HomeView extends GetView<HomeController> {
           indicator: UnderlineIndicator(
               strokeCap: StrokeCap.square,
               borderSide: BorderSide(
-                color: Colors.black,
+                color: Theme.of(context).tabBarTheme.indicatorColor!,
                 width: 3.h,
               ),
               insets: EdgeInsets.only(
@@ -90,7 +90,7 @@ class HomeView extends GetView<HomeController> {
       tabController: controller.tabController,
       pageController: controller.pageController,
       children: controller.categoryList.map((map) {
-        return TabListView(
+        return MovieListView(
           source: map['source']!,
         );
       }).toList(),

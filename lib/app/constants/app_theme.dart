@@ -9,14 +9,15 @@ class AppTheme {
     brightness: Brightness.dark,
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
-    appBarTheme: const AppBarTheme().copyWith(
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black,
-        titleTextStyle: const TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        )),
+    appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(color: Colors.white),
+      backgroundColor: Colors.black,
+      titleTextStyle: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.black,
       unselectedLabelStyle: TextStyle(fontSize: 10),
@@ -26,11 +27,14 @@ class AppTheme {
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: Colors.white,
-      labelStyle: TextStyle(fontSize: 14),
+      labelStyle: TextStyle(fontSize: 16),
       unselectedLabelColor: AppColor.secondaryText,
-      unselectedLabelStyle: TextStyle(fontSize: 12),
+      unselectedLabelStyle: TextStyle(fontSize: 14),
       // indicatorSize: TabBarIndicatorSize.label,
       indicatorColor: Colors.white,
+    ),
+    iconTheme: const IconThemeData(
+      color: Colors.white,
     ),
   );
 
@@ -70,11 +74,14 @@ class AppTheme {
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: Colors.black,
-      labelStyle: TextStyle(fontSize: 14),
+      labelStyle: TextStyle(fontSize: 16),
       unselectedLabelColor: AppColor.secondaryText,
-      unselectedLabelStyle: TextStyle(fontSize: 12),
+      unselectedLabelStyle: TextStyle(fontSize: 14),
       // indicatorSize: TabBarIndicatorSize.label,
       indicatorColor: Colors.black,
+    ),
+    iconTheme: const IconThemeData(
+      color: Colors.black,
     ),
   );
 }

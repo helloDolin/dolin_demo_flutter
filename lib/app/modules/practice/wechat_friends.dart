@@ -8,7 +8,9 @@ class WechatFriends extends StatefulWidget {
   const WechatFriends({super.key});
 
   @override
-  State<WechatFriends> createState() => _WechatFriendsState();
+  State<WechatFriends> createState() {
+    return _WechatFriendsState();
+  }
 }
 
 class _WechatFriendsState extends State<WechatFriends>
@@ -69,6 +71,13 @@ class _WechatFriendsState extends State<WechatFriends>
     WidgetsBinding.instance.removeObserver(this);
     Global.routerObserver.unsubscribe(this);
     super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    // 暂时从视图树中移除，通常用于释放一些资源
+    print('deactivate');
+    super.deactivate();
   }
 
   @override
