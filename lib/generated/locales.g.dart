@@ -23,6 +23,26 @@ class LocaleKeys {
   static const mine_switch_language = 'mine_switch_language';
   static const mine_check_update = 'mine_check_update';
   static const mine_about_app = 'mine_about_app';
+  static const refreshConfiguration_header_completeText =
+      'refreshConfiguration_header_completeText';
+  static const refreshConfiguration_header_releaseText =
+      'refreshConfiguration_header_releaseText';
+  static const refreshConfiguration_header_refreshingText =
+      'refreshConfiguration_header_refreshingText';
+  static const refreshConfiguration_header_failedText =
+      'refreshConfiguration_header_failedText';
+  static const refreshConfiguration_header_idleText =
+      'refreshConfiguration_header_idleText';
+  static const refreshConfiguration_footer_loadingText =
+      'refreshConfiguration_footer_loadingText';
+  static const refreshConfiguration_footer_failedText =
+      'refreshConfiguration_footer_failedText';
+  static const refreshConfiguration_footer_idleText =
+      'refreshConfiguration_footer_idleText';
+  static const refreshConfiguration_footer_canLoadingText =
+      'refreshConfiguration_footer_canLoadingText';
+  static const refreshConfiguration_footer_noDataText =
+      'refreshConfiguration_footer_noDataText';
 }
 
 class Locales {
@@ -39,6 +59,16 @@ class Locales {
     'mine_switch_language': '切换语言',
     'mine_check_update': '检查更新',
     'mine_about_app': '关于 APP',
+    'refreshConfiguration_header_completeText': '刷新完成',
+    'refreshConfiguration_header_releaseText': '释放立即刷新',
+    'refreshConfiguration_header_refreshingText': '正在刷新...',
+    'refreshConfiguration_header_failedText': '拉取数据失败',
+    'refreshConfiguration_header_idleText': '下拉可以刷新',
+    'refreshConfiguration_footer_loadingText': '正在加载...',
+    'refreshConfiguration_footer_failedText': '拉取数据失败',
+    'refreshConfiguration_footer_idleText': '上拉可以加载',
+    'refreshConfiguration_footer_canLoadingText': '上拉可以加载',
+    'refreshConfiguration_footer_noDataText': '没有更多数据',
   };
   static const en_US = {
     'index_home': 'Home',
@@ -53,5 +83,15 @@ class Locales {
     'mine_switch_language': 'Switch The Language',
     'mine_check_update': 'Check Update',
     'mine_about_app': 'About APP',
+    'refreshConfiguration_header_completeText': 'Refres completed',
+    'refreshConfiguration_header_releaseText': 'Release immediate refresh',
+    'refreshConfiguration_header_refreshingText': 'Refreshing...',
+    'refreshConfiguration_header_failedText': 'Failed to pull data',
+    'refreshConfiguration_header_idleText': 'Dropdown can refresh',
+    'refreshConfiguration_footer_loadingText': 'Loading...',
+    'refreshConfiguration_footer_failedText': 'Failed to pull data',
+    'refreshConfiguration_footer_idleText': 'Pulling up can load',
+    'refreshConfiguration_footer_canLoadingText': 'Pulling up can load',
+    'refreshConfiguration_footer_noDataText': 'No more data available',
   };
 }

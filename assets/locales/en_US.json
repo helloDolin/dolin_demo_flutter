@@ -16,5 +16,21 @@
         "switch_language": "Switch The Language",
         "check_update": "Check Update",
         "about_app": "About APP"
+    },
+    "refreshConfiguration": {
+        "header": {
+            "completeText": "Refres completed",
+            "releaseText": "Release immediate refresh",
+            "refreshingText": "Refreshing...",
+            "failedText": "Failed to pull data",
+            "idleText": "Dropdown can refresh"
+        },
+        "footer": {
+            "loadingText": "Loading...",
+            "failedText": "Failed to pull data",
+            "idleText": "Pulling up can load",
+            "canLoadingText": "Pulling up can load",
+            "noDataText": "No more data available"
+        }
     }
 }

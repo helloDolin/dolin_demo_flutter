@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
-import '../../../../routes/app_pages.dart';
 import '../../movie_list/movie_list_view.dart';
 import '../controllers/home_controller.dart';
 
@@ -17,19 +16,6 @@ class HomeView extends GetView<HomeController> {
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 50),
         child: Obx(() => AppBar(
-              actions: [
-                SizedBox(
-                  // width: 46,
-                  child: TextButton(
-                      onPressed: () {
-                        Get.toNamed(Routes.DETAIL, arguments: 1);
-                      },
-                      child: const Text(
-                        'GetX 进入相同页面',
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
-                      )),
-                )
-              ],
               title: Text(
                 controller.pageTitle.value,
               ),

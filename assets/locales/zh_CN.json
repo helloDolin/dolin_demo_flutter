@@ -16,5 +16,21 @@
         "switch_language": "切换语言",
         "check_update": "检查更新",
         "about_app": "关于 APP"
+    },
+    "refreshConfiguration": {
+        "header": {
+            "completeText": "刷新完成",
+            "releaseText": "释放立即刷新",
+            "refreshingText": "正在刷新...",
+            "failedText": "拉取数据失败",
+            "idleText": "下拉可以刷新"
+        },
+        "footer": {
+            "loadingText": "正在加载...",
+            "failedText": "拉取数据失败",
+            "idleText": "上拉可以加载",
+            "canLoadingText": "上拉可以加载",
+            "noDataText": "没有更多数据"
+        }
     }
 }

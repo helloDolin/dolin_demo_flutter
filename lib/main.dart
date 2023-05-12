@@ -23,8 +23,24 @@ void main() {
       splitScreenMode: true,
       builder: (context, child) {
         return RefreshConfiguration(
-          headerBuilder: () => const ClassicHeader(),
-          footerBuilder: () => const ClassicFooter(),
+          headerBuilder: () => ClassicHeader(
+            completeText:
+                LocaleKeys.refreshConfiguration_header_completeText.tr,
+            releaseText: LocaleKeys.refreshConfiguration_header_releaseText.tr,
+            refreshingText:
+                LocaleKeys.refreshConfiguration_header_refreshingText.tr,
+            failedText: LocaleKeys.refreshConfiguration_header_failedText.tr,
+            idleText: LocaleKeys.refreshConfiguration_header_idleText.tr,
+          ),
+          footerBuilder: () => ClassicFooter(
+            loadingText: LocaleKeys.refreshConfiguration_footer_loadingText.tr,
+            failedText: LocaleKeys.refreshConfiguration_footer_failedText.tr,
+            idleText: LocaleKeys.refreshConfiguration_footer_idleText.tr,
+            canLoadingText:
+                LocaleKeys.refreshConfiguration_footer_canLoadingText.tr,
+            noDataText: LocaleKeys.refreshConfiguration_footer_noDataText.tr,
+            loadStyle: LoadStyle.ShowWhenLoading,
+          ),
           headerTriggerDistance: 80, // 头部触发刷新的越界距离
           maxOverScrollExtent: 100, //头部最大可以拖动的范围,如果发生冲出视图范围区域,请设置这个属性
           footerTriggerDistance: 150, // 底部最大可以拖动的范围
@@ -33,12 +49,10 @@ void main() {
           enableLoadingWhenFailed: true, //在加载失败的状态下,用户仍然可以通过手势上拉来触发加载更多
           hideFooterWhenNotFull: true, // Viewport不满一屏时,禁用上拉加载更多功能
           enableBallisticLoad: true, // 可以通过惯性滑动触发加载更多
-
           springDescription: const SpringDescription(
               stiffness: 170,
               damping: 16,
               mass: 1.9), // 自定义回弹动画,三个属性值意义请查询flutter api
-
           child: GetMaterialApp(
               // showPerformanceOverlay: true,
               debugShowCheckedModeBanner: false,
