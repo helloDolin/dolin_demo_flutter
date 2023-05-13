@@ -14,7 +14,6 @@ Flutter 学习、总结、提高
 ![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/light.png)
 ![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/dark.png)
 ![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/english.png)
-![image](https://raw.githubusercontent.com/helloDolin/dolin_demo_flutter/main/screenshot/wechat.png)
 
 ### ps:
 以上截图使用 python 脚本拼接，源码在 screenshot 下 merge_img.py
