@@ -12,7 +12,7 @@ import '../../../../routes/app_pages.dart';
 import '../../../../util/random_color_util.dart';
 import '../../arena_practice.dart';
 import '../../async_practice.dart';
-import '../../customer_paint_view.dart';
+import '../../custom_paint/customer_paint_view.dart';
 import '../../dart_summary/dart_summary.dart';
 import '../../in_common_use_widget.dart';
 import '../../layout_practice.dart';

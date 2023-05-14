@@ -2,10 +2,9 @@
 
 import 'dart:math';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-// CustomPaint 是用以承接自绘控件的容器，并不负责真正的绘制
+import 'coordinate.dart';
 
 class CustomPaintPage extends StatefulWidget {
   const CustomPaintPage({Key? key}) : super(key: key);
@@ -53,11 +52,42 @@ class _CustomPaintPageState extends State<CustomPaintPage> {
       ),
       body: Center(
         child: Column(
-          children: const [Cake()],
+          children: [
+            Container(
+              color: Colors.amber,
+              child: const Cake(),
+            ),
+            Expanded(
+              child: CustomPaint(
+                size: const Size(double.infinity, double.infinity),
+                painter: TestPainter(),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
+}
+
+class TestPainter extends CustomPainter {
+  Coordinate coordinate = Coordinate();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    coordinate.paint(canvas, size);
+    canvas.translate(size.width / 2, size.height / 2);
+
+    final Paint paint = Paint();
+    paint.color = Colors.red;
+    canvas.drawCircle(const Offset(0, 0), 40, paint);
+  }
+
+  @override
+  bool shouldRepaint(TestPainter oldDelegate) => oldDelegate != this;
+
+  // @override
+  // bool shouldRebuildSemantics(TestPainter oldDelegate) => false;
 }
 
 class WheelPainter extends CustomPainter {
