@@ -12,7 +12,7 @@ import '../../../../routes/app_pages.dart';
 import '../../../../util/random_color_util.dart';
 import '../../arena_practice.dart';
 import '../../async_practice.dart';
-import '../../custom_paint/customer_paint_view.dart';
+import '../../custom_paint/index.dart';
 import '../../dart_summary/dart_summary.dart';
 import '../../in_common_use_widget.dart';
 import '../../layout_practice.dart';
@@ -44,7 +44,7 @@ class PracticeView extends GetView<PracticeController> {
                   Get.to(const DartSummaryPage());
                 }),
                 Card('手绘 Widget', () {
-                  Get.to(const CustomPaintPage());
+                  Get.to(const Index());
                 }),
                 Card('手势竞技场', () {
                   Get.to(const ArenaPage(

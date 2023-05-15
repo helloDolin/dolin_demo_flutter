@@ -13,7 +13,7 @@ class TextFieldView extends GetView<TextFieldController> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       // extendBody: true,
-      appBar: const DLAppBar(),
+      appBar: const DLAppBar(title: 'test'),
       body: ListView(
         children: [
           const Title('自定义 TextField'),
