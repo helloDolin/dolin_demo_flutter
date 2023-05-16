@@ -35,6 +35,19 @@ dart create project_name
 * Element 是 Widget 的一个实例化对象，将 Widget 树的变化做了抽象，能够做到只将真正需要修改的部分同步到真实的 Render Object 树中，最大程度优化从结构化的配置信息到完成最终渲染的过程。理解成创建widget的上下文就可以了。context实际是element，是为了阻止直接对element操作而抽象出来的一个概念
 * Render Object：负责实现视图的最终呈现，通过布局、绘制完成界面的展示
 
+Element 与 Widget 的关系只有两条
+1.Widget 对象通过 createElement 方法创建 Element 对象。
+2.Element 对象会持有创建它的 Widget 对象。
+
+Widget 与 RenderObject 的关系只有两条
+[1]. RenderObjectWidget 对 RenderObject 对象进行创建(create)和更新(update)。
+[2]. ParentDataWidget 通过 applyParentData 方法设置 RenderObject 的 parentData 数据。
+
+RenderObject 与 Element 关系有如下三点
+[1]. RenderObjectElement 负责触发 Widget 对 RenderObject 操作
+[2]. RenderObjectElement 持有 RenderObject。
+[3]. 任何 Element 都可以获取 RenderObject。
+
 ```dart
 // RenderObjectWidget
 abstract class RenderObjectWidget extends Widget {

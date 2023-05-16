@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 import 'bezier_study.dart';
 import 'charts.dart';
 import 'paint_and_animate.dart' as paint_and_animate;
+import 'spring.dart';
 
 class Index extends StatelessWidget {
   const Index({super.key});
@@ -43,6 +44,13 @@ class Index extends StatelessWidget {
               title: const Text('Charts'),
               onTap: () {
                 Get.to(const Charts());
+              },
+              trailing: const Icon(Icons.arrow_forward_ios),
+            ),
+            ListTile(
+              title: const Text('Spring'),
+              onTap: () {
+                Get.to(const Spring());
               },
               trailing: const Icon(Icons.arrow_forward_ios),
             ),
