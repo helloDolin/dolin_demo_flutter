@@ -3,7 +3,21 @@ import 'package:flutter_plugin_practice/flutter_plugin_practice.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-class PracticeController extends GetxController {
+mixin PrintGetLifeCircle on GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+    print('onInit');
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    print('onReady');
+  }
+}
+
+class PracticeController extends GetxController with PrintGetLifeCircle {
   bool b = false;
 
   RxString deviceData = ''.obs;

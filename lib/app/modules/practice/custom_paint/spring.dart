@@ -16,6 +16,10 @@ class Spring extends StatefulWidget {
 }
 
 class _SpringState extends State<Spring> with SingleTickerProviderStateMixin {
+  _SpringState() {
+    print('_SpringState 构造函数');
+    print(mounted);
+  }
   // 使用可监听对象来触发重绘，使可监听对象直接通知画板更新，期间没有任何的构建过程，是更高效触发重绘的手段
   ValueNotifier<double> height = ValueNotifier(_kDefaultSpringHeight);
   double s = 0; // 移动距离
@@ -42,6 +46,8 @@ class _SpringState extends State<Spring> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
+    print(mounted);
+
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 300))
       ..addListener(() {

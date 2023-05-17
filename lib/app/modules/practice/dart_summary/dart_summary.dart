@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'dart_summary_show_code.dart' hide PrintHelper;
 // import 'dart_summary_show_code.dart' show PrintHelper;
 
+/*
+如果说 命名参数 是为了方便使用而允许乱序，提供名称传参；那么 位置参数 就是不允许乱序，依次传参。
+
+*/
+
 const kDartCode = """
 // 接口：打印工具抽象类
 abstract class PrintHelper {
