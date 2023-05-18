@@ -47,7 +47,7 @@ dependencies:
   lottie: ^2.3.2
   share_plus: ^7.0.0
   decimal: ^2.3.2
-
+  flutter_native_splash: 2.2.19
   # 插件练习
   flutter_plugin_practice:
     path: ./flutter_plugin_practice

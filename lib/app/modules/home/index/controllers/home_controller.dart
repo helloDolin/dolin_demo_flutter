@@ -1,5 +1,6 @@
 import 'package:dolin_demo_flutter/app/modules/debug/dev_view.dart';
 import 'package:dolin_demo_flutter/generated/locales.g.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +26,9 @@ class HomeController extends SuperController
   @override
   void onReady() {
     super.onReady();
-    insertDevView();
+    if (!kReleaseMode) {
+      insertDevView();
+    }
   }
 
   /// tabIndex 变化
