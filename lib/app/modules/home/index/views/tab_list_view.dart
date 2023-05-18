@@ -1,8 +1,8 @@
-import 'package:dolin_demo_flutter/app/apis/home/home.dart';
-import 'package:dolin_demo_flutter/app/common_widgets/gallery/index.dart';
-import 'package:dolin_demo_flutter/app/constants/constants.dart';
-import 'package:dolin_demo_flutter/app/data/home/douban250.dart';
-import 'package:dolin_demo_flutter/app/util/random_color_util.dart';
+import 'package:dolin/app/apis/home/home.dart';
+import 'package:dolin/app/common_widgets/gallery/index.dart';
+import 'package:dolin/app/constants/constants.dart';
+import 'package:dolin/app/data/home/douban250.dart';
+import 'package:dolin/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';

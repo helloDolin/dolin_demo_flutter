@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/modules/debug/log/log.dart';
+import 'package:dolin/app/modules/debug/log/log.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:logger_flutter_plus/logger_flutter_plus.dart';

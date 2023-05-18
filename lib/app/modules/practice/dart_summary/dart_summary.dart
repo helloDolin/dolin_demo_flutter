@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/common_widgets/code/code.dart';
+import 'package:dolin/app/common_widgets/code/code.dart';
 import 'package:flutter/material.dart';
 
 import 'dart_summary_show_code.dart' hide PrintHelper;

@@ -1,5 +1,5 @@
-import 'package:dolin_demo_flutter/app/common_widgets/keepAliveWrapper.dart';
-import 'package:dolin_demo_flutter/app/constants/app_fonts.dart';
+import 'package:dolin/app/common_widgets/keepAliveWrapper.dart';
+import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

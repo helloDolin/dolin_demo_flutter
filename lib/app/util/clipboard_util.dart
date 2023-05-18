@@ -1,5 +1,5 @@
 //复制粘贴
-import 'package:dolin_demo_flutter/app/util/toast_util.dart';
+import 'package:dolin/app/util/toast_util.dart';
 import 'package:flutter/services.dart';
 
 /// 剪切板工具

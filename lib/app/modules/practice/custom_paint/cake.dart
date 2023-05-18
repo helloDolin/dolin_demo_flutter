@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dolin_demo_flutter/app/common_widgets/dl_appbar.dart';
+import 'package:dolin/app/common_widgets/dl_appbar.dart';
 import 'package:flutter/material.dart';
 
 class Cake extends StatelessWidget {

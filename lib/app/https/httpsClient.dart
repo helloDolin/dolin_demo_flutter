@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:dio/dio.dart';
-import 'package:dolin_demo_flutter/app/services/user.dart';
+import 'package:dolin/app/services/user.dart';
 import 'package:get/get.dart' hide FormData, Response;
 
 import 'custom_error.dart';

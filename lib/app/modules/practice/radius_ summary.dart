@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:dolin_demo_flutter/app/constants/constants.dart';
+import 'package:dolin/app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class RadiusSummary extends StatelessWidget {

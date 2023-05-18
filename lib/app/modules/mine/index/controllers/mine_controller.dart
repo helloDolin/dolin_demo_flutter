@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/constants/app_assets.dart';
+import 'package:dolin/app/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:dolin_demo_flutter/app/modules/practice/custom_paint/tool/coordinate.dart';
+import 'package:dolin/app/modules/practice/custom_paint/tool/coordinate.dart';
 import 'package:flutter/material.dart';
 
 class BezierPage extends StatefulWidget {

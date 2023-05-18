@@ -1,7 +1,7 @@
-import 'package:dolin_demo_flutter/app/modules/comic/index/controllers/comic_controller.dart';
-import 'package:dolin_demo_flutter/app/modules/home/index/controllers/home_controller.dart';
-import 'package:dolin_demo_flutter/app/modules/mine/index/controllers/mine_controller.dart';
-import 'package:dolin_demo_flutter/app/modules/practice/index/controllers/practice_controller.dart';
+import 'package:dolin/app/modules/comic/index/controllers/comic_controller.dart';
+import 'package:dolin/app/modules/home/index/controllers/home_controller.dart';
+import 'package:dolin/app/modules/mine/index/controllers/mine_controller.dart';
+import 'package:dolin/app/modules/practice/index/controllers/practice_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/index_controller.dart';

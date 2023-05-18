@@ -1,5 +1,5 @@
-import 'package:dolin_demo_flutter/app/common_widgets/status/app_empty.dart';
-import 'package:dolin_demo_flutter/app/common_widgets/status/app_error.dart';
+import 'package:dolin/app/common_widgets/status/app_empty.dart';
+import 'package:dolin/app/common_widgets/status/app_error.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

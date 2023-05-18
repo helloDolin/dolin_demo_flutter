@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:dolin_demo_flutter/app/services/user.dart';
-import 'package:dolin_demo_flutter/app/util/fps_util.dart';
+import 'package:dolin/app/services/user.dart';
+import 'package:dolin/app/util/fps_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

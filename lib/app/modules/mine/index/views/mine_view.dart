@@ -1,5 +1,5 @@
-import 'package:dolin_demo_flutter/app/util/dialog_util.dart';
-import 'package:dolin_demo_flutter/generated/locales.g.dart';
+import 'package:dolin/app/util/dialog_util.dart';
+import 'package:dolin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

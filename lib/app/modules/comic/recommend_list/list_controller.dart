@@ -1,6 +1,6 @@
-import 'package:dolin_demo_flutter/app/apis/comic/comic.dart';
-import 'package:dolin_demo_flutter/app/common_widgets/page_list/dl_base_controller.dart';
-import 'package:dolin_demo_flutter/app/data/comic/recommend_model.dart';
+import 'package:dolin/app/apis/comic/comic.dart';
+import 'package:dolin/app/common_widgets/page_list/dl_base_controller.dart';
+import 'package:dolin/app/data/comic/recommend_model.dart';
 
 class ListController extends BasePageController<RecommendModel> {
   @override

@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/util/clipboard_util.dart';
+import 'package:dolin/app/util/clipboard_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';

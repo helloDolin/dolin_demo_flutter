@@ -1,9 +1,9 @@
-import 'package:dolin_demo_flutter/app/modules/comic/index/views/comic_view.dart';
-import 'package:dolin_demo_flutter/app/modules/home/index/views/home_view.dart';
-import 'package:dolin_demo_flutter/app/modules/mine/index/views/mine_view.dart';
-import 'package:dolin_demo_flutter/app/modules/practice/index/views/practice_view.dart';
-import 'package:dolin_demo_flutter/app/services/app_settings_service.dart';
-import 'package:dolin_demo_flutter/app/util/dialog_util.dart';
+import 'package:dolin/app/modules/comic/index/views/comic_view.dart';
+import 'package:dolin/app/modules/home/index/views/home_view.dart';
+import 'package:dolin/app/modules/mine/index/views/mine_view.dart';
+import 'package:dolin/app/modules/practice/index/views/practice_view.dart';
+import 'package:dolin/app/services/app_settings_service.dart';
+import 'package:dolin/app/util/dialog_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

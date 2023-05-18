@@ -1,4 +1,4 @@
-import 'package:dolin_demo_flutter/app/data/comic/comic_tag_model.dart';
+import 'package:dolin/app/data/comic/comic_tag_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
