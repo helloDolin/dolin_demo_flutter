@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 class TextFieldController extends GetxController {
   RxString inputText = ''.obs;
-  final GlobalKey<FormState> formKey = GlobalKey();
   RxString uiInfo = ''.obs;
 
   String getUIInfo() {

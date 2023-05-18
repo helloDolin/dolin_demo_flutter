@@ -44,6 +44,7 @@ utsname-release:    ${deviceInfo.utsname.release ?? ''}
 utsname-version:    ${deviceInfo.utsname.version ?? ''}
 utsname-machine:    ${deviceInfo.utsname.machine ?? ''}''';
     }
+    if (deviceInfo is AndroidDeviceInfo) {}
   }
 
   void getPackageInflo() async {

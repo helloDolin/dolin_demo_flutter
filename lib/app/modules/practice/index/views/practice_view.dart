@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:dolin/app/util/toast_util.dart';
 import 'package:dolin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -128,6 +129,8 @@ class PracticeView extends GetView<PracticeController> {
                   final Uri uri = Uri.parse('weixin://');
                   if (await canLaunchUrl(uri)) {
                     await launchUrl(uri);
+                  } else {
+                    showToast('请安装微信');
                   }
                 }),
                 Card('高德地图-导航北大', () async {

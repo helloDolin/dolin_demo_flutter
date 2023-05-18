@@ -44,67 +44,9 @@ class TextFieldView extends GetView<TextFieldController> {
               text: '',
             ),
           ),
-
-          // 表单
-          const SizedBox(
-            height: 50,
-          ),
-          const Title('表单验证'),
-
-          Form(
-            key: controller.formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: const InputDecoration(
-                    // hintText: '电话',
-                    labelText: '电话 label',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return '请输入正确的手机号码';
-                    }
-                    RegExp reg = RegExp(r'^1\d{10}$');
-                    if (!reg.hasMatch(value)) {
-                      return '请输入正确的手机号码';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: const InputDecoration(hintText: '用户名'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return '请输入用户名';
-                    }
-                    return null;
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 100,
-          ),
           const Title('UI 信息'),
-
           Text(controller.uiInfo.value)
         ],
-      ),
-      bottomNavigationBar: SafeArea(
-        child: TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.amber),
-          ),
-          onPressed: () {
-            if (controller.formKey.currentState!.validate()) {
-              print('valid pass');
-            }
-          },
-          child: const Text('验证表单是否通过'),
-        ),
       ),
     );
   }

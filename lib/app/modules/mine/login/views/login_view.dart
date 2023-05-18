@@ -1,3 +1,4 @@
+import 'package:dolin/app/modules/debug/log/log.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +16,7 @@ class LoginView extends GetView<LoginController> {
       child: Scaffold(
         appBar: AppBar(
           leading: const SizedBox.shrink(),
-          title: const Text('LoginView'),
+          title: const Text('登录'),
           centerTitle: true,
           actions: [
             IconButton(
@@ -43,6 +44,8 @@ class LoginView extends GetView<LoginController> {
                         onPressed: (() {
                           Get.back(result: true);
                           Get.back();
+                          // 将焦点给一个新值，相当于隐藏键盘
+                          FocusScope.of(context).requestFocus(FocusNode());
                         }),
                         child: const Text("确定"),
                       ),
@@ -53,40 +56,86 @@ class LoginView extends GetView<LoginController> {
                 icon: const Icon(Icons.close))
           ],
         ),
-        body: SingleChildScrollView(
+        body: Padding(
+          padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              TextField(
-                onChanged: (value) {
-                  controller.username = value.trim();
-                },
-                decoration: InputDecoration(
-                  icon: const Icon(Icons.people),
-                  hintText:
-                      controller.username.isEmpty ? '账号' : controller.username,
+              Form(
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      onChanged: (value) => controller.phoneNum = value.trim(),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: '手机',
+                        icon: Icon(Icons.phone),
+                        helperText: '请输入 11 位手机号',
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return '请输入正确的手机号码';
+                        }
+                        RegExp reg = RegExp(r'^1\d{10}$');
+                        if (!reg.hasMatch(value)) {
+                          return '请输入正确的手机号码';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      onChanged: (value) => controller.password = value.trim(),
+                      obscureText: true,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        labelText: '密码',
+                        // hintText: '密码',
+                        icon: Icon(Icons.password),
+                        helperText: '请输入 6 位密码',
+                      ),
+                      validator: (value) {
+                        if (value != null) {
+                          if (value.trim().length != 6) {
+                            return '密码为 6 位数';
+                          }
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
                 ),
               ),
-              TextField(
-                obscureText: true,
-                onChanged: (value) {
-                  controller.password = value.trim();
-                },
-                decoration: InputDecoration(
-                  icon: const Icon(Icons.password_outlined),
-                  hintText:
-                      controller.password.isEmpty ? '密码' : controller.password,
+              const Spacer(),
+              SafeArea(
+                child: SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        shadowColor: MaterialStateProperty.all(Colors.black),
+                        elevation: MaterialStateProperty.all(10),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(150)),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (controller.formKey.currentState!.validate()) {
+                          final token =
+                              'username:${controller.phoneNum}_password:${controller.password}';
+                          Log.i('toke: $token');
+                          UserStore.to.setToken(token);
+                          Get.back();
+                        }
+                      },
+                      child: const Text('登录')),
                 ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                    onPressed: () {
-                      final token =
-                          'username:${controller.username}_password:${controller.password}';
-                      UserStore.to.setToken(token);
-                      Get.back();
-                    },
-                    child: const Text('登录')),
               )
             ],
           ),
