@@ -37,6 +37,9 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Card('Time-Keeping', () {
+                  Get.toNamed(Routes.TIME_KEEPING);
+                }),
                 Card('TextField', () {
                   Get.toNamed(Routes.TEXT_FIELD);
                 }),

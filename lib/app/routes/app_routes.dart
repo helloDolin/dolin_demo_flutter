@@ -13,6 +13,7 @@ abstract class Routes {
   static const LOGIN = _Paths.MINE + _Paths.LOGIN;
   static const SETTINGS = _Paths.MINE + _Paths.SETTINGS;
   static const NOVEL_DETAIL = _Paths.COMIC + _Paths.NOVEL_DETAIL;
+  static const TIME_KEEPING = _Paths.PRACTICE + _Paths.TIME_KEEPING;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const SETTINGS = '/settings';
   static const NOVEL_DETAIL = '/novel-detail';
+  static const TIME_KEEPING = '/time-keeping';
 }

@@ -18,6 +18,8 @@ import '../modules/practice/index/bindings/practice_binding.dart';
 import '../modules/practice/index/views/practice_view.dart';
 import '../modules/practice/text_field/bindings/text_field_binding.dart';
 import '../modules/practice/text_field/views/text_field_view.dart';
+import '../modules/practice/time_keeping/bindings/time_keeping_binding.dart';
+import '../modules/practice/time_keeping/views/time_keeping_view.dart';
 
 part 'app_routes.dart';
 
@@ -46,6 +48,11 @@ class AppPages {
           name: _Paths.TEXT_FIELD,
           page: () => const TextFieldView(),
           binding: TextFieldBinding(),
+        ),
+        GetPage(
+          name: _Paths.TIME_KEEPING,
+          page: () => const TimeKeepingView(),
+          binding: TimeKeepingBinding(),
         ),
       ],
     ),
