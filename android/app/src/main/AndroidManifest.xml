@@ -16,7 +16,7 @@
     </queries> 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
    <application
-        android:label="dolin_demo_flutter"
+        android:label="Dolin"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
