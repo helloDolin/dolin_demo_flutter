@@ -7,10 +7,12 @@ class DLTextField extends StatefulWidget {
       this.text = '',
       required this.maxLength,
       this.enabled = true,
-      this.onChanged});
+      this.onChanged,
+      this.autofocus = false});
   final String text;
   final int maxLength;
   final bool enabled;
+  final bool autofocus;
   final Function(String)? onChanged;
 
   @override
@@ -63,6 +65,7 @@ class _DLTextFieldState extends State<DLTextField> {
   Widget build(BuildContext context) {
     return Container(
       child: TextField(
+        autofocus: widget.autofocus,
         enabled: widget.enabled,
         controller: _controller,
         inputFormatters: _textInputFormatterList,
