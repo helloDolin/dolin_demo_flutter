@@ -17,6 +17,26 @@ mixin PrintGetLifeCircle on GetxController {
   }
 }
 
+/// 接口枚举
+enum PortType {
+  usbA('USB-A', true),
+  usbC('USB-C', true),
+  typeC('TYPE-C'),
+  unknown('UNKNOWN');
+
+  final String name;
+  final bool isUSB;
+
+  const PortType(this.name, [this.isUSB = false]);
+
+  static PortType fromName(String name) {
+    return values.firstWhere(
+      (element) => element.name == name,
+      orElse: () => PortType.unknown,
+    );
+  }
+}
+
 class PracticeController extends GetxController with PrintGetLifeCircle {
   RxString deviceData = ''.obs;
   RxString pacakgeData = ''.obs;
