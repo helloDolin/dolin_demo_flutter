@@ -18,14 +18,11 @@ mixin PrintGetLifeCircle on GetxController {
 }
 
 class PracticeController extends GetxController with PrintGetLifeCircle {
-  bool b = false;
-
   RxString deviceData = ''.obs;
   RxString pacakgeData = ''.obs;
-
   RxString scanCode = ''.obs;
-
   RxString invokeChannelResult = ''.obs;
+  RxDouble pi = 0.0.obs;
 
   void getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
@@ -70,5 +67,14 @@ buildNumber:$buildNumber
 
     invokeChannelResult.value =
         '电量：${(getBatteryLevel ?? 0).toString()}\n版本：${getPlatformVersion ?? ''}';
+  }
+
+  /// mock 耗时任务
+  void mockTimeConsumingTask(int count) {
+    double res = 0;
+    for (int i = 1; i < count; i += 4) {
+      res += (4 / i) - (4 / (i + 2));
+    }
+    pi.value = res;
   }
 }

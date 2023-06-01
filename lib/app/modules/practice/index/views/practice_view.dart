@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:dolin/app/util/toast_util.dart';
 import 'package:dolin/generated/locales.g.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,19 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Center(child: CircularProgressIndicator()),
+                Obx(() => Card(
+                      'π的值为：${controller.pi.value.toString()}\n点击计算',
+                      () async {
+                        // controller.pi.value = 123;
+                        // // 由于耗时太多，所以会造成 CircularProgressIndicator 卡住
+                        // controller.mockTimeConsumingTask(1000000000);
+                        // 使用 compute 创建新的 Isolate
+                        final double res =
+                            await compute(mockTimeConsumingTask, 1000000000);
+                        controller.pi.value = res;
+                      },
+                    )),
                 Card('Time-Keeping', () {
                   Get.toNamed(Routes.TIME_KEEPING);
                 }),
@@ -245,4 +259,12 @@ class Card extends StatelessWidget {
           ),
         ));
   }
+}
+
+double mockTimeConsumingTask(int count) {
+  double res = 0;
+  for (int i = 1; i < count; i += 4) {
+    res += (4 / i) - (4 / (i + 2));
+  }
+  return res;
 }
