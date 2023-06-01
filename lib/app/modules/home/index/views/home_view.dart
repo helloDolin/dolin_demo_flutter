@@ -1,9 +1,11 @@
 import 'package:dolin/app/common_widgets/dl_tabbar_view.dart';
+import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
+import '../../../mine/index/views/mine_view.dart';
 import '../../movie_list/movie_list_view.dart';
 import '../controllers/home_controller.dart';
 
@@ -12,10 +14,25 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: 从左边抽出
+      // endDrawer: 从右边抽出
+      endDrawer: const Drawer(
+        child: MineView(),
+      ),
       // appbar 只接收 PreferredSize 类型
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 50),
         child: Obx(() => AppBar(
+              actions: [
+                Builder(builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(AppFonts.mine),
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                  );
+                }),
+              ],
               title: Text(
                 controller.pageTitle.value,
               ),
