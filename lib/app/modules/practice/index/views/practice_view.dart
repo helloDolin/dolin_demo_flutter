@@ -15,6 +15,7 @@ import '../../../../util/random_color_util.dart';
 import '../../arena_practice.dart';
 import '../../async_practice.dart';
 import '../../custom_paint/index.dart';
+import '../../custom_render_object.dart';
 import '../../dart_summary/dart_summary.dart';
 import '../../in_common_use_widget.dart';
 import '../../layout_practice.dart';
@@ -39,19 +40,24 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(child: CircularProgressIndicator()),
-                Obx(() => Card(
-                      'π的值为：${controller.pi.value.toString()}\n点击计算',
-                      () async {
-                        // controller.pi.value = 123;
-                        // // 由于耗时太多，所以会造成 CircularProgressIndicator 卡住
-                        // controller.mockTimeConsumingTask(1000000000);
-                        // 使用 compute 创建新的 Isolate
-                        final double res =
-                            await compute(mockTimeConsumingTask, 1000000000);
-                        controller.pi.value = res;
-                      },
-                    )),
+                Card('手撕 RenderObject', () {
+                  Get.to(const CustomRenderObject());
+                }),
+                Obx(
+                  () => Card(
+                    'π的值为：${controller.pi.value.toString()}\n点击计算',
+                    () async {
+                      // controller.pi.value = 123;
+                      // // 由于耗时太多，所以会造成 CircularProgressIndicator 卡住
+                      // controller.mockTimeConsumingTask(1000000000);
+                      // 使用 compute 创建新的 Isolate
+                      final double res =
+                          await compute(mockTimeConsumingTask, 1000000000);
+                      controller.pi.value = res;
+                    },
+                    child: const CircularProgressIndicator(),
+                  ),
+                ),
                 Card('Time-Keeping', () {
                   Get.toNamed(Routes.TIME_KEEPING);
                 }),
@@ -229,9 +235,10 @@ class PracticeView extends GetView<PracticeController> {
 }
 
 class Card extends StatelessWidget {
-  const Card(this.title, this.onTap, {Key? key}) : super(key: key);
+  const Card(this.title, this.onTap, {Key? key, this.child}) : super(key: key);
   final String title;
   final VoidCallback onTap;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -253,9 +260,17 @@ class Card extends StatelessWidget {
             border: Border.all(color: borderColor, width: 1.h),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
           ),
-          child: Text(
-            title,
-            style: TextStyle(color: titleColor),
+          child: Row(
+            mainAxisAlignment: child != null
+                ? MainAxisAlignment.spaceBetween
+                : MainAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(color: titleColor),
+              ),
+              if (child != null) child!
+            ],
           ),
         ));
   }
