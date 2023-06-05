@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../common_widgets/keepAliveWrapper.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../util/random_color_util.dart';
+import '../../animate.dart';
 import '../../arena_practice.dart';
 import '../../async_practice.dart';
 import '../../custom_paint/index.dart';
@@ -40,22 +41,38 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Card('动画练习', () {
+                  Get.to(const AnimatePractice());
+                }),
                 Card('手撕 RenderObject', () {
                   Get.to(const CustomRenderObject());
                 }),
                 Obx(
-                  () => Card(
-                    'π的值为：${controller.pi.value.toString()}\n点击计算',
-                    () async {
-                      // controller.pi.value = 123;
-                      // // 由于耗时太多，所以会造成 CircularProgressIndicator 卡住
-                      // controller.mockTimeConsumingTask(1000000000);
-                      // 使用 compute 创建新的 Isolate
-                      final double res =
-                          await compute(mockTimeConsumingTask, 1000000000);
-                      controller.pi.value = res;
+                  () => AnimatedSwitcher(
+                    transitionBuilder: (child, animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: ScaleTransition(
+                          scale: animation,
+                          child: child,
+                        ),
+                      );
                     },
-                    child: const CircularProgressIndicator(),
+                    duration: const Duration(seconds: 1),
+                    child: Card(
+                      'π的值为：${controller.pi.value.toString()}\n点击计算',
+                      () async {
+                        // controller.pi.value = 123;
+                        // // 由于耗时太多，所以会造成 CircularProgressIndicator 卡住
+                        // controller.mockTimeConsumingTask(1000000000);
+                        // 使用 compute 创建新的 Isolate
+                        final double res =
+                            await compute(mockTimeConsumingTask, 1000000000);
+                        controller.pi.value = res;
+                      },
+                      key: UniqueKey(),
+                      child: const CircularProgressIndicator(),
+                    ),
                   ),
                 ),
                 Card('Time-Keeping', () {
@@ -259,6 +276,13 @@ class Card extends StatelessWidget {
             color: bgRadomColor,
             border: Border.all(color: borderColor, width: 1.h),
             borderRadius: const BorderRadius.all(Radius.circular(6)),
+            gradient: LinearGradient(
+              // begin: Alignment.bottomCenter,
+              // end: Alignment.topCenter,
+              stops: const [0, 0.9],
+              colors: [bgRadomColor, titleColor],
+            ),
+            // boxShadow: const [BoxShadow(spreadRadius: 1, blurRadius: 1)],
           ),
           child: Row(
             mainAxisAlignment: child != null

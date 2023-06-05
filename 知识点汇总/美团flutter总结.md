@@ -128,8 +128,8 @@ iOS 的布局更少，只有 Frame 布局和自动布局两种
 Column：宽度等于子元素最大宽度，可以通过设置交叉轴 stretch，让交叉轴方向宽拉长
 Container：紧包裹子元素 
 
-松约束：区间值 eg： width >=0 <= 屏幕宽
-紧约束：ConstrainedBox：constraints 约束
+松约束：最小值为0， 区间值 eg： width >=0 <= 屏幕宽
+紧约束：最小值等于最大值，ConstrainedBox：constraints 约束
 
 unbounded 组件：Row Column ListView
 
