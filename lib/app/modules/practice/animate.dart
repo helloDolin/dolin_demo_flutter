@@ -7,11 +7,34 @@ class AnimatePractice extends StatefulWidget {
   State<AnimatePractice> createState() => _AnimatePracticeState();
 }
 
-class _AnimatePracticeState extends State<AnimatePractice> {
+class _AnimatePracticeState extends State<AnimatePractice>
+    with SingleTickerProviderStateMixin {
+  // 如果要用到多个 ticker 需要 with TickerProviderStateMixin（去掉 single）
+  // ticker，singleTicker
   int _count = 0;
+  bool _isAnimating = false;
+
+  final slidingBoxCount = 3;
+  final slidingInterval = 1 / 5;
+  late final AnimationController _ac = AnimationController(
+    vsync: this, // 屏幕刷新时可以得到一次回传,eg:一秒回传 60 或者 120 次
+    duration: const Duration(seconds: 1),
+    lowerBound: 0.0,
+    upperBound: 1.0,
+  )..addListener(() {
+      print('animation controller value: ${_ac.value}');
+    });
+
+  @override
+  void dispose() {
+    _ac.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Animation opacityAnimation = Tween(begin: 0.5, end: 0.8).animate(_ac);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('AnimatePractice'),
@@ -26,7 +49,7 @@ class _AnimatePracticeState extends State<AnimatePractice> {
               spacing: 3,
               children: [
                 const AnimatedCounter(
-                  count: 1,
+                  count: 100,
                   duration: Duration(milliseconds: 300),
                 ),
                 const AnimatedCounter(
@@ -38,17 +61,111 @@ class _AnimatePracticeState extends State<AnimatePractice> {
                   duration: const Duration(milliseconds: 300),
                 ),
               ],
-            )
+            ),
+            // 显示动画
+            RotationTransition(
+              // scale: _ac,
+              // position: _ac.drive(
+              //     Tween(begin: const Offset(0, 0), end: const Offset(1, 1))),
+              turns: _ac,
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+              ),
+            ),
+            ...[
+              for (int i = 0; i < slidingBoxCount; i++)
+                SlidingBox(
+                  ac: _ac,
+                  color: Colors.blue[i * 100 + 100] ?? Colors.red,
+                  interval: Interval(
+                    i * slidingInterval,
+                    i * slidingInterval + slidingInterval,
+                  ),
+                ),
+            ],
+            AnimatedBuilder(
+              animation: _ac,
+              child: const Center(
+                child: Text(
+                  'Hello',
+                  style: TextStyle(fontSize: 36),
+                ),
+              ),
+              builder: (BuildContext context, Widget? child) {
+                // 这里的 child 即为上面的 child，传入不参与动画的组件以提升性能
+                return Opacity(
+                  opacity: opacityAnimation.value,
+                  child: Container(
+                    color: Colors.amber[100],
+                    width: 300,
+                    height: Tween(begin: 50.0, end: 100.0).evaluate(_ac),
+                    child: child,
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _count++;
-          });
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    _isAnimating ? _ac.stop() : _ac.repeat(reverse: true);
+                    setState(() {
+                      _isAnimating = !_isAnimating;
+                    });
+                  },
+                  child: Text(_isAnimating ? '停止动画' : '运行动画')),
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _count++;
+                    });
+                  },
+                  child: const Text('数字加一')),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SlidingBox extends StatelessWidget {
+  const SlidingBox({
+    super.key,
+    required AnimationController ac,
+    required this.color,
+    required this.interval,
+  }) : _ac = ac;
+
+  final AnimationController _ac;
+  final Color color;
+  final Interval interval;
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: Tween(begin: Offset.zero, end: const Offset(0.1, 0))
+          .chain(CurveTween(curve: interval))
+          .chain(CurveTween(curve: Curves.bounceInOut))
+          .animate(_ac),
+      child: Container(
+        width: 300,
+        height: 50,
+        color: color,
       ),
     );
   }
@@ -69,8 +186,9 @@ class AnimatedCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
       builder: (BuildContext context, double value, Widget? child) {
-        final whole = value ~/ 1;
+        var whole = value ~/ 1;
         final decimal = value - whole;
+        if (whole > 99) whole = 99;
         print('whole,decimal:$whole,$decimal');
         return Container(
           color: Colors.blue[300],
