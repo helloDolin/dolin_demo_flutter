@@ -1,4 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AnimatePractice extends StatefulWidget {
   const AnimatePractice({super.key});
@@ -13,6 +17,7 @@ class _AnimatePracticeState extends State<AnimatePractice>
   // ticker，singleTicker
   int _count = 0;
   bool _isAnimating = false;
+  late final List<Snow> _snows = List.generate(1000, (index) => Snow());
 
   final slidingBoxCount = 3;
   final slidingInterval = 1 / 5;
@@ -39,75 +44,115 @@ class _AnimatePracticeState extends State<AnimatePractice>
       appBar: AppBar(
         title: const Text('AnimatePractice'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              width: double.infinity,
-            ),
-            Wrap(
-              spacing: 3,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
               children: [
-                const AnimatedCounter(
-                  count: 100,
-                  duration: Duration(milliseconds: 300),
+                const SizedBox(
+                  width: double.infinity,
                 ),
-                const AnimatedCounter(
-                  count: 2,
-                  duration: Duration(milliseconds: 300),
+
+                Wrap(
+                  spacing: 3,
+                  children: [
+                    const AnimatedCounter(
+                      count: 100,
+                      duration: Duration(milliseconds: 300),
+                    ),
+                    const AnimatedCounter(
+                      count: 2,
+                      duration: Duration(milliseconds: 300),
+                    ),
+                    AnimatedCounter(
+                      count: _count,
+                      duration: const Duration(milliseconds: 300),
+                    ),
+                  ],
                 ),
-                AnimatedCounter(
-                  count: _count,
-                  duration: const Duration(milliseconds: 300),
+                // 显示动画
+                RotationTransition(
+                  // scale: _ac,
+                  // position: _ac.drive(
+                  //     Tween(begin: const Offset(0, 0), end: const Offset(1, 1))),
+                  turns: _ac,
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    color: Colors.red,
+                  ),
+                ),
+                ...[
+                  for (int i = 0; i < slidingBoxCount; i++)
+                    SlidingBox(
+                      ac: _ac,
+                      color: Colors.blue[i * 100 + 100] ?? Colors.red,
+                      interval: Interval(
+                        i * slidingInterval,
+                        i * slidingInterval + slidingInterval,
+                      ),
+                    ),
+                ],
+                AnimatedBuilder(
+                  animation: _ac,
+                  // child: child,
+                  builder: (BuildContext context, Widget? child) {
+                    return Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [Colors.blue[600]!, Colors.blue[100]!],
+                          stops: [_ac.value, _ac.value + 0.1],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                AnimatedBuilder(
+                  animation: _ac,
+                  child: const Center(
+                    child: Text(
+                      'Hello',
+                      style: TextStyle(fontSize: 36),
+                    ),
+                  ),
+                  builder: (BuildContext context, Widget? child) {
+                    // 这里的 child 即为上面的 child，传入不参与动画的组件以提升性能
+                    return Opacity(
+                      opacity: opacityAnimation.value,
+                      child: Container(
+                        color: Colors.amber[100],
+                        width: 300,
+                        height: Tween(begin: 50.0, end: 100.0).evaluate(_ac),
+                        child: child,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
-            // 显示动画
-            RotationTransition(
-              // scale: _ac,
-              // position: _ac.drive(
-              //     Tween(begin: const Offset(0, 0), end: const Offset(1, 1))),
-              turns: _ac,
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.red,
-              ),
-            ),
-            ...[
-              for (int i = 0; i < slidingBoxCount; i++)
-                SlidingBox(
-                  ac: _ac,
-                  color: Colors.blue[i * 100 + 100] ?? Colors.red,
-                  interval: Interval(
-                    i * slidingInterval,
-                    i * slidingInterval + slidingInterval,
-                  ),
-                ),
-            ],
-            AnimatedBuilder(
+          ),
+          // 飘雪花
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+            child: AnimatedBuilder(
               animation: _ac,
-              child: const Center(
-                child: Text(
-                  'Hello',
-                  style: TextStyle(fontSize: 36),
-                ),
-              ),
-              builder: (BuildContext context, Widget? child) {
-                // 这里的 child 即为上面的 child，传入不参与动画的组件以提升性能
-                return Opacity(
-                  opacity: opacityAnimation.value,
-                  child: Container(
-                    color: Colors.amber[100],
-                    width: 300,
-                    height: Tween(begin: 50.0, end: 100.0).evaluate(_ac),
-                    child: child,
-                  ),
+              builder: (context, child) {
+                for (var element in _snows) {
+                  element.fall();
+                }
+                return CustomPaint(
+                  painter: MyPainter(_snows),
                 );
               },
             ),
-          ],
-        ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -121,11 +166,19 @@ class _AnimatePracticeState extends State<AnimatePractice>
             mainAxisSize: MainAxisSize.min,
             children: [
               ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     _isAnimating ? _ac.stop() : _ac.repeat(reverse: true);
                     setState(() {
                       _isAnimating = !_isAnimating;
                     });
+                    // _ac.duration = const Duration(seconds: 4);
+                    // _ac.forward();
+                    // await Future.delayed(const Duration(seconds: 4));
+
+                    // await Future.delayed(const Duration(seconds: 7));
+
+                    // _ac.duration = const Duration(seconds: 8);
+                    // _ac.reverse();
                   },
                   child: Text(_isAnimating ? '停止动画' : '运行动画')),
               ElevatedButton(
@@ -226,5 +279,43 @@ class AnimatedCounter extends StatelessWidget {
       tween: Tween(end: count.toDouble()),
       // Tween(begin: 1.0, end: 10.0), // 从 1 - 10，不想要效果，就把 begin 和 end 设置为一样
     );
+  }
+}
+
+class MyPainter extends CustomPainter {
+  final List<Snow> _snows;
+  MyPainter(this._snows);
+  @override
+  void paint(Canvas canvas, Size size) {
+    final whitePaint = Paint()..color = Colors.green[100]!;
+    for (var element in _snows) {
+      canvas.drawCircle(
+          Offset(element.x, element.y), element.radius, whitePaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class Snow {
+  double y = Random().nextDouble() * ScreenUtil().screenHeight;
+  double x = Random().nextDouble() * ScreenUtil().screenWidth;
+  double radius = Random().nextDouble() * 2 + 2;
+  double velocity = Random().nextDouble() * 4 + 2;
+
+  fall() {
+    y += velocity;
+    if (y >
+        ScreenUtil().screenHeight -
+            ScreenUtil().statusBarHeight -
+            ScreenUtil().bottomBarHeight) {
+      y = 0;
+      x = Random().nextDouble() * ScreenUtil().screenWidth;
+      radius = Random().nextDouble() * 2 + 2;
+      velocity = Random().nextDouble() * 4 + 2;
+    }
   }
 }
