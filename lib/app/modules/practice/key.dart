@@ -17,14 +17,34 @@ class _KeyPracticeState extends State<KeyPractice> {
   double _stackTopPadding = 0.0;
 
   void _shuffle() {
+    // Color obj1 = Colors.blue[900]!;
+    // Color obj2 = Colors.blue[100]!;
+    // print(obj1.computeLuminance());
+    // print(obj2.computeLuminance());
+
+    // return;
     _color = Colors.primaries[Random().nextInt(Colors.primaries.length)];
-    _colors = List.generate(3, (i) => _color[(i + 1) * 100]!);
+    _colors = List.generate(4, (i) => _color[(i + 1) * 100]!);
     setState(() {
       _colors.shuffle();
     });
   }
 
-  void checkWinStatus() {}
+  void checkWinStatus() {
+    bool res = true;
+    for (var i = 1; i < _colors.length; i++) {
+      Color colorPre = _colors[i - 1];
+      Color colorCur = _colors[i];
+      double computeLuminancePre = colorPre.computeLuminance();
+      double computeLuminanceCur = colorCur.computeLuminance();
+      // computeLuminance() 颜色越亮值越大
+      if (computeLuminancePre > computeLuminanceCur) {
+        res = false;
+        break;
+      }
+    }
+    print(res);
+  }
 
   @override
   void initState() {
@@ -103,6 +123,7 @@ class _KeyPracticeState extends State<KeyPractice> {
                               final offset =
                                   renderBox.localToGlobal(Offset.zero);
                               _stackTopPadding = offset.dy;
+                              checkWinStatus();
                             },
                             onDragStarted: (Color color) {
                               final index = _colors.indexOf(color);
@@ -127,8 +148,8 @@ class _KeyPracticeState extends State<KeyPractice> {
 }
 
 class Box extends StatelessWidget {
-  static const double boxWidth = 100.0;
-  static const double boxHeight = 50.0;
+  static const double boxWidth = 50.0;
+  static const double boxHeight = 100.0;
   static const double margin = 8.0;
 
   Box({
@@ -157,7 +178,7 @@ class Box extends StatelessWidget {
     );
 
     return AnimatedPositioned(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 200),
       top: y,
       left: x,
       child: Draggable(
