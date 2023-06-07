@@ -19,9 +19,11 @@ import '../../custom_paint/index.dart';
 import '../../custom_render_object.dart';
 import '../../dart_summary/dart_summary.dart';
 import '../../in_common_use_widget.dart';
+import '../../key.dart';
 import '../../layout_practice.dart';
 import '../../pieces_of_knowledge.dart';
 import '../../radius_ summary.dart';
+import '../../sliver.dart';
 import '../../webView.dart';
 import '../../wechat_friends.dart';
 import '../controllers/practice_controller.dart';
@@ -43,6 +45,12 @@ class PracticeView extends GetView<PracticeController> {
               children: [
                 Card('动画练习', () {
                   Get.to(const AnimatePractice());
+                }),
+                Card('Key 练习', () {
+                  Get.to(const KeyPractice());
+                }),
+                Card('Sliver练习', () {
+                  Get.to(const SliverPractice());
                 }),
                 Card('手撕 RenderObject', () {
                   Get.to(const CustomRenderObject());
