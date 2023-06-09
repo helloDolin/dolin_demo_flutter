@@ -4,6 +4,7 @@ import 'package:dolin/app/services/user.dart';
 import 'package:dolin/app/util/fps_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -71,6 +72,8 @@ class DLAPPDefend {
     runZonedGuarded(
       () {
         // FlutterBugly.postCatchedException(() {
+        debugRepaintRainbowEnabled =
+            false; // 开启 debugRepaintRainbowEnabled 时，当重新绘制时，该区域的颜色会发生变化
         runApp(app);
         // });
       },
