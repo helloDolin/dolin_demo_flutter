@@ -49,6 +49,7 @@ dependencies:
   decimal: ^2.3.2
   flutter_native_splash: 2.2.19
   intl: 0.17.0
+  expandable: ^5.0.1
   # 插件练习
   flutter_plugin_practice:
     path: ./flutter_plugin_practice
