@@ -32,6 +32,7 @@ import '../../pieces_of_knowledge.dart';
 import '../../radius_ summary.dart';
 import '../../sliver.dart';
 import '../../stream/stream.dart';
+import '../../stream/stream_game.dart';
 import '../../webView.dart';
 import '../../wechat_friends.dart';
 import '../controllers/practice_controller.dart';
@@ -224,6 +225,13 @@ class PracticeView extends GetView<PracticeController> {
               title: const Text('StreamPractice'),
               onTap: () {
                 Get.to(() => const StreamPractice());
+              },
+              trailing: const Icon(Icons.arrow_forward_ios),
+            ),
+            ListTile(
+              title: const Text('StreamGame'),
+              onTap: () {
+                Get.to(() => const StreamGame());
               },
               trailing: const Icon(Icons.arrow_forward_ios),
             ),
