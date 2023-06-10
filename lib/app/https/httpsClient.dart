@@ -73,8 +73,7 @@ class HttpsClient {
         rethrow;
       }
       if (e.type == DioErrorType.badResponse) {
-        return throw CustomError(
-            message: '请求失败:${e.response?.statusCode ?? -1}');
+        throw CustomError(message: '请求失败:${e.response?.statusCode ?? -1}');
       }
       throw CustomError(
         message: "请求失败,请检查网络",
@@ -105,8 +104,7 @@ class HttpsClient {
         rethrow;
       }
       if (e.type == DioErrorType.badResponse) {
-        return throw CustomError(
-            message: '请求失败:${e.response?.statusCode ?? -1}');
+        throw CustomError(message: '请求失败:${e.response?.statusCode ?? -1}');
       }
       throw CustomError(message: "请求失败,请检查网络");
     }
