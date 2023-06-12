@@ -30,7 +30,8 @@ import '../../key.dart';
 import '../../layout_practice.dart';
 import '../../pieces_of_knowledge.dart';
 import '../../radius_ summary.dart';
-import '../../sliver.dart';
+import '../../sliver/sliver_app_bar_and_sliver_list.dart';
+import '../../sliver/sliver_basic.dart';
 import '../../stream/stream.dart';
 import '../../stream/stream_game.dart';
 import '../../webView.dart';
@@ -52,19 +53,17 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildStreamExpandable(context),
-                _buildCustomPaintExpandable(context),
-                _buildDevicePackageExpandable(context),
-                _buildUrlLaunchExpandable(context),
-                _buildGetXExpandable(context, title: 'GetX-dialog-snackbar'),
+                _buildStreamExpandable(),
+                _buildCustomPaintExpandable(),
+                _buildDevicePackageExpandable(),
+                _buildUrlLaunchExpandable(),
+                _buildGetXExpandable(),
+                _buildSliverExpandable(),
                 Card('动画练习', () {
                   Get.to(const AnimatePractice());
                 }),
                 Card('Key 练习', () {
                   Get.to(const KeyPractice());
-                }),
-                Card('Sliver练习', () {
-                  Get.to(const SliverPractice());
                 }),
                 Card('手撕 RenderObject', () {
                   Get.to(const CustomRenderObject());
@@ -175,169 +174,225 @@ class PracticeView extends GetView<PracticeController> {
     );
   }
 
-  Widget _buildStreamExpandable(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: ExpandablePanel(
-        theme: const ExpandableThemeData(
-          headerAlignment: ExpandablePanelHeaderAlignment.center,
-          tapBodyToExpand: true,
-          tapBodyToCollapse: true,
-          hasIcon: false,
-        ),
-        header: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(6)),
-            color: Colors.indigoAccent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ExpandableIcon(
-                  theme: const ExpandableThemeData(
-                    expandIcon: Icons.arrow_right,
-                    collapseIcon: Icons.arrow_drop_down,
-                    iconColor: Colors.white,
-                    iconSize: 28.0,
-                    iconRotationAngle: math.pi / 2,
-                    iconPadding: EdgeInsets.only(right: 5),
-                    hasIcon: false,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "stream",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        collapsed: Container(),
-        expanded: Column(
-          children: [
-            ListTile(
-              title: const Text('StreamPractice'),
-              onTap: () {
-                Get.to(() => const StreamPractice());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-            ListTile(
-              title: const Text('StreamGame'),
-              onTap: () {
-                Get.to(() => const StreamGame());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-          ],
-        ),
+  Widget _buildSliverExpandable() {
+    return ExpandableWidget(title: 'Sliver Practice', children: [
+      ListTile(
+        title: const Text('SliverBasic'),
+        onTap: () {
+          Get.to(() => const SliverBasic());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
       ),
-    );
+      ListTile(
+        title: const Text('SliverPractice'),
+        onTap: () {
+          Get.to(() => const SliverPractice());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+    ]);
   }
 
-  Widget _buildCustomPaintExpandable(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: ExpandablePanel(
-        theme: const ExpandableThemeData(
-          headerAlignment: ExpandablePanelHeaderAlignment.center,
-          tapBodyToExpand: true,
-          tapBodyToCollapse: true,
-          hasIcon: false,
-        ),
-        header: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(6)),
-            color: Colors.indigoAccent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ExpandableIcon(
-                  theme: const ExpandableThemeData(
-                    expandIcon: Icons.arrow_right,
-                    collapseIcon: Icons.arrow_drop_down,
-                    iconColor: Colors.white,
-                    iconSize: 28.0,
-                    iconRotationAngle: math.pi / 2,
-                    iconPadding: EdgeInsets.only(right: 5),
-                    hasIcon: false,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "CustomPaint",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        collapsed: Container(),
-        expanded: Column(
-          children: [
-            ListTile(
-              title: const Text('绘制+动画'),
-              onTap: () {
-                Get.to(const paint_and_animate.Page());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-            ListTile(
-              title: const Text('cake'),
-              onTap: () {
-                Get.to(const Cake());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-            ListTile(
-              title: const Text('BezierPage'),
-              onTap: () {
-                Get.to(const BezierPage());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-            ListTile(
-              title: const Text('Charts'),
-              onTap: () {
-                Get.to(const Charts());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-            ListTile(
-              title: const Text('Spring'),
-              onTap: () {
-                Get.to(const Spring());
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-            ListTile(
-              title: const Text('学习链接'),
-              onTap: () {
-                launchUrlString(
-                  'https://juejin.cn/book/6844733827265331214/section/6844733827214999565',
-                );
-              },
-              trailing: const Icon(Icons.arrow_forward_ios),
-            ),
-          ],
-        ),
+  Widget _buildStreamExpandable() {
+    return ExpandableWidget(title: 'Stream Practice', children: [
+      ListTile(
+        title: const Text('StreamBuilder Basics'),
+        onTap: () {
+          Get.to(() => const StreamPractice());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
       ),
-    );
+      ListTile(
+        title: const Text('Stream Game'),
+        onTap: () {
+          Get.to(() => const StreamGame());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+    ]);
   }
 
-  Widget _buildDevicePackageExpandable(BuildContext context) {
+  Widget _buildCustomPaintExpandable() {
+    return ExpandableWidget(title: '自绘', children: [
+      ListTile(
+        title: const Text('绘制+动画'),
+        onTap: () {
+          Get.to(const paint_and_animate.Page());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+      ListTile(
+        title: const Text('cake'),
+        onTap: () {
+          Get.to(const Cake());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+      ListTile(
+        title: const Text('BezierPage'),
+        onTap: () {
+          Get.to(const BezierPage());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+      ListTile(
+        title: const Text('Charts'),
+        onTap: () {
+          Get.to(const Charts());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+      ListTile(
+        title: const Text('Spring'),
+        onTap: () {
+          Get.to(const Spring());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+      ListTile(
+        title: const Text('学习链接'),
+        onTap: () {
+          launchUrlString(
+            'https://juejin.cn/book/6844733827265331214/section/6844733827214999565',
+          );
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+    ]);
+  }
+
+  Widget _buildDevicePackageExpandable() {
+    return ExpandableWidget(title: 'DeviceInfo&PackageInfo', children: [
+      Card('DeviceInfo', () {
+        controller.deviceData.value.isEmpty
+            ? controller.getDeviceInfo()
+            : controller.deviceData.value = '';
+      }),
+      Obx(() => Offstage(
+            offstage: controller.deviceData.value.isEmpty,
+            child: Container(
+              // color: Colors.red,
+              padding:
+                  const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 10),
+              child: Text(
+                controller.deviceData.value,
+                style: const TextStyle(wordSpacing: 3, fontSize: 16),
+              ),
+            ),
+          )),
+      Card('PackageInfo', () {
+        controller.pacakgeData.value.isEmpty
+            ? controller.getPackageInflo()
+            : controller.pacakgeData.value = '';
+      }),
+      Obx(() => Offstage(
+            offstage: controller.pacakgeData.value.isEmpty,
+            child: Container(
+              // color: Colors.red,
+              padding:
+                  const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 0),
+              child: Text(
+                controller.pacakgeData.value,
+                style: const TextStyle(wordSpacing: 3, fontSize: 16),
+              ),
+            ),
+          )),
+    ]);
+  }
+
+  Widget _buildUrlLaunchExpandable() {
+    return ExpandableWidget(title: 'url_launcher', children: [
+      Card('打开百度', () async {
+        final Uri uri = Uri.parse('https://www.baidu.com');
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        }
+      }),
+      Card('打电话', () async {
+        final Uri uri = Uri.parse('tel:10086');
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        }
+      }),
+      Card('发短信', () async {
+        final Uri uri = Uri.parse('sms:10086');
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        }
+      }),
+      Card('打开微信', () async {
+        final Uri uri = Uri.parse('weixin://');
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        } else {
+          showToast('请安装微信');
+        }
+      }),
+      Card('高德地图-导航北大', () async {
+        String title = "北京大学";
+        String latitude = "39.992806";
+        String longitude = "116.310905";
+        Uri uri = Uri.parse(
+            '${Platform.isAndroid ? 'android' : 'ios'}amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2&poiname=$title');
+        print(uri);
+        try {
+          if (await canLaunchUrl(uri)) {
+            await launchUrl(uri);
+          } else {
+            print('无法调起高德地图');
+          }
+        } catch (e) {
+          print('无法调起高德地图');
+        }
+      }),
+    ]);
+  }
+
+  Widget _buildGetXExpandable() {
+    return ExpandableWidget(
+      title: 'GetX-dialog-snackbar',
+      children: [
+        Card('get dialog', () {
+          Get.defaultDialog(
+              onConfirm: () => print("Ok"),
+              middleText: "Dialog made in 3 lines of code");
+        }),
+        Card('get snackbar', () {
+          Get.snackbar(
+            "Hey i'm a Get SnackBar!", // title
+            "It's unbelievable! I'm using SnackBar without context, without boilerplate, without Scaffold, it is something truly amazing!", // message
+            icon: const Icon(Icons.alarm),
+            shouldIconPulse: true,
+            onTap: (_) {},
+            barBlur: 20,
+            isDismissible: true,
+            duration: const Duration(seconds: 3),
+          );
+        }),
+      ],
+    );
+  }
+}
+
+class ExpandableWidget extends StatelessWidget {
+  const ExpandableWidget({
+    super.key,
+    required this.title,
+    required this.children,
+  });
+
+  final String title;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    // 根据明暗调整颜色
+    final bgRadomColor = getRandomColor();
+    final brightnessValue = bgRadomColor.computeLuminance();
+    final titleColor = brightnessValue > 0.5 ? Colors.black : Colors.white;
+    final borderColor = brightnessValue > 0.5
+        ? const Color.fromARGB(255, 9, 130, 31)
+        : Colors.black;
     return Container(
       margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: ExpandablePanel(
@@ -348,9 +403,17 @@ class PracticeView extends GetView<PracticeController> {
           hasIcon: false,
         ),
         header: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(6)),
-            color: Colors.indigoAccent,
+          decoration: BoxDecoration(
+            color: bgRadomColor,
+            border: Border.all(color: borderColor, width: 1.h),
+            borderRadius: const BorderRadius.all(Radius.circular(6)),
+            gradient: LinearGradient(
+              // begin: Alignment.bottomCenter,
+              // end: Alignment.topCenter,
+              stops: const [0, 0.9],
+              colors: [bgRadomColor, titleColor],
+            ),
+            // boxShadow: const [BoxShadow(spreadRadius: 1, blurRadius: 1)],
           ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -369,7 +432,7 @@ class PracticeView extends GetView<PracticeController> {
                 ),
                 Expanded(
                   child: Text(
-                    "Device&PackageInfo",
+                    title,
                     style: Theme.of(context)
                         .textTheme
                         .bodyLarge!
@@ -386,210 +449,7 @@ class PracticeView extends GetView<PracticeController> {
             const SizedBox(
               height: 10,
             ),
-            Card('获取设备信息', () {
-              controller.deviceData.value.isEmpty
-                  ? controller.getDeviceInfo()
-                  : controller.deviceData.value = '';
-            }),
-            Obx(() => Offstage(
-                  offstage: controller.deviceData.value.isEmpty,
-                  child: Container(
-                    // color: Colors.red,
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, bottom: 10),
-                    child: Text(
-                      controller.deviceData.value,
-                      style: const TextStyle(wordSpacing: 3, fontSize: 16),
-                    ),
-                  ),
-                )),
-            Card('PackageInfo', () {
-              controller.pacakgeData.value.isEmpty
-                  ? controller.getPackageInflo()
-                  : controller.pacakgeData.value = '';
-            }),
-            Obx(() => Offstage(
-                  offstage: controller.pacakgeData.value.isEmpty,
-                  child: Container(
-                    // color: Colors.red,
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, bottom: 0),
-                    child: Text(
-                      controller.pacakgeData.value,
-                      style: const TextStyle(wordSpacing: 3, fontSize: 16),
-                    ),
-                  ),
-                )),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildUrlLaunchExpandable(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: ExpandablePanel(
-        theme: const ExpandableThemeData(
-          headerAlignment: ExpandablePanelHeaderAlignment.center,
-          tapBodyToExpand: true,
-          tapBodyToCollapse: true,
-          hasIcon: false,
-        ),
-        header: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(6)),
-            color: Colors.indigoAccent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ExpandableIcon(
-                  theme: const ExpandableThemeData(
-                    expandIcon: Icons.arrow_right,
-                    collapseIcon: Icons.arrow_drop_down,
-                    iconColor: Colors.white,
-                    iconSize: 28.0,
-                    iconRotationAngle: math.pi / 2,
-                    iconPadding: EdgeInsets.only(right: 5),
-                    hasIcon: false,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    "url_launcher",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        collapsed: Container(),
-        expanded: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Card('打开百度', () async {
-              final Uri uri = Uri.parse('https://www.baidu.com');
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              }
-            }),
-            Card('打电话', () async {
-              final Uri uri = Uri.parse('tel:10086');
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              }
-            }),
-            Card('发短信', () async {
-              final Uri uri = Uri.parse('sms:10086');
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              }
-            }),
-            Card('打开微信', () async {
-              final Uri uri = Uri.parse('weixin://');
-              if (await canLaunchUrl(uri)) {
-                await launchUrl(uri);
-              } else {
-                showToast('请安装微信');
-              }
-            }),
-            Card('高德地图-导航北大', () async {
-              String title = "北京大学";
-              String latitude = "39.992806";
-              String longitude = "116.310905";
-              Uri uri = Uri.parse(
-                  '${Platform.isAndroid ? 'android' : 'ios'}amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2&poiname=$title');
-              print(uri);
-              try {
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri);
-                } else {
-                  print('无法调起高德地图');
-                }
-              } catch (e) {
-                print('无法调起高德地图');
-              }
-            }),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGetXExpandable(BuildContext context, {String? title}) {
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-      child: ExpandablePanel(
-        theme: const ExpandableThemeData(
-          headerAlignment: ExpandablePanelHeaderAlignment.center,
-          tapBodyToExpand: true,
-          tapBodyToCollapse: true,
-          hasIcon: false,
-        ),
-        header: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(6)),
-            color: Colors.indigoAccent,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Row(
-              children: [
-                ExpandableIcon(
-                  theme: const ExpandableThemeData(
-                    expandIcon: Icons.arrow_right,
-                    collapseIcon: Icons.arrow_drop_down,
-                    iconColor: Colors.white,
-                    iconSize: 28.0,
-                    iconRotationAngle: math.pi / 2,
-                    iconPadding: EdgeInsets.only(right: 5),
-                    hasIcon: false,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    title ?? '',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        collapsed: Container(),
-        expanded: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            Card('get dialog', () {
-              Get.defaultDialog(
-                  onConfirm: () => print("Ok"),
-                  middleText: "Dialog made in 3 lines of code");
-            }),
-            Card('get snackbar', () {
-              Get.snackbar(
-                "Hey i'm a Get SnackBar!", // title
-                "It's unbelievable! I'm using SnackBar without context, without boilerplate, without Scaffold, it is something truly amazing!", // message
-                icon: const Icon(Icons.alarm),
-                shouldIconPulse: true,
-                onTap: (_) {},
-                barBlur: 20,
-                isDismissible: true,
-                duration: const Duration(seconds: 3),
-              );
-            }),
+            ...children
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class LayoutPractice extends StatefulWidget {
@@ -108,7 +109,7 @@ class _LayoutPracticeState extends State<LayoutPractice> {
           ),
         ),
         const FittedBox(
-          child: Text('超过 width 自动缩小,使用场景：需要全部显示，但又要求不欢行'),
+          child: Text('超过 width 自动缩小,使用场景：需要全部显示，但又要求不换行'),
         ),
       ],
       //初始状态为闭合状态(默认状态)

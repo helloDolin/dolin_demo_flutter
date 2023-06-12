@@ -80,13 +80,18 @@ buildNumber:$buildNumber
 
   void getInvokeChannelInfo() async {
     FlutterPluginPractice flutterPluginPractice = FlutterPluginPractice();
+    int? getBatteryLevel;
+    try {
+      getBatteryLevel = await flutterPluginPractice.getBatteryLevel();
+    } catch (e) {
+      print(e);
+    }
 
-    final int? getBatteryLevel = await flutterPluginPractice.getBatteryLevel();
     final String? getPlatformVersion =
         await flutterPluginPractice.getPlatformVersion();
 
     invokeChannelResult.value =
-        '电量：${(getBatteryLevel ?? 0).toString()}\n版本：${getPlatformVersion ?? ''}';
+        '电量：${(getBatteryLevel ?? '获取电量异常').toString()}\n版本：${getPlatformVersion ?? ''}';
   }
 
   /// mock 耗时任务

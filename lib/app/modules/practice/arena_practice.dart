@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ArenaPage extends StatefulWidget {
   const ArenaPage({Key? key, required this.title}) : super(key: key);
@@ -48,16 +47,6 @@ class _ArenaPageState extends State<ArenaPage> {
             ),
           )
         ],
-      ),
-      floatingActionButton: ElevatedButton(
-        onPressed: () {
-          Get.to(
-              () => const ArenaPage(
-                    title: 'hello1',
-                  ),
-              preventDuplicates: false);
-        },
-        child: const Text('自己跳自己'),
       ),
     );
   }
