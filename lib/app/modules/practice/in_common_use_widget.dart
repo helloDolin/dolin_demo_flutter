@@ -34,11 +34,13 @@ class InCommonUseWidgetPage extends StatelessWidget {
             margin: EdgeInsets.all(10),
             child: Text('Card'),
           ),
+          // 新版本的 button，波纹效果从当前点击的位置开始
+          // 老版本的 FlatButton，波纹效果先变色再开始
           SizedBox(
             width: 300,
             height: 300,
             child: ElevatedButton.icon(
-              icon: const Icon(Icons.send),
+              icon: const Icon(Icons.color_lens),
               onPressed: () {},
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all(Colors.green),
