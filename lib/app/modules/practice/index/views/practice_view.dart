@@ -26,6 +26,7 @@ import '../../custom_paint/spring.dart';
 import '../../custom_render_object.dart';
 import '../../dart_summary/dart_summary.dart';
 import '../../in_common_use_widget.dart';
+import '../../interview.dart/chengyao.dart';
 import '../../key.dart';
 import '../../layout_practice.dart';
 import '../../pieces_of_knowledge.dart';
@@ -53,6 +54,7 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                _buildInterViewExpandable(),
                 _buildStreamExpandable(),
                 _buildCustomPaintExpandable(),
                 _buildDevicePackageExpandable(),
@@ -172,6 +174,18 @@ class PracticeView extends GetView<PracticeController> {
             )),
       ),
     );
+  }
+
+  Widget _buildInterViewExpandable() {
+    return ExpandableWidget(title: '面试总结', children: [
+      ListTile(
+        title: const Text('乘耀健康'),
+        onTap: () {
+          Get.to(() => const ChengYaoJianKang());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+    ]);
   }
 
   Widget _buildSliverExpandable() {

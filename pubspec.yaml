@@ -80,6 +80,7 @@ flutter:
     - assets/images/
     - assets/statement.txt
     - assets/lotties/
+    - assets/json/
 
   uses-material-design: true
   fonts:

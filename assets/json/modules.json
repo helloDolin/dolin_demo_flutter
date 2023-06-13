@@ -1,0 +1,25 @@
+{
+    "modules": [
+        {
+            "name": "A",
+            "dependencies": [
+                "B",
+                "C"
+            ]
+        },
+        {
+            "name": "B",
+            "dependencies": []
+        },
+        {
+            "name": "C",
+            "dependencies": [
+                "D"
+            ]
+        },
+        {
+            "name": "D",
+            "dependencies": []
+        }
+    ]
+}
