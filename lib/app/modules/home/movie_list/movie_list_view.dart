@@ -53,9 +53,9 @@ class MovieListView extends StatelessWidget {
                 child: controller.isShowUpIcon.value
                     ? IconButton(
                         onPressed: () {
-                          controller.scrollController.animateTo(0,
+                          controller.scrollController.animateTo(-20,
                               duration: const Duration(milliseconds: 500),
-                              curve: Curves.decelerate);
+                              curve: Curves.bounceInOut);
                         },
                         icon: const Icon(
                           AppFonts.back2Top,
