@@ -1,5 +1,5 @@
 import 'package:dolin/app/data/comic/recommend_model.dart';
-import 'package:dolin/app/https/httpsClient.dart';
+import 'package:dolin/app/https/https_client.dart';
 
 import '../../data/comic/comic_tag_model.dart';
 

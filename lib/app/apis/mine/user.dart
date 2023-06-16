@@ -1,5 +1,5 @@
 import 'package:dolin/app/data/mine/userModel.dart';
-import 'package:dolin/app/https/httpsClient.dart';
+import 'package:dolin/app/https/https_client.dart';
 
 /// 用户
 class UserAPI {

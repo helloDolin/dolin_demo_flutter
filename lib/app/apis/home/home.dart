@@ -1,5 +1,5 @@
 import 'package:dolin/app/data/home/douban250.dart';
-import 'package:dolin/app/https/httpsClient.dart';
+import 'package:dolin/app/https/https_client.dart';
 
 class HomeAPI {
   static Future<List<Douban250>> movieList(
