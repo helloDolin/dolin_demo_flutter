@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'widgets/corner_mark.dart';
+import 'widgets/diagonal.dart';
 import 'widgets/hollow_text.dart';
 import 'widgets/wartermark.dart';
 
@@ -48,6 +49,35 @@ class ChallengePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Container(
+                    color: Colors.blue[100],
+                    child: ClipRRect(
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: Diagonal(
+                          children: [
+                            const FlutterLogo(
+                              size: 100,
+                            ),
+                            const Text('123123123'),
+                            Container(
+                              width: 100,
+                              height: 200,
+                              color: Colors.red,
+                            ),
+                            const FlutterLogo(
+                              size: 30,
+                            ),
+                            Container(
+                              width: 10,
+                              height: 100,
+                              color: Colors.blue,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             );
