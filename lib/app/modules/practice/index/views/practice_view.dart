@@ -25,8 +25,9 @@ import '../../custom_paint/paint_and_animate.dart' as paint_and_animate;
 import '../../custom_paint/spring.dart';
 import '../../custom_render_object.dart';
 import '../../dart_summary/dart_summary.dart';
+import '../../h65wang_challenge/index.dart';
 import '../../in_common_use_widget.dart';
-import '../../interview.dart/chengyao.dart';
+import '../../interview/chengyao.dart';
 import '../../key.dart';
 import '../../layout_practice.dart';
 import '../../pieces_of_knowledge.dart';
@@ -61,6 +62,9 @@ class PracticeView extends GetView<PracticeController> {
                 _buildUrlLaunchExpandable(),
                 _buildGetXExpandable(),
                 _buildSliverExpandable(),
+                Card('B站大神王叔不秃挑战', () {
+                  Get.to(const ChallengePage());
+                }),
                 Card('动画练习', () {
                   Get.to(const AnimatePractice());
                 }),
