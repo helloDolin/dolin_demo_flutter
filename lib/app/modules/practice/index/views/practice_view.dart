@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../../../common_widgets/keepAliveWrapper.dart';
+import '../../../../common_widgets/keepalive_wrapper.dart';
 import '../../../../routes/app_pages.dart';
 import '../../../../util/random_color_util.dart';
 import '../../animate.dart';
