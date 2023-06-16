@@ -28,15 +28,62 @@ class ChallengePage extends StatelessWidget {
                     thickness: 3,
                     hollowColor: Colors.white,
                   ),
-                  CornerMark(
-                    markBgColor: Colors.red[200]!,
-                    markTitleColor: Colors.white,
-                    markTitle: '哈哈哈',
-                    markTitleSize: 12,
-                    child: Container(
-                      width: 200,
-                      height: 100,
-                      color: Colors.orange,
+                  SizedBox(
+                    height: 100,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          CornerMark(
+                            cornerMarkPosition: CornerMarkPosition.topLeft,
+                            markBgColor: Colors.red[200]!,
+                            markTitleColor: Colors.white,
+                            markTitle: '哈哈哈',
+                            markTitleSize: 12,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              color: Colors.orange[800],
+                            ),
+                          ),
+                          CornerMark(
+                            markBgColor: Colors.red[200]!,
+                            markTitleColor: Colors.white,
+                            markTitle: '哈哈哈',
+                            markTitleSize: 12,
+                            cornerMarkPosition: CornerMarkPosition.topRight,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              color: Colors.orange[600],
+                            ),
+                          ),
+                          CornerMark(
+                            cornerMarkPosition: CornerMarkPosition.bottomLeft,
+                            markBgColor: Colors.red[200]!,
+                            markTitleColor: Colors.white,
+                            markTitle: '哈哈哈',
+                            markTitleSize: 12,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              color: Colors.orange[400],
+                            ),
+                          ),
+                          CornerMark(
+                            cornerMarkPosition: CornerMarkPosition.bottomRight,
+                            markBgColor: Colors.red[200]!,
+                            markTitleColor: Colors.white,
+                            markTitle: '哈哈哈',
+                            markTitleSize: 12,
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              color: Colors.orange[200],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(
