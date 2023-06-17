@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'widgets/corner_mark.dart';
+import 'widgets/countdown_button.dart';
 import 'widgets/diagonal.dart';
 import 'widgets/hollow_text.dart';
 import 'widgets/wartermark.dart';
@@ -21,6 +22,32 @@ class ChallengePage extends StatelessWidget {
                     ? Axis.vertical
                     : Axis.horizontal,
                 children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Wrap(
+                    spacing: 15,
+                    children: const [
+                      CountdownButton(
+                        width: 100,
+                        height: 100,
+                        duration: Duration(seconds: 5),
+                        radius: 50,
+                      ),
+                      CountdownButton(
+                        width: 100,
+                        height: 100,
+                        duration: Duration(seconds: 5),
+                        radius: 25,
+                      ),
+                      CountdownButton(
+                        width: 100,
+                        height: 100,
+                        duration: Duration(seconds: 5),
+                        radius: 0,
+                      ),
+                    ],
+                  ),
                   const HollowText(
                     text: '你好',
                     color: Colors.red,
