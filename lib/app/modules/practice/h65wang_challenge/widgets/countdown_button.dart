@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -77,12 +76,16 @@ class _CountdownButtonState extends State<CountdownButton>
 
     return Stack(
       children: [
-        CustomPaint(
-          painter: BorderPainter(
-            widget.width,
-            widget.height,
-            widget.radius,
-            _ac,
+        SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: CustomPaint(
+            painter: BorderPainter(
+              widget.width,
+              widget.height,
+              widget.radius,
+              _ac,
+            ),
           ),
         ),
         SizedBox(
@@ -147,36 +150,63 @@ class BorderPainter extends CustomPainter {
       Rect.fromCenter(center: Offset.zero, width: btnWidth, height: btnHeight),
       Radius.circular(btnRadius),
     );
-    final path = Path()..addRRect(shape);
-    // computeMetrics 把路径的行为特征计算出来
+    // final path = Path()..addRRect(shape);
+    // // computeMetrics 把路径的行为特征计算出来
+    // pathMetric = path.computeMetrics().single;
+    // print('path pathMetric: $pathMetric');
+    final Radius radius = Radius.circular(btnRadius);
+    final path = Path()
+      ..moveTo(btnWidth / 2, 0)
+      ..relativeLineTo(btnWidth / 2 - btnRadius, 0)
+      ..relativeArcToPoint(Offset(btnRadius, btnRadius), radius: radius)
+      ..relativeLineTo(0, btnHeight - 2 * btnRadius)
+      ..relativeArcToPoint(Offset(-btnRadius, btnRadius), radius: radius)
+      ..relativeLineTo(-btnWidth + 2 * btnRadius, 0)
+      ..relativeArcToPoint(Offset(-btnRadius, -btnRadius), radius: radius)
+      ..relativeLineTo(0, -btnHeight + 2 * btnRadius)
+      ..relativeArcToPoint(Offset(btnRadius, -btnRadius), radius: radius)
+      ..close();
     pathMetric = path.computeMetrics().single;
-    print('path pathMetric: $pathMetric');
+
+    print('BorderPainter 构造函数');
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    final path = Path();
+    print('BorderPainter paint');
     final totalLength = pathMetric.length;
     final curLength = totalLength * animation.value;
 
     // extractPath：提取路径
     // path.addPath(pathMetric.extractPath(0, curLength), Offset.zero);
 
-    final startingPoint = totalLength / 4 + max(btnHeight / 2 - btnRadius, 0);
+    // 第一种方案
+    // final startingPoint = totalLength / 4 + max(btnHeight / 2 - btnRadius, 0);
     // path 分为两段，为了起点位置从 12 点开始
-    path.addPath(
-        pathMetric.extractPath(startingPoint, curLength + startingPoint),
-        Offset.zero);
-    path.addPath(
-        pathMetric.extractPath(0.0, curLength - totalLength + startingPoint),
-        Offset.zero);
+    // path.addPath(
+    //     pathMetric.extractPath(startingPoint, curLength + startingPoint),
+    //     Offset.zero);
+    // path.addPath(
+    //     pathMetric.extractPath(0.0, curLength - totalLength + startingPoint),
+    //     Offset.zero);
+    // canvas.translate(btnWidth / 2, btnHeight / 2);
+    // canvas.drawRRect(shape, bluePaint);
+    // canvas.drawPath(path, greyPaint);
+
+    // 第二种方案
+    canvas.save();
     canvas.translate(btnWidth / 2, btnHeight / 2);
     canvas.drawRRect(shape, bluePaint);
-    canvas.drawPath(path, greyPaint);
+    canvas.restore();
+
+    canvas.drawPath(pathMetric.extractPath(0, curLength), greyPaint);
   }
 
   @override
-  bool shouldRepaint(BorderPainter oldDelegate) => false;
+  bool shouldRepaint(BorderPainter oldDelegate) =>
+      btnRadius != oldDelegate.btnRadius &&
+      btnWidth != oldDelegate.btnWidth &&
+      btnHeight != oldDelegate.btnHeight;
 
   // @override
   // bool shouldRebuildSemantics(BorderPainter oldDelegate) => false;
