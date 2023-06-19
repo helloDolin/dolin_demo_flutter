@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GalleryView extends StatefulWidget {
-  const GalleryView({
+  GalleryView({
     super.key,
     this.scrollController,
     this.itemCount,
@@ -10,7 +10,21 @@ class GalleryView extends StatefulWidget {
     this.minCrossAxisCount = 1,
     this.maxCrossAxisCount = 7,
     this.duration = const Duration(seconds: 1),
-  });
+  }) : now = DateTime.now();
+
+  GalleryView.build({
+    Key? key,
+    this.scrollController,
+    this.itemCount,
+    required this.builder,
+    this.initialPerRow = 3,
+    this.minCrossAxisCount = 1,
+    this.maxCrossAxisCount = 7,
+    this.duration = const Duration(seconds: 1),
+  })  : now = DateTime.now(),
+        assert(minCrossAxisCount < 1, 'minCrossAxisCount 最小值为 1'),
+        super(key: key);
+
   final ScrollController? scrollController;
   final int? itemCount;
   final Function(BuildContext context, int index) builder;
@@ -18,6 +32,7 @@ class GalleryView extends StatefulWidget {
   final int minCrossAxisCount;
   final int maxCrossAxisCount;
   final Duration duration;
+  final DateTime now;
 
   @override
   State<GalleryView> createState() => _GalleryViewState();
@@ -30,15 +45,6 @@ class _GalleryViewState extends State<GalleryView> {
   double _maxWidth = 0.0;
   double _size = 0.0; // item size
   double _prevSize = 0;
-
-  _snapToGrid() {
-    final countPerRow = (_maxWidth / _size)
-        .round() // 四舍五入
-        .clamp(widget.minCrossAxisCount, widget.maxCrossAxisCount);
-    setState(() {
-      _size = _maxWidth / countPerRow;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +66,24 @@ class _GalleryViewState extends State<GalleryView> {
             final maxSize = _maxWidth / widget.minCrossAxisCount;
             final minSize = _maxWidth / widget.maxCrossAxisCount;
             setState(() {
-              print(details.scale);
+              print('onScaleUpdate ${details.scale}');
               _size = (_prevSize * details.scale).clamp(minSize, maxSize);
             });
           },
-          onScaleEnd: (details) => _snapToGrid(),
+          onScaleEnd: (_) => _snapToGrid(),
           child: _buildListView(),
         );
       },
     );
+  }
+
+  _snapToGrid() {
+    final countPerRow = (_maxWidth / _size)
+        .round() // 四舍五入
+        .clamp(widget.minCrossAxisCount, widget.maxCrossAxisCount);
+    setState(() {
+      _size = _maxWidth / countPerRow;
+    });
   }
 
   Widget _buildItem(BuildContext context, int index) {
@@ -100,6 +115,7 @@ class _GalleryViewState extends State<GalleryView> {
           alignment: Alignment.centerLeft,
           child: Row(children: [
             for (int i = 0; i < countPerRow; i++)
+              // 处理最后一行逻辑
               if (widget.itemCount == null ||
                   index * countPerRow + i < widget.itemCount!)
                 _buildItem(context, index * countPerRow + i)

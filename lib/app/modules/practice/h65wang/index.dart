@@ -18,6 +18,30 @@ class ChallengePage extends StatelessWidget {
     );
   }
 
+  /// ListView 实现 GridView
+  LayoutBuilder _buildGrid() {
+    return LayoutBuilder(builder: (context, cons) {
+      const int itemCount = 11;
+      final int rowCount = (11 / 2).ceil();
+      const int perRow = 3;
+      return ListView.builder(
+        itemCount: rowCount,
+        itemBuilder: (context, index) {
+          return Row(
+            children: [
+              for (int i = 0; i < perRow; i++)
+                if (index * perRow + i < itemCount)
+                  SizedBox(
+                    width: cons.maxWidth / perRow,
+                    child: const Item(),
+                  ),
+            ],
+          );
+        },
+      );
+    });
+  }
+
   Center _buildBody() {
     return Center(
       child: OrientationBuilder(
@@ -28,8 +52,7 @@ class ChallengePage extends StatelessWidget {
                   ? Axis.vertical
                   : Axis.horizontal,
               children: [
-                // Column 里边套 ListView
-                // ListView 高度随着 Item 的变化而变化
+                // Column 里边套 ListView，ListView 高度随着 Item 的变化而变化
                 // 使用 Stack 的特性，Stack 大小由子 View 决定，如果子 View 有无位置组件，那么 Stack 大小为无位置组件确定
                 // 如下 Item 确认其高度，SizedBox 确认其宽度
                 Stack(
@@ -57,18 +80,7 @@ class ChallengePage extends StatelessWidget {
                 ),
                 AspectRatio(
                   aspectRatio: 1,
-                  child: GalleryView(
-                    maxCrossAxisCount: 10,
-                    builder: (BuildContext context, int index) {
-                      return Container(
-                        width: double.infinity,
-                        height: double.infinity,
-                        color:
-                            Colors.primaries[index % Colors.primaries.length],
-                        child: Center(child: Text(index.toString())),
-                      );
-                    },
-                  ),
+                  child: _buildGalleryView(),
                 ),
                 const SizedBox(
                   height: 20,
@@ -205,6 +217,21 @@ class ChallengePage extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  GalleryView _buildGalleryView() {
+    return GalleryView(
+      itemCount: 101,
+      maxCrossAxisCount: 10,
+      builder: (BuildContext context, int index) {
+        return Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.primaries[index % Colors.primaries.length],
+          child: Center(child: Text(index.toString())),
+        );
+      },
     );
   }
 }
