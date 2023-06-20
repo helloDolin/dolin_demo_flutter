@@ -16,6 +16,17 @@ class RadiusSummary extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
         children: [
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: FractionallySizedBox(
+              widthFactor: 0.5,
+              heightFactor: 0.5,
+              child: Container(
+                color: Colors.red,
+              ),
+            ),
+          ),
           const SizedBox(
             width: double.infinity,
           ),
@@ -70,6 +81,7 @@ class RadiusSummary extends StatelessWidget {
           PhysicalModel(
             color: Colors.transparent,
             borderRadius: const BorderRadius.all(Radius.circular(50)),
+            elevation: 4,
             clipBehavior: Clip.antiAlias,
             child: Image.asset(
               AppAssets.qingmaiPng,
@@ -77,7 +89,12 @@ class RadiusSummary extends StatelessWidget {
               height: 300,
               fit: BoxFit.cover,
             ),
-          )
+          ),
+          const PhysicalModel(
+            color: Colors.white,
+            elevation: 20,
+            child: FlutterLogo(size: 200),
+          ),
         ],
       ))),
     );
