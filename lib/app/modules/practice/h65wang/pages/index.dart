@@ -6,7 +6,7 @@ import '../widgets/countdown_button.dart';
 import '../widgets/diagonal.dart';
 import '../widgets/gallery_view.dart';
 import '../widgets/hollow_text.dart';
-import '../widgets/magnifier.dart' as magnifier;
+// import '../widgets/magnifier.dart' as magnifier;
 import '../widgets/wartermark.dart';
 import 'simulate_click_page.dart';
 
@@ -17,7 +17,7 @@ class ChallengePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('王叔不秃挑战')),
-      body: magnifier.Magnifier(child: _buildBody()),
+      body: _buildBody(),
       bottomNavigationBar: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -93,6 +93,17 @@ class ChallengePage extends StatelessWidget {
                     )
                   ],
                 ),
+
+                Autocomplete(
+                  optionsBuilder: (textEditingValue) {
+                    final v = textEditingValue.text;
+                    final candidates = <String>['alice', 'bob', 'charles'];
+                    return candidates.where((element) {
+                      return element.toLowerCase().contains(v.toLowerCase());
+                    });
+                  },
+                ),
+
                 AspectRatio(
                   aspectRatio: 1,
                   child: _buildGalleryView(),
