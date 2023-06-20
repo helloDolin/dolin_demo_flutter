@@ -6,6 +6,7 @@ import '../widgets/countdown_button.dart';
 import '../widgets/diagonal.dart';
 import '../widgets/gallery_view.dart';
 import '../widgets/hollow_text.dart';
+import '../widgets/magnifier.dart' as magnifier;
 import '../widgets/wartermark.dart';
 import 'simulate_click_page.dart';
 
@@ -16,7 +17,7 @@ class ChallengePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('王叔不秃挑战')),
-      body: _buildBody(),
+      body: magnifier.Magnifier(child: _buildBody()),
       bottomNavigationBar: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.min,
