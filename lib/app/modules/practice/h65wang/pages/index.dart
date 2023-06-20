@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import 'widgets/corner_mark.dart';
-import 'widgets/countdown_button.dart';
-import 'widgets/diagonal.dart';
-import 'widgets/gallery_view.dart';
-import 'widgets/hollow_text.dart';
-import 'widgets/wartermark.dart';
+import '../widgets/corner_mark.dart';
+import '../widgets/countdown_button.dart';
+import '../widgets/diagonal.dart';
+import '../widgets/gallery_view.dart';
+import '../widgets/hollow_text.dart';
+import '../widgets/wartermark.dart';
+import 'simulate_click_page.dart';
 
 class ChallengePage extends StatelessWidget {
   const ChallengePage({super.key});
@@ -15,6 +17,18 @@ class ChallengePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('王叔不秃挑战')),
       body: _buildBody(),
+      bottomNavigationBar: SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+                onPressed: () {
+                  Get.to(const SimulateClickPage());
+                },
+                child: const Text('模拟点击'))
+          ],
+        ),
+      ),
     );
   }
 
