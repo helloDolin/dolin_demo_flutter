@@ -65,6 +65,15 @@ class SettingsView extends GetView<SettingsController> {
               subtitle: const Text("开启可能会有布局错乱"),
             ),
           ),
+          Obx(
+            () => SwitchListTile(
+              value: controller.settings.isAppGrey.value,
+              onChanged: (e) {
+                controller.settings.setAppGrey(e);
+              },
+              title: const Text("APP 置灰"),
+            ),
+          ),
         ],
       ),
     );

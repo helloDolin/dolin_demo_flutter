@@ -39,11 +39,13 @@ class SliverBasic extends StatelessWidget {
             ),
           ),
           // // 当前视窗剩余
-          // const SliverFillRemaining(
-          //   child: Center(
-          //     child: CircularProgressIndicator(),
-          //   ),
-          // ),
+          const SliverFillRemaining(
+            hasScrollBody: false, // 滚动区域不需要改动
+            child: Align(
+              alignment: Alignment(0, 1),
+              child: CircularProgressIndicator(),
+            ),
+          ),
           const SliverToBoxAdapter(
             child: SizedBox(height: 100, child: Placeholder()),
           ),

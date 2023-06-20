@@ -5,7 +5,8 @@ import 'storage_service.dart';
 
 class AppSettingsService extends GetxController {
   static AppSettingsService get instance => Get.find<AppSettingsService>();
-  var firstRun = false;
+
+  bool firstRun = false;
   RxInt themeMode = 0.obs;
 
   @override
@@ -15,10 +16,17 @@ class AppSettingsService extends GetxController {
   }
 
   /// 显示字体大小跟随系统
-  var useSystemFontSize = false.obs;
+  RxBool useSystemFontSize = false.obs;
   void setUseSystemFontSize(bool e) {
     useSystemFontSize.value = e;
     StorageService.instance.setValue(StorageService.kUseSystemFontSize, e);
+  }
+
+  /// app 置灰
+  RxBool isAppGrey = false.obs;
+  void setAppGrey(bool e) {
+    isAppGrey.value = e;
+    StorageService.instance.setValue(StorageService.kGreyApp, e);
   }
 
   /// 下载是否允许使用流量

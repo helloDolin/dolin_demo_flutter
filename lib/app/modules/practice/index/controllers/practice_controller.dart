@@ -26,7 +26,7 @@ enum PortType {
 
   final String name;
   final bool isUSB;
-
+  // 枚举也可以有构造函数
   const PortType(this.name, [this.isUSB = false]);
 
   static PortType fromName(String name) {

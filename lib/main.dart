@@ -48,7 +48,7 @@ class _RootState extends State<Root> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final appWidget = MaterialApp(
       home: Stack(
         alignment: AlignmentDirectional.topStart,
         children: [
@@ -152,6 +152,14 @@ class _RootState extends State<Root> with WidgetsBindingObserver {
         ],
       ),
     );
+
+    return Obx(() => AppSettingsService.instance.isAppGrey.value
+        ? ColorFiltered(
+            colorFilter:
+                const ColorFilter.mode(Colors.grey, BlendMode.saturation),
+            child: appWidget,
+          )
+        : appWidget);
   }
 }
 

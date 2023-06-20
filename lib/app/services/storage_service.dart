@@ -25,6 +25,9 @@ class StorageService extends GetxService {
   /// 下载是否允许使用流量
   static const String kDownloadAllowCellular = "DownloadAllowCellular";
 
+  /// app 全部置灰
+  static const String kGreyApp = 'GreyApp';
+
   late Box settingsBox;
 
   Future init() async {
