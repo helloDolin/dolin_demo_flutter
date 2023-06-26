@@ -39,6 +39,7 @@ class _LayoutPracticeState extends State<LayoutPractice> {
     return ExpansionTile(
       backgroundColor: Colors.blue,
       trailing: Transform.rotate(
+        alignment: Alignment.center, // 旋转锚点
         angle: _isExpanded ? 0 : math.pi, // 旋转90度
         child: const Icon(
           Icons.arrow_upward,

@@ -53,3 +53,6 @@ key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更�
 6. The compositing phase: 合成阶段                  =
 7. The semantics phase: 语义阶段=====================
 8. The finalization phase: 结束阶段 
+
+# await 之后使用 context 可能会有风险
+context 也就是 element，await 之后，element 有可能已经不是那个 element 了

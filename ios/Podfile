@@ -36,5 +36,13 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # add 修改项目配置
+    if target.platform_name == :ios
+      target.build_configurations.each do |config|
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0' # 将 11.0 替换为您需要的目标版本号
+      end
+    end
+    # add end
   end
 end
