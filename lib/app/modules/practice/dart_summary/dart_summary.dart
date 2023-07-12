@@ -10,8 +10,8 @@ import 'dart_summary_show_code.dart' hide PrintHelper;
 */
 
 const kDartCode = """
-// 接口：打印工具抽象类
-abstract class PrintHelper {
+// 混入：打印工具混入
+mixin PrintHelper {
   void printInfo() => print(getInfo());
   String getInfo();
 }

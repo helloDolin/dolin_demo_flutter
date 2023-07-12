@@ -15,7 +15,7 @@ Padding(
 
 # WillPopScope 正确用法
 ```dart
-// 直接 return true或false 会阻止 iOS 手势
+// 直接 return true 或 false 会阻止 iOS 手势
 // so，按下面方式使用，具体原因看源码
 onWillPop: controller.canPop() ? null : () async => false,
 ```

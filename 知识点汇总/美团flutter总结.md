@@ -128,7 +128,7 @@ iOS 的布局更少，只有 Frame 布局和自动布局两种
 Column：宽度等于子元素最大宽度，可以通过设置交叉轴 stretch，让交叉轴方向宽拉长
 Container：紧包裹子元素 
 
-松约束：最小值为0， 区间值 eg： width >=0 <= 屏幕宽
+松约束：最小值为0， 区间值
 紧约束：最小值等于最大值，ConstrainedBox：constraints 约束
 
 unbounded 组件：Row Column ListView
@@ -140,9 +140,6 @@ Align：alignment:const FractionalOffset(0.5.0.5) // 居中，（0,0）左上角
 ![image][主轴_max_min]
 
 ## 自绘
-
-见 CustomPaintPage
-
 面对复杂 UI 时，选择组装或自绘
 
 无论是组合还是自绘，在自定义 UI 时，有了目标视图整体印象后，我们首先需要考虑的事情应该是如何将它化繁为简，把视觉元素拆解细分，变成自己立即可以着手去实现的一个小控件，然后再思考如何将这些小控件串联起来。把大问题拆成小问题后，实现目标也逐渐清晰，落地方案就自然浮出水面了
