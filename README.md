@@ -40,6 +40,12 @@ Framework • revision 4b12645012 (3 days ago) • 2023-04-03 17:46:48 -0700
 Engine • revision ec975089ac
 Tools • Dart 2.19.6 • DevTools 2.20.1
 
+### 2023年07月12日 升级
+Flutter 3.10.5 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision 796c8ef792 (4 weeks ago) • 2023-06-13 15:51:02 -0700
+Engine • revision 45f6e00911
+Tools • Dart 3.0.5 • DevTools 2.23.1
+
 ## flutter 性能优化
 https://juejin.cn/post/7145730792948252686  from:58
 
