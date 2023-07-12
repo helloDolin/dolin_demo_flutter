@@ -34,7 +34,7 @@ PODS:
     - Flutter
   - share_plus (0.0.1):
     - Flutter
-  - SwiftProtobuf (1.21.0)
+  - SwiftProtobuf (1.22.0)
   - Toast (4.0.0)
   - uni_links (0.0.1):
     - Flutter
@@ -114,12 +114,12 @@ SPEC CHECKSUMS:
   photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
   sensors_plus: 5717760720f7e6acd96fdbd75b7428f5ad755ec2
   share_plus: 599aa54e4ea31d4b4c0e9c911bcc26c55e791028
-  SwiftProtobuf: afced68785854575756db965e9da52bbf3dc45e7
+  SwiftProtobuf: 40bd808372cb8706108f22d28f8ab4a6b9bc6989
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   uni_links: d97da20c7701486ba192624d99bffaaffcfc298a
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
   video_player_avfoundation: 81e49bb3d9fb63dccf9fa0f6d877dc3ddbeac126
 
-PODFILE CHECKSUM: 65449de1c0ff49953b87602241da69102744cea3
+PODFILE CHECKSUM: 558f4ca672c504d398edf8e60916691106a990cc
 
 COCOAPODS: 1.12.0
