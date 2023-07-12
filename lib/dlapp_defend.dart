@@ -68,12 +68,22 @@ class DLAPPDefend {
   }
 
   /// run zone
-  void _runZone(Widget app) {
-    runZonedGuarded(
-      () {
+  void _runZone(Widget app) async {
+    await runZonedGuarded(
+      () async {
         // FlutterBugly.postCatchedException(() {
         debugRepaintRainbowEnabled =
             false; // 开启 debugRepaintRainbowEnabled 时，当重新绘制时，该区域的颜色会发生变化
+        WidgetsBinding widgetsBinding =
+            WidgetsFlutterBinding.ensureInitialized();
+        widgetsBinding.addTimingsCallback(onReportTimings); // 设置帧回调函数
+
+        await setSystemUi();
+        await Hive.initFlutter();
+        await initServices();
+        setDebugPrint();
+        setFlutterFrameworkError();
+
         runApp(app);
         // });
       },
@@ -85,15 +95,6 @@ class DLAPPDefend {
   }
 
   run(Widget app) async {
-    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    widgetsBinding.addTimingsCallback(onReportTimings); // 设置帧回调函数
-
-    await setSystemUi();
-    await Hive.initFlutter();
-    await initServices();
-    setDebugPrint();
-    setFlutterFrameworkError();
-
     _runZone(app);
   }
 }
