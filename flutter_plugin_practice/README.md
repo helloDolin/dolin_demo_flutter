@@ -25,3 +25,8 @@ flutter create -t plugin flutter_plugin_practice --platform=android,ios -a java 
 /Users/liaoshaolin/Desktop/dolin_demo_flutter/flutter_plugin_practice/example
 flutter build ios --no-codesign 
 
+调试需要再 example 目录下打开
+
+原生侧编码
+以 iOS 举例，在原生侧启动后，在 Development Pods 下的 flutter_plugin_practice 下的 Classess 编码，会同步修改外层目录代码，这里编码方便调试，Android 同理
+

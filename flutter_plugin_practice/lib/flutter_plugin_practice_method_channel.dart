@@ -21,4 +21,13 @@ class MethodChannelFlutterPluginPractice extends FlutterPluginPracticePlatform {
     final level = await methodChannel.invokeMethod<int>('getBatteryLevel');
     return level;
   }
+
+  @override
+  Future<int?> add(int a, int b) async {
+    final level = await methodChannel.invokeMethod<int>('add', <String, int>{
+      'a': a,
+      'b': b,
+    });
+    return level;
+  }
 }

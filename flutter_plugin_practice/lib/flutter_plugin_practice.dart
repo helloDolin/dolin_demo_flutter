@@ -8,4 +8,8 @@ class FlutterPluginPractice {
   Future<int?> getBatteryLevel() {
     return FlutterPluginPracticePlatform.instance.getBatteryLevel();
   }
+
+  Future<int?> add(int a, int b) {
+    return FlutterPluginPracticePlatform.instance.add(a, b);
+  }
 }

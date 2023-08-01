@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_plugin_practice/flutter_plugin_practice.dart';
 
@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final _flutterPluginPracticePlugin = FlutterPluginPractice();
+  int _sum = 0;
 
   @override
   void initState() {
@@ -32,7 +33,8 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _flutterPluginPracticePlugin.getPlatformVersion() ?? 'Unknown platform version';
+          await _flutterPluginPracticePlugin.getPlatformVersion() ??
+              'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -55,8 +57,22 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              Text(_sum.toString())
+            ],
+          ),
         ),
+        floatingActionButton: ElevatedButton.icon(
+            onPressed: () async {
+              final sum = await _flutterPluginPracticePlugin.add(_sum, 1);
+              setState(() {
+                _sum = sum ?? -1;
+              });
+            },
+            icon: const Icon(Icons.add),
+            label: const Text('+')),
       ),
     );
   }

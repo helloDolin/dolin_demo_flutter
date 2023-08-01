@@ -31,4 +31,8 @@ abstract class FlutterPluginPracticePlatform extends PlatformInterface {
   Future<int?> getBatteryLevel() {
     throw UnimplementedError('getBatteryLevel() has not been implemented.');
   }
+
+  Future<int?> add(int a, int b) {
+    throw UnimplementedError('add() has not been implemented.');
+  }
 }

@@ -15,6 +15,12 @@ class MockFlutterPluginPracticePlatform
     // TODO: implement getBatteryLevel
     throw UnimplementedError();
   }
+
+  @override
+  Future<int?> add(int a, int b) {
+    // TODO: implement add
+    throw UnimplementedError();
+  }
 }
 
 void main() {

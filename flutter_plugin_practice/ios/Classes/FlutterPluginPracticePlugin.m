@@ -19,6 +19,10 @@
         } else {
             result(@(batteryLevel));
         }
+    } else if ([@"add" isEqualToString:call.method]) {
+        int num1  = [call.arguments[@"a"] intValue];
+        int num2  = [call.arguments[@"b"] intValue];
+        result(@(num1 + num2));
     } else {
         result(FlutterMethodNotImplemented);
     }
@@ -33,6 +37,6 @@
   } else {
     return (int)(device.batteryLevel * 100);
   }
-}
+} 
 
 @end
