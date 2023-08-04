@@ -29,7 +29,7 @@ class Item extends Meta {
         super(name, price);
 
   // 重载 + 运算符，合并商品
-  Item operator +(Item item) => Item(name + item.name, price + item.price);
+  Item operator +(Item other) => Item(name + other.name, price + other.price);
 }
 
 class ShoppingCart extends Meta with PrintHelper {
@@ -75,11 +75,9 @@ class ShoppingCart extends Meta with PrintHelper {
    * a = 10 b = ++a 先运算再赋值
    * list.filled(2,'1') list 固定长度 + 初始化
    * list:foreach where any every fold
-   * 可选参数、可选命名参数
+   * 如果说 命名参数 是为了方便使用而允许乱序，提供名称传参；那么 位置参数 就是不允许乱序，依次传参。
    */
 }
-
-
 """;
 
 class DartSummaryPage extends StatefulWidget {
