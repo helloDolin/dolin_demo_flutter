@@ -5,8 +5,8 @@ description: Flutter 学习、总结、提高
 
 # 写死 SDK 版本号：避免因为跨 SDK 版本出现的 API 差异进而导致工程问题
 environment:
-  sdk: 3.0.5
-  flutter: 3.10.5
+  sdk: 2.19.5
+  flutter: 3.7.8
 
 dependencies:
   cupertino_icons: ^1.0.2
@@ -42,17 +42,18 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path_provider: ^2.0.14
-  extended_image: ^8.0.2 #拓展Image
+  extended_image: ^7.0.2 #拓展Image
   flutter_smart_dialog: ^4.9.0+6
   lottie: ^2.3.2
   share_plus: ^7.0.0
   decimal: ^2.3.2
   flutter_native_splash: 2.2.19
-  intl: 0.18.0
+  intl: 0.17.0
   expandable: ^5.0.1
   # 插件练习
   flutter_plugin_practice:
     path: ./flutter_plugin_practice
+  json_annotation: 4.8.0
 
   flutter:
     sdk: flutter
@@ -71,8 +72,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^2.3.3 # 如果修改了某个变量的名称或者是类型，那么也要修改对应的序列化函数，大量的代码很容易出错
-  json_serializable: ^6.6.1
+  build_runner: 2.3.3 # 如果修改了某个变量的名称或者是类型，那么也要修改对应的序列化函数，大量的代码很容易出错
+  json_serializable: 6.6.1
   flutter_launcher_icons: ^0.13.1
 
 flutter:
