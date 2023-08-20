@@ -13,13 +13,6 @@ Padding(
 )
 ```
 
-# WillPopScope 正确用法
-```dart
-// 直接 return true 或 false 会阻止 iOS 手势
-// so，按下面方式使用，具体原因看源码
-onWillPop: controller.canPop() ? null : () async => false,
-```
-
 # Scaffold.of(context).openEndDrawer() 报错或者不生效
 外层包一个 Builder，因为 Scaffold.of 找的是父级
 
