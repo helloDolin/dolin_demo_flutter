@@ -1,3 +1,8 @@
+# pubspec.yaml 中的版本号+构建号
+> The following defines the version and build number for your application. A version number is three numbers separated by dots, like 1.2.43 followed by an optional build number separated by a +. Both the version and the builder number may be overridden in flutter build by specifying --build-name and --build-number, respectively. Read more about versioning at semver.org.
+
+version: 1.0.0+1
+
 # 弹框
 showDialog()
 showModalBottomSheet() 若底部弹框有输入框，需要添加 isScrollControlled: true,
@@ -49,3 +54,4 @@ key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更�
 
 # await 之后使用 context 可能会有风险
 context 也就是 element，await 之后，element 有可能已经不是那个 element 了
+
