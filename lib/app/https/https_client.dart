@@ -7,15 +7,20 @@ import 'package:get/get.dart' hide FormData, Response;
 import 'custom_error.dart';
 import 'custom_interceptor.dart';
 
+// 单例参考官方例子：
+// https://flutter.cn/community/tutorials/singleton-pattern-in-flutter-n-dart
+
 // import 'package:cookie_jar/cookie_jar.dart';
 // import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 class HttpsClient {
-  /// 工厂构造函数
-  factory HttpsClient() => _instance;
+  // HttpsClient._internal();
 
-  /// 单例
+  factory HttpsClient() => _instance; // 工厂构造函数 （具备了 不必每次都去创建新的类实例 的特性）
+
   static final HttpsClient _instance = HttpsClient._internal();
+
   static HttpsClient get instance => _instance;
+
   late Dio _dio;
 
   /// 构造函数私有化，防止被误创建
