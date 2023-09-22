@@ -32,10 +32,6 @@ class MovieListView extends StatelessWidget {
               onRefresh: controller.onRefresh,
               onLoading: controller.onLoading,
               child: ListView.separated(
-                // ListView 不会销毁那些在屏幕可视范围之外的那些 item，如果 item 使用了高分辨率的图片，那么它将会消耗非常多的内存
-                // 通过将这两个选项置为 false 来禁用它们，这样不可见的子元素就会被自动处理和 GC
-                addRepaintBoundaries: false,
-                addAutomaticKeepAlives: false,
                 controller: controller.scrollController,
                 separatorBuilder: (context, index) => Container(
                   height: 10,

@@ -30,6 +30,7 @@ import '../../in_common_use_widget.dart';
 import '../../interview/chengyao.dart';
 import '../../key.dart';
 import '../../layout_practice.dart';
+import '../../my_provider_page.dart';
 import '../../pieces_of_knowledge.dart';
 import '../../radius_ summary.dart';
 import '../../sliver/sliver_app_bar_and_sliver_list.dart';
@@ -174,6 +175,9 @@ class PracticeView extends GetView<PracticeController> {
                         ),
                       ),
                     )),
+                Card('手撕 Provider', () {
+                  Get.to(() => const MyProviderPage());
+                }),
               ],
             )),
       ),
