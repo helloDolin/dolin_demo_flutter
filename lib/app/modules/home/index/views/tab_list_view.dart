@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dolin/app/apis/home/home.dart';
 import 'package:dolin/app/common_widgets/gallery/index.dart';
 import 'package:dolin/app/constants/constants.dart';
@@ -182,16 +183,25 @@ class Item extends StatelessWidget {
                 height: ScreenUtil().screenWidth * 880 / 540, // 图片尺寸：540 * 880
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
-                  child: FadeInImage.assetNetwork(
-                    placeholder: AppAssets.placeholderPng,
-                    placeholderFit: BoxFit.cover,
-                    image: model.shareImage,
-                    fit: BoxFit.cover,
-                    imageErrorBuilder: (context, error, stackTrace) =>
-                        const SizedBox(
-                      child: Text('图片加载失败'),
-                    ),
+                  child: CachedNetworkImage(
+                    imageUrl: model.shareImage,
+                    placeholder: (context, url) {
+                      return Image.asset(AppAssets.placeholderPng);
+                    },
+                    errorWidget: (context, url, error) {
+                      return Text(error.toString());
+                    },
                   ),
+                  // child: FadeInImage.assetNetwork(
+                  //   placeholder: AppAssets.placeholderPng,
+                  //   placeholderFit: BoxFit.cover,
+                  //   image: model.shareImage,
+                  //   fit: BoxFit.cover,
+                  //   imageErrorBuilder: (context, error, stackTrace) =>
+                  //       const SizedBox(
+                  //     child: Text('图片加载失败'),
+                  //   ),
+                  // ),
                 )),
             Padding(
                 padding: const EdgeInsets.all(10),

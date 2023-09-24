@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../../routes/app_pages.dart';
 import '../../../../services/user.dart';
-import '../../../practice/webView.dart';
+import '../../../practice/webview/flutter_inappwebview.dart';
 import '../controllers/mine_controller.dart';
 
 class MineView extends GetView<MineController> {
@@ -190,7 +190,7 @@ class MineView extends GetView<MineController> {
         visible: UserStore.to.isLogin.value,
         child: InkWell(
           onTap: () {
-            Get.to(() => const WebView());
+            Get.to(() => const FlutterInappwebview());
           },
           child: SizedBox(
             height: 100,

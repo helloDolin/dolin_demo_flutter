@@ -9,6 +9,7 @@ environment:
   flutter: 3.7.8
 
 dependencies:
+  cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   get: 4.6.5 # getx
   flutter_screenutil: ^5.7.0 # 屏幕适配
@@ -22,6 +23,7 @@ dependencies:
   easy_refresh: ^3.3.1+2
   underline_indicator: ^0.0.4
   flutter_inappwebview: ^5.7.2+3 # webView
+  webview_flutter: ^4.2.3
   animate_do: ^3.0.2 # 动画
   wechat_assets_picker: ^8.4.1 # 照片选择
   flutter_staggered_grid_view: ^0.6.2 # 瀑布流

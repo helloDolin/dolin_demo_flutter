@@ -81,7 +81,7 @@ class Douban250 {
         imdbId: json["imdbId"],
         alias: json["alias"],
         doubanId: json["doubanId"],
-        type: typeValues.map[json["type"]]!,
+        type: typeValues.map[json["type"]] ?? Type.MOVIE,
         doubanRating: json["doubanRating"],
         doubanVotes: json["doubanVotes"],
         duration: json["duration"],

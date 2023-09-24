@@ -1,12 +1,16 @@
 import 'package:dolin/my_provider/box_model.dart';
 import 'package:dolin/my_provider/my_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'index/controllers/practice_controller.dart';
 
 class MyProviderPage extends StatelessWidget {
   const MyProviderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    PracticeController controller = Get.find();
     BoxModel model = MyProvider.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -21,7 +25,12 @@ class MyProviderPage extends StatelessWidget {
             width: model.size,
             height: model.size,
             color: Colors.teal,
-            child: const Text('click me!'),
+            child: Column(
+              children: [
+                const Text('click me!'),
+                Text(controller.deviceData.value),
+              ],
+            ),
           ),
         ),
       ),

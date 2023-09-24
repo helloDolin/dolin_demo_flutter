@@ -37,7 +37,8 @@ import '../../sliver/sliver_app_bar_and_sliver_list.dart';
 import '../../sliver/sliver_basic.dart';
 import '../../stream/stream.dart';
 import '../../stream/stream_game.dart';
-import '../../webView.dart';
+import '../../webview/flutter_inappwebview.dart';
+import '../../webview/webview_flutter.dart';
 import '../../wechat_friends.dart';
 import '../controllers/practice_controller.dart';
 
@@ -56,6 +57,10 @@ class PracticeView extends GetView<PracticeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Card('手撕 Provider', () {
+                  Get.to(() => const MyProviderPage());
+                }),
+                _buildWebViewExpandable(),
                 _buildInterViewExpandable(),
                 _buildStreamExpandable(),
                 _buildCustomPaintExpandable(),
@@ -132,9 +137,6 @@ class PracticeView extends GetView<PracticeController> {
                 Card('LayoutPractice', () {
                   Get.to(() => const LayoutPractice());
                 }),
-                Card('WebView', () {
-                  Get.to(() => const WebView());
-                }),
                 Obx(() => Card(
                         controller.scanCode.value.isEmpty
                             ? '扫码'
@@ -175,13 +177,29 @@ class PracticeView extends GetView<PracticeController> {
                         ),
                       ),
                     )),
-                Card('手撕 Provider', () {
-                  Get.to(() => const MyProviderPage());
-                }),
               ],
             )),
       ),
     );
+  }
+
+  Widget _buildWebViewExpandable() {
+    return ExpandableWidget(title: 'webView', children: [
+      ListTile(
+        title: const Text('FlutterInappwebview'),
+        onTap: () {
+          Get.to(() => const FlutterInappwebview());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+      ListTile(
+        title: const Text('WebviewFlutter'),
+        onTap: () {
+          Get.to(() => const WebviewFlutter());
+        },
+        trailing: const Icon(Icons.arrow_forward_ios),
+      ),
+    ]);
   }
 
   Widget _buildInterViewExpandable() {

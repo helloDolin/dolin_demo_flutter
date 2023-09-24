@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-class WebView extends StatefulWidget {
-  const WebView({super.key});
+class FlutterInappwebview extends StatefulWidget {
+  const FlutterInappwebview({super.key});
 
   @override
-  State<WebView> createState() => _WebViewState();
+  State<FlutterInappwebview> createState() => _FlutterInappwebviewState();
 }
 
-class _WebViewState extends State<WebView> {
+class _FlutterInappwebviewState extends State<FlutterInappwebview> {
   bool _showLoading = true;
   String _title = '';
   @override

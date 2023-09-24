@@ -1,0 +1,258 @@
+<html>
+
+<head>
+    <title> 2022年05月19日 </title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script>
+        function callJS() {
+            console.log('123');
+            document.getElementById("photoInfo").innerText += '哈哈哈哈哈哈';
+        }
+        function callBack(obj) {
+            var callbackId = obj['callbackId'];
+            if (callbackId == 1) {
+                var photoInfos = obj['data']['photoInfos'];
+                var photoInfo = photoInfos[0];
+
+                var imgUrl = photoInfo['photoUrl'];
+                var imgW = photoInfo['photoWidth'];
+                var imgH = photoInfo['photoHeight'];
+                document.getElementById("photo").src = imgUrl;
+                document.getElementById("photoInfo").innerText = '照片宽高' + imgW + '×' + imgH + '\n' + imgUrl;
+            }
+            if (callbackId == 2) {
+                var hasPermission = obj['data']['hasUserRole'];
+                document.getElementById("hasPermission").innerText = hasPermission;
+            }
+            if (callbackId == 3) {
+                var shopId = obj['data']['shopId'];
+                var shopName = obj['data']['shopName'];
+                document.getElementById("goEVPage").innerText = '门店ID:\t' + shopId + '\n门店名:\t' + shopName;
+            }
+        }
+
+        function getNativePhotoInfos() {
+        //   alert(123);
+        CallFlutter.postMessage('Hello from JavaScript');
+
+        }
+
+        function hasPermission() {
+            var pms = { "code": 4029 };
+            var msg = { "method": "hasUserRole", "params": JSON.stringify(pms), "callbackId": "2" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        function goEVPage() {
+            var pms = { "url": "/merchant/common_page/shop_search", "pageType": 2 };
+            var msg = { "method": "goEVPage", "params": JSON.stringify(pms), "callbackId": "3" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 下载图片并保存到相册
+        function downloadPictures() {
+            var urls = ["https://c-ssl.duitang.com/uploads/item/201906/11/20190611135736_fsdsh.gif"];
+            var pms = {
+                "urls": urls,
+                "showToast": true
+            };
+            var msg = { "method": "downloadPictures", "params": JSON.stringify(pms), "callbackId": "4" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 下载视频并保存到相册
+        function downloadVideo() {
+            var pms = {
+                "url": "https://easybike-image.oss-cn-hangzhou.aliyuncs.com/leaseBikeVideo/896e85969c704f498eaa11142f504c44?Expires=1670144208&OSSAccessKeyId=LTAIwDP3dFcdWEUd&Signature=5Ytf6XKFHYASIKbUMydcg11dq1o%3D",
+                "showToast": true
+            };
+            var msg = { "method": "downloadVideo", "params": JSON.stringify(pms), "callbackId": "5" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 图片预览 即跳转页面 goEVPage
+        function imagePreview() {
+            var pms = {
+                "url": "/merchant/preview/images",
+                "pageType": 1,
+                "params": {
+                    "imgUrls": [
+                        "https://c-ssl.duitang.com/uploads/item/201906/11/20190611135736_fsdsh.gif",
+                        "https://athena-cdn.hellobike.com/media/20211216/08b5ac778470b850d39cf152600bc1fa.png?width=513&height=513"
+                    ],
+                    "selectedIndex": null
+                }
+            };
+            var msg = { "method": "goEVPage", "params": JSON.stringify(pms), "callbackId": "6" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 视频预览 即跳转页面 goEVPage
+        function videoPreview() {
+            var pms = {
+                "url": "/merchant/preview/video",
+                "pageType": 1,
+                "params": {
+                    "url": "https://easybike-image.oss-cn-hangzhou.aliyuncs.com/leaseBikeVideo/896e85969c704f498eaa11142f504c44?Expires=1670144208&OSSAccessKeyId=LTAIwDP3dFcdWEUd&Signature=5Ytf6XKFHYASIKbUMydcg11dq1o%3D"
+                }
+            }
+            var msg = { "method": "goEVPage", "params": JSON.stringify(pms), "callbackId": "7" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 关闭页面
+        function closePage() {
+            var pms = {
+                "params": {
+                    "imgUrls": [
+                        "https://c-ssl.duitang.com/uploads/item/201906/11/20190611135736_fsdsh.gif",
+                        "https://athena-cdn.hellobike.com/media/20211216/08b5ac778470b850d39cf152600bc1fa.png?width=513&height=513"
+                    ],
+                }
+            }
+            var msg = { "method": "closePage", "params": JSON.stringify(pms), "callbackId": "8" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 跳转第三方应用
+        function goNativeApp() {
+            var pms = {
+                "url": "weixin://"
+            }
+            var msg = { "method": "goNativeApp", "params": JSON.stringify(pms), "callbackId": "9" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 拨打电话
+        function phoneCall() {
+            var pms = {
+                "phone": "18521563189",
+                "virtual": false
+            }
+            var msg = { "method": "phoneCall", "params": JSON.stringify(pms), "callbackId": "10" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 存储本地数据
+        function storeLocalData() {
+            var pms = {
+                "key": "storeLocalData",
+                "data": "123"
+            }
+            var msg = { "method": "storeLocalData", "params": JSON.stringify(pms), "callbackId": "11" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+        // 获取本地数据
+        function getLocalData() {
+            var pms = {
+                "key": "storeLocalData",
+            }
+            var msg = { "method": "getLocalData", "params": JSON.stringify(pms), "callbackId": "13" };
+            window.webkit.messageHandlers.callNative.postMessage(JSON.stringify(msg));
+        }
+
+
+
+    </script>
+    <style>
+        .text_p {
+            font-size: 50;
+            color: blue;
+        }
+
+        .btn {
+            width: 400px;
+            height: 200px;
+            color: red;
+            font-size: 28;
+        }
+    </style>
+</head>
+
+
+<body>
+    <button type="button" class="btn" onclick="getNativePhotoInfos()"> 跳转到手撕 Provider 页面 </button>
+    <p id="photoInfo" class="text_p">选取照片的宽高信息</p>
+    <img id="photo" src="" />
+
+    <p>-------------------------------------------------------------------</p>
+
+    <button type="button" class="btn" onclick="hasPermission()"> 是否有权限 </button>
+    <p id="hasPermission" class="text_p">是否有权限</p>
+
+    <p>------------------------------------------------------------------</p>
+
+    <button type="button" class="btn" onclick="goEVPage()"> 跳转到门店并获取门店信息 </button>
+    <p id="goEVPage" class="text_p">移动端页面返回信息</p>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="downloadPictures()"> 下载图片 </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="downloadVideo()"> 下载视频 </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="imagePreview()"> 图片预览 </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="videoPreview()"> 视频预览 </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="closePage()"> closePage </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="goNativeApp()"> goNativeApp </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="phoneCall()"> phoneCall </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="storeLocalData()"> storeLocalData </button>
+
+    <p>------------------------------------------------------------------</p>
+    <button type="button" class="btn" onclick="getLocalData()"> getLocalData </button>
+
+</body>
+
+</html>
+
+
+<!-- 
+Q：选视频、照片在一起？支持多选？
+TODO:getNativePhotoInfos，只能拍照或选取，不会返回数组，同 Flutter 交互
+
+1. 跳转本地H5 mock：
+    [[HLBOSRouter sharedRouter] openPage:@"/merchant/electric/webview" params:@{@"url":@"file:///Users/liaoshaolin/Desktop/mock_work_dic/work_doc/H5_test/test_web.html"}];
+2. native 回调：- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
+
+3.iOS 调用 js
+[self.webView evaluateJavaScript:jsString completionHandler:nil];
+
+jsString eg：
+callBack({
+  "callbackId" : "3",
+  "data" : {
+    "photoUrl" : "http://easybike-image.oss-cn-hangzhou.aliyuncs.com/scenicParkImg/1171de801ed34c7d845a6793bc3cc318?Expires=1646901163&OSSAccessKeyId=LTAIwDP3dFcdWEUd&Signature=Y%2FiZjDSu1muva0no6%2Fh9lWlzgbA%3D",
+    "photoHeight" : 712,
+    "photoWidth" : 1072
+  },
+  "code" : 0
+})
+
+callBack({
+  "callbackId" : "1",
+  "data" : {
+    "photoInfos" : [
+      {
+        "photoUrl" : "http://easybike-image.oss-cn-hangzhou.aliyuncs.com/scenicParkImg/90a69a614e3f43e4b7e540351bbd15dc?Expires=1646913851&OSSAccessKeyId=LTAIwDP3dFcdWEUd&Signature=xqhcoOXr1lNjjUEv3PwZCuoM5AE%3D",
+        "photoHeight" : 313,
+        "photoWidth" : 500
+      }
+    ]
+  },
+  "code" : 0
+})
+ -->
+
+ ''';
