@@ -19,7 +19,7 @@ class SliverBasic extends StatelessWidget {
             snap: true, // 下拉时出现全貌 appbar
             // pinned: true, // 上拉时不消失
             expandedHeight:
-                150, // 一般设置了 expandedHeight，stretch 需要同事设置 stretchModes
+                150, // 一般设置了 expandedHeight，stretch 需要同时设置 stretchModes
             stretch: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
