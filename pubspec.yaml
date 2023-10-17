@@ -5,8 +5,8 @@ description: Flutter 学习、总结、提高
 
 # 写死 SDK 版本号：避免因为跨 SDK 版本出现的 API 差异进而导致工程问题
 environment:
-  sdk: 2.19.5
-  flutter: 3.7.8
+  sdk: 3.0.0
+  flutter: 3.10.0
 
 dependencies:
   cached_network_image: ^3.2.3
@@ -50,7 +50,7 @@ dependencies:
   share_plus: ^7.0.0
   decimal: ^2.3.2
   flutter_native_splash: 2.2.19
-  intl: 0.17.0
+  intl: 0.18.0
   expandable: ^5.0.1
   # 插件练习
   flutter_plugin_practice:
