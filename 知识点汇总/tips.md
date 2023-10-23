@@ -5,7 +5,6 @@ version: 1.0.0+1
 
 # 弹框
 showDialog()
-TODO: showDialog 有文本输入，参考 merchant 自动向上平移
 ```dart
     showDialog(
       context: Get.context!,
