@@ -5,8 +5,168 @@ version: 1.0.0+1
 
 # 弹框
 showDialog()
+TODO: showDialog 有文本输入，参考 merchant 自动向上平移
+```dart
+    showDialog(
+      context: Get.context!,
+      barrierColor: Colors.black12,
+      barrierDismissible: false, // 点击蒙版关闭
+      builder: (cxt) => Center(
+        // 防止文本下面有双黄线
+        child: Material(
+          // material 颜色设为透明，否则子 widget 圆角会有颜色
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.colorLightGreen,
+              borderRadius: BorderRadius.all(
+                Radius.circular(12.w),
+              ),
+            ),
+            padding: EdgeInsets.all(25.w),
+            width: 320.w,
+            height: 178.w,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'title\nsubtitle',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: const Color(0xFF111111),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17.sp),
+                ),
+                SizedBox(
+                  height: 25.w,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 130.w,
+                      height: 44.w,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(cxt);
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFFF2F2F2)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(28.w))),
+                        ),
+                        child: Text(
+                          '取消',
+                          style: TextStyle(
+                              fontSize: 16.0.sp,
+                              color: const Color(0xFF666666),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 130.w,
+                      height: 44.w,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(cxt);
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all(0),
+                          backgroundColor: MaterialStateProperty.all(
+                              const Color(0xFF222222)),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(28.w))),
+                        ),
+                        child: const Text(
+                          '确定合成',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: Color(0xFFFFFFFF),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+```
 showModalBottomSheet() 若底部弹框有输入框，需要添加 isScrollControlled: true,
+```dart
+    showModalBottomSheet(
+      barrierColor: Colors.black12, // 蒙版颜色
+      // isScrollControlled: true, // 是否可滚动，有键盘时考虑使用
+      isDismissible: true, // 点击外部关闭
+      enableDrag: true, // 拖拽关闭弹框
+      context: Get.context!,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
+        ),
+      ),
 
+      constraints: const BoxConstraints(
+        maxWidth: 500,
+      ),
+      useSafeArea: true,
+      backgroundColor: Colors.orange, // Get.theme.cardColor,
+      // backgroundColor: Colors.red,
+      builder: (context) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.copy),
+              title: const Text("复制链接"),
+              onTap: () {
+                Get.back();
+                // ClipboardUtil.setDataToast(url);
+              },
+            ),
+            Visibility(
+              visible: content.isNotEmpty,
+              child: ListTile(
+                leading: const Icon(Icons.copy),
+                title: const Text("复制标题与链接"),
+                onTap: () {
+                  Get.back();
+                  // ClipboardUtil.setDataToast("$content\n$url");
+                },
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.public),
+              title: const Text("浏览器打开"),
+              onTap: () {
+                Get.back();
+                // launchUrlString(url, mode: LaunchMode.externalApplication);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.share),
+              title: const Text("系统分享"),
+              onTap: () {
+                Get.back();
+                // Share.share(content.isEmpty ? url : "$content\n$url");
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+```
  
 ## 弹框里有输入框随键盘弹起位置变化
 1. 用 Scaffold
