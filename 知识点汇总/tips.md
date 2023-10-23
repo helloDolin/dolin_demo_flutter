@@ -10,12 +10,65 @@ showModalBottomSheet() 若底部弹框有输入框，需要添加 isScrollContro
  
 ## 弹框里有输入框随键盘弹起位置变化
 1. 用 Scaffold
+```dart
+// eg:
+showDialog(
+      context: context,
+      builder: (context) {
+        return Material(
+          type: MaterialType.transparency,
+          // animationDuration: const Duration(seconds: 2),
+          child: Center(
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              // padding: EdgeInsets.only(
+              // bottom: MediaQuery.of(context).viewInsets.bottom),
+              body: Center(
+                child: Container(
+                    alignment: Alignment.bottomCenter,
+                    color: Colors.red,
+                    width: double.infinity,
+                    height: 300,
+                    child: Column(
+                      children: const [
+                        TextField(),
+                        TextField(),
+                      ],
+                    )),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+```
 2. 外层套 Padding
 ```dart
-// MediaQuery.of(context).viewInsets.bottom：键盘高度
-Padding(
-    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-)
+showDialog(
+      context: context,
+      builder: (context) {
+        return Material(
+          type: MaterialType.transparency,
+          child: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: Container(
+                  alignment: Alignment.bottomCenter,
+                  color: Colors.red,
+                  width: double.infinity,
+                  height: 300,
+                  child: Column(
+                    children: const [
+                      TextField(),
+                      TextField(),
+                    ],
+                  )),
+            ),
+          ),
+        );
+      },
+    );
 ```
 
 # Scaffold.of(context).openEndDrawer() 报错或者不生效
