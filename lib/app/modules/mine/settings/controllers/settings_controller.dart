@@ -1,4 +1,4 @@
-import 'package:extended_image/extended_image.dart';
+// import 'package:extended_image/extended_image.dart';
 import 'package:get/get.dart';
 
 import '../../../../services/app_settings_service.dart';
@@ -10,25 +10,25 @@ class SettingsController extends GetxController {
 
   @override
   void onInit() {
-    getImageCachedSize();
+    // getImageCachedSize();
     super.onInit();
   }
 
-  void getImageCachedSize() async {
-    try {
-      imageCacheSize.value = "正在计算缓存...";
-      var bytes = await getCachedSizeBytes();
-      imageCacheSize.value = "${(bytes / 1024 / 1024).toStringAsFixed(1)}MB";
-    } catch (e) {
-      imageCacheSize.value = "缓存计算失败";
-    }
-  }
+  // void getImageCachedSize() async {
+  //   try {
+  //     imageCacheSize.value = "正在计算缓存...";
+  //     var bytes = await getCachedSizeBytes();
+  //     imageCacheSize.value = "${(bytes / 1024 / 1024).toStringAsFixed(1)}MB";
+  //   } catch (e) {
+  //     imageCacheSize.value = "缓存计算失败";
+  //   }
+  // }
 
-  void cleanImageCache() async {
-    var result = await clearDiskCachedImages();
-    if (!result) {
-      // SmartDialog.showToast("清除失败");
-    }
-    getImageCachedSize();
-  }
+  // void cleanImageCache() async {
+  //   var result = await clearDiskCachedImages();
+  //   if (!result) {
+  //     // SmartDialog.showToast("清除失败");
+  //   }
+  //   getImageCachedSize();
+  // }
 }

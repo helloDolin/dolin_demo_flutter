@@ -49,7 +49,7 @@ class SettingsView extends GetView<SettingsController> {
               subtitle: Text(controller.imageCacheSize.value),
               trailing: OutlinedButton(
                 onPressed: () {
-                  controller.cleanImageCache();
+                  // controller.cleanImageCache();
                 },
                 child: const Text("清除"),
               ),

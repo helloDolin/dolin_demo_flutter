@@ -63,6 +63,35 @@ class HomeView extends GetView<HomeController> {
           onTap: (value) {
             controller.pageController.jumpToPage(value);
             controller.tabIndexChanged(value);
+            // test
+//             showDialog(
+//               context: context,
+//               builder: (context) {
+//                 // print(MediaQuery.of(context).viewInsets.bottom);
+//                 print(MediaQuery.viewInsetsOf(context));
+// // print(Medi)
+//                 return Material(
+//                   type: MaterialType.transparency,
+//                   child: Center(
+//                     child: SingleChildScrollView(
+//                       padding: EdgeInsets.only(
+//                           bottom: MediaQuery.of(context).viewInsets.bottom),
+//                       child: Container(
+//                           alignment: Alignment.bottomCenter,
+//                           color: Colors.red,
+//                           width: double.infinity,
+//                           height: 300,
+//                           child: const Column(
+//                             children: [
+//                               TextField(),
+//                               TextField(),
+//                             ],
+//                           )),
+//                     ),
+//                   ),
+//                 );
+//               },
+//             );
           },
           controller: controller.tabController,
           isScrollable: true,

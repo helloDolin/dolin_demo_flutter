@@ -322,7 +322,7 @@ packages:
     source: hosted
     version: "5.0.1"
   extended_image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: extended_image
       sha256: "75e4b0ad0f8f63eed7935ff2506c809a670f5e6dd0f61304525879d53fc41a17"
