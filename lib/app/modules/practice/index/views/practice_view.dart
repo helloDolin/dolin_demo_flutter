@@ -31,7 +31,6 @@ import '../../interview/chengyao.dart';
 import '../../key.dart';
 import '../../layout_practice.dart';
 import '../../my_provider_page.dart';
-import '../../pieces_of_knowledge.dart';
 import '../../radius_ summary.dart';
 import '../../sliver/sliver_app_bar_and_sliver_list.dart';
 import '../../sliver/sliver_basic.dart';
@@ -125,9 +124,7 @@ class PracticeView extends GetView<PracticeController> {
                 Card('异步练习', () {
                   Get.to(const AsyncPage());
                 }),
-                Card('小知识点总结', () {
-                  Get.to(const PiecesOfKnowledge());
-                }),
+               
                 Card('各种圆角总结', () {
                   Get.to(const RadiusSummary());
                 }),
