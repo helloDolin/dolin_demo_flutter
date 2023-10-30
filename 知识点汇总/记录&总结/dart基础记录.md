@@ -1,3 +1,49 @@
+# listEquals 
+比较两个数组内容、位置是否相同
+
+# where 使用(任务抽查那个可以用 every、any 替换)
+```dart
+bool b2 = bigCar
+        .where((element) =>
+            element.leftUrl.isEmpty && element.rightUrl.isEmpty)
+        .length ==
+    bigCar.length;
+bool b3 = smallCar
+        .where((element) =>
+            element.leftUrl.isEmpty && element.rightUrl.isEmpty)
+        .length ==
+    smallCar.length;
+```
+
+# ValueListenableBuilder、ListenableBuilder 使用
+ValueNotifier<bool> commitBtnEnabled = ValueNotifier(false); 控制刷新颗粒度
+```dart
+// Listenable 还可以 merge，简直 666
+Listenable.merge([controller, controller])
+```
+
+# Flutter 异步结束回调（类 iOS 并发 group 功能）
+```dart
+Future<void> test1() async {
+  await Future.delayed(Duration(seconds: 1), () => print('11111'));
+}
+
+Future<void> test2() async {
+  // throw '123';
+  await Future.delayed(Duration(seconds: 3), () => print('222222'));
+}
+
+Future.wait([test1(), test2()])
+      .then((value) => print('哈哈😄'))
+      .whenComplete(() => print('whenComplete'))
+      .catchError((error) {
+    print(error);
+  });
+// whenComplete 在所有 Future 结束之后调用，即使有些 Future 抛出异常
+// 注意：1.当 Future 抛出异常时，then 不会执行，catchError 会执行
+// 2.传入的 Future 如果返回 void 需要 await 一下
+```
+
 # pubspec.yaml 中的版本号+构建号
 > The following defines the version and build number for your application. A version number is three numbers separated by dots, like 1.2.43 followed by an optional build number separated by a +. Both the version and the builder number may be overridden in flutter build by specifying --build-name and --build-number, respectively. Read more about versioning at semver.org.
 
@@ -241,29 +287,42 @@ OrientationBuilder
 DefaultTextStyle
 IconTheme
 SingleChildScrollView
-InteractiveViewer
+InteractiveViewer（让用户在子组件上执行平移、缩放和旋转等手势操作）
 
 # Key
-当状态类中有私有成员，对多子组件中的组件进行交换、移除、增加等变化时，通过添加 Key 让由于元素可以感知变化，保证正确的关系，不至于状态类的混乱
-key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更新中被识别，这就是 LocalKey 的作用
-所以 LocalKey 保证的是 相同父级 组件的身份唯一性。
-而 GlobalKey 是整个应用中，组件的身份唯一
+* 对多子组件中的组件进行交换、移除、增加等变化时，通过添加 Key 让由于元素可以感知变化，保证正确的关系，不至于状态类的混乱
+*key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更新中被识别，这就是 LocalKey 的作用,所以 LocalKey 保证的是 相同父级 组件的身份唯一性
+* 而 GlobalKey 是整个应用中，组件的身份唯一性
+```dart
+// eg:
+// 选中第一个后，删除第一个 Box，保存后剩下的两个的第一个也被选中了
+Row(
+  children: [Box(), Box(), Box()],
+),
+
+class _BoxState extends State<Box> {
+  bool isChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50,
+      height: 50,
+      color: Colors.red,
+      child: Checkbox(
+          value: isChecked,
+          onChanged: ((value) {
+            setState(() {
+              isChecked = value!;
+            });
+          })),
+    );
+  }
+}
+```
 
 # 性能提升
-那什么时候该用 RepaintBoundary 呢？很简单，当一个局部的组件，会频繁地触发更新，你不想让他影响其他区域时。最常见的场景是 动画 、循环定时器 、滑动操作 等
-这也是为什么 ListView 在默认情况下，会为每个条目都套上一个 RepaintBoundary 的原因
-
-# 在 RendererBinding#drawFrame 的注释中，介绍了一帧的 8 个阶段，其中的 3~7 都是和 PipelineOwner 相关的流程。另外三个是和 SchedulerBinding 调度相关的。
-
-1. The animation phase: 动画阶段
-2. Microtasks: 微任务阶段
-3. The layout phase: 布局阶段 =======================
-4. The compositing bits phase: 合成位标记阶段        =
-5. The paint phase: 绘制阶段                        = PipelineOwner
-6. The compositing phase: 合成阶段                  =
-7. The semantics phase: 语义阶段=====================
-8. The finalization phase: 结束阶段 
+* RepaintBoundary 当一个局部的组件，会频繁地触发更新，你不想让他影响其他区域时。最常见的场景是 动画 、循环定时器 、滑动操作,考虑使用 RepaintBoundary 包裹（这也是为什么 ListView 在默认情况下，会为每个条目都套上一个 RepaintBoundary 的原因）
 
 # await 之后使用 context 可能会有风险
 context 也就是 element，await 之后，element 有可能已经不是那个 element 了，也有可能 element 被释放了
-

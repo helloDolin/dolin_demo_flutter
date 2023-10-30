@@ -22,6 +22,7 @@ class MovieListController extends GetxController {
   void onRefresh() {
     reqData(isRefresh: true).then((_) {
       refreshController.refreshCompleted();
+      refreshController.resetNoData();
     }).catchError((_) {
       refreshController.refreshFailed();
     });
