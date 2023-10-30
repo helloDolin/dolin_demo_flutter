@@ -3,55 +3,53 @@ version: 0.0.1
 publish_to: none
 description: Flutter 学习、总结、提高
 
-# 写死 SDK 版本号：避免因为跨 SDK 版本出现的 API 差异进而导致工程问题
 environment:
-  sdk: 3.0.0
-  flutter: 3.10.0
+  sdk: '>=3.0.0 <4.0.0' # dart 版本
+  # flutter: 3.10.0 # sdk 版本(写死 SDK 版本号：避免因为跨 SDK 版本出现的 API 差异进而导致工程问题)
 
 dependencies:
-  cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
+  cached_network_image: 3.2.3 # 磁盘缓存 img
   get: 4.6.5 # getx
-  flutter_screenutil: ^5.7.0 # 屏幕适配
+  flutter_screenutil: 5.7.0 # 屏幕适配
   dio: 5.1.0
-  dio_cookie_manager: ^3.0.0
-  cookie_jar: ^4.0.1
-  # flutter_html: ^2.2.1
-  flutter_swiper_view: ^1.1.8
-  fluttertoast: ^8.2.1
-  pull_to_refresh: ^2.0.0
-  easy_refresh: ^3.3.1+2
-  underline_indicator: ^0.0.4
-  flutter_inappwebview: ^5.7.2+3 # webView
-  webview_flutter: ^4.2.3
-  animate_do: ^3.0.2 # 动画
-  wechat_assets_picker: ^8.4.1 # 照片选择
-  flutter_staggered_grid_view: ^0.6.2 # 瀑布流
-  visibility_detector: ^0.4.0+2 # 监听 widget 展示到屏幕，埋点用
-  pin_code_fields: ^7.4.0 # 验证码输入
-  city_pickers: ^1.2.1 # 省市区选择器
-  crypto: ^3.0.2 # 加密
-  device_info_plus: ^8.2.0
-  url_launcher: ^6.1.10
+  dio_cookie_manager: 3.0.0
+  cookie_jar: 4.0.1
+  flutter_swiper_view: 1.1.8
+  fluttertoast: 8.2.1
+  pull_to_refresh: 2.0.0
+  easy_refresh: 3.3.1+2
+  underline_indicator: 0.0.4
+  flutter_inappwebview: 5.7.2+3 # webView
+  webview_flutter: 4.2.3
+  animate_do: 3.0.2 # 动画
+  wechat_assets_picker: 8.4.1 # 照片选择
+  flutter_staggered_grid_view: 0.6.2 # 瀑布流
+  visibility_detector: 0.4.0+2 # 监听 widget 展示到屏幕，埋点用
+  pin_code_fields: 7.4.0 # 验证码输入
+  city_pickers: 1.2.1 # 省市区选择器
+  crypto: 3.0.2 # 加密
+  device_info_plus: 8.2.0
+  url_launcher: 6.1.10
   # chewie: ^1.4.0 # 视频播放
-  video_player: ^2.6.1
-  barcode_scan2: ^4.2.4 # 扫码
-  uni_links: ^0.5.1 # Deep Links (Android) and Universal Links and Custom URL schemes (iOS)
-  package_info_plus: ^3.1.0
-  photo_view: ^0.14.0
-  logger: ^1.3.0
-  logger_flutter_plus: ^1.0.5
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  path_provider: ^2.0.14
-  # extended_image: ^7.0.2 #拓展Image
-  flutter_smart_dialog: ^4.9.0+6
-  lottie: ^2.3.2
-  share_plus: ^7.0.0
-  decimal: ^2.3.2
+  video_player: 2.6.1
+  barcode_scan2: 4.2.4 # 扫码
+  uni_links: 0.5.1 # Deep Links (Android) and Universal Links and Custom URL schemes (iOS)
+  package_info_plus: 3.1.0
+  photo_view: 0.14.0
+  logger: 1.3.0
+  logger_flutter_plus: 1.0.5
+  hive: 2.2.3
+  hive_flutter: 1.1.0
+  path_provider: 2.0.14
+  flutter_smart_dialog: 4.9.0+6
+  lottie: 2.3.2
+  share_plus: 7.0.0
+  decimal: 2.3.2
   flutter_native_splash: 2.2.19
   intl: 0.18.0
-  expandable: ^5.0.1
+  expandable: 5.0.1
+
   # 插件练习
   flutter_plugin_practice:
     path: ./flutter_plugin_practice
@@ -76,7 +74,7 @@ dev_dependencies:
 
   build_runner: 2.3.3 # 如果修改了某个变量的名称或者是类型，那么也要修改对应的序列化函数，大量的代码很容易出错
   json_serializable: 6.6.1
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: 0.13.1
 
 flutter:
   assets:

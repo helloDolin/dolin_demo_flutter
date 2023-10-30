@@ -1,9 +1,7 @@
-import 'package:dolin/app/common_widgets/dl_tabbar_view.dart';
 import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:underline_indicator/underline_indicator.dart';
 
 import '../../../mine/index/views/mine_view.dart';
 import '../../movie_list/movie_list_view.dart';
@@ -46,10 +44,8 @@ class HomeView extends GetView<HomeController> {
           child: Column(
         children: [
           _tabBar(context),
-          const SizedBox(
-            height: 10,
-          ),
-          _content(),
+          const SizedBox(height: 10),
+          Expanded(child: _content()),
         ],
       )),
     );
@@ -60,51 +56,8 @@ class HomeView extends GetView<HomeController> {
       width: double.infinity,
       height: 25.h,
       child: TabBar(
-          onTap: (value) {
-            controller.pageController.jumpToPage(value);
-            controller.tabIndexChanged(value);
-            // test
-//             showDialog(
-//               context: context,
-//               builder: (context) {
-//                 // print(MediaQuery.of(context).viewInsets.bottom);
-//                 print(MediaQuery.viewInsetsOf(context));
-// // print(Medi)
-//                 return Material(
-//                   type: MaterialType.transparency,
-//                   child: Center(
-//                     child: SingleChildScrollView(
-//                       padding: EdgeInsets.only(
-//                           bottom: MediaQuery.of(context).viewInsets.bottom),
-//                       child: Container(
-//                           alignment: Alignment.bottomCenter,
-//                           color: Colors.red,
-//                           width: double.infinity,
-//                           height: 300,
-//                           child: const Column(
-//                             children: [
-//                               TextField(),
-//                               TextField(),
-//                             ],
-//                           )),
-//                     ),
-//                   ),
-//                 );
-//               },
-//             );
-          },
           controller: controller.tabController,
-          isScrollable: true,
-          indicator: UnderlineIndicator(
-              strokeCap: StrokeCap.square,
-              borderSide: BorderSide(
-                color: Theme.of(context).tabBarTheme.indicatorColor!,
-                width: 3.h,
-              ),
-              insets: EdgeInsets.only(
-                left: 10.w,
-                right: 10.w,
-              )),
+          isScrollable: false,
           tabs: controller.categoryList
               .map((map) => Tab(
                     text: map['title'],
@@ -114,18 +67,12 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _content() {
-    return Flexible(
-        child: DLTabBarView(
-      tabChange: (index) {
-        controller.tabIndexChanged(index);
-      },
-      tabController: controller.tabController,
-      pageController: controller.pageController,
-      children: controller.categoryList.map((map) {
-        return MovieListView(
-          source: map['source']!,
-        );
-      }).toList(),
-    ));
+    return TabBarView(
+        controller: controller.tabController,
+        children: controller.categoryList.map((map) {
+          return MovieListView(
+            source: map['source']!,
+          );
+        }).toList());
   }
 }

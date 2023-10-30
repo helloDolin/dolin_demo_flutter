@@ -108,7 +108,10 @@ class _RootState extends State<Root> with WidgetsBindingObserver {
                     title: "dolin_demo_flutter",
                     initialRoute: AppPages.INITIAL,
                     getPages: AppPages.routes,
-                    navigatorObservers: [Global.routerObserver, MyObserver()],
+                    navigatorObservers: [
+                      Global.routerObserver,
+                      MyObserver(),
+                    ],
                     // 本地化
                     localizationsDelegates: const [
                       GlobalMaterialLocalizations.delegate,
