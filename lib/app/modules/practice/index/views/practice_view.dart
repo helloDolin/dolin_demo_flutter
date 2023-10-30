@@ -124,7 +124,6 @@ class PracticeView extends GetView<PracticeController> {
                 Card('异步练习', () {
                   Get.to(const AsyncPage());
                 }),
-               
                 Card('各种圆角总结', () {
                   Get.to(const RadiusSummary());
                 }),
