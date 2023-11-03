@@ -14,6 +14,7 @@ flutter create -i objc -a java dolin_demo_flutter
 
 ## dart practice
 dart create project_name
+
 ## 生命周期
 State：创建（插入视图树）、更新（在视图树中存在）、销毁（从视图树中移除） （图片示例 https://www.jianshu.com/p/0c776fc06a01 ）
 
