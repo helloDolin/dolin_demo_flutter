@@ -1,7 +1,87 @@
+# 保存图片到相册
+```dart
+// toImage
+Future<String?> toImage(GlobalKey globalKey, BuildContext ctx) async {
+  try {
+    RenderRepaintBoundary boundary =
+        globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    ui.Image image = await boundary.toImage(
+        pixelRatio: MediaQuery.devicePixelRatioOf(ctx));
+    ByteData? byteData =
+        await image.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List uInt8List = byteData!.buffer.asUint8List();
+    Directory directory = await getTemporaryDirectory();
+    final file = await File('${directory.path}/share_temp.png').create();
+    await file.writeAsBytes(uInt8List);
+    return file.path;
+  } catch (e) {
+    return null;
+  }
+}
+
+// save
+try {
+  String? path = await toImage(globalKey, context);
+  await GallerySaver.saveImage(path!);
+  Fluttertoast.showToast(
+    msg: '已保存到相册',
+    gravity: ToastGravity.CENTER,
+  );
+} catch (e) {
+  Fluttertoast.showToast(
+    msg: '保存失败',
+    gravity: ToastGravity.CENTER,
+  );
+}
+```
+
+# 监听 TabController index 打印两次
+看源码：在动画开始前 notify 一次，动画结束后 notify 一次。所以调用了两次
+所以在监听 index 前加上判断：
+```dart
+if (tabController.indexIsChanging) {
+    print("监听切换tab ${tabController.index} ");
+}
+```
+
 # AnnotatedRegion 
 是 Flutter 中的一个小部件，用于在应用程序的特定区域内设置系统UI（如状态栏、导航栏等）的样式。它通常用于定制某个页面或部分页面的系统UI样式，而不是整个应用程序。
 
 在移动设备上，系统UI通常包括状态栏（显示时间、电池状态等信息的区域）和导航栏（位于屏幕底部的虚拟按钮区域，如返回按钮、主屏幕按钮等）。在某些情况下，您可能想要为应用程序的特定页面或特定部分的页面更改这些系统UI的样式，例如改变状态栏的颜色、透明度等。
+
+iOS 下需要配置 plist
+```xml
+<key>UIStatusBarHidden</key>
+<false/>
+<key>UIViewControllerBasedStatusBarAppearance</key>
+<false/>
+```
+## 设置 AppBar 背景色，状态栏颜色会自动修改（亲测有效 iOS）
+AppBar backgroundColor
+
+## 三种方式改变状态栏颜色
+```dart
+// 1.通过 SystemChrome 修改
+SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark); // SystemUiOverlayStyle.light
+// 2. 通过 AnnotatedRegion 修改
+@override
+Widget build(BuildContext context) {
+  return AnnotatedRegion(
+    value: SystemUiOverlayStyle.dark, // SystemUiOverlayStyle.light
+    child: Container(),
+  );
+}
+// 3.通过 AppBar 修改
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      systemOverlayStyle: SystemUiOverlayStyle.dark, // SystemUiOverlayStyle.light
+    ),
+    body: Container(),
+  );
+}
+```
 
 # resizeToAvoidBottomInset 
 是一个布尔值属性，用于控制当键盘弹出时，Scaffold是否会自动调整自身的大小以避免被底部插入（即避免键盘覆盖底部内容）
