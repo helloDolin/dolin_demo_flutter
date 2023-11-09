@@ -85,10 +85,10 @@ class _ChengYaoJianKangState extends State<ChengYaoJianKang> {
   }
 
   Wrap _tagTest() {
-    return Wrap(
+    return const Wrap(
       runSpacing: 10,
       spacing: 10,
-      children: const [
+      children: [
         Tag(
           content: '阿斯顿发生大法师大法师阿斯顿发生大法师大法师阿斯顿发生大法师大法师阿斯顿发生大法师大法师',
         ),

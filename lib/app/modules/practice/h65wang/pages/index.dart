@@ -111,9 +111,9 @@ class ChallengePage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Wrap(
+                const Wrap(
                   spacing: 15,
-                  children: const [
+                  children: [
                     CountdownButton(
                       width: 100,
                       height: 100,
@@ -269,8 +269,8 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: const [
+      child: const Column(
+        children: [
           Text(
             'hello',
             style: TextStyle(fontSize: 12),

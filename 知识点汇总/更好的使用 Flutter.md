@@ -8,7 +8,8 @@
 * /// 注释
 * 注释中 markdown
 ## 1.2 dart-fix
-
+dart fix --dry-run
+dart fix --apply
 [https://dart.dev/tools/dart-fix](https://dart.dev/tools/dart-fix)
 
 ## 1.3 lint

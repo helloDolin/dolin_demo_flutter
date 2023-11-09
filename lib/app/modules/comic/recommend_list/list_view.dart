@@ -118,8 +118,8 @@ class ListView extends StatelessWidget {
   Widget buildShowMore({required Function() onTap}) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           Text(
             "查看更多",
             style: TextStyle(fontSize: 14, color: Colors.grey),

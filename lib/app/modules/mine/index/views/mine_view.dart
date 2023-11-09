@@ -159,10 +159,10 @@ class MineView extends GetView<MineController> {
                   const SizedBox(
                     width: 10,
                   ),
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "未登录",
                         style: TextStyle(height: 1.0),

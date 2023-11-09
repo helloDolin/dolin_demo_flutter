@@ -1,3 +1,13 @@
+# pip3 install gitpython
+```python
+// python 查看 git 状态
+def git_is_clean():
+    repo = git.Repo(flutter_path)
+    res = repo.git.status()
+    isClean = (res.find('nothing to commit, working tree clean') != -1)
+    return isClean
+```
+
 # .gitconfig
 [user]
 	name = Dolin
@@ -28,6 +38,8 @@ git commit -m "新的提交信息"
 // 推送到远程分支
 git push origin 分支名 --force
 git push origin develop --force
+
+git push origin shaolin/predict_trends --force
 git push origin shaolin/shell_market --force
 
 # git 配置
