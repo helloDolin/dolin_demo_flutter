@@ -1,3 +1,38 @@
+# 带水波纹效果按钮
+```dart
+// Inkwell 在包裹 container 且有颜色有圆角时，水波纹效果仅在圆角与区域外有效
+ElevatedButton(
+  onPressed: () {
+    Get.back();
+  },
+  style: ButtonStyle(
+    // 设置圆角
+    shape:
+        MaterialStateProperty.all<RoundedRectangleBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(100),
+      ),
+    ),
+    // 设置宽高
+    minimumSize:
+        MaterialStateProperty.all<Size>(Size(192.w, 40.w)),
+    backgroundColor: MaterialStateProperty.all<Color>(
+      model.betMarket == 1
+          ? const Color(0xFFFF3B30)
+          : const Color(0xFF34C759),
+    ),
+  ),
+  child: Text(
+    '确定',
+    style: TextStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w900,
+      color: const Color(0xFFFFFFFF),
+    ),
+  ),
+),
+```
+
 # 光标挪到最后
 ```dart
 _textEditingNumController.selection =
@@ -272,7 +307,7 @@ showDialog()
       ),
     );
 ```
-showModalBottomSheet() 若底部弹框有输入框，需要添加 isScrollControlled: true,
+showModalBottomSheet() 若底部弹框有输入框且在键盘弹起要看到底部，需要添加 isScrollControlled: true,
 ```dart
     showModalBottomSheet(
       barrierColor: Colors.black12, // 蒙版颜色
