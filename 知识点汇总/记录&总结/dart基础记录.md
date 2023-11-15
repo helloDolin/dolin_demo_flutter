@@ -1,6 +1,39 @@
+# 光标挪到最后
+```dart
+_textEditingNumController.selection =
+TextSelection.collapsed(
+    offset: _textEditingNumController
+        .text.length);
+```
+
+# 监听键盘弹起落下
+```dart
+with WidgetsBindingObserver
+
+WidgetsBinding.instance.addObserver(this);
+WidgetsBinding.instance.removeObserver(this);
+
+@override
+void didChangeMetrics() {
+  super.didChangeMetrics();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (MediaQuery.of(Get.context!).viewInsets.bottom == 0) {
+      debugPrint('键盘收回');
+    } else {
+      debugPrint('键盘弹出' '😄 ${scrollController.position.maxScrollExtent}');
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  });
+}
+```
 # 保存图片到相册
 ```dart
 // toImage
+// gallery_saver: ^2.3.2
 Future<String?> toImage(GlobalKey globalKey, BuildContext ctx) async {
   try {
     RenderRepaintBoundary boundary =
