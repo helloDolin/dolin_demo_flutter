@@ -20,7 +20,7 @@ dependencies:
   pull_to_refresh: 2.0.0
   easy_refresh: 3.3.1+2
   underline_indicator: 0.0.4
-  flutter_inappwebview: 5.7.2+3 # webView
+  flutter_inappwebview: 5.8.0 # webView
   webview_flutter: 4.2.3
   animate_do: 3.0.2 # 动画
   wechat_assets_picker: 8.4.1 # 照片选择

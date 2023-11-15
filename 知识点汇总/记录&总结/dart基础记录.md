@@ -1,3 +1,66 @@
+# TextFormField
+```dart
+TextFormField(
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  decoration: const InputDecoration(
+    labelText: 'Enter your email',
+    border: OutlineInputBorder(),
+  ),
+  keyboardType: TextInputType.emailAddress,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+    return null;
+  },
+),
+```
+
+# TextField
+```dart
+// 常用属性
+controller
+autofocus
+cursor: // 光标相关
+textCapitalization: // 首字母大写、首句大写，全部小写设置
+keyboardType: const TextInputType.numberWithOptions(decimal: false)
+style
+inputFormatters: <TextInputFormatter>[
+  // 只允许输入大于 1 的整数
+  FilteringTextInputFormatter.allow(RegExp(r'^[1-9]\d*$')),
+],
+maxLines: 10, // 最大行数，如果不设置最小行数，默认占 10 行空间
+minLines: 1,
+maxLength: 200, // 设置这个值，右下角会显示当前输入字符个数，不需要的话需要设置 decoration 下 counterText 为空
+// 注：prefix、suffix 只有在选中状态下才会显示,常显示的是 prefixIcon、suffixIcon，但高度自定义的话也用不到
+decoration: InputDecoration(
+  contentPadding:
+      const EdgeInsets.fromLTRB(5, 0, 5, 0),
+  border: const OutlineInputBorder(
+    borderSide: BorderSide.none,
+  ),
+  counterText: '',
+  hintText: '请输入',
+  hintStyle: TextStyle(
+      fontSize: 14.sp,
+      color: const Color(0xFFCCCCCC)),
+  suffix: Text(
+    '元',
+    style: TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      color: const Color(0xFF111111),
+    ),
+  ),
+),
+```
+```dart
+// 光标挪到最后
+_textEditingNumController.selection =
+TextSelection.collapsed(
+    offset: _textEditingNumController
+        .text.length);
+```
 # 带水波纹效果按钮
 ```dart
 // Inkwell 在包裹 container 且有颜色有圆角时，水波纹效果仅在圆角与区域外有效
@@ -31,14 +94,6 @@ ElevatedButton(
     ),
   ),
 ),
-```
-
-# 光标挪到最后
-```dart
-_textEditingNumController.selection =
-TextSelection.collapsed(
-    offset: _textEditingNumController
-        .text.length);
 ```
 
 # 监听键盘弹起落下

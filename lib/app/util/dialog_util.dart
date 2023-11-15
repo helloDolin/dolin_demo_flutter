@@ -62,6 +62,7 @@ class DialogUtil {
       cancel: "退出",
       barrierDismissible: false,
     ).then((value) {
+      debugPrint('cur value is ----------- ${value.toString()}');
       if (!value) {
         exit(0);
       }

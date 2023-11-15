@@ -118,7 +118,7 @@ SPEC CHECKSUMS:
   barcode_scan2: 0af2bb63c81b4565aab6cd78278e4c0fa136dbb0
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_inappwebview: acd4fc0f012cefd09015000c241137d82f01ba62
+  flutter_inappwebview: 3d32228f1304635e7c028b0d4252937730bbc6cf
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_plugin_practice: ca2595c840df67d34fa44e8960643abe6a30f03a
   fluttertoast: 48c57db1b71b0ce9e6bba9f31c940ff4b001293c
