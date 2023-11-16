@@ -37,8 +37,8 @@ class InCommonUseWidgetPage extends StatelessWidget {
           // 新版本的 button，波纹效果从当前点击的位置开始
           // 老版本的 FlatButton，波纹效果先变色再开始
           SizedBox(
-            width: 300,
-            height: 300,
+            // width: 300,
+            // height: 300,
             child: ElevatedButton.icon(
               icon: const Icon(Icons.color_lens),
               onPressed: () {},
@@ -80,7 +80,10 @@ class InCommonUseWidgetPage extends StatelessWidget {
             label: const Text('OutlinedButton'),
           ),
           IconButton(
-            icon: const Icon(Icons.thumb_up),
+            icon: const Icon(
+              Icons.thumb_up,
+              size: 200,
+            ),
             onPressed: () {
               print('IconButton');
             },

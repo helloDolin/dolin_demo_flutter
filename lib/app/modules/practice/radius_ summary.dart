@@ -16,17 +16,6 @@ class RadiusSummary extends StatelessWidget {
           child: SingleChildScrollView(
               child: Column(
         children: [
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: FractionallySizedBox(
-              widthFactor: 0.5,
-              heightFactor: 0.5,
-              child: Container(
-                color: Colors.red,
-              ),
-            ),
-          ),
           const SizedBox(
             width: double.infinity,
           ),
@@ -90,11 +79,27 @@ class RadiusSummary extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          const PhysicalModel(
-            color: Colors.white,
-            elevation: 20,
-            child: FlutterLogo(size: 200),
+          // FractionallySizedBox 是一个可以根据父容器的大小调整其子项大小的小部件。它允许你根据父容器的百分比来设置子项的大小。
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: FractionallySizedBox(
+              widthFactor: 0.5,
+              heightFactor: 0.5,
+              child: Container(
+                color: Colors.red,
+              ),
+            ),
           ),
+          // PhysicalModel 是一个用于创建具有形状、裁剪行为和阴影效果的小部件。它常用于创建具有物理特性的形状，如圆角、裁剪或投影效果。
+          PhysicalModel(
+              color: Colors.green,
+              elevation: 20,
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+              )),
         ],
       ))),
     );

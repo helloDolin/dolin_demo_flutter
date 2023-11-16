@@ -15,11 +15,9 @@ class SettingsView extends GetView<SettingsController> {
             title: Container(
               padding: const EdgeInsets.only(right: 56),
               alignment: Alignment.center,
-              child: TabBar(
+              child: const TabBar(
                 isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
-                tabs: const [
+                tabs: [
                   Tab(
                     text: '常规',
                   ),

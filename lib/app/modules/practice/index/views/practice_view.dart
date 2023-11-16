@@ -397,12 +397,28 @@ class PracticeView extends GetView<PracticeController> {
           Get.snackbar(
             "Hey i'm a Get SnackBar!", // title
             "It's unbelievable! I'm using SnackBar without context, without boilerplate, without Scaffold, it is something truly amazing!", // message
-            icon: const Icon(Icons.alarm),
+            // icon: const Icon(Icons.alarm),
+            backgroundColor: Colors.purple,
             shouldIconPulse: true,
             onTap: (_) {},
             barBlur: 20,
             isDismissible: true,
             duration: const Duration(seconds: 3),
+            titleText: Container(
+              width: 100,
+              height: 50,
+              color: Colors.red,
+            ),
+            messageText: Container(
+              width: 100,
+              height: 150,
+              color: Colors.blue,
+            ),
+            icon: Container(
+              width: 100,
+              height: 150,
+              color: Colors.yellow,
+            ),
           );
         }),
       ],

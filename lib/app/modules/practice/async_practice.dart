@@ -2,6 +2,8 @@
 
 import 'dart:async';
 
+import 'package:dolin/app/common_widgets/code/code_widget.dart';
+import 'package:dolin/app/common_widgets/code/highlighter_style.dart';
 import 'package:flutter/material.dart';
 
 class AsyncPage extends StatefulWidget {
@@ -12,6 +14,8 @@ class AsyncPage extends StatefulWidget {
 }
 
 class _AsyncPageState extends State<AsyncPage> {
+  String _debugText = '';
+
   void test1() {
     Future(() => debugPrint('Running in Future 1')); // 下一个事件循环输出字符串
     Future(() => debugPrint('Running in Future 2'))
@@ -33,29 +37,62 @@ class _AsyncPageState extends State<AsyncPage> {
   }
 
   void test3() {
-    Future(() => debugPrint('f1')); // 声明一个匿名 Future
+    Future(() {
+      debugPrint('f1');
+      _debugText += 'f1\n';
+    }); // 声明一个匿名 Future
     Future fx = Future(() => null); // 声明 Future fx，其执行体为 null
 
     // 声明一个匿名 Future，并注册了两个 then。在第一个 then 回调里启动了一个微任务
-    Future(() => debugPrint('f2')).then((_) {
+    Future(() {
+      debugPrint('f2');
+      _debugText += 'f2\n';
+    }).then((_) {
       debugPrint('f3');
-      scheduleMicrotask(() => debugPrint('f4'));
-    }).then((_) => debugPrint('f5'));
+      _debugText += 'f3\n';
+
+      scheduleMicrotask(() {
+        debugPrint('f4');
+        _debugText += 'f4\n';
+      });
+    }).then((_) {
+      debugPrint('f5');
+      _debugText += 'f5\n';
+    });
 
     // 声明了一个匿名 Future，并注册了两个 then。第一个 then 是一个 Future
-    Future(() => debugPrint('f6'))
-        .then((_) => Future(() => debugPrint('f7')))
-        .then((_) => debugPrint('f8'));
+    Future(() {
+      debugPrint('f6');
+      _debugText += 'f6\n';
+    })
+        .then((_) => Future(() {
+              debugPrint('f7');
+              _debugText += 'f7\n';
+            }))
+        .then((_) {
+      debugPrint('f8');
+      _debugText += 'f8\n';
+    });
 
     // 声明了一个匿名 Future
-    Future(() => debugPrint('f9'));
+    Future(() {
+      debugPrint('f9');
+      _debugText += 'f9\n';
+    });
 
     // 往执行体为 null 的 fx 注册了了一个 then
-    fx.then((_) => debugPrint('f10'));
+    fx.then((_) {
+      debugPrint('f10');
+      _debugText += 'f10\n';
+    });
 
     // 启动一个微任务
-    scheduleMicrotask(() => debugPrint('f11'));
+    scheduleMicrotask(() {
+      debugPrint('f11');
+      _debugText += 'f11\n';
+    });
     debugPrint('f12');
+    _debugText += 'f12\n';
   }
 
   @override
@@ -64,14 +101,64 @@ class _AsyncPageState extends State<AsyncPage> {
       appBar: AppBar(
         title: const Text('AsyncPage'),
       ),
-      body: const Center(
-        child: Text('counter.counter.toString()'),
+      body: ListView(
+        children: [
+          CodeWidget(
+            code: '''
+void test3() {
+  Future(() => debugPrint('f1')); // 声明一个匿名 Future
+  Future fx = Future(() => null); // 声明 Future fx，其执行体为 null
+
+  // 声明一个匿名 Future，并注册了两个 then。在第一个 then 回调里启动了一个微任务
+  Future(() => debugPrint('f2')).then((_) {
+    debugPrint('f3');
+    scheduleMicrotask(() => debugPrint('f4'));
+  }).then((_) => debugPrint('f5'));
+
+  // 声明了一个匿名 Future，并注册了两个 then。第一个 then 是一个 Future
+  Future(() => debugPrint('f6'))
+      .then((_) => Future(() => debugPrint('f7')))
+      .then((_) => debugPrint('f8'));
+
+  // 声明了一个匿名 Future
+  Future(() => debugPrint('f9'));
+
+  // 往执行体为 null 的 fx 注册了了一个 then
+  fx.then((_) => debugPrint('f10'));
+
+  // 启动一个微任务
+  scheduleMicrotask(() => debugPrint('f11'));
+  debugPrint('f12');
+}
+''',
+            style: HighlighterStyle.fromColors(HighlighterStyle.gitHub),
+          ),
+          const SizedBox(height: 20),
+          Text(
+            '打印结果：\n$_debugText',
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF000000),
+            ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: ElevatedButton(
         onPressed: () {
           test3();
+          if (mounted) {
+            setState(() {});
+          }
         },
-        child: const Icon(Icons.directions_run_outlined),
+        child: const Text(
+          '点击显示打印结果',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF000000),
+          ),
+        ),
       ),
     );
   }

@@ -42,7 +42,7 @@ class _MyWebViewState extends State<MyWebView> {
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted) // 允许 js
       ..loadRequest(Uri.parse(
-          'file:///Users/liaoshaolin/Desktop/dolin_demo_flutter/lib/app/modules/practice/webview/local_html.html'));
+          'file:///Users/bd/Desktop/dolin_demo_flutter/lib/app/modules/practice/webview/local_html.html'));
 
     super.initState();
   }
