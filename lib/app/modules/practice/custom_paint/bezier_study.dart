@@ -127,7 +127,6 @@ class Painter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant Painter oldDelegate) {
-    // TODO: implement shouldRepaint
     return oldDelegate.repaint != repaint;
   }
 }

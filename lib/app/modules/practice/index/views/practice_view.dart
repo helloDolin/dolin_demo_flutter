@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:barcode_scan2/barcode_scan2.dart';
+import 'package:dolin/app/modules/debug/log/log.dart';
 import 'package:dolin/app/util/toast_util.dart';
 import 'package:dolin/generated/locales.g.dart';
 import 'package:expandable/expandable.dart';
@@ -150,11 +151,14 @@ class PracticeView extends GetView<PracticeController> {
                       var result = await BarcodeScanner.scan(options: options);
                       controller.scanCode.value = result.rawContent;
 
-                      print(result
-                          .type); // The result type (barcode, cancelled, failed)
-                      print(result.rawContent); // The barcode content
-                      print(result.format); // The barcode format (as enum)
-                      print(result.formatNote); // If a unkn
+                      if (!kReleaseMode) {
+                        Log.i(result.type
+                            .toString()); // The result type (barcode, cancelled, failed)
+                        Log.i(result.rawContent); // The barcode content
+                        Log.i(result.format
+                            .toString()); // The barcode format (as enum)
+                        Log.i(result.formatNote); // If a unkn
+                      }
                     })),
                 Card('常用组件', () {
                   Get.to(() => const InCommonUseWidgetPage());
@@ -370,15 +374,15 @@ class PracticeView extends GetView<PracticeController> {
         String longitude = "116.310905";
         Uri uri = Uri.parse(
             '${Platform.isAndroid ? 'android' : 'ios'}amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2&poiname=$title');
-        print(uri);
+        debugPrint(uri.toString());
         try {
           if (await canLaunchUrl(uri)) {
             await launchUrl(uri);
           } else {
-            print('无法调起高德地图');
+            debugPrint('无法调起高德地图');
           }
         } catch (e) {
-          print('无法调起高德地图');
+          debugPrint('无法调起高德地图');
         }
       }),
     ]);
@@ -390,7 +394,7 @@ class PracticeView extends GetView<PracticeController> {
       children: [
         Card('get dialog', () {
           Get.defaultDialog(
-              onConfirm: () => print("Ok"),
+              onConfirm: () => debugPrint("Ok"),
               middleText: "Dialog made in 3 lines of code");
         }),
         Card('get snackbar', () {

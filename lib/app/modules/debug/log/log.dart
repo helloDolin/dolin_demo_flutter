@@ -13,22 +13,26 @@ class Log {
       lineLength: 120,
       colors: true,
       printEmojis: true,
-      printTime: false,
+      printTime: true,
     ),
   );
 
+  /// Debug log
   static d(String message) {
     logger.d("${DateTime.now().toString()}\n$message");
   }
 
+  /// Info log
   static i(String message) {
     logger.i("${DateTime.now().toString()}\n$message");
   }
 
+  /// Error log
   static e(String message, StackTrace stackTrace) {
     logger.e("${DateTime.now().toString()}\n$message", null, stackTrace);
   }
 
+  /// Warning log
   static w(String message) {
     logger.w("${DateTime.now().toString()}\n$message");
   }
@@ -53,7 +57,7 @@ class AppLogOutput extends LogOutput {
     // 记录到 logConsoleManager
     logConsoleManager.addLog(event);
     // 控制台打印
-    event.lines.forEach(print);
+    event.lines.forEach(debugPrint);
   }
 
   @override

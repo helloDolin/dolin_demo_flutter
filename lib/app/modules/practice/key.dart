@@ -67,85 +67,81 @@ class _KeyPracticeState extends State<KeyPractice> {
           ),
         ],
       ),
-      body: Container(
-        // color: Colors.orange,
-        child: Center(
-          child: Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  '将色块由深到浅挪动\n（第一个色块为演示色块，不能动）',
-                  textAlign: TextAlign.center,
-                ),
+      body: Center(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                '将色块由深到浅挪动\n（第一个色块为演示色块，不能动）',
+                textAlign: TextAlign.center,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    color: _colors.isEmpty ? Colors.white : _color[900],
-                    borderRadius: const BorderRadius.all(Radius.circular(6))),
-                alignment: Alignment.center,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  color: _colors.isEmpty ? Colors.white : _color[900],
+                  borderRadius: const BorderRadius.all(Radius.circular(6))),
+              alignment: Alignment.center,
+              width: Box.boxWidth - Box.margin * 2,
+              height: Box.boxHeight - Box.margin * 2,
+              child: const Icon(Icons.lock_clock_outlined),
+            ),
+            const SizedBox(
+              height: Box.margin * 2,
+            ),
+            Expanded(
+              child: SizedBox(
                 width: Box.boxWidth - Box.margin * 2,
-                height: Box.boxHeight - Box.margin * 2,
-                child: const Icon(Icons.lock_clock_outlined),
-              ),
-              const SizedBox(
-                height: Box.margin * 2,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: Box.boxWidth - Box.margin * 2,
-                  child: Listener(
-                    onPointerMove: (event) {
-                      final y = event.position.dy - _stackTopPadding;
-                      if (y > (_dragIndex + 1) * Box.boxHeight) {
-                        if (_dragIndex == _colors.length - 1) return;
-                        setState(() {
-                          final c = _colors[_dragIndex];
-                          _colors[_dragIndex] = _colors[_dragIndex + 1];
-                          _colors[_dragIndex + 1] = c;
-                          _dragIndex++; // 很重要
-                        });
-                      } else if (y < _dragIndex * Box.boxHeight) {
-                        if (_dragIndex == 0) return;
-                        setState(() {
-                          final c = _colors[_dragIndex];
-                          _colors[_dragIndex] = _colors[_dragIndex - 1];
-                          _colors[_dragIndex - 1] = c;
-                          _dragIndex--; // 很重要
-                        });
-                      }
-                    },
-                    child: Stack(
-                      key: _stackGlobalKey,
-                      alignment: Alignment.center,
-                      children: [
-                        ...List.generate(
-                          _colors.length,
-                          (index) => Box(
-                            onDragEnd: () {
-                              RenderBox renderBox = _stackGlobalKey
-                                  .currentContext!
-                                  .findRenderObject() as RenderBox;
-                              final offset =
-                                  renderBox.localToGlobal(Offset.zero);
-                              _stackTopPadding = offset.dy;
-                              checkWinStatus();
-                            },
-                            onDragStarted: (Color color) {
-                              _dragIndex = _colors.indexOf(color);
-                            },
-                            color: _colors[index],
-                            x: 0,
-                            y: index * Box.boxHeight,
-                          ),
+                child: Listener(
+                  onPointerMove: (event) {
+                    final y = event.position.dy - _stackTopPadding;
+                    if (y > (_dragIndex + 1) * Box.boxHeight) {
+                      if (_dragIndex == _colors.length - 1) return;
+                      setState(() {
+                        final c = _colors[_dragIndex];
+                        _colors[_dragIndex] = _colors[_dragIndex + 1];
+                        _colors[_dragIndex + 1] = c;
+                        _dragIndex++; // 很重要
+                      });
+                    } else if (y < _dragIndex * Box.boxHeight) {
+                      if (_dragIndex == 0) return;
+                      setState(() {
+                        final c = _colors[_dragIndex];
+                        _colors[_dragIndex] = _colors[_dragIndex - 1];
+                        _colors[_dragIndex - 1] = c;
+                        _dragIndex--; // 很重要
+                      });
+                    }
+                  },
+                  child: Stack(
+                    key: _stackGlobalKey,
+                    alignment: Alignment.center,
+                    children: [
+                      ...List.generate(
+                        _colors.length,
+                        (index) => Box(
+                          onDragEnd: () {
+                            RenderBox renderBox = _stackGlobalKey
+                                .currentContext!
+                                .findRenderObject() as RenderBox;
+                            final offset = renderBox.localToGlobal(Offset.zero);
+                            _stackTopPadding = offset.dy;
+                            checkWinStatus();
+                          },
+                          onDragStarted: (Color color) {
+                            _dragIndex = _colors.indexOf(color);
+                          },
+                          color: _colors[index],
+                          x: 0,
+                          y: index * Box.boxHeight,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

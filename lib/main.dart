@@ -139,7 +139,7 @@ void main() {
 }
 
 void write(String text, {bool isError = false}) {
-  Future.microtask(() => print('** $text. isError: [$isError]'));
+  Future.microtask(() => debugPrint('** $text. isError: [$isError]'));
 }
 
 class Messages extends Translations {

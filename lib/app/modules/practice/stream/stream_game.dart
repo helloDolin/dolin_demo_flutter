@@ -38,15 +38,12 @@ class _StreamGameState extends State<StreamGame> {
       body: Column(
         children: [
           Expanded(
-              child: Container(
-            // color: Colors.red,
-            child: Stack(
-              children: List.generate(
-                5,
-                (index) => Puzzle(
-                  inputStream: inputStreamController.stream,
-                  scoreController: scoreController,
-                ),
+              child: Stack(
+            children: List.generate(
+              5,
+              (index) => Puzzle(
+                inputStream: inputStreamController.stream,
+                scoreController: scoreController,
               ),
             ),
           )),

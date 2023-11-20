@@ -76,43 +76,43 @@ class _WechatFriendsState extends State<WechatFriends>
   @override
   void deactivate() {
     // 暂时从视图树中移除，通常用于释放一些资源
-    print('deactivate');
+    debugPrint('deactivate');
     super.deactivate();
   }
 
   @override
   void didPush() {
     super.didPush();
-    print('didPush');
+    debugPrint('didPush');
   }
 
   @override
   void didPushNext() {
     super.didPushNext();
-    print('didPushNext');
+    debugPrint('didPushNext');
   }
 
   @override
   void didPop() {
     super.didPop();
-    print('didPop');
+    debugPrint('didPop');
   }
 
   @override
   void didPopNext() {
     super.didPopNext();
-    print('didPopNext');
+    debugPrint('didPopNext');
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    print('didChangeAppLifecycleState $state');
+    debugPrint('didChangeAppLifecycleState $state');
     if (state == AppLifecycleState.inactive) {
-      print('前台不可见');
+      debugPrint('前台不可见');
     }
     if (state == AppLifecycleState.resumed) {
-      print('前台可见');
+      debugPrint('前台可见');
     }
   }
 
@@ -465,14 +465,14 @@ class _ExpandableTextState extends State<ExpandableText> {
         textSize.width,
         textSize.height,
       ));
-      print('position:$position');
+      debugPrint('position:$position');
       final endOffset = textPainter.getOffsetBefore(position.offset);
-      print('endOffset:$endOffset');
+      debugPrint('endOffset:$endOffset');
 
       if (textPainter.didExceedMaxLines) {
-        print('超出最大');
+        debugPrint('超出最大');
       } else {
-        print('未超出最大');
+        debugPrint('未超出最大');
       }
 
       return RichText(

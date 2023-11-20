@@ -15,13 +15,13 @@ class _LogViewState extends State<LogView> {
 
   Future<String> task1() async {
     await Future.delayed(const Duration(seconds: 2));
-    print('task1');
+    debugPrint('task1');
     return 'task1';
   }
 
   Future<String> task2() async {
     await Future.delayed(const Duration(seconds: 1));
-    print('task2');
+    debugPrint('task2');
     return 'task2';
   }
 
@@ -77,11 +77,11 @@ class _LogViewState extends State<LogView> {
                   Future.wait([task1(), task2()])
                       .then((value) {
                         // Future 返回结果
-                        print(value);
+                        debugPrint(value.toString());
                       })
-                      .whenComplete(() => print('执行 group 结束'))
+                      .whenComplete(() => debugPrint('执行 group 结束'))
                       .catchError((err) {
-                        print(err);
+                        debugPrint(err.toString());
                       });
                 })
           ],

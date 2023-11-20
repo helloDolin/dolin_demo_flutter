@@ -211,7 +211,8 @@ Widget build(BuildContext context) {
  
 # RefreshConfiguration.copyAncestor
 
-# getx controller debounce 防抖
+# getx controller worker中 debounce 防抖
+缺点：需要传入一个 listener，如果多个地方都需要防抖，需要传入多个 listener，比较麻烦
 
 # listEquals 
 比较两个数组内容、位置是否相同
@@ -535,9 +536,6 @@ class _BoxState extends State<Box> {
   }
 }
 ```
-
-# 性能提升
-* RepaintBoundary 当一个局部的组件，会频繁地触发更新，你不想让他影响其他区域时。最常见的场景是 动画 、循环定时器 、滑动操作,考虑使用 RepaintBoundary 包裹（这也是为什么 ListView 在默认情况下，会为每个条目都套上一个 RepaintBoundary 的原因）
 
 # await 之后使用 context 可能会有风险
 context 也就是 element，await 之后，element 有可能已经不是那个 element 了，也有可能 element 被释放了

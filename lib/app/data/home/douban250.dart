@@ -81,7 +81,7 @@ class Douban250 {
         imdbId: json["imdbId"],
         alias: json["alias"],
         doubanId: json["doubanId"],
-        type: typeValues.map[json["type"]] ?? Type.MOVIE,
+        type: typeValues.map[json["type"]] ?? Type.movie,
         doubanRating: json["doubanRating"],
         doubanVotes: json["doubanVotes"],
         duration: json["duration"],
@@ -175,13 +175,13 @@ class Datum {
       };
 }
 
-enum Lang { CN }
+enum Lang { cn }
 
-final langValues = EnumValues({"Cn": Lang.CN});
+final langValues = EnumValues({"Cn": Lang.cn});
 
-enum Type { MOVIE }
+enum Type { movie }
 
-final typeValues = EnumValues({"Movie": Type.MOVIE});
+final typeValues = EnumValues({"Movie": Type.movie});
 
 class EnumValues<T> {
   Map<String, T> map;

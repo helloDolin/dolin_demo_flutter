@@ -1,4 +1,5 @@
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_plugin_practice/flutter_plugin_practice.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -7,13 +8,13 @@ mixin PrintGetLifeCircle on GetxController {
   @override
   void onInit() {
     super.onInit();
-    print('onInit');
+    debugPrint('onInit');
   }
 
   @override
   void onReady() {
     super.onReady();
-    print('onReady');
+    debugPrint('onReady');
   }
 }
 
@@ -84,7 +85,7 @@ buildNumber:$buildNumber
     try {
       getBatteryLevel = await flutterPluginPractice.getBatteryLevel();
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
 
     final String? getPlatformVersion =

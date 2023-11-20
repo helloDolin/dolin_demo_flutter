@@ -66,7 +66,7 @@ class _GalleryViewState extends State<GalleryView> {
             final maxSize = _maxWidth / widget.minCrossAxisCount;
             final minSize = _maxWidth / widget.maxCrossAxisCount;
             setState(() {
-              print('onScaleUpdate ${details.scale}');
+              debugPrint('onScaleUpdate ${details.scale}');
               _size = (_prevSize * details.scale).clamp(minSize, maxSize);
             });
           },

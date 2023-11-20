@@ -117,7 +117,7 @@ class _DartSummaryPageState extends State<DartSummaryPage> {
 
           var res = obj.bookings.fold<double>(
               10, (previousValue, element) => previousValue + element.price);
-          print(res);
+          debugPrint(res.toString());
         },
         child: const Text('test dart code'),
       ),

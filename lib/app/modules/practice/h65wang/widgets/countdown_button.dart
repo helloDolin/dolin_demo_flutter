@@ -168,12 +168,12 @@ class BorderPainter extends CustomPainter {
       ..close();
     pathMetric = path.computeMetrics().single;
 
-    print('BorderPainter 构造函数');
+    debugPrint('BorderPainter 构造函数');
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    print('BorderPainter paint');
+    debugPrint('BorderPainter paint');
     final totalLength = pathMetric.length;
     final curLength = totalLength * animation.value;
 

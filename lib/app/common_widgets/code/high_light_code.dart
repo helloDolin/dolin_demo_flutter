@@ -7,6 +7,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:string_scanner/string_scanner.dart';
 
 import 'highlighter_style.dart';

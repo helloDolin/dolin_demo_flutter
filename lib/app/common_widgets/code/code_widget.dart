@@ -33,7 +33,7 @@ class CodeWidget extends StatelessWidget {
         ),
       );
     } catch (err) {
-      print(err);
+      debugPrint(err.toString());
       codeWidget = Text(code);
     }
     body = SingleChildScrollView(

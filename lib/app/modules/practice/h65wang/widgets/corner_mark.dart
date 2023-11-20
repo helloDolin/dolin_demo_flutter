@@ -50,7 +50,7 @@ class CornerMark extends StatelessWidget {
     // (w - math.sqrt(h * h + h * h)) * (w - math.sqrt(h * h + h * h)) / 2)
     // 公式简化
     final double offset = (w - math.sqrt(h * h + h * h)) / math.sqrt2;
-    print('offset : $offset');
+    debugPrint('offset : $offset');
 
     switch (cornerMarkPosition) {
       case CornerMarkPosition.topLeft:

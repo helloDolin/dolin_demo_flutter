@@ -40,25 +40,21 @@ class HomeController extends SuperController
 
   @override
   void onDetached() {
-    // TODO: implement onDetached
-    print('onDetached');
+    debugPrint('onDetached');
   }
 
   @override
   void onInactive() {
-    // TODO: implement onInactive
-    print('onInactive');
+    debugPrint('onInactive');
   }
 
   @override
   void onPaused() {
-    // TODO: implement onPaused
-    print('onPaused');
+    debugPrint('onPaused');
   }
 
   @override
   void onResumed() {
-    // AppLifecycleState.resumed
-    print('onResumed：应用程序是可见的，并对用户输入做出响应。恢复');
+    debugPrint('onResumed：应用程序是可见的，并对用户输入做出响应。恢复');
   }
 }

@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import '../../../../apis/comic/comic.dart';
 
 class ComicController extends GetxController with GetTickerProviderStateMixin {
-  var loading = true;
-  var error = false;
-  var errMsg = '';
+  bool loading = true;
+  bool error = false;
+  String errMsg = '';
   List<ComicTagMoel> categores = [];
   late TabController tabController;
 
@@ -24,6 +24,10 @@ class ComicController extends GetxController with GetTickerProviderStateMixin {
     loading = false;
     update();
   }
+
+  //  SmartDialog.showLoading();
+  //   await Future.delayed(const Duration(seconds: 5));
+  //   SmartDialog.dismiss();
 
   void reqCategores() async {
     try {

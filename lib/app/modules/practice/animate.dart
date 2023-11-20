@@ -27,7 +27,7 @@ class _AnimatePracticeState extends State<AnimatePractice>
     lowerBound: 0.0,
     upperBound: 1.0,
   )..addListener(() {
-      print('animation controller value: ${_ac.value}');
+      debugPrint('animation controller value: ${_ac.value}');
     });
 
   @override
@@ -242,7 +242,7 @@ class AnimatedCounter extends StatelessWidget {
         var whole = value ~/ 1;
         final decimal = value - whole;
         if (whole > 99) whole = 99;
-        print('whole,decimal:$whole,$decimal');
+        debugPrint('whole,decimal:$whole,$decimal');
         return Container(
           color: Colors.blue[300],
           height: fontSize + 20,

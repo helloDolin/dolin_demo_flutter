@@ -62,7 +62,7 @@ class _ChengYaoJianKangState extends State<ChengYaoJianKang> {
             for (var item in obj.modules!) {
               loadModules(item);
             }
-            print(_res);
+            debugPrint(_res.toString());
           },
           child: const Text(
             '点击测试',

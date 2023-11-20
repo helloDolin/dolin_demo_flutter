@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-const BALL_WIDTH = 60.0;
+const double kBallWidth = 60.0;
 
 late OverlayEntry _overlayEntry;
-RxDouble offsetX = (ScreenUtil().screenWidth - BALL_WIDTH).obs;
+RxDouble offsetX = (ScreenUtil().screenWidth - kBallWidth).obs;
 RxDouble offsetY = (ScreenUtil().screenHeight / 2).obs;
 
 void insertDevView() {
@@ -20,8 +20,8 @@ void insertDevView() {
             if (details.offset.dx < 0) {
               offsetX.value = 0.0;
             } else if (details.offset.dx >
-                (ScreenUtil().screenWidth - BALL_WIDTH)) {
-              offsetX.value = ScreenUtil().screenWidth - BALL_WIDTH;
+                (ScreenUtil().screenWidth - kBallWidth)) {
+              offsetX.value = ScreenUtil().screenWidth - kBallWidth;
             } else {
               offsetX.value = details.offset.dx;
             }
@@ -61,11 +61,11 @@ class FloatBall extends StatelessWidget {
         },
         child: Container(
           alignment: Alignment.center,
-          width: BALL_WIDTH,
-          height: BALL_WIDTH,
+          width: kBallWidth,
+          height: kBallWidth,
           decoration: BoxDecoration(
               borderRadius:
-                  const BorderRadius.all(Radius.circular(BALL_WIDTH / 2)),
+                  const BorderRadius.all(Radius.circular(kBallWidth / 2)),
               color: Colors.blue.withOpacity(0.5)),
           child: const Text(
             'log\ninfo',

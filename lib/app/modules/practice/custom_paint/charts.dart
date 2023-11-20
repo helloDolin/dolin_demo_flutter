@@ -173,8 +173,6 @@ class ChartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    // throw UnimplementedError();
     return true;
   }
 }

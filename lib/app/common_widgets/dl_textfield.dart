@@ -63,18 +63,16 @@ class _DLTextFieldState extends State<DLTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: TextField(
-        autofocus: widget.autofocus,
-        enabled: widget.enabled,
-        controller: _controller,
-        inputFormatters: _textInputFormatterList,
-        onChanged: (text) {
-          if (widget.onChanged != null) {
-            widget.onChanged!(text);
-          }
-        },
-      ),
+    return TextField(
+      autofocus: widget.autofocus,
+      enabled: widget.enabled,
+      controller: _controller,
+      inputFormatters: _textInputFormatterList,
+      onChanged: (text) {
+        if (widget.onChanged != null) {
+          widget.onChanged!(text);
+        }
+      },
     );
   }
 }

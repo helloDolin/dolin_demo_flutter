@@ -56,7 +56,7 @@ class _MyInheritedWidget<T> extends InheritedWidget {
 }
 
 extension MyProviderExt<T extends Listenable> on BuildContext {
-  T watch<T>() {
+  T watch() {
     return MyProvider.of<T>(this);
   }
 }

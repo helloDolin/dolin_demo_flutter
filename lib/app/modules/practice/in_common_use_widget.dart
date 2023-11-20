@@ -85,7 +85,7 @@ class InCommonUseWidgetPage extends StatelessWidget {
               size: 200,
             ),
             onPressed: () {
-              print('IconButton');
+              debugPrint('IconButton');
             },
           )
         ],

@@ -45,13 +45,13 @@ class DLSearchBar extends StatefulWidget implements PreferredSizeWidget {
   final VoidCallback? tapLeftBackBtn;
   final ValueChanged<String>? onSubmmit;
   @override
-  _DLSearchBarState createState() => _DLSearchBarState();
+  DLSearchBarState createState() => DLSearchBarState();
 
   @override
   final Size preferredSize;
 }
 
-class _DLSearchBarState extends State<DLSearchBar> {
+class DLSearchBarState extends State<DLSearchBar> {
   bool _showClear = false; // 是否展示 × 号
   final double _searchBarHeight = 30; // 搜索框高度
   final TextEditingController _controller = TextEditingController();

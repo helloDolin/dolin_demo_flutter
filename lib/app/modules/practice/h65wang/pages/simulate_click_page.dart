@@ -15,7 +15,7 @@ class SimulateClickPage extends StatelessWidget {
             child: ElevatedButton(
               child: const Text('big btn'),
               onPressed: () {
-                print('tap big btn');
+                debugPrint('tap big btn');
               },
             ),
           ),

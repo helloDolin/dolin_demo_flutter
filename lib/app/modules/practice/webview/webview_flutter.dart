@@ -36,7 +36,7 @@ class _MyWebViewState extends State<MyWebView> {
       ..addJavaScriptChannel(
         'CallFlutter',
         onMessageReceived: (JavaScriptMessage obj) {
-          print(obj.message);
+          debugPrint(obj.message);
           Get.to(() => const MyProviderPage());
         },
       )

@@ -15,7 +15,7 @@ class _StreamPracticeState extends State<StreamPractice> {
     while (true) {
       await Future.delayed(const Duration(milliseconds: 10));
       DateTime dateTime = DateTime.now();
-      print(dateTime.millisecond);
+      debugPrint(dateTime.millisecond.toString());
 
       String timeStr =
           DateFormat('yyyy-MM-dd 😄 HH:mm:ss').format(DateTime.now());
@@ -86,10 +86,8 @@ class _StreamPracticeState extends State<StreamPractice> {
                   switch (snapshot.connectionState) {
                     case ConnectionState.none:
                       return const Text('没有数据流');
-                      break;
                     case ConnectionState.waiting:
                       return const Text('等待数据流');
-                      break;
                     // 与 FutureBuilder 不同的是，StreamBuilder 在 active 状态下才有 hasData、hasError，
                     // 因为 Steam 是持续的，Future 不持续
                     case ConnectionState.active:
@@ -102,7 +100,6 @@ class _StreamPracticeState extends State<StreamPractice> {
                       break;
                     case ConnectionState.done:
                       return const Text('ConnectionState.done');
-                      break;
                   }
 
                   // throw 'will not happen';

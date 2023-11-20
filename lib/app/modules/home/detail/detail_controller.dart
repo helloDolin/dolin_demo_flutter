@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailController extends GetxController {
@@ -10,7 +11,7 @@ class DetailController extends GetxController {
 
   @override
   void onInit() {
-    print('DetailController init');
+    debugPrint('DetailController init');
     super.onInit();
   }
 }

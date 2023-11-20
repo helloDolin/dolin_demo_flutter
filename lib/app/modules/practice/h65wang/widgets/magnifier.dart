@@ -95,7 +95,7 @@ class _MagnifierState extends State<Magnifier> {
               // );
               return GestureDetector(
                 onPanUpdate: (details) {
-                  print('details ${details.localPosition}');
+                  debugPrint('details ${details.localPosition}');
                   setState(() {
                     _offset = details.localPosition;
                   });

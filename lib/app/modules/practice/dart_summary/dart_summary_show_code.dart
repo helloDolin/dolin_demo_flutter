@@ -1,6 +1,8 @@
 // 混入：打印工具混入
+import 'package:flutter/foundation.dart';
+
 mixin PrintHelper {
-  void printInfo() => print(getInfo());
+  void printInfo() => debugPrint(getInfo());
   String getInfo();
 }
 
