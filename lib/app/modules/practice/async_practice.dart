@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:dolin/app/common_widgets/code/code_widget.dart';
 import 'package:dolin/app/common_widgets/code/highlighter_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 class AsyncPage extends StatefulWidget {
   const AsyncPage({Key? key}) : super(key: key);
@@ -145,9 +146,13 @@ void test3() {
         ],
       ),
       floatingActionButton: ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
+          _debugText = '';
           test3();
+          SmartDialog.showLoading();
+          await Future.delayed(const Duration(seconds: 1));
           if (mounted) {
+            SmartDialog.dismiss();
             setState(() {});
           }
         },

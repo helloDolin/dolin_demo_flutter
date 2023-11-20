@@ -18,6 +18,8 @@ dart create project_name
 ## 生命周期
 State：创建（插入视图树）、更新（在视图树中存在）、销毁（从视图树中移除） （图片示例 https://www.jianshu.com/p/0c776fc06a01 ）
 
+当一个State对象依赖的InheritedWidget发生变化时（比如，语言环境、主题等），didChangeDependencies方法会被调用
+
 didChangeDependencies：State 对象的依赖关系发生变化后，Flutter 会回调这个方
 法，随后触发组件构建。哪些情况下 State 对象的依赖关系会发生变化呢？典型的场景
 是，系统语言 Locale 或应用主题改变时，系统会通知 State 执行
@@ -59,20 +61,6 @@ WidgetsBinding.instance.addPersistentFrameCallback((_){
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 单线程
 在 Dart 中，实际上有两个队列，一个事件队列（Event Queue），另一个则是微任务队列（Microtask Queue）。在每一次事件循环中，Dart 总是先去第一个微任务队列中查询是否有可执行的任务，如果没有，才会处理后续的事件队列的流程
 ![image][event_loop_1]
@@ -104,11 +92,11 @@ await 是采用事件队列的机制实现等待行为的
 
 现有原生开发中一些相对成熟的解决方案，以接口封装的形式在 Dart 层快速搞定
 
-BasicMessageChannel：用于传递字符串和半结构化的信息。持续通信,收到消息后可以回复此次消息,如 Native 将遍历到的文件信息陆续传递到 Dart,在比如:Flutter 将从服务端陆续获取到的信息交给 Native 加工,Native 处理完返回等。
+BasicMessageChannel ：用于传递字符串和半结构化的信息。持续通信,收到消息后可以回复此次消息,如 Native 将遍历到的文件信息陆续传递到 Dart,在比如:Flutter 将从服务端陆续获取到的信息交给 Native 加工,Native 处理完返回等。
 
-MethodChannel：用于传递方法调用（method invocation）。一次性通信:如 Flutter 调用 Native 拍照。
+MethodChannel ：用于传递方法调用（method invocation）。一次性通信:如 Flutter 调用 Native 拍照。
 
-EventChannel: 用于数据流（event streams）的通信。持续通信,收到消息后无法回复此次消息,通常用于 Native 向 Dart 的通信,如:手机电量变化,网络变化,陀螺仪,传感器等
+EventChannel : 用于数据流（event streams）的通信。持续通信,收到消息后无法回复此次消息,通常用于 Native 向 Dart 的通信,如:手机电量变化,网络变化,陀螺仪,传感器等
 
 这三种Channel之间互相独立，各有用途，但它们在设计上却非常相近。每种Channel均有三个重要成员变量：
 
@@ -203,7 +191,7 @@ debugPrint = (String message, {int wrapWidth}) {};
 
 // 将 debugPrint 指定为同步打印数据
 debugPrint = (String message, {int wrapWidth}) => debugPrintSynchronously(message, wrapWidth: wrapWidth);
-}
+
 ```
 UI 辅助线
 inspector 查看各个 widget 信息，如：约束信息，宽高等
