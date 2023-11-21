@@ -92,14 +92,16 @@ await 是采用事件队列的机制实现等待行为的
 
 现有原生开发中一些相对成熟的解决方案，以接口封装的形式在 Dart 层快速搞定
 
-BasicMessageChannel ：用于传递字符串和半结构化的信息。持续通信,收到消息后可以回复此次消息,如 Native 将遍历到的文件信息陆续传递到 Dart,在比如:Flutter 将从服务端陆续获取到的信息交给 Native 加工,Native 处理完返回等。
 
-MethodChannel ：用于传递方法调用（method invocation）。一次性通信:如 Flutter 调用 Native 拍照。
+MethodChannel ：用于在Dart和平台原生代码之间进行方法调用和响应。它允许Flutter应用程序调用原生平台的方法，并获取返回的结果。一次性通信:如 Flutter 调用 Native 拍照。
 
-EventChannel : 用于数据流（event streams）的通信。持续通信,收到消息后无法回复此次消息,通常用于 Native 向 Dart 的通信,如:手机电量变化,网络变化,陀螺仪,传感器等
+EventChannel : 用于在Dart和原生平台之间进行事件流的单向通信。这个通道主要用于从原生平台向Flutter发送事件流（例如传感器数据、原生事件等）。Flutter端可以订阅该通道以接收来自原生端的事件流，并作出相应的处理。持续通信,收到消息后无法回复此次消息,通常用于 Native 向 Dart 的通信,如:手机电量变化,网络变化,陀螺仪,传感器等
 
-这三种Channel之间互相独立，各有用途，但它们在设计上却非常相近。每种Channel均有三个重要成员变量：
+BasicMessageChannel ：用于在Dart和原生平台之间传递任意类型的消息。它提供了一种简单的方式来传递序列化后的消息对象。可以用它发送和接收复杂数据类型，比如字符串、数字、Map、List等。可以自定义编解码器，使得在Flutter和原生代码之间传递数据更加灵活。用于传递字符串和半结构化的信息。持续通信,收到消息后可以回复此次消息,如 Native 将遍历到的文件信息陆续传递到 Dart,在比如:Flutter 将从服务端陆续获取到的信息交给 Native 加工,Native 处理完返回等。
 
+这三种Channel之间互相独立，各有用途，但它们在设计上却非常相近。
+
+每种Channel均有三个重要成员变量：
 name: String类型，代表Channel的名字，也是其唯一标识符。
 messager：BinaryMessenger类型，代表消息信使，是消息的发送与接收的工具。
 codec: MessageCodec类型或MethodCodec类型，代表消息的编解码器。
