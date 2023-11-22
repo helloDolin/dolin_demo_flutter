@@ -1,8 +1,11 @@
 # dolin_demo_flutter
 
 ## 麻雀虽小，五脏俱全
-支持主题切换、国际化，完善的 http 请求，完善的日志系统
+支持主题切换、本地化
 
+完善的 http 请求
+
+完善的日志系统
 
 ## 目的
 Flutter 学习、总结、提高
@@ -46,15 +49,10 @@ Framework • revision 796c8ef792 (4 weeks ago) • 2023-06-13 15:51:02 -0700
 Engine • revision 45f6e00911
 Tools • Dart 3.0.5 • DevTools 2.23.1
 
-### 2023年08月18日 降级
-同公司项目 SDK 版本
-Flutter 3.7.8 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision 90c64ed42b (5 months ago) • 2023-03-21 11:27:08 -0500
-Engine • revision 9aa7816315
-Tools • Dart 2.19.5 • DevTools 2.20.1
-
-## flutter 性能优化
-https://juejin.cn/post/7145730792948252686  from:58
-
 ## 使用到的接口定义文档
 https://github.com/iiiiiii1/douban-imdb-api
+
+## Util 目录
+此目录下存放工具函数
+### auto_archive_upload
+iOS 自动打包，自动上传到蒲公英 TODO：飞书、钉钉通知
