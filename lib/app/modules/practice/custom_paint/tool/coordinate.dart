@@ -1,7 +1,15 @@
+// ignore_for_file: cascade_invocations
+
 import 'package:flutter/material.dart';
 
 /// 坐标
 class Coordinate {
+  Coordinate({
+    this.step = 20,
+    this.strokeWidth = .5,
+    this.axisColor = Colors.blue,
+    this.gridColor = Colors.grey,
+  });
   final double step;
 
   /// 画笔粗细
@@ -15,13 +23,6 @@ class Coordinate {
 
   final TextPainter _textPainter =
       TextPainter(textDirection: TextDirection.ltr);
-
-  Coordinate({
-    this.step = 20,
-    this.strokeWidth = .5,
-    this.axisColor = Colors.blue,
-    this.gridColor = Colors.grey,
-  });
 
   final Paint _gridPaint = Paint();
 
@@ -77,17 +78,35 @@ class Coordinate {
       ..color = Colors.blue
       ..strokeWidth = 1;
     canvas.drawLine(
-        Offset(-size.width / 2, 0), Offset(size.width / 2, 0), _gridPaint);
+      Offset(-size.width / 2, 0),
+      Offset(size.width / 2, 0),
+      _gridPaint,
+    );
     canvas.drawLine(
-        Offset(0, -size.height / 2), Offset(0, size.height / 2), _gridPaint);
-    canvas.drawLine(Offset(0, size.height / 2),
-        Offset(0 - 7.0, size.height / 2 - 10), _gridPaint);
-    canvas.drawLine(Offset(0, size.height / 2),
-        Offset(0 + 7.0, size.height / 2 - 10), _gridPaint);
+      Offset(0, -size.height / 2),
+      Offset(0, size.height / 2),
+      _gridPaint,
+    );
     canvas.drawLine(
-        Offset(size.width / 2, 0), Offset(size.width / 2 - 10, 7), _gridPaint);
+      Offset(0, size.height / 2),
+      Offset(0 - 7.0, size.height / 2 - 10),
+      _gridPaint,
+    );
     canvas.drawLine(
-        Offset(size.width / 2, 0), Offset(size.width / 2 - 10, -7), _gridPaint);
+      Offset(0, size.height / 2),
+      Offset(0 + 7.0, size.height / 2 - 10),
+      _gridPaint,
+    );
+    canvas.drawLine(
+      Offset(size.width / 2, 0),
+      Offset(size.width / 2 - 10, 7),
+      _gridPaint,
+    );
+    canvas.drawLine(
+      Offset(size.width / 2, 0),
+      Offset(size.width / 2 - 10, -7),
+      _gridPaint,
+    );
   }
 
   void _drawText(Canvas canvas, Size size) {
@@ -98,7 +117,7 @@ class Coordinate {
         canvas.translate(0, step);
         continue;
       } else {
-        var str = (i * step).toInt().toString();
+        final str = (i * step).toInt().toString();
         _drawAxisText(canvas, str, color: Colors.green);
       }
       canvas.translate(0, step);
@@ -109,7 +128,7 @@ class Coordinate {
     canvas.save();
     for (int i = 0; i < size.width / 2 / step; i++) {
       if (i == 0) {
-        _drawAxisText(canvas, "O", color: Colors.black, x: null);
+        _drawAxisText(canvas, 'O', x: null);
         canvas.translate(step, 0);
         continue;
       }
@@ -117,7 +136,7 @@ class Coordinate {
         canvas.translate(step, 0);
         continue;
       } else {
-        var str = (i * step).toInt().toString();
+        final str = (i * step).toInt().toString();
         _drawAxisText(canvas, str, color: Colors.green, x: true);
       }
       canvas.translate(step, 0);
@@ -131,7 +150,7 @@ class Coordinate {
         canvas.translate(0, -step);
         continue;
       } else {
-        var str = (-i * step).toInt().toString();
+        final str = (-i * step).toInt().toString();
         _drawAxisText(canvas, str, color: Colors.green);
       }
 
@@ -146,7 +165,7 @@ class Coordinate {
         canvas.translate(-step, 0);
         continue;
       } else {
-        var str = (-i * step).toInt().toString();
+        final str = (-i * step).toInt().toString();
         _drawAxisText(canvas, str, color: Colors.green, x: true);
       }
       canvas.translate(-step, 0);
@@ -154,18 +173,23 @@ class Coordinate {
     canvas.restore();
   }
 
-  void _drawAxisText(Canvas canvas, String str,
-      {Color color = Colors.black, bool? x = false}) {
-    TextSpan text = TextSpan(
-        text: str,
-        style: TextStyle(
-          fontSize: 11,
-          color: color,
-        ));
+  void _drawAxisText(
+    Canvas canvas,
+    String str, {
+    Color color = Colors.black,
+    bool? x = false,
+  }) {
+    final TextSpan text = TextSpan(
+      text: str,
+      style: TextStyle(
+        fontSize: 11,
+        color: color,
+      ),
+    );
 
     _textPainter.text = text;
     _textPainter.layout(); // 进行布局
-    Size size = _textPainter.size;
+    final Size size = _textPainter.size;
     Offset offset = Offset.zero;
     if (x == null) {
       offset = Offset(-size.width * 1.5, size.width * 0.7);

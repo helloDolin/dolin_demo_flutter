@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class Watermark extends StatelessWidget {
   const Watermark({
-    super.key,
     required this.child,
     required this.watermarkContent,
+    super.key,
     this.contentTextStyle,
   });
 
@@ -21,7 +21,9 @@ class Watermark extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1), child: child),
+          imageFilter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+          child: child,
+        ),
         // LayoutBuilder(
         //   builder:
         //       (BuildContext context, BoxConstraints constraints) {
@@ -43,14 +45,15 @@ class Watermark extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 1,
             child: Transform.rotate(
-                angle: -math.pi / 4,
-                child: FittedBox(
-                  child: Text(
-                    watermarkContent,
-                    style: contentTextStyle ??
-                        TextStyle(color: Colors.black.withOpacity(0.5)),
-                  ),
-                )),
+              angle: -math.pi / 4,
+              child: FittedBox(
+                child: Text(
+                  watermarkContent,
+                  style: contentTextStyle ??
+                      TextStyle(color: Colors.black.withOpacity(0.5)),
+                ),
+              ),
+            ),
           ),
         ),
       ],

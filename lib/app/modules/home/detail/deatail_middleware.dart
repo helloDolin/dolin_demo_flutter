@@ -1,8 +1,7 @@
+import 'package:dolin/app/routes/app_pages.dart';
+import 'package:dolin/app/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../routes/app_pages.dart';
-import '../../../services/user.dart';
 
 class DeatailMiddleWare extends GetMiddleware {
   @override

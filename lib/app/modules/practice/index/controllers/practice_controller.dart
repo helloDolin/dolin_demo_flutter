@@ -20,15 +20,16 @@ mixin PrintGetLifeCircle on GetxController {
 
 /// 接口枚举
 enum PortType {
-  usbA('USB-A', true),
-  usbC('USB-C', true),
+  usbA('USB-A', isUSB: true),
+  usbC('USB-C', isUSB: true),
   typeC('TYPE-C'),
   unknown('UNKNOWN');
 
   final String name;
   final bool isUSB;
   // 枚举也可以有构造函数
-  const PortType(this.name, [this.isUSB = false]);
+  // ignore: sort_constructors_first
+  const PortType(this.name, {this.isUSB = false});
 
   static PortType fromName(String name) {
     return values.firstWhere(
@@ -45,11 +46,12 @@ class PracticeController extends GetxController with PrintGetLifeCircle {
   RxString invokeChannelResult = ''.obs;
   RxDouble pi = 0.0.obs;
 
-  void getDeviceInfo() async {
+  Future<void> getDeviceInfo() async {
     final deviceInfoPlugin = DeviceInfoPlugin();
     final deviceInfo = await deviceInfoPlugin.deviceInfo;
     if (deviceInfo is IosDeviceInfo) {
-      deviceData.value = '''name:   ${deviceInfo.name ?? ''}
+      deviceData.value = '''
+name:   ${deviceInfo.name ?? ''}
 systemName:   ${deviceInfo.systemName ?? ''}
 systemVersion:    ${deviceInfo.systemVersion ?? ''}
 model:    ${deviceInfo.model ?? ''}
@@ -65,22 +67,23 @@ utsname-machine:    ${deviceInfo.utsname.machine ?? ''}''';
     if (deviceInfo is AndroidDeviceInfo) {}
   }
 
-  void getPackageInflo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  Future<void> getPackageInflo() async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    String appName = packageInfo.appName;
-    String packageName = packageInfo.packageName;
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
-    pacakgeData.value = '''appName:$appName
+    final String appName = packageInfo.appName;
+    final String packageName = packageInfo.packageName;
+    final String version = packageInfo.version;
+    final String buildNumber = packageInfo.buildNumber;
+    pacakgeData.value = '''
+appName:$appName
 packageName:$packageName
 version:$version
 buildNumber:$buildNumber    
 ''';
   }
 
-  void getInvokeChannelInfo() async {
-    FlutterPluginPractice flutterPluginPractice = FlutterPluginPractice();
+  Future<void> getInvokeChannelInfo() async {
+    final FlutterPluginPractice flutterPluginPractice = FlutterPluginPractice();
     int? getBatteryLevel;
     try {
       getBatteryLevel = await flutterPluginPractice.getBatteryLevel();
@@ -92,7 +95,7 @@ buildNumber:$buildNumber
         await flutterPluginPractice.getPlatformVersion();
 
     invokeChannelResult.value =
-        '电量：${(getBatteryLevel ?? '获取电量异常').toString()}\n版本：${getPlatformVersion ?? ''}';
+        '电量：${getBatteryLevel ?? '获取电量异常'}\n版本：${getPlatformVersion ?? ''}';
   }
 
   /// mock 耗时任务

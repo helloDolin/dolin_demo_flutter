@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DLSearchBar extends StatefulWidget implements PreferredSizeWidget {
-  const DLSearchBar(
-      {Key? key,
-      this.hideCancelBtn = false,
-      this.hint,
-      this.hintTextStyle,
-      this.defaultText = '',
-      this.onChanged,
-      this.hideScanBtn = true,
-      this.tapScanBtn,
-      this.isPopWithAnimated = true,
-      this.tapBackBtn,
-      this.returnChanged,
-      this.inputType,
-      this.autofocus = false,
-      this.backTitle,
-      this.hideLeftBackBtn = true,
-      this.tapLeftBackBtn,
-      this.onSubmmit,
-      this.focusNode})
-      // 仿 SDK AppBar 写法
-      // ignore: avoid_field_initializers_in_const_classes
-      : preferredSize = const Size.fromHeight(kToolbarHeight),
-        super(key: key);
+  const DLSearchBar({
+    super.key,
+    this.hideCancelBtn = false,
+    this.hint,
+    this.hintTextStyle,
+    this.defaultText = '',
+    this.onChanged,
+    this.hideScanBtn = true,
+    this.tapScanBtn,
+    this.isPopWithAnimated = true,
+    this.tapBackBtn,
+    this.returnChanged,
+    this.inputType,
+    this.autofocus = false,
+    this.backTitle,
+    this.hideLeftBackBtn = true,
+    this.tapLeftBackBtn,
+    this.onSubmmit,
+    this.focusNode,
+  })
+  // 仿 SDK AppBar 写法
+  // ignore: avoid_field_initializers_in_const_classes
+  : preferredSize = const Size.fromHeight(kToolbarHeight);
 
   final FocusNode? focusNode;
   final bool? hideCancelBtn;
@@ -88,7 +88,6 @@ class DLSearchBarState extends State<DLSearchBar> {
         alignment: const Alignment(-1, 0.68),
         color: Colors.white,
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             _leftBackBtn,
             _scanBtn,
@@ -101,31 +100,30 @@ class DLSearchBarState extends State<DLSearchBar> {
   Widget get _leftBackBtn => Offstage(
         offstage: widget.hideLeftBackBtn!,
         child: InkWell(
-            onTap: widget.tapLeftBackBtn ??
-                () {
-                  Get.back();
-                },
-            child: const Padding(
-              padding: EdgeInsets.only(left: 18),
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-                size: 18,
-              ),
-            )),
+          onTap: widget.tapLeftBackBtn ?? Get.back<void>,
+          child: const Padding(
+            padding: EdgeInsets.only(left: 18),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 18,
+            ),
+          ),
+        ),
       );
   Widget get _scanBtn => Offstage(
         offstage: widget.hideScanBtn!,
         child: InkWell(
-            onTap: widget.tapScanBtn,
-            child: const Padding(
-              padding: EdgeInsets.only(left: 18),
-              child: Icon(
-                Icons.qr_code,
-                color: Colors.grey,
-                size: 18,
-              ),
-            )),
+          onTap: widget.tapScanBtn,
+          child: const Padding(
+            padding: EdgeInsets.only(left: 18),
+            child: Icon(
+              Icons.qr_code,
+              color: Colors.grey,
+              size: 18,
+            ),
+          ),
+        ),
       );
 
   Widget get _cancelBtn => widget.hideCancelBtn!
@@ -133,10 +131,7 @@ class DLSearchBarState extends State<DLSearchBar> {
           width: 18,
         )
       : InkWell(
-          onTap: widget.tapBackBtn ??
-              () {
-                Get.back();
-              },
+          onTap: widget.tapBackBtn ?? Get.back<void>,
           child: Container(
             alignment: Alignment.center,
             height: _searchBarHeight,
@@ -145,10 +140,10 @@ class DLSearchBarState extends State<DLSearchBar> {
               widget.backTitle ?? '取消',
               style: const TextStyle(fontSize: 15, color: Colors.black),
             ),
-          ));
+          ),
+        );
 
   Widget get _inputBox => Expanded(
-        flex: 1,
         child: Container(
           height: _searchBarHeight,
           padding: const EdgeInsets.fromLTRB(15, 5, 10, 5),
@@ -156,7 +151,8 @@ class DLSearchBarState extends State<DLSearchBar> {
           decoration: BoxDecoration(
             color: const Color(0xffF5F5F5),
             borderRadius: BorderRadius.circular(
-                18 * MediaQuery.of(context).size.width / 375),
+              18 * MediaQuery.of(context).size.width / 375,
+            ),
           ),
           child: Row(
             children: <Widget>[
@@ -166,7 +162,6 @@ class DLSearchBarState extends State<DLSearchBar> {
                 color: Color(0xFFBBBBBB),
               ),
               Expanded(
-                flex: 1,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 2),
                   child: TextField(

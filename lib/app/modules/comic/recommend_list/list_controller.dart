@@ -5,7 +5,7 @@ import 'package:dolin/app/data/comic/recommend_model.dart';
 class ListController extends BasePageController<RecommendModel> {
   @override
   Future<List<RecommendModel>> getData(int page, int pageSize) async {
-    var ls = await ComicAPI.recommend();
+    final ls = await ComicAPI.recommend();
     return ls;
   }
 }

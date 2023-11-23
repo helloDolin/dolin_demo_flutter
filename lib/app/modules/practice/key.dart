@@ -15,7 +15,7 @@ class _KeyPracticeState extends State<KeyPractice> {
   var _colors = <Color>[];
   int _dragIndex = 0;
   final _stackGlobalKey = GlobalKey();
-  double _stackTopPadding = 0.0;
+  double _stackTopPadding = 0;
 
   void _shuffle() {
     // Color obj1 = Colors.blue[900]!;
@@ -32,12 +32,12 @@ class _KeyPracticeState extends State<KeyPractice> {
   }
 
   void checkWinStatus() {
-    bool res = true;
+    var res = true;
     for (var i = 1; i < _colors.length; i++) {
-      Color colorPre = _colors[i - 1];
-      Color colorCur = _colors[i];
-      double computeLuminancePre = colorPre.computeLuminance();
-      double computeLuminanceCur = colorCur.computeLuminance();
+      final colorPre = _colors[i - 1];
+      final colorCur = _colors[i];
+      final computeLuminancePre = colorPre.computeLuminance();
+      final computeLuminanceCur = colorCur.computeLuminance();
       // computeLuminance() 颜色越亮值越大
       if (computeLuminancePre > computeLuminanceCur) {
         res = false;
@@ -71,7 +71,7 @@ class _KeyPracticeState extends State<KeyPractice> {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8),
               child: Text(
                 '将色块由深到浅挪动\n（第一个色块为演示色块，不能动）',
                 textAlign: TextAlign.center,
@@ -79,8 +79,9 @@ class _KeyPracticeState extends State<KeyPractice> {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: _colors.isEmpty ? Colors.white : _color[900],
-                  borderRadius: const BorderRadius.all(Radius.circular(6))),
+                color: _colors.isEmpty ? Colors.white : _color[900],
+                borderRadius: const BorderRadius.all(Radius.circular(6)),
+              ),
               alignment: Alignment.center,
               width: Box.boxWidth - Box.margin * 2,
               height: Box.boxHeight - Box.margin * 2,
@@ -121,9 +122,8 @@ class _KeyPracticeState extends State<KeyPractice> {
                         _colors.length,
                         (index) => Box(
                           onDragEnd: () {
-                            RenderBox renderBox = _stackGlobalKey
-                                .currentContext!
-                                .findRenderObject() as RenderBox;
+                            final renderBox = _stackGlobalKey.currentContext!
+                                .findRenderObject()! as RenderBox;
                             final offset = renderBox.localToGlobal(Offset.zero);
                             _stackTopPadding = offset.dy;
                             checkWinStatus();
@@ -149,10 +149,6 @@ class _KeyPracticeState extends State<KeyPractice> {
 }
 
 class Box extends StatelessWidget {
-  static const double boxWidth = 200.0;
-  static const double boxHeight = 50.0;
-  static const double margin = 5.0;
-
   Box({
     // super.key,
     required this.color,
@@ -161,18 +157,22 @@ class Box extends StatelessWidget {
     required this.onDragStarted,
     required this.onDragEnd,
   }) : super(key: ValueKey(color));
+  static const double boxWidth = 200;
+  static const double boxHeight = 50;
+  static const double margin = 5;
   final Color color;
   final double x;
   final double y;
-  final Function(Color color) onDragStarted;
-  final Function() onDragEnd;
+  final void Function(Color color) onDragStarted;
+  final void Function() onDragEnd;
 
   @override
   Widget build(BuildContext context) {
     final container = Container(
       decoration: BoxDecoration(
-          color: color,
-          borderRadius: const BorderRadius.all(Radius.circular(6))),
+        color: color,
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+      ),
       alignment: Alignment.center,
       width: boxWidth - margin * 2,
       height: boxHeight - margin * 2,

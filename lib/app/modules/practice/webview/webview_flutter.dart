@@ -1,8 +1,7 @@
+import 'package:dolin/app/modules/practice/my_provider_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
-import '../my_provider_page.dart';
 
 class WebviewFlutter extends StatelessWidget {
   const WebviewFlutter({super.key});
@@ -37,12 +36,15 @@ class _MyWebViewState extends State<MyWebView> {
         'CallFlutter',
         onMessageReceived: (JavaScriptMessage obj) {
           debugPrint(obj.message);
-          Get.to(() => const MyProviderPage());
+          Get.to<void>(() => const MyProviderPage());
         },
       )
       ..setJavaScriptMode(JavaScriptMode.unrestricted) // 允许 js
-      ..loadRequest(Uri.parse(
-          'file:///Users/bd/Desktop/dolin_demo_flutter/lib/app/modules/practice/webview/local_html.html'));
+      ..loadRequest(
+        Uri.parse(
+          'file:///Users/bd/Desktop/dolin_demo_flutter/lib/app/modules/practice/webview/local_html.html',
+        ),
+      );
 
     super.initState();
   }

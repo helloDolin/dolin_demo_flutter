@@ -13,18 +13,6 @@ class LogView extends StatefulWidget {
 class _LogViewState extends State<LogView> {
   bool _canpop = true;
 
-  Future<String> task1() async {
-    await Future.delayed(const Duration(seconds: 2));
-    debugPrint('task1');
-    return 'task1';
-  }
-
-  Future<String> task2() async {
-    await Future.delayed(const Duration(seconds: 1));
-    debugPrint('task2');
-    return 'task2';
-  }
-
   @override
   Widget build(BuildContext context) {
     // 正确使用 WillPopScope 的姿势
@@ -35,7 +23,7 @@ class _LogViewState extends State<LogView> {
       onWillPop: _canpop
           ? null
           : () async {
-              showDialog(
+              await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
                 builder: (cxt) => Center(
@@ -65,31 +53,11 @@ class _LogViewState extends State<LogView> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('摇晃手机返回'),
-          actions: [
-            TextButton(
-                child: const Text('类iOS异步group'),
-                onPressed: () {
-                  // print('执行 group');
-                  // await task1();
-                  // await task2();
-                  // print('执行 group 结束');
-
-                  Future.wait([task1(), task2()])
-                      .then((value) {
-                        // Future 返回结果
-                        debugPrint(value.toString());
-                      })
-                      .whenComplete(() => debugPrint('执行 group 结束'))
-                      .catchError((err) {
-                        debugPrint(err.toString());
-                      });
-                })
-          ],
         ),
         body: ShakeDetectorWidget(
-          shakeDetector: DefaultShakeDetector(onPhoneShake: () {
-            Get.back();
-          }),
+          shakeDetector: DefaultShakeDetector(
+            onPhoneShake: Get.back<void>,
+          ),
           child: LogConsoleWidget(
             logConsoleManager: StorageService.instance.logConsoleManager,
             theme: LogConsoleTheme.byTheme(Theme.of(context)),

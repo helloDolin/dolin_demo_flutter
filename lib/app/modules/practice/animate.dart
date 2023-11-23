@@ -24,8 +24,6 @@ class _AnimatePracticeState extends State<AnimatePractice>
   late final AnimationController _ac = AnimationController(
     vsync: this, // 屏幕刷新时可以得到一次回传,eg:一秒回传 60 或者 120 次
     duration: const Duration(seconds: 1),
-    lowerBound: 0.0,
-    upperBound: 1.0,
   )..addListener(() {
       debugPrint('animation controller value: ${_ac.value}');
     });
@@ -38,7 +36,7 @@ class _AnimatePracticeState extends State<AnimatePractice>
 
   @override
   Widget build(BuildContext context) {
-    final Animation opacityAnimation = Tween(begin: 0.5, end: 0.8).animate(_ac);
+    final opacityAnimation = Tween(begin: 0.5, end: 0.8).animate(_ac);
 
     return Scaffold(
       appBar: AppBar(
@@ -125,7 +123,8 @@ class _AnimatePracticeState extends State<AnimatePractice>
                       child: Container(
                         color: Colors.amber[100],
                         width: 300,
-                        height: Tween(begin: 50.0, end: 100.0).evaluate(_ac),
+                        height:
+                            Tween<double>(begin: 50, end: 100).evaluate(_ac),
                         child: child,
                       ),
                     );
@@ -143,7 +142,7 @@ class _AnimatePracticeState extends State<AnimatePractice>
             child: AnimatedBuilder(
               animation: _ac,
               builder: (context, child) {
-                for (var element in _snows) {
+                for (final element in _snows) {
                   element.fall();
                 }
                 return CustomPaint(
@@ -166,28 +165,30 @@ class _AnimatePracticeState extends State<AnimatePractice>
             mainAxisSize: MainAxisSize.min,
             children: [
               ElevatedButton(
-                  onPressed: () async {
-                    _isAnimating ? _ac.stop() : _ac.repeat(reverse: true);
-                    setState(() {
-                      _isAnimating = !_isAnimating;
-                    });
-                    // _ac.duration = const Duration(seconds: 4);
-                    // _ac.forward();
-                    // await Future.delayed(const Duration(seconds: 4));
+                onPressed: () async {
+                  _isAnimating ? _ac.stop() : _ac.repeat(reverse: true);
+                  setState(() {
+                    _isAnimating = !_isAnimating;
+                  });
+                  // _ac.duration = const Duration(seconds: 4);
+                  // _ac.forward();
+                  // await Future.delayed(const Duration(seconds: 4));
 
-                    // await Future.delayed(const Duration(seconds: 7));
+                  // await Future.delayed(const Duration(seconds: 7));
 
-                    // _ac.duration = const Duration(seconds: 8);
-                    // _ac.reverse();
-                  },
-                  child: Text(_isAnimating ? '停止动画' : '运行动画')),
+                  // _ac.duration = const Duration(seconds: 8);
+                  // _ac.reverse();
+                },
+                child: Text(_isAnimating ? '停止动画' : '运行动画'),
+              ),
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      _count++;
-                    });
-                  },
-                  child: const Text('数字加一')),
+                onPressed: () {
+                  setState(() {
+                    _count++;
+                  });
+                },
+                child: const Text('数字加一'),
+              ),
             ],
           ),
         ),
@@ -198,10 +199,10 @@ class _AnimatePracticeState extends State<AnimatePractice>
 
 class SlidingBox extends StatelessWidget {
   const SlidingBox({
-    super.key,
     required AnimationController ac,
     required this.color,
     required this.interval,
+    super.key,
   }) : _ac = ac;
 
   final AnimationController _ac;
@@ -226,9 +227,9 @@ class SlidingBox extends StatelessWidget {
 
 class AnimatedCounter extends StatelessWidget {
   const AnimatedCounter({
-    super.key,
     required this.count,
     required this.duration,
+    super.key,
     this.fontSize = 100.0,
   });
   final int count;
@@ -288,9 +289,12 @@ class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final whitePaint = Paint()..color = Colors.green[100]!;
-    for (var element in _snows) {
+    for (final element in _snows) {
       canvas.drawCircle(
-          Offset(element.x, element.y), element.radius, whitePaint);
+        Offset(element.x, element.y),
+        element.radius,
+        whitePaint,
+      );
     }
   }
 
@@ -306,7 +310,7 @@ class Snow {
   double radius = Random().nextDouble() * 2 + 2;
   double velocity = Random().nextDouble() * 4 + 2;
 
-  fall() {
+  void fall() {
     y += velocity;
     if (y >
         ScreenUtil().screenHeight -

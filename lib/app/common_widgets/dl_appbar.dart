@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 
 class DLAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DLAppBar({
-    Key? key,
     required this.title,
-  }) : super(key: key);
+    super.key,
+  });
   final String title;
 
   @override
@@ -18,9 +18,7 @@ class DLAppBar extends StatelessWidget implements PreferredSizeWidget {
           Container(
             alignment: Alignment.centerLeft,
             child: IconButton(
-              onPressed: () {
-                Get.back();
-              },
+              onPressed: Get.back<bool>,
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: Colors.black,

@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_positional_boolean_parameters
+
+import 'package:dolin/app/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'storage_service.dart';
 
 class AppSettingsService extends GetxController {
   static AppSettingsService get instance => Get.find<AppSettingsService>();
@@ -41,44 +42,44 @@ class AppSettingsService extends GetxController {
     StorageService.instance.setValue(StorageService.kFirstRun, false);
   }
 
-  void setTheme(int i) async {
+  Future<void> setTheme(int i) async {
     themeMode.value = i;
-    var mode = ThemeMode.values[i];
+    final mode = ThemeMode.values[i];
 
-    StorageService.instance.setValue(StorageService.kThemeMode, i);
+    await StorageService.instance.setValue(StorageService.kThemeMode, i);
     Get.changeThemeMode(mode);
     // await Get.forceAppUpdate(); 慎用
   }
 
   void changeTheme() {
-    Get.dialog(
+    Get.dialog<void>(
       SimpleDialog(
-        title: const Text("设置主题"),
+        title: const Text('设置主题'),
         children: [
           RadioListTile<int>(
-            title: const Text("跟随系统"),
+            title: const Text('跟随系统'),
             value: 0,
             groupValue: themeMode.value,
             onChanged: (e) {
-              Get.back();
+              Get.back<void>();
               setTheme(e ?? 0);
             },
           ),
           RadioListTile<int>(
-            title: const Text("浅色模式"),
+            title: const Text('浅色模式'),
             value: 1,
             groupValue: themeMode.value,
             onChanged: (e) {
-              Get.back();
+              Get.back<void>();
               setTheme(e ?? 1);
             },
           ),
           RadioListTile<int>(
-            title: const Text("深色模式"),
+            title: const Text('深色模式'),
             value: 2,
             groupValue: themeMode.value,
             onChanged: (e) {
-              Get.back();
+              Get.back<void>();
               setTheme(e ?? 2);
             },
           ),

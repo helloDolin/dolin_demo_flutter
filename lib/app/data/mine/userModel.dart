@@ -6,11 +6,11 @@ part 'userModel.g.dart';
 
 @JsonSerializable()
 class UserLoginResponseEntity {
-  String? accessToken;
-  String? displayName;
-  List<String>? channels;
   UserLoginResponseEntity();
   factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) =>
       _$UserLoginResponseEntityFromJson(json);
+  String? accessToken;
+  String? displayName;
+  List<String>? channels;
   Map<String, dynamic> toJson() => _$UserLoginResponseEntityToJson(this);
 }

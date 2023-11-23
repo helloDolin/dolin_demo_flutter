@@ -1,6 +1,5 @@
+import 'package:dolin/app/modules/home/index/controllers/home_controller.dart';
 import 'package:get/get.dart';
-
-import '../controllers/home_controller.dart';
 
 class HomeBinding extends Bindings {
   @override

@@ -1,12 +1,12 @@
 import 'package:dolin/app/modules/debug/log/log.dart';
+import 'package:dolin/app/modules/mine/login/controllers/login_controller.dart';
+import 'package:dolin/app/services/user.dart';
+import 'package:dolin/app/util/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../services/user.dart';
-import '../controllers/login_controller.dart';
-
 class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -20,8 +20,9 @@ class LoginView extends GetView<LoginController> {
           centerTitle: true,
           actions: [
             IconButton(
-                onPressed: () {
-                  Get.dialog(AlertDialog(
+              onPressed: () {
+                Get.dialog<void>(
+                  AlertDialog(
                     title: const Text('暂不登录'),
                     content: Container(
                       constraints: const BoxConstraints(
@@ -37,23 +38,26 @@ class LoginView extends GetView<LoginController> {
                     ),
                     actions: [
                       TextButton(
-                        onPressed: (() => Get.back(result: false)),
-                        child: const Text("取消"),
+                        onPressed: () => Get.back(result: false),
+                        child: const Text('取消'),
                       ),
                       TextButton(
-                        onPressed: (() {
+                        onPressed: () {
                           Get.back(result: true);
+                          // ignore: inference_failure_on_function_invocation, cascade_invocations
                           Get.back();
                           // 将焦点给一个新值，相当于隐藏键盘
                           FocusScope.of(context).requestFocus(FocusNode());
-                        }),
-                        child: const Text("确定"),
+                        },
+                        child: const Text('确定'),
                       ),
                       // ...?actions,
                     ],
-                  ));
-                },
-                icon: const Icon(Icons.close))
+                  ),
+                );
+              },
+              icon: const Icon(Icons.close),
+            )
           ],
         ),
         body: Padding(
@@ -76,7 +80,7 @@ class LoginView extends GetView<LoginController> {
                         if (value!.isEmpty) {
                           return '请输入正确的手机号码';
                         }
-                        RegExp reg = RegExp(r'^1\d{10}$');
+                        final reg = RegExp(r'^1\d{10}$');
                         if (!reg.hasMatch(value)) {
                           return '请输入正确的手机号码';
                         }
@@ -114,27 +118,35 @@ class LoginView extends GetView<LoginController> {
                   height: 50,
                   width: double.infinity,
                   child: ElevatedButton(
-                      style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
-                        shadowColor: MaterialStateProperty.all(Colors.black),
-                        elevation: MaterialStateProperty.all(10),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(150)),
+                    style: ButtonStyle(
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                      shadowColor: MaterialStateProperty.all(Colors.black),
+                      elevation: MaterialStateProperty.all(10),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
                         ),
                       ),
-                      onPressed: () {
-                        if (controller.formKey.currentState!.validate()) {
-                          final token =
-                              'username:${controller.phoneNum}_password:${controller.password}';
-                          Log.i('toke: $token');
-                          UserStore.to.setToken(token);
-                          Get.back();
-                        }
-                      },
-                      child: const Text('登录')),
+                    ),
+                    onPressed: () async {
+                      if (!controller.formKey.currentState!.validate()) {
+                        showToast('验证未通过，请重试');
+                        return;
+                      }
+                      showLoading();
+                      await Future<void>.delayed(const Duration(seconds: 2));
+                      hideLoading();
+
+                      final token = 'username:${controller.phoneNum}'
+                          '_password:${controller.password}';
+                      Log.i('toke: $token');
+                      await UserStore.to.setToken(token);
+                      showToast('登录成功');
+                      Get.back<void>();
+                    },
+                    child: const Text('登录'),
+                  ),
                 ),
               )
             ],

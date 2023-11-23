@@ -5,26 +5,26 @@ import 'package:dolin/app/https/https_client.dart';
 class UserAPI {
   /// 登录
   static Future<UserLoginResponseEntity> login({
-    Map? params,
+    Map<String, dynamic>? params,
   }) async {
-    var response = await HttpsClient().post(
+    final response = await HttpsClient().post(
       '/user/login',
       // data:params
     );
-    return UserLoginResponseEntity.fromJson(response);
+    return UserLoginResponseEntity.fromJson(response as Map<String, dynamic>);
   }
 
   /// Profile
   static Future<UserLoginResponseEntity> profile() async {
-    var response = await HttpsClient().post(
+    final response = await HttpsClient().post(
       '/user/profile',
     );
-    return UserLoginResponseEntity.fromJson(response);
+    return UserLoginResponseEntity.fromJson(response as Map<String, dynamic>);
   }
 
   /// Logout
-  static Future logout() async {
-    return await HttpsClient().post(
+  static Future<void> logout() async {
+    return HttpsClient().post(
       '/user/logout',
     );
   }

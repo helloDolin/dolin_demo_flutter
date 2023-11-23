@@ -22,13 +22,14 @@ void onReportTimings(List<FrameTiming> timings) {
 
 double get fps {
   int sum = 0;
-  for (FrameTiming timing in lastFrames) {
-    int duration = timing.timestampInMicroseconds(FramePhase.rasterFinish) -
-        timing.timestampInMicroseconds(FramePhase.buildStart);
+  for (final FrameTiming timing in lastFrames) {
+    final int duration =
+        timing.timestampInMicroseconds(FramePhase.rasterFinish) -
+            timing.timestampInMicroseconds(FramePhase.buildStart);
     if (duration < frameInterval.inMicroseconds) {
       sum += 1;
     } else {
-      int count = (duration / frameInterval.inMicroseconds).ceil();
+      final int count = (duration / frameInterval.inMicroseconds).ceil();
       sum += count;
     }
   }

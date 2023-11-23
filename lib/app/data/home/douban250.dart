@@ -1,19 +1,16 @@
-import 'dart:convert';
+// To parse this JSON data, do
+//
+//     final douban250 = douban250FromJson(jsonString);
 
-List<Douban250> douban250FromList(List list) {
-  List<Douban250> res = [];
-  if (list.isNotEmpty) {
-    for (var element in list) {
-      res.add(Douban250.fromJson(element));
-    }
-  }
-  return res;
-}
+import 'package:json_annotation/json_annotation.dart';
 
-String douban250ToJson(List<Douban250> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+part 'douban250.g.dart';
 
+@JsonSerializable()
+
+/// 豆瓣 250 模型
 class Douban250 {
+  /// 构造函数
   Douban250({
     this.data,
     this.createdAt,
@@ -35,86 +32,55 @@ class Douban250 {
     this.dateReleased,
   });
 
-  List<Datum>? data;
-  int? createdAt;
-  int? updatedAt;
-  String? id;
-  String? originalName;
-  int? imdbVotes;
-  String? imdbRating;
-  String? rottenRating;
-  int? rottenVotes;
-  String? year;
-  String? imdbId;
-  String? alias;
-  String? doubanId;
-  Type? type;
-  String? doubanRating;
-  int? doubanVotes;
-  int? duration;
-  DateTime? dateReleased;
+  /// fromJson 构造
+  factory Douban250.fromJson(Map<String, dynamic> json) =>
+      _$Douban250FromJson(json);
 
   String get shareImage {
-    if (data!.isNotEmpty) {
-      Datum obj = data![0];
-      if (obj.poster != null) {
-        return obj.poster!;
-      }
-      return '';
-    }
-    return '';
+    return data?.first.poster ?? '';
   }
 
-  factory Douban250.fromJson(Map<String, dynamic> json) => Douban250(
-        data: json["data"] == null
-            ? []
-            : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
-        createdAt: json["createdAt"],
-        updatedAt: json["updatedAt"],
-        id: json["id"],
-        originalName: json["originalName"],
-        imdbVotes: json["imdbVotes"],
-        imdbRating: json["imdbRating"],
-        rottenRating: json["rottenRating"],
-        rottenVotes: json["rottenVotes"],
-        year: json["year"],
-        imdbId: json["imdbId"],
-        alias: json["alias"],
-        doubanId: json["doubanId"],
-        type: typeValues.map[json["type"]] ?? Type.movie,
-        doubanRating: json["doubanRating"],
-        doubanVotes: json["doubanVotes"],
-        duration: json["duration"],
-        dateReleased: json["dateReleased"] == null
-            ? null
-            : DateTime.parse(json["dateReleased"]),
-      );
+  @JsonKey(name: 'data')
+  List<Datum>? data;
+  @JsonKey(name: 'createdAt')
+  int? createdAt;
+  @JsonKey(name: 'updatedAt')
+  int? updatedAt;
+  @JsonKey(name: 'id')
+  String? id;
+  @JsonKey(name: 'originalName')
+  String? originalName;
+  @JsonKey(name: 'imdbVotes')
+  int? imdbVotes;
+  @JsonKey(name: 'imdbRating')
+  String? imdbRating;
+  @JsonKey(name: 'rottenRating')
+  String? rottenRating;
+  @JsonKey(name: 'rottenVotes')
+  int? rottenVotes;
+  @JsonKey(name: 'year')
+  String? year;
+  @JsonKey(name: 'imdbId')
+  String? imdbId;
+  @JsonKey(name: 'alias')
+  String? alias;
+  @JsonKey(name: 'doubanId')
+  String? doubanId;
+  @JsonKey(name: 'type')
+  String? type;
+  @JsonKey(name: 'doubanRating')
+  String? doubanRating;
+  @JsonKey(name: 'doubanVotes')
+  int? doubanVotes;
+  @JsonKey(name: 'duration')
+  int? duration;
+  @JsonKey(name: 'dateReleased')
+  DateTime? dateReleased;
 
-  Map<String, dynamic> toJson() => {
-        "data": data == null
-            ? []
-            : List<dynamic>.from(data!.map((x) => x.toJson())),
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "id": id,
-        "originalName": originalName,
-        "imdbVotes": imdbVotes,
-        "imdbRating": imdbRating,
-        "rottenRating": rottenRating,
-        "rottenVotes": rottenVotes,
-        "year": year,
-        "imdbId": imdbId,
-        "alias": alias,
-        "doubanId": doubanId,
-        "type": typeValues.reverse[type],
-        "doubanRating": doubanRating,
-        "doubanVotes": doubanVotes,
-        "duration": duration,
-        "dateReleased":
-            "${dateReleased!.year.toString().padLeft(4, '0')}-${dateReleased!.month.toString().padLeft(2, '0')}-${dateReleased!.day.toString().padLeft(2, '0')}",
-      };
+  Map<String, dynamic> toJson() => _$Douban250ToJson(this);
 }
 
+@JsonSerializable()
 class Datum {
   Datum({
     this.createdAt,
@@ -131,66 +97,31 @@ class Datum {
     this.movie,
   });
 
+  factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
+  @JsonKey(name: 'createdAt')
   int? createdAt;
+  @JsonKey(name: 'updatedAt')
   int? updatedAt;
+  @JsonKey(name: 'id')
   String? id;
+  @JsonKey(name: 'poster')
   String? poster;
+  @JsonKey(name: 'name')
   String? name;
+  @JsonKey(name: 'genre')
   String? genre;
+  @JsonKey(name: 'description')
   String? description;
+  @JsonKey(name: 'language')
   String? language;
+  @JsonKey(name: 'country')
   String? country;
-  Lang? lang;
+  @JsonKey(name: 'lang')
+  String? lang;
+  @JsonKey(name: 'shareImage')
   String? shareImage;
+  @JsonKey(name: 'movie')
   String? movie;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        createdAt: json["createdAt"],
-        updatedAt: json["updatedAt"],
-        id: json["id"],
-        poster: json["poster"],
-        name: json["name"],
-        genre: json["genre"],
-        description: json["description"],
-        language: json["language"],
-        country: json["country"],
-        lang: langValues.map[json["lang"]]!,
-        shareImage: json["shareImage"],
-        movie: json["movie"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-        "id": id,
-        "poster": poster,
-        "name": name,
-        "genre": genre,
-        "description": description,
-        "language": language,
-        "country": country,
-        "lang": langValues.reverse[lang],
-        "shareImage": shareImage,
-        "movie": movie,
-      };
-}
-
-enum Lang { cn }
-
-final langValues = EnumValues({"Cn": Lang.cn});
-
-enum Type { movie }
-
-final typeValues = EnumValues({"Movie": Type.movie});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
+  Map<String, dynamic> toJson() => _$DatumToJson(this);
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: strict_raw_type
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -13,12 +15,12 @@ class StreamPractice extends StatefulWidget {
 class _StreamPracticeState extends State<StreamPractice> {
   Stream<String> getTime() async* {
     while (true) {
-      await Future.delayed(const Duration(milliseconds: 10));
-      DateTime dateTime = DateTime.now();
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+      final dateTime = DateTime.now();
       debugPrint(dateTime.millisecond.toString());
 
-      String timeStr =
-          DateFormat('yyyy-MM-dd 😄 HH:mm:ss').format(DateTime.now());
+      var timeStr = DateFormat('yyyy-MM-dd 😄 HH:mm:ss').format(DateTime.now());
+      // ignore: use_string_buffers
       timeStr = '$timeStr-${dateTime.millisecond ~/ 10}';
       yield timeStr;
     }
@@ -97,7 +99,6 @@ class _StreamPracticeState extends State<StreamPractice> {
                       if (snapshot.hasError) {
                         return Text(snapshot.error.toString());
                       }
-                      break;
                     case ConnectionState.done:
                       return const Text('ConnectionState.done');
                   }

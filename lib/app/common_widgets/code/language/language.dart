@@ -1,7 +1,6 @@
 abstract class Language {
-  final String name;
-
   const Language(this.name);
+  final String name;
 
   bool containsKeywords(String word);
 

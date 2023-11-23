@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -7,11 +9,11 @@ enum CountdownButtonStatus { send, cancel, done }
 
 class CountdownButton extends StatefulWidget {
   const CountdownButton({
-    super.key,
     required this.duration,
     required this.width,
     required this.height,
     required this.radius,
+    super.key,
   });
 
   /// 时长
@@ -60,17 +62,15 @@ class _CountdownButtonState extends State<CountdownButton>
         label = 'Send';
         textColor = Colors.white;
         bgColor = Colors.blue;
-        break;
       case CountdownButtonStatus.cancel:
         label = 'Cancel';
         textColor = Colors.blue;
         bgColor = Colors.white;
-        break;
       case CountdownButtonStatus.done:
         label = 'Done';
         textColor = Colors.grey;
         bgColor = Colors.white;
-        break;
+      // ignore: no_default_cases
       default:
     }
 
@@ -92,32 +92,32 @@ class _CountdownButtonState extends State<CountdownButton>
           width: widget.width,
           height: widget.height,
           child: TextButton(
-              onPressed: () {
-                switch (countdownButtonStatus) {
-                  case CountdownButtonStatus.send:
-                    _ac.forward(from: 0.0);
-                    setState(() {
-                      countdownButtonStatus = CountdownButtonStatus.cancel;
-                    });
-                    break;
-                  case CountdownButtonStatus.cancel:
-                  case CountdownButtonStatus.done:
-                    _ac.reset();
-                    setState(() {
-                      countdownButtonStatus = CountdownButtonStatus.send;
-                    });
-                    break;
-                  default:
-                }
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: textColor,
-                backgroundColor: bgColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(widget.radius),
-                ),
+            onPressed: () {
+              switch (countdownButtonStatus) {
+                case CountdownButtonStatus.send:
+                  _ac.forward(from: 0);
+                  setState(() {
+                    countdownButtonStatus = CountdownButtonStatus.cancel;
+                  });
+                case CountdownButtonStatus.cancel:
+                case CountdownButtonStatus.done:
+                  _ac.reset();
+                  setState(() {
+                    countdownButtonStatus = CountdownButtonStatus.send;
+                  });
+                // ignore: no_default_cases
+                default:
+              }
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: textColor,
+              backgroundColor: bgColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(widget.radius),
               ),
-              child: Text(label)),
+            ),
+            child: Text(label),
+          ),
         )
       ],
     );
@@ -125,25 +125,6 @@ class _CountdownButtonState extends State<CountdownButton>
 }
 
 class BorderPainter extends CustomPainter {
-  final double btnWidth;
-  final double btnHeight;
-  final double btnRadius;
-  final Animation<double> animation;
-
-  final Paint bluePaint = Paint()
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 4.0
-    ..color = Colors.blue;
-
-  final Paint greyPaint = Paint()
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 4.0
-    ..color = Colors.grey;
-
-  // late Rect rect;
-  late RRect shape;
-  late PathMetric pathMetric;
-
   BorderPainter(this.btnWidth, this.btnHeight, this.btnRadius, this.animation)
       : super(repaint: animation) {
     shape = RRect.fromRectAndRadius(
@@ -170,6 +151,24 @@ class BorderPainter extends CustomPainter {
 
     debugPrint('BorderPainter 构造函数');
   }
+  final double btnWidth;
+  final double btnHeight;
+  final double btnRadius;
+  final Animation<double> animation;
+
+  final Paint bluePaint = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 4.0
+    ..color = Colors.blue;
+
+  final Paint greyPaint = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 4.0
+    ..color = Colors.grey;
+
+  // late Rect rect;
+  late RRect shape;
+  late PathMetric pathMetric;
 
   @override
   void paint(Canvas canvas, Size size) {

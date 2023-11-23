@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 /// 对角线布局
 class Diagonal extends StatelessWidget {
   const Diagonal({
-    super.key,
     required this.children,
+    super.key,
   });
 
   final List<Widget> children;

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 // 类名后加 T，才能声明 T 的属性
 class MyProvider<T extends Listenable> extends StatefulWidget {
   const MyProvider({
-    super.key,
     required this.child,
     required this.create,
+    super.key,
   });
 
   final Widget child;

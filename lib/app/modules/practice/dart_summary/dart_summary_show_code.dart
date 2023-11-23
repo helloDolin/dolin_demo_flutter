@@ -14,19 +14,15 @@ class Meta {
 }
 
 class Item extends Meta {
-  Item(String name, double price)
-      : assert(price > 0.0, '价格必须大于 0'),
-        super(name, price);
+  Item(super.name, super.price) : assert(price > 0.0, '价格必须大于 0');
 
   // 重载 + 运算符，合并商品
   Item operator +(Item other) => Item(name + other.name, price + other.price);
 }
 
 class ShoppingCart extends Meta with PrintHelper {
-  DateTime dateTime;
-  String code;
-  late List<Item> bookings;
-
+  // 默认初始化函数，转发至 withCode 函数
+  ShoppingCart({String? name}) : this.withCode(code: '', name: name);
   // 命名构造函数
   // 实例化之前初始化实例变量 dateTime
   ShoppingCart.withCode({
@@ -34,9 +30,9 @@ class ShoppingCart extends Meta with PrintHelper {
     String? name,
   })  : dateTime = DateTime.now(),
         super(name ?? '', 0);
-
-  // 默认初始化函数，转发至 withCode 函数
-  ShoppingCart({name}) : this.withCode(code: '', name: name);
+  DateTime dateTime;
+  String code;
+  late List<Item> bookings;
 
   // override price 作为购物车总价
   @override

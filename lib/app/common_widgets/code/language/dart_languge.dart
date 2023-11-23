@@ -1,4 +1,4 @@
-import 'language.dart';
+import 'package:dolin/app/common_widgets/code/language/language.dart';
 
 class DartLanguage extends Language {
   const DartLanguage() : super('Dart');

@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:dolin/app/https/custom_error.dart';
+import 'package:dolin/app/modules/debug/log/log.dart';
+import 'package:dolin/app/services/user.dart';
 import 'package:get/get.dart' hide Response;
-
-import '../modules/debug/log/log.dart';
-import '../services/user.dart';
-import 'custom_error.dart';
 
 /// 自定义拦截器
 class CustomInterceptor extends Interceptor {
@@ -16,11 +15,14 @@ class CustomInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     final time = DateTime.now().millisecondsSinceEpoch -
-        response.requestOptions.extra["ts"];
-    Log.i(
-      '''【HTTP请求响应】 耗时:${time}ms
+        (response.requestOptions.extra['ts'] as int);
+    Log.i('''
+【HTTP请求响应】 耗时:${time}ms
 Request Method：${response.requestOptions.method}
 Request Code：${response.statusCode}
 Request URL：${response.requestOptions.uri}
@@ -28,8 +30,7 @@ Request Query：${response.requestOptions.queryParameters}
 Request Data：${response.requestOptions.data}
 Request Headers：${response.requestOptions.headers}
 Response Headers：${response.headers.map}
-Response Data：${response.data}''',
-    );
+Response Data：${response.data}''');
 
     //  返回数据结构、内容校验
     // final Map<String, dynamic> data = response.data as Map<String, dynamic>;
@@ -58,9 +59,11 @@ Response Data：${response.data}''',
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    final time =
-        DateTime.now().millisecondsSinceEpoch - err.requestOptions.extra['ts'];
-    Log.e('''【HTTP请求错误】 耗时:${time}ms
+    final time = DateTime.now().millisecondsSinceEpoch -
+        (err.requestOptions.extra['ts'] as int);
+    Log.e(
+      '''
+【HTTP请求错误】 耗时:${time}ms
 Request Method：${err.requestOptions.method}
 Response Code：${err.response?.statusCode}
 Request URL：${err.requestOptions.uri}
@@ -68,20 +71,22 @@ Request Query：${err.requestOptions.queryParameters}
 Request Data：${err.requestOptions.data}
 Request Headers：${err.requestOptions.headers}
 Response Headers：${err.response?.headers.map}
-Response Data：${err.response?.data}''', err.stackTrace);
+Response Data：${err.response?.data}''',
+      err.stackTrace,
+    );
 
-    final CustomError customErr = createCustomError(err);
+    final customErr = createCustomError(err);
     handleErrorCode(customErr.code);
     return handler.next(err);
   }
 }
 
+/// 处理错误 code
 bool handleErrorCode(int code) {
-  bool res = true;
+  var res = true;
   switch (code) {
     case 401:
       UserStore.to.onLogout();
-      break;
     default:
       res = false;
       break;
@@ -89,43 +94,43 @@ bool handleErrorCode(int code) {
   return res;
 }
 
-// 错误信息
+/// 创建自定义错误
 CustomError createCustomError(DioError error) {
   switch (error.type) {
     case DioErrorType.cancel:
-      return CustomError(code: -1, message: "请求取消");
+      return CustomError(code: -1, message: '请求取消');
     case DioErrorType.connectionTimeout:
-      return CustomError(code: -1, message: "连接超时");
+      return CustomError(code: -1, message: '连接超时');
     case DioErrorType.sendTimeout:
-      return CustomError(code: -1, message: "请求超时");
+      return CustomError(code: -1, message: '请求超时');
     case DioErrorType.receiveTimeout:
-      return CustomError(code: -1, message: "响应超时");
+      return CustomError(code: -1, message: '响应超时');
     case DioErrorType.badResponse:
       {
         try {
-          int errCode =
+          final errCode =
               error.response != null ? error.response!.statusCode! : -1;
           // String errMsg = error.response.statusMessage;
           // return CustomError(code: errCode, message: errMsg);
           switch (errCode) {
             case 400:
-              return CustomError(code: errCode, message: "请求语法错误");
+              return CustomError(code: errCode, message: '请求语法错误');
             case 401:
-              return CustomError(code: errCode, message: "没有权限");
+              return CustomError(code: errCode, message: '没有权限');
             case 403:
-              return CustomError(code: errCode, message: "服务器拒绝执行");
+              return CustomError(code: errCode, message: '服务器拒绝执行');
             case 404:
-              return CustomError(code: errCode, message: "无法连接服务器");
+              return CustomError(code: errCode, message: '无法连接服务器');
             case 405:
-              return CustomError(code: errCode, message: "请求方法被禁止");
+              return CustomError(code: errCode, message: '请求方法被禁止');
             case 500:
-              return CustomError(code: errCode, message: "服务器内部错误");
+              return CustomError(code: errCode, message: '服务器内部错误');
             case 502:
-              return CustomError(code: errCode, message: "无效的请求");
+              return CustomError(code: errCode, message: '无效的请求');
             case 503:
-              return CustomError(code: errCode, message: "服务器挂了");
+              return CustomError(code: errCode, message: '服务器挂了');
             case 505:
-              return CustomError(code: errCode, message: "不支持HTTP协议请求");
+              return CustomError(code: errCode, message: '不支持HTTP协议请求');
             default:
               {
                 // return CustomError(code: errCode, message: "未知错误");
@@ -133,14 +138,15 @@ CustomError createCustomError(DioError error) {
                   code: errCode,
                   message: error.response != null
                       ? error.response!.statusMessage!
-                      : "",
+                      : '',
                 );
               }
           }
         } on Exception catch (_) {
-          return CustomError(code: -1, message: "未知错误");
+          return CustomError(code: -1, message: '未知错误');
         }
       }
+    // ignore: no_default_cases
     default:
       {
         return CustomError(code: -1, message: error.message ?? '');

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class HollowText extends StatelessWidget {
   const HollowText({
-    super.key,
     required this.text,
     required this.thickness,
     required this.color,
     required this.fontSize,
+    super.key,
     this.hollowColor,
   });
   final String text;
@@ -23,11 +23,12 @@ class HollowText extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-              fontSize: fontSize,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = thickness
-                ..color = color),
+            fontSize: fontSize,
+            foreground: Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = thickness
+              ..color = color,
+          ),
         ),
         Text(
           text,

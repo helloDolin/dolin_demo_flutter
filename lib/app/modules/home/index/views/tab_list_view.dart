@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class TabListView extends StatefulWidget {
-  const TabListView({super.key, required this.source});
+  const TabListView({required this.source, super.key});
   final String source;
 
   @override
@@ -69,7 +69,7 @@ class _TabListViewState extends State<TabListView>
 
   void _onLoading() {
     if (_listData.length % pageSize == 0) {
-      reqData(isRefresh: false).then((_) {
+      reqData().then((_) {
         _refreshController.loadComplete();
       }).catchError((_) {
         _refreshController.loadFailed();
@@ -102,7 +102,6 @@ class _TabListViewState extends State<TabListView>
     return Stack(
       children: [
         SmartRefresher(
-          enablePullDown: true,
           enablePullUp: true,
           // header: const WaterDropHeader(),
           // footer: CustomFooter(
@@ -145,15 +144,17 @@ class _TabListViewState extends State<TabListView>
           ),
         ),
         Positioned(
-            bottom: 0,
-            right: 0,
-            child: _isShowUpIcon
-                ? ElevatedButton(
-                    onPressed: () {
-                      _scrollController.jumpTo(0);
-                    },
-                    child: const Icon(Icons.arrow_upward_outlined))
-                : const SizedBox.shrink()),
+          bottom: 0,
+          right: 0,
+          child: _isShowUpIcon
+              ? ElevatedButton(
+                  onPressed: () {
+                    _scrollController.jumpTo(0);
+                  },
+                  child: const Icon(Icons.arrow_upward_outlined),
+                )
+              : const SizedBox.shrink(),
+        ),
       ],
     );
   }
@@ -163,7 +164,7 @@ class _TabListViewState extends State<TabListView>
 }
 
 class Item extends StatelessWidget {
-  const Item({super.key, required this.model, required this.index});
+  const Item({required this.model, required this.index, super.key});
   final Douban250 model;
   final int index;
 
@@ -171,7 +172,7 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        openGallery(context, 0, [model.shareImage]);
+        openGallery<void>(context, 0, [model.shareImage]);
       },
       child: SizedBox(
         width: double.infinity,
@@ -179,36 +180,39 @@ class Item extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-                width: ScreenUtil().screenWidth,
-                height: ScreenUtil().screenWidth * 880 / 540, // 图片尺寸：540 * 880
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: CachedNetworkImage(
-                    imageUrl: model.shareImage,
-                    placeholder: (context, url) {
-                      return Image.asset(AppAssets.placeholderPng);
-                    },
-                    errorWidget: (context, url, error) {
-                      return Text(error.toString());
-                    },
-                  ),
-                  // child: FadeInImage.assetNetwork(
-                  //   placeholder: AppAssets.placeholderPng,
-                  //   placeholderFit: BoxFit.cover,
-                  //   image: model.shareImage,
-                  //   fit: BoxFit.cover,
-                  //   imageErrorBuilder: (context, error, stackTrace) =>
-                  //       const SizedBox(
-                  //     child: Text('图片加载失败'),
-                  //   ),
-                  // ),
-                )),
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenWidth * 880 / 540, // 图片尺寸：540 * 880
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: CachedNetworkImage(
+                  imageUrl: model.shareImage,
+                  placeholder: (context, url) {
+                    return Image.asset(AppAssets.placeholderPng);
+                  },
+                  errorWidget: (context, url, error) {
+                    return Text(error.toString());
+                  },
+                ),
+                // child: FadeInImage.assetNetwork(
+                //   placeholder: AppAssets.placeholderPng,
+                //   placeholderFit: BoxFit.cover,
+                //   image: model.shareImage,
+                //   fit: BoxFit.cover,
+                //   imageErrorBuilder: (context, error, stackTrace) =>
+                //       const SizedBox(
+                //     child: Text('图片加载失败'),
+                //   ),
+                // ),
+              ),
+            ),
             Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text('片名：${model.originalName ?? ''}')),
+              padding: const EdgeInsets.all(10),
+              child: Text('片名：${model.originalName ?? ''}'),
+            ),
             Padding(
-                padding: const EdgeInsets.all(10),
-                child: Text('排名：${index + 1}')),
+              padding: const EdgeInsets.all(10),
+              child: Text('排名：${index + 1}'),
+            ),
           ],
         ),
       ),

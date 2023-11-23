@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-typedef TabChange = Function(int index);
+typedef TabChange = void Function(int index);
 
 class DLTabBarView extends StatelessWidget {
   const DLTabBarView({
@@ -9,10 +9,10 @@ class DLTabBarView extends StatelessWidget {
     required this.tabController,
     required this.pageController,
     required this.tabChange,
-    Key? key,
+    super.key,
     this.physics = const ScrollPhysics(),
     this.dragStartBehavior = DragStartBehavior.start,
-  }) : super(key: key);
+  });
 
   final TabController tabController;
   final PageController pageController;

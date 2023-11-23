@@ -1,6 +1,5 @@
+import 'package:dolin/app/modules/practice/index/controllers/practice_controller.dart';
 import 'package:get/get.dart';
-
-import '../controllers/practice_controller.dart';
 
 class PracticeBinding extends Bindings {
   @override

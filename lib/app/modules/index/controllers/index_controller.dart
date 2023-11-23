@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 class IndexController extends GetxController {
   RxInt currentIndex = 0.obs;
 
-  PageController pageController = PageController(initialPage: 0);
+  PageController pageController = PageController();
   final List<Widget> pages = const [
     HomeView(),
     ComicView(),
@@ -24,7 +24,7 @@ class IndexController extends GetxController {
     super.onInit();
   }
 
-  void setCurrentIndex(index) {
+  void setCurrentIndex(int index) {
     currentIndex.value = index;
     // 点击底部 tab 时找到对应页面的 controller 然后发起请求，实现 viewWillAppear
     // CategoryController cateC = Get.find<CategoryController>();
@@ -36,9 +36,9 @@ class IndexController extends GetxController {
     if (AppSettingsService.instance.firstRun) {
       AppSettingsService.instance.setNoFirstRun();
       DialogUtil.showStatement();
-      // TODO: 检查更新
+      // TODO(检查更新):
     } else {
-      // TODO: 检查更新
+      // TODO(检查更新):
     }
   }
 }

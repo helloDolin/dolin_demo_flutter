@@ -1,7 +1,7 @@
 import 'package:dolin/app/common_widgets/code/code.dart';
+import 'package:dolin/app/modules/practice/dart_summary/dart_summary_show_code.dart'
+    hide PrintHelper;
 import 'package:flutter/material.dart';
-
-import 'dart_summary_show_code.dart' hide PrintHelper;
 // import 'dart_summary_show_code.dart' show PrintHelper;
 
 /*
@@ -9,7 +9,7 @@ import 'dart_summary_show_code.dart' hide PrintHelper;
 
 */
 
-const kDartCode = """
+const kDartCode = r"""
 // 混入：打印工具混入
 mixin PrintHelper {
   void printInfo() => print(getInfo());
@@ -58,10 +58,10 @@ class ShoppingCart extends Meta with PrintHelper {
     return '''
 购物车信息
 ==========================
-用户名：\$name
-优惠码：\$code
-总价：\$price
-日期：\$dateTime
+用户名：$name
+优惠码：$code
+总价：$price
+日期：$dateTime
 ==========================
     ''';
   }
@@ -95,28 +95,32 @@ class _DartSummaryPageState extends State<DartSummaryPage> {
         title: const Text('Dart 温故知新'),
       ),
       body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            CodeWidget(
-              code: kDartCode,
-              style: HighlighterStyle.fromColors(HighlighterStyle.gitHub),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              CodeWidget(
+                code: kDartCode,
+                style: HighlighterStyle.fromColors(HighlighterStyle.gitHub),
+              )
+            ],
+          ),
         ),
-      )),
+      ),
       floatingActionButton: ElevatedButton(
         onPressed: () {
-          ShoppingCart obj = ShoppingCart.withCode(code: 'code', name: '京东')
-            ..bookings = [
-              Item('商品1', 12),
-              Item('商品2', 13),
-              Item('商品3', 14),
-            ];
-          obj.printInfo();
+          final ShoppingCart obj =
+              ShoppingCart.withCode(code: 'code', name: '京东')
+                ..bookings = [
+                  Item('商品1', 12),
+                  Item('商品2', 13),
+                  Item('商品3', 14),
+                ]
+                ..printInfo();
 
-          var res = obj.bookings.fold<double>(
-              10, (previousValue, element) => previousValue + element.price);
+          final res = obj.bookings.fold<double>(
+            10,
+            (previousValue, element) => previousValue + element.price,
+          );
           debugPrint(res.toString());
         },
         child: const Text('test dart code'),

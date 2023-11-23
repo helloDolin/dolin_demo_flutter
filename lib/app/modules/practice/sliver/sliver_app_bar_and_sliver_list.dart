@@ -15,7 +15,6 @@ class SliverPractice extends StatelessWidget {
               'https://img.zcool.cn/community/01014259f069b7a801216a4b278f97.jpg@1280w_1l_2o_100sh.jpg',
               fit: BoxFit.cover,
             ),
-            collapseMode: CollapseMode.parallax,
           ),
         ),
         SliverList(

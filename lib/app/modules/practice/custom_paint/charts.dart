@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -51,17 +53,16 @@ const double _kScaleHeight = 8; // 刻度高
 const double _kBarPadding = 10; // 柱状图前间隔
 
 class ChartPainter extends CustomPainter {
-  final Animation<double> repaint;
-
   ChartPainter(this.repaint) : super(repaint: repaint) {
     // data 中最大值
     maxData = yData.reduce(max);
   }
+  final Animation<double> repaint;
   final TextPainter _textPainter =
       TextPainter(textDirection: TextDirection.ltr);
   // 测试数据
   final List<double> yData = [88, 98, 70, 80, 100, 75];
-  final List<String> xData = ["7月", "8月", "9月", "10月", "11月", "12月"];
+  final List<String> xData = ['7月', '8月', '9月', '10月', '11月', '12月'];
 
   Path axisPath = Path();
   Paint axisPaint = Paint()
@@ -82,7 +83,9 @@ class ChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawRect(
-        Offset.zero & size, Paint()..color = Colors.black.withAlpha(22));
+      Offset.zero & size,
+      Paint()..color = Colors.black.withAlpha(22),
+    );
 
     // 中心点移至左下角
     canvas.translate(0, size.height);
@@ -104,10 +107,14 @@ class ChartPainter extends CustomPainter {
     canvas.translate(xStep, 0);
     for (int i = 0; i < xData.length; i++) {
       canvas.drawRect(
-          Rect.fromLTWH(_kBarPadding, 0, xStep - 2 * _kBarPadding,
-                  -(yData[i] / maxData * (size.height - _kScaleHeight)))
-              .translate(-xStep, 0),
-          fillPaint);
+        Rect.fromLTWH(
+          _kBarPadding,
+          0,
+          xStep - 2 * _kBarPadding,
+          -(yData[i] / maxData * (size.height - _kScaleHeight)),
+        ).translate(-xStep, 0),
+        fillPaint,
+      );
       canvas.translate(xStep, 0);
     }
     canvas.restore();
@@ -119,9 +126,16 @@ class ChartPainter extends CustomPainter {
     canvas.translate(xStep, 0);
     for (int i = 0; i < xData.length; i++) {
       canvas.drawLine(
-          const Offset(0, 0), const Offset(0, _kScaleHeight), axisPaint);
-      _drawAxisText(canvas, xData[i],
-          alignment: Alignment.center, offset: Offset(-xStep / 2, 10));
+        Offset.zero,
+        const Offset(0, _kScaleHeight),
+        axisPaint,
+      );
+      _drawAxisText(
+        canvas,
+        xData[i],
+        alignment: Alignment.center,
+        offset: Offset(-xStep / 2, 10),
+      );
       canvas.translate(xStep, 0);
     }
     canvas.restore();
@@ -130,7 +144,7 @@ class ChartPainter extends CustomPainter {
   void drawYText(Canvas canvas, Size size) {
     canvas.save();
     yStep = (size.height - _kScaleHeight) / 5;
-    double numStep = maxData / 5;
+    final double numStep = maxData / 5;
     for (int i = 0; i <= 5; i++) {
       if (i == 0) {
         _drawAxisText(canvas, '0', offset: const Offset(-10, 2));
@@ -139,34 +153,44 @@ class ChartPainter extends CustomPainter {
       }
 
       canvas.drawLine(
-          const Offset(0, 0), Offset(size.width - _kScaleHeight, 0), gridPaint);
+        Offset.zero,
+        Offset(size.width - _kScaleHeight, 0),
+        gridPaint,
+      );
 
       canvas.drawLine(
-          const Offset(-_kScaleHeight, 0), const Offset(0, 0), axisPaint);
-      String str = (numStep * i).toStringAsFixed(0);
+        const Offset(-_kScaleHeight, 0),
+        Offset.zero,
+        axisPaint,
+      );
+      final String str = (numStep * i).toStringAsFixed(0);
       _drawAxisText(canvas, str, offset: const Offset(-10, 2));
       canvas.translate(0, -yStep);
     }
     canvas.restore();
   }
 
-  void _drawAxisText(Canvas canvas, String str,
-      {Color color = Colors.black,
-      Alignment alignment = Alignment.centerRight,
-      Offset offset = Offset.zero}) {
-    TextSpan text = TextSpan(
-        text: str,
-        style: TextStyle(
-          fontSize: 11,
-          color: color,
-        ));
+  void _drawAxisText(
+    Canvas canvas,
+    String str, {
+    Color color = Colors.black,
+    Alignment alignment = Alignment.centerRight,
+    Offset offset = Offset.zero,
+  }) {
+    final TextSpan text = TextSpan(
+      text: str,
+      style: TextStyle(
+        fontSize: 11,
+        color: color,
+      ),
+    );
 
     _textPainter.text = text;
     _textPainter.layout(); // 进行布局
 
-    Size size = _textPainter.size;
+    final Size size = _textPainter.size;
 
-    Offset offsetPos = Offset(-size.width / 2, -size.height / 2)
+    final Offset offsetPos = Offset(-size.width / 2, -size.height / 2)
         .translate(-size.width / 2 * alignment.x + offset.dx, 0.0 + offset.dy);
     _textPainter.paint(canvas, offsetPos);
   }

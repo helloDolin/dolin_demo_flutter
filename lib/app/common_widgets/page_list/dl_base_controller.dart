@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class BaseController extends GetxController {
   RxBool isPageLoadding = false.obs;
-  var isLoadding = false;
+  bool isLoadding = false;
   RxBool isPageEmpty = false.obs;
   RxBool isPageError = false.obs;
   RxBool isNotLogin = false.obs;
@@ -40,9 +40,9 @@ class BasePageController<T> extends BaseController {
   int pageSize = 10;
 
   RxBool canLoadMore = false.obs;
-  RxList list = <T>[].obs;
+  RxList<T> list = <T>[].obs;
 
-  Future loadData() async {
+  Future<void> loadData() async {
     try {
       if (isLoadding) {
         return;
@@ -83,7 +83,7 @@ class BasePageController<T> extends BaseController {
     return [];
   }
 
-  Future refreshData() async {
+  Future<void> refreshData() async {
     curPage = 1;
     list.clear();
     await loadData();

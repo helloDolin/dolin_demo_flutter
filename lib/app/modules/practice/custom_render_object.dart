@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -26,8 +28,7 @@ class CustomRenderObject extends StatelessWidget {
 
 /// SingleChildRenderObjectWidget 真正可以画到屏幕上的 Widget
 class ShadowBox extends SingleChildRenderObjectWidget {
-  const ShadowBox({this.distance = 10, super.key, Widget? child})
-      : super(child: child);
+  const ShadowBox({this.distance = 10, super.key, super.child});
   final double distance;
 
   @override
@@ -37,7 +38,9 @@ class ShadowBox extends SingleChildRenderObjectWidget {
 
   @override
   void updateRenderObject(
-      BuildContext context, covariant RenderShadowBox renderObject) {
+    BuildContext context,
+    covariant RenderShadowBox renderObject,
+  ) {
     // 有改动时告之，否知 hotreload 无效
     renderObject.distance = distance;
   }
@@ -45,9 +48,8 @@ class ShadowBox extends SingleChildRenderObjectWidget {
 
 // class RenderShadowBox extends RenderBox with RenderObjectWithChildMixin {
 class RenderShadowBox extends RenderProxyBox with DebugOverflowIndicatorMixin {
-  double distance;
-
   RenderShadowBox(this.distance);
+  double distance;
 
   @override
   void performLayout() {
@@ -56,6 +58,7 @@ class RenderShadowBox extends RenderProxyBox with DebugOverflowIndicatorMixin {
     child!.layout(constraints, parentUsesSize: true);
     // child!.layout(BoxConstraints.tight(const Size(50, 50)));
     // size = const Size(300, 300);
+    // ignore: cast_nullable_to_non_nullable
     size = (child as RenderBox).size;
   }
 

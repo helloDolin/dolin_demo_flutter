@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:dolin/app/modules/debug/log/log.dart';
+import 'package:dolin/app/services/app_settings_service.dart';
+import 'package:dolin/app/services/storage_service.dart';
 import 'package:dolin/app/services/user.dart';
 import 'package:dolin/app/util/fps_util.dart';
 import 'package:flutter/foundation.dart';
@@ -9,22 +12,18 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'app/modules/debug/log/log.dart';
-import 'app/services/app_settings_service.dart';
-import 'app/services/storage_service.dart';
-
 // import 'package:flutter_bugly/flutter_bugly.dart';
 
 /// 防御启动
 class DLAPPDefend {
   // 设置状态栏为透明
-  setSystemUi() async {
+  Future<void> setSystemUi() async {
     // 只允许竖屏
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
     if (GetPlatform.isAndroid) {
       // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+      const systemUiOverlayStyle = SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
@@ -37,11 +36,12 @@ class DLAPPDefend {
   }
 
   /// 初始化服务
-  Future initServices() async {
+  Future<void> initServices() async {
     await Get.put<StorageService>(StorageService()).init(); // 注意：put 后 init
     Get.put<UserStore>(UserStore());
 
     /// 初始化设置服务
+    // ignore: cascade_invocations
     Get.put(AppSettingsService());
   }
 
@@ -68,15 +68,14 @@ class DLAPPDefend {
   }
 
   /// run zone
-  void _runZone(Widget app) async {
+  Future<void> _runZone(Widget app) async {
     await runZonedGuarded(
       () async {
         // FlutterBugly.postCatchedException(() {
         debugRepaintRainbowEnabled =
             false; // 开启 debugRepaintRainbowEnabled 时，当重新绘制时，该区域的颜色会发生变化
-        WidgetsBinding widgetsBinding =
-            WidgetsFlutterBinding.ensureInitialized();
-        widgetsBinding.addTimingsCallback(onReportTimings); // 设置帧回调函数
+        WidgetsFlutterBinding.ensureInitialized()
+            .addTimingsCallback(onReportTimings); // 设置帧回调函数
 
         await setSystemUi();
         await Hive.initFlutter();
@@ -94,7 +93,7 @@ class DLAPPDefend {
     );
   }
 
-  run(Widget app) async {
-    _runZone(app);
+  Future<void> run(Widget app) async {
+    await _runZone(app);
   }
 }

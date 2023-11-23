@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 /// 放大镜
 class Magnifier extends StatefulWidget {
   const Magnifier({
-    super.key,
     required this.child,
+    super.key,
     this.magnification = 2.0,
   });
 
@@ -53,12 +53,13 @@ class _MagnifierState extends State<Magnifier> {
             ),
             // 边框
             Positioned.fill(
-                child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blueAccent, width: 2),
-                color: Colors.green.withOpacity(0.2),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blueAccent, width: 2),
+                  color: Colors.green.withOpacity(0.2),
+                ),
               ),
-            ))
+            )
           ],
         ),
       ),

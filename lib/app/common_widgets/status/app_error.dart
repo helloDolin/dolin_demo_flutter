@@ -1,16 +1,18 @@
+import 'package:dolin/app/util/clipboard_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../util/clipboard_util.dart';
-
 class AppErrorWidget extends StatelessWidget {
-  final Function()? onRefresh;
+  const AppErrorWidget({
+    this.errorMsg = '',
+    this.onRefresh,
+    this.error,
+    super.key,
+  });
+  final void Function()? onRefresh;
   final String errorMsg;
   final Error? error;
-  const AppErrorWidget(
-      {this.errorMsg = "", this.onRefresh, this.error, Key? key})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class AppErrorWidget extends StatelessWidget {
                 repeat: false,
               ),
               Text(
-                "$errorMsg\r\n点击刷新",
+                '$errorMsg\r\n点击刷新',
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
@@ -45,10 +47,10 @@ class AppErrorWidget extends StatelessWidget {
                     ),
                     onPressed: () {
                       ClipboardUtil.setDataToastMsg(
-                        '$errorMsg\n${error?.stackTrace?.toString()}',
+                        '$errorMsg\n${error?.stackTrace}',
                       );
                     },
-                    child: const Text("复制详细信息"),
+                    child: const Text('复制详细信息'),
                   ),
                 ),
               ),

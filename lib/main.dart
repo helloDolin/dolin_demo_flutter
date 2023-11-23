@@ -1,22 +1,21 @@
+import 'package:dolin/app/common_widgets/status/app_loading.dart';
+import 'package:dolin/app/constants/constants.dart';
+import 'package:dolin/app/modules/debug/log/log.dart';
+import 'package:dolin/app/modules/unknowPage.dart';
+import 'package:dolin/app/routes/app_pages.dart';
+import 'package:dolin/app/services/app_settings_service.dart';
+import 'package:dolin/app/util/pv_exception_util.dart';
+import 'package:dolin/dlapp_defend.dart';
+import 'package:dolin/generated/locales.g.dart';
+import 'package:dolin/global.dart';
 import 'package:dolin/my_provider/box_model.dart';
+import 'package:dolin/my_provider/my_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-import 'app/common_widgets/status/app_loading.dart';
-import 'app/constants/constants.dart';
-import 'app/modules/debug/log/log.dart';
-import 'app/modules/unknowPage.dart';
-import 'app/routes/app_pages.dart';
-import 'app/services/app_settings_service.dart';
-import 'app/util/pv_exception_util.dart';
-import 'dlapp_defend.dart';
-import 'generated/locales.g.dart';
-import 'global.dart';
-import 'my_provider/my_provider.dart';
 
 class Root extends StatelessWidget {
   const Root({super.key});
@@ -52,25 +51,23 @@ class Root extends StatelessWidget {
               noDataText: LocaleKeys.refreshConfiguration_footer_noDataText.tr,
               loadStyle: LoadStyle.ShowWhenLoading,
             ),
-            headerTriggerDistance: 80, // 头部触发刷新的越界距离
             maxOverScrollExtent: 100, //头部最大可以拖动的范围,如果发生冲出视图范围区域,请设置这个属性
             footerTriggerDistance: 150, // 底部最大可以拖动的范围
             enableScrollWhenRefreshCompleted:
                 true, //这个属性不兼容PageView和TabBarView,如果你特别需要TabBarView左右滑动,你需要把它设置为true
-            enableLoadingWhenFailed: true, //在加载失败的状态下,用户仍然可以通过手势上拉来触发加载更多
             hideFooterWhenNotFull: true, // Viewport不满一屏时,禁用上拉加载更多功能
-            enableBallisticLoad: true, // 可以通过惯性滑动触发加载更多
             springDescription: const SpringDescription(
-                stiffness: 170,
-                damping: 16,
-                mass: 1.9), // 自定义回弹动画,三个属性值意义请查询flutter api
+              stiffness: 170,
+              damping: 16,
+              mass: 1.9,
+            ), // 自定义回弹动画,三个属性值意义请查询flutter api
             child: GetMaterialApp(
               // showPerformanceOverlay: true,
               debugShowCheckedModeBanner: false,
               routingCallback: (routing) {
                 Log.i('😄😄😄 routingCallback ${routing?.current ?? ''}');
               },
-              title: "dolin_demo_flutter",
+              title: 'dolin_demo_flutter',
               initialRoute: AppPages.INITIAL,
               getPages: AppPages.routes,
               navigatorObservers: [
@@ -91,21 +88,19 @@ class Root extends StatelessWidget {
                 Locale('zh', 'CH'),
                 Locale('en', 'US'),
               ],
-              themeMode: ThemeMode.system,
               darkTheme: AppTheme.dark,
               theme: AppTheme.light,
               unknownRoute:
                   GetPage(name: '/404', page: () => const UnknowPage()),
-              enableLog: true,
               // logWriterCallback: write,
               builder: FlutterSmartDialog.init(
-                loadingBuilder: ((msg) => const AppLoaddingWidget()),
+                loadingBuilder: (msg) => const AppLoaddingWidget(),
                 builder: (context, child) => Obx(
                   () => MediaQuery(
                     data: AppSettingsService.instance.useSystemFontSize.value
                         ? MediaQuery.of(context)
                         : MediaQuery.of(context)
-                            .copyWith(textScaleFactor: 1.0), // 字体大小不跟随系统变化
+                            .copyWith(textScaleFactor: 1), // 字体大小不跟随系统变化
                     child: child!,
                   ),
                 ),
@@ -124,13 +119,15 @@ class Root extends StatelessWidget {
       // ],
     );
 
-    return Obx(() => AppSettingsService.instance.isAppGrey.value
-        ? ColorFiltered(
-            colorFilter:
-                const ColorFilter.mode(Colors.grey, BlendMode.saturation),
-            child: appWidget,
-          )
-        : appWidget);
+    return Obx(
+      () => AppSettingsService.instance.isAppGrey.value
+          ? ColorFiltered(
+              colorFilter:
+                  const ColorFilter.mode(Colors.grey, BlendMode.saturation),
+              child: appWidget,
+            )
+          : appWidget,
+    );
   }
 }
 

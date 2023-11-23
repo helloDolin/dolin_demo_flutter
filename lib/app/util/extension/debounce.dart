@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -26,17 +28,16 @@ extension FunctionExt on Function {
 
 // 用一个对象来代理执行事件,防止用传入的方式，导致传入的函数 hashCode 每次都一样
 class FunctionProxy {
+  FunctionProxy(this.target, {int? timeout}) : timeout = timeout ?? 500;
   static final Map<String, bool> _funcThrottle = {};
   static final Map<String, Timer> _funcDebounce = {};
   final Function? target;
 
   final int timeout;
 
-  FunctionProxy(this.target, {int? timeout}) : timeout = timeout ?? 500;
-
-  void throttle() async {
-    String key = hashCode.toString();
-    bool enable = _funcThrottle[key] ?? true;
+  Future<void> throttle() async {
+    final String key = hashCode.toString();
+    final bool enable = _funcThrottle[key] ?? true;
     if (enable) {
       _funcThrottle[key] = false;
       try {
@@ -50,8 +51,8 @@ class FunctionProxy {
   }
 
   void throttleWithTimeout() {
-    String key = hashCode.toString();
-    bool enable = _funcThrottle[key] ?? true;
+    final String key = hashCode.toString();
+    final bool enable = _funcThrottle[key] ?? true;
     if (enable) {
       _funcThrottle[key] = false;
       Timer(Duration(milliseconds: timeout), () {
@@ -62,11 +63,11 @@ class FunctionProxy {
   }
 
   void debounce() {
-    String key = hashCode.toString();
+    final String key = hashCode.toString();
     Timer? timer = _funcDebounce[key];
     timer?.cancel();
     timer = Timer(Duration(milliseconds: timeout), () {
-      Timer? t = _funcDebounce.remove(key);
+      final Timer? t = _funcDebounce.remove(key);
       t?.cancel();
       target?.call();
     });

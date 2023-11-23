@@ -1,15 +1,14 @@
+import 'package:dolin/app/apis/home/home.dart';
+import 'package:dolin/app/data/home/douban250.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../../apis/home/home.dart';
-import '../../../data/home/douban250.dart';
-
 const pageSize = 5;
 
 class MovieListController extends GetxController {
-  final String source;
   MovieListController(this.source);
+  final String source;
 
   late RefreshController refreshController;
   late ScrollController scrollController;
@@ -21,8 +20,9 @@ class MovieListController extends GetxController {
 
   void onRefresh() {
     reqData(isRefresh: true).then((_) {
-      refreshController.refreshCompleted();
-      refreshController.resetNoData();
+      refreshController
+        ..refreshCompleted()
+        ..resetNoData();
     }).catchError((_) {
       refreshController.refreshFailed();
     });
@@ -30,7 +30,7 @@ class MovieListController extends GetxController {
 
   void onLoading() {
     if (data.length % pageSize == 0) {
-      reqData(isRefresh: false).then((_) {
+      reqData().then((_) {
         refreshController.loadComplete();
       }).catchError((_) {
         refreshController.loadFailed();
@@ -55,7 +55,7 @@ class MovieListController extends GetxController {
 
   @override
   void onInit() {
-    refreshController = RefreshController(initialRefresh: false);
+    refreshController = RefreshController();
     scrollController = ScrollController();
     scrollController.addListener(() {
       if (scrollController.position.pixels > 200 &&

@@ -1,33 +1,33 @@
+import 'package:dolin/app/modules/mine/index/controllers/mine_controller.dart';
+import 'package:dolin/app/modules/practice/webview/flutter_inappwebview.dart';
+import 'package:dolin/app/routes/app_pages.dart';
+import 'package:dolin/app/services/user.dart';
 import 'package:dolin/app/util/dialog_util.dart';
 import 'package:dolin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../routes/app_pages.dart';
-import '../../../../services/user.dart';
-import '../../../practice/webview/flutter_inappwebview.dart';
-import '../controllers/mine_controller.dart';
-
 class MineView extends GetView<MineController> {
-  const MineView({Key? key}) : super(key: key);
+  const MineView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: SingleChildScrollView(
-        child: Column(
-          children: [
-            // 已登录
-            _logined(),
-            // 未登录
-            _noLogin(),
-            // 第一个分组
-            _group1(),
-            // 第二个分组
-            _group2(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // 已登录
+              _logined(),
+              // 未登录
+              _noLogin(),
+              // 第一个分组
+              _group1(),
+              // 第二个分组
+              _group2(),
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 
@@ -51,23 +51,25 @@ class MineView extends GetView<MineController> {
               Icons.chevron_right,
               color: Colors.grey,
             ),
-            onTap: () {
-              DialogUtil.showStatement();
-            },
+            onTap: DialogUtil.showStatement,
           ),
           const Divider(height: 0.5),
-          Obx(() => ListTile(
-                leading: const Icon(Icons.language),
-                title: Text(
-                    '${LocaleKeys.mine_switch_language.tr} (${controller.curLanguage.value})'),
-                trailing: const Icon(
-                  Icons.chevron_right,
-                  color: Colors.grey,
-                ),
-                onTap: () {
-                  controller.changeLang();
-                },
-              )),
+          Obx(
+            () => ListTile(
+              leading: const Icon(Icons.language),
+              title: Text(
+                '${LocaleKeys.mine_switch_language.tr}'
+                '(${controller.curLanguage.value})',
+              ),
+              trailing: const Icon(
+                Icons.chevron_right,
+                color: Colors.grey,
+              ),
+              onTap: () {
+                controller.changeLang();
+              },
+            ),
+          ),
           const Divider(height: 0.5),
           ListTile(
             leading: const Icon(Icons.system_update),
@@ -126,7 +128,7 @@ class MineView extends GetView<MineController> {
               color: Colors.grey,
             ),
             onTap: () {
-              Get.toNamed(Routes.SETTINGS);
+              Get.toNamed<void>(Routes.SETTINGS);
             },
           ),
         ],
@@ -135,7 +137,8 @@ class MineView extends GetView<MineController> {
   }
 
   Obx _noLogin() {
-    return Obx(() => Visibility(
+    return Obx(
+      () => Visibility(
         visible: !UserStore.to.isLogin.value,
         child: InkWell(
           onTap: () {
@@ -164,11 +167,11 @@ class MineView extends GetView<MineController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "未登录",
-                        style: TextStyle(height: 1.0),
+                        '未登录',
+                        style: TextStyle(height: 1),
                       ),
                       Text(
-                        "点击前往登录",
+                        '点击前往登录',
                         style: TextStyle(fontSize: 11, color: Colors.grey),
                       ),
                     ],
@@ -182,15 +185,18 @@ class MineView extends GetView<MineController> {
               ),
             ),
           ),
-        )));
+        ),
+      ),
+    );
   }
 
   Obx _logined() {
-    return Obx(() => Visibility(
+    return Obx(
+      () => Visibility(
         visible: UserStore.to.isLogin.value,
         child: InkWell(
           onTap: () {
-            Get.to(() => const FlutterInappwebview());
+            Get.to<void>(() => const FlutterInappwebview());
           },
           child: SizedBox(
             height: 100,
@@ -212,17 +218,21 @@ class MineView extends GetView<MineController> {
                   const SizedBox(
                     width: 10,
                   ),
-                  const Text.rich(TextSpan(
+                  const Text.rich(
+                    TextSpan(
                       text: 'DOLIN',
                       style: TextStyle(fontSize: 20),
                       children: [
                         WidgetSpan(
-                            child: Icon(
-                          Icons.sports_basketball,
-                          color: Colors.blueGrey,
-                          size: 24,
-                        )),
-                      ])),
+                          child: Icon(
+                            Icons.sports_basketball,
+                            color: Colors.blueGrey,
+                            size: 24,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   const Spacer(),
                   const Icon(
                     Icons.chevron_right,
@@ -232,6 +242,8 @@ class MineView extends GetView<MineController> {
               ),
             ),
           ),
-        )));
+        ),
+      ),
+    );
   }
 }

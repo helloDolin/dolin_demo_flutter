@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ArenaPage extends StatefulWidget {
-  const ArenaPage({Key? key, required this.title}) : super(key: key);
+  const ArenaPage({required this.title, super.key});
   final String title;
 
   @override
@@ -31,7 +31,7 @@ class _ArenaPageState extends State<ArenaPage> {
                 },
               )
             },
-            child: Container(
+            child: ColoredBox(
               color: Colors.pinkAccent,
               child: Center(
                 child: GestureDetector(
@@ -39,8 +39,8 @@ class _ArenaPageState extends State<ArenaPage> {
                   onTap: () => debugPrint('Child tapped'),
                   child: Container(
                     color: Colors.blueAccent,
-                    width: 200.0,
-                    height: 200.0,
+                    width: 200,
+                    height: 200,
                   ),
                 ),
               ),

@@ -1,11 +1,10 @@
 // ignore_for_file: file_names
 
 import 'package:dio/dio.dart';
+import 'package:dolin/app/https/custom_error.dart';
+import 'package:dolin/app/https/custom_interceptor.dart';
 import 'package:dolin/app/services/user.dart';
 import 'package:get/get.dart' hide FormData, Response;
-
-import 'custom_error.dart';
-import 'custom_interceptor.dart';
 
 // 单例参考官方例子：
 // https://flutter.cn/community/tutorials/singleton-pattern-in-flutter-n-dart
@@ -13,15 +12,7 @@ import 'custom_interceptor.dart';
 // import 'package:cookie_jar/cookie_jar.dart';
 // import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 class HttpsClient {
-  // HttpsClient._internal();
-
   factory HttpsClient() => _instance; // 工厂构造函数 （具备了 不必每次都去创建新的类实例 的特性）
-
-  static final HttpsClient _instance = HttpsClient._internal();
-
-  static HttpsClient get instance => _instance;
-
-  late Dio _dio;
 
   /// 构造函数私有化，防止被误创建
   HttpsClient._internal() {
@@ -39,10 +30,17 @@ class HttpsClient {
     // _dio.interceptors.add(CookieManager(cookieJar));
     _dio.interceptors.add(CustomInterceptor());
   }
+  // HttpsClient._internal();
+
+  static final HttpsClient _instance = HttpsClient._internal();
+
+  static HttpsClient get instance => _instance;
+
+  late Dio _dio;
 
   /// 读取本地配置
   Map<String, dynamic>? getAuthorizationHeader() {
-    var headers = <String, dynamic>{};
+    final headers = <String, dynamic>{};
 
     if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
       headers['Authorization'] = 'DOLIN-${UserStore.to.token}';
@@ -53,21 +51,23 @@ class HttpsClient {
     return headers;
   }
 
-  Future<dynamic> get(String path,
-      {Map<String, dynamic>? queryParameters,
-      Options? options,
-      bool isShowLoading = true}) async {
+  Future<dynamic> get(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    bool isShowLoading = true,
+  }) async {
     try {
-      Options requestOptions = options ?? Options();
+      final requestOptions = options ?? Options();
       requestOptions.headers = requestOptions.headers ?? {};
-      Map<String, dynamic>? authorization = getAuthorizationHeader();
+      final authorization = getAuthorizationHeader();
       if (authorization != null) {
         requestOptions.headers!.addAll(authorization);
       }
       // if (isShowLoading) {
       //   EasyLoading.show(dismissOnTap: true);
       // }
-      final Response<dynamic> res = await _dio.get(
+      final res = await _dio.get<dynamic>(
         path,
         queryParameters: queryParameters,
         options: options,
@@ -81,7 +81,7 @@ class HttpsClient {
         throw CustomError(message: '请求失败:${e.response?.statusCode ?? -1}');
       }
       throw CustomError(
-        message: "请求失败,请检查网络",
+        message: '请求失败,请检查网络',
       );
     }
   }
@@ -92,13 +92,13 @@ class HttpsClient {
     Options? options,
   }) async {
     try {
-      Options requestOptions = options ?? Options();
+      final requestOptions = options ?? Options();
       requestOptions.headers = requestOptions.headers ?? {};
-      Map<String, dynamic>? authorization = getAuthorizationHeader();
+      final authorization = getAuthorizationHeader();
       if (authorization != null) {
         requestOptions.headers!.addAll(authorization);
       }
-      final Response<dynamic> res = await _dio.post(
+      final res = await _dio.post<dynamic>(
         path,
         data: queryParameters,
         options: requestOptions,
@@ -111,7 +111,7 @@ class HttpsClient {
       if (e.type == DioErrorType.badResponse) {
         throw CustomError(message: '请求失败:${e.response?.statusCode ?? -1}');
       }
-      throw CustomError(message: "请求失败,请检查网络");
+      throw CustomError(message: '请求失败,请检查网络');
     }
   }
 }

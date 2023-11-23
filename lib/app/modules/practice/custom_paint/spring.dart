@@ -1,7 +1,6 @@
+import 'package:dolin/app/modules/practice/custom_paint/tool/coordinate.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'tool/coordinate.dart';
 
 const double _kDefaultSpringHeight = 200; // 弹簧默认高度
 const double _kRateOfMove =
@@ -49,8 +48,9 @@ class _SpringState extends State<Spring> with SingleTickerProviderStateMixin {
     debugPrint('initState mounted：$mounted');
 
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300))
-      ..addListener(() {
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    )..addListener(() {
         _updateHeightByAnim();
       });
     _animation =
@@ -75,9 +75,7 @@ class _SpringState extends State<Spring> with SingleTickerProviderStateMixin {
         onVerticalDragUpdate: _updateHeight,
         onVerticalDragEnd: _animateToDefault,
         child: SafeArea(
-          child: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
+          child: SizedBox.expand(
             child: CustomPaint(
               painter: Painter(height: height),
             ),
@@ -89,28 +87,26 @@ class _SpringState extends State<Spring> with SingleTickerProviderStateMixin {
 }
 
 class Painter extends CustomPainter {
+  Painter({required this.height, this.count = 20}) : super(repaint: height);
   // 将 height 类型定义为 ValueListenable<double> ，并通过 super(repaint: height) 将画板与可监听对象绑定。
   // 这样，当 height 值发生变化，就会通知直接画板重绘
   final ValueListenable<double> height;
   final int count;
 
-  Painter({required this.height, this.count = 20}) : super(repaint: height);
-
   @override
   void paint(Canvas canvas, Size size) {
     Coordinate().paint(canvas, size);
     canvas.translate(size.width / 2 - _kSpringWidth / 2, size.height / 2);
-    double space = height.value / count;
-    Path path = Path();
-    path.relativeLineTo(_kSpringWidth, 0);
+    final double space = height.value / count;
+    final Path path = Path()..relativeLineTo(_kSpringWidth, 0);
     for (int i = 1; i < count; i++) {
-      if (i % 2 == 1) {
+      if ((i % 2).isOdd) {
         path.relativeLineTo(-_kSpringWidth, -space);
       } else {
         path.relativeLineTo(_kSpringWidth, -space);
       }
     }
-    if (count % 2 == 0) {
+    if ((count % 2) == 0) {
       path.relativeLineTo(_kSpringWidth, 0);
     } else {
       path.relativeLineTo(-_kSpringWidth, 0);

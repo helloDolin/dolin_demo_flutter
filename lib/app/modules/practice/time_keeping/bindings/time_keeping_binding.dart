@@ -1,6 +1,5 @@
+import 'package:dolin/app/modules/practice/time_keeping/controllers/time_keeping_controller.dart';
 import 'package:get/get.dart';
-
-import '../controllers/time_keeping_controller.dart';
 
 class TimeKeepingBinding extends Bindings {
   @override

@@ -23,9 +23,13 @@ class UserStore extends GetxController {
     super.onInit();
     token = StorageService.instance.getValue('user_token', '');
     isLogin.value = token.isNotEmpty;
-    var profileOffline = StorageService.instance.getValue('user_profile', '');
+    final profileOffline = StorageService.instance.getValue('user_profile', '');
     if (profileOffline.isNotEmpty) {
-      _profile(UserLoginResponseEntity.fromJson(jsonDecode(profileOffline)));
+      _profile(
+        UserLoginResponseEntity.fromJson(
+          jsonDecode(profileOffline) as Map<String, dynamic>,
+        ),
+      );
     }
   }
 
@@ -39,20 +43,20 @@ class UserStore extends GetxController {
   // 获取 profile
   Future<void> getProfile() async {
     if (token.isEmpty) return;
-    var result = await UserAPI.profile();
+    final result = await UserAPI.profile();
     _profile(result);
-    StorageService.instance.setValue('user_profile', jsonEncode(result));
+    await StorageService.instance.setValue('user_profile', jsonEncode(result));
   }
 
   // 保存 profile
   Future<void> saveProfile(UserLoginResponseEntity profile) async {
-    StorageService.instance.setValue('user_profile', jsonEncode(profile));
+    await StorageService.instance.setValue('user_profile', jsonEncode(profile));
   }
 
   // 注销
   Future<void> onLogout() async {
     if (isLogin.value) await UserAPI.logout();
-    await StorageService.instance.removeValue('user_token');
+    await StorageService.instance.removeValue<void>('user_token');
     isLogin.value = false;
     token = '';
   }

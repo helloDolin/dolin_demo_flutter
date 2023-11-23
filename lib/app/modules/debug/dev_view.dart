@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-const double kBallWidth = 60.0;
+const double kBallWidth = 60;
 
 late OverlayEntry _overlayEntry;
 RxDouble offsetX = (ScreenUtil().screenWidth - kBallWidth).obs;
 RxDouble offsetY = (ScreenUtil().screenHeight / 2).obs;
 
 void insertDevView() {
-  _overlayEntry = OverlayEntry(builder: (BuildContext context) {
-    return AnimatedPositioned(
+  _overlayEntry = OverlayEntry(
+    builder: (BuildContext context) {
+      return AnimatedPositioned(
         top: offsetY.value,
         left: offsetX.value,
-        duration: const Duration(seconds: 0),
+        duration: Duration.zero,
         child: Draggable(
           onDragEnd: (details) {
             if (details.offset.dx < 0) {
@@ -42,8 +43,10 @@ void insertDevView() {
           childWhenDragging: const SizedBox.shrink(),
           feedback: const FloatBall(),
           child: const FloatBall(),
-        ));
-  });
+        ),
+      );
+    },
+  );
   Overlay.of(Get.overlayContext!).insert(_overlayEntry);
 }
 
@@ -57,16 +60,17 @@ class FloatBall extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Get.to(() => const LogView());
+          Get.to<LogView>(() => const LogView());
         },
         child: Container(
           alignment: Alignment.center,
           width: kBallWidth,
           height: kBallWidth,
           decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadius.all(Radius.circular(kBallWidth / 2)),
-              color: Colors.blue.withOpacity(0.5)),
+            borderRadius:
+                const BorderRadius.all(Radius.circular(kBallWidth / 2)),
+            color: Colors.blue.withOpacity(0.5),
+          ),
           child: const Text(
             'log\ninfo',
             textAlign: TextAlign.center,

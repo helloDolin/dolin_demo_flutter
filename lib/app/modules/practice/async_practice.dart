@@ -4,11 +4,11 @@ import 'dart:async';
 
 import 'package:dolin/app/common_widgets/code/code_widget.dart';
 import 'package:dolin/app/common_widgets/code/highlighter_style.dart';
+import 'package:dolin/app/util/toast_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 class AsyncPage extends StatefulWidget {
-  const AsyncPage({Key? key}) : super(key: key);
+  const AsyncPage({super.key});
 
   @override
   State<AsyncPage> createState() => _AsyncPageState();
@@ -42,7 +42,7 @@ class _AsyncPageState extends State<AsyncPage> {
       debugPrint('f1');
       _debugText += 'f1\n';
     }); // 声明一个匿名 Future
-    Future fx = Future(() => null); // 声明 Future fx，其执行体为 null
+    final fx = Future(() => null); // 声明 Future fx，其执行体为 null
 
     // 声明一个匿名 Future，并注册了两个 then。在第一个 then 回调里启动了一个微任务
     Future(() {
@@ -66,10 +66,12 @@ class _AsyncPageState extends State<AsyncPage> {
       debugPrint('f6');
       _debugText += 'f6\n';
     })
-        .then((_) => Future(() {
-              debugPrint('f7');
-              _debugText += 'f7\n';
-            }))
+        .then(
+      (_) => Future(() {
+        debugPrint('f7');
+        _debugText += 'f7\n';
+      }),
+    )
         .then((_) {
       debugPrint('f8');
       _debugText += 'f8\n';
@@ -149,10 +151,10 @@ void test3() {
         onPressed: () async {
           _debugText = '';
           test3();
-          SmartDialog.showLoading();
-          await Future.delayed(const Duration(seconds: 1));
+          showLoading();
+          await Future<void>.delayed(const Duration(seconds: 1));
           if (mounted) {
-            SmartDialog.dismiss();
+            hideLoading();
             setState(() {});
           }
         },

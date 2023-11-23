@@ -1,3 +1,5 @@
+// ignore_for_file: strict_raw_type
+
 import 'dart:async';
 import 'dart:math';
 
@@ -29,7 +31,7 @@ class _StreamGameState extends State<StreamGame> {
           stream: scoreController.stream.transform(MyStreamTransformer()),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text('当前得分为：${snapshot.data.toString()}');
+              return Text('当前得分为：${snapshot.data}');
             }
             return const Text('当前得分为:0');
           },
@@ -38,15 +40,16 @@ class _StreamGameState extends State<StreamGame> {
       body: Column(
         children: [
           Expanded(
-              child: Stack(
-            children: List.generate(
-              5,
-              (index) => Puzzle(
-                inputStream: inputStreamController.stream,
-                scoreController: scoreController,
+            child: Stack(
+              children: List.generate(
+                5,
+                (index) => Puzzle(
+                  inputStream: inputStreamController.stream,
+                  scoreController: scoreController,
+                ),
               ),
             ),
-          )),
+          ),
           Align(
             alignment: Alignment.bottomLeft,
             child: KeyPannel(inputStreamControllerl: inputStreamController),
@@ -58,7 +61,7 @@ class _StreamGameState extends State<StreamGame> {
 }
 
 class KeyPannel extends StatelessWidget {
-  const KeyPannel({super.key, required this.inputStreamControllerl});
+  const KeyPannel({required this.inputStreamControllerl, super.key});
   final StreamController inputStreamControllerl;
 
   @override
@@ -88,9 +91,9 @@ class KeyPannel extends StatelessWidget {
 
 class Puzzle extends StatefulWidget {
   const Puzzle({
-    super.key,
     required this.inputStream,
     required this.scoreController,
+    super.key,
   });
   final Stream inputStream;
   final StreamController scoreController;
@@ -108,11 +111,11 @@ class _PuzzleState extends State<Puzzle> with SingleTickerProviderStateMixin {
   late final AnimationController _ac = AnimationController(vsync: this)
     ..duration =
         Duration(milliseconds: (Random().nextDouble() * 5000).toInt() + 5000)
-    ..forward(from: 0.0)
+    ..forward(from: 0)
     ..addListener(() {
       if (_ac.isCompleted) {
         // 减分
-        _ac.forward(from: 0.0);
+        _ac.forward(from: 0);
         widget.scoreController.add(-3);
       }
     });
@@ -125,7 +128,7 @@ class _PuzzleState extends State<Puzzle> with SingleTickerProviderStateMixin {
       // 加分
       if (event == _a + _b) {
         _reset();
-        _ac.forward(from: 0.0);
+        _ac.forward(from: 0);
         widget.scoreController.add(5);
       }
     });

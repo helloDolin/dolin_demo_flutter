@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, always_use_package_imports, inference_failure_on_instance_creation
 
 import 'package:get/get.dart';
 
@@ -59,21 +59,22 @@ class AppPages {
       ],
     ),
     GetPage(
-        name: _Paths.MINE,
-        page: () => const MineView(),
-        binding: MineBinding(),
-        children: [
-          GetPage(
-            name: _Paths.LOGIN,
-            page: () => const LoginView(),
-            binding: LoginBinding(),
-          ),
-          GetPage(
-            name: _Paths.SETTINGS,
-            page: () => const SettingsView(),
-            binding: SettingsBinding(),
-          ),
-        ]),
+      name: _Paths.MINE,
+      page: () => const MineView(),
+      binding: MineBinding(),
+      children: [
+        GetPage(
+          name: _Paths.LOGIN,
+          page: () => const LoginView(),
+          binding: LoginBinding(),
+        ),
+        GetPage(
+          name: _Paths.SETTINGS,
+          page: () => const SettingsView(),
+          binding: SettingsBinding(),
+        ),
+      ],
+    ),
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),

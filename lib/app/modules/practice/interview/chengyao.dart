@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:dolin/app/modules/practice/interview/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'model.dart';
 
 class ChengYaoJianKang extends StatefulWidget {
   const ChengYaoJianKang({super.key});
@@ -16,9 +15,9 @@ class _ChengYaoJianKangState extends State<ChengYaoJianKang> {
   final _res = <String>[];
 
   Future<ModuleModel> getModules() async {
-    String jsonData = await rootBundle.loadString("assets/json/modules.json");
+    final jsonData = await rootBundle.loadString('assets/json/modules.json');
     final jsonresult = json.decode(jsonData);
-    return ModuleModel.fromJson(jsonresult);
+    return ModuleModel.fromJson(jsonresult as Map<String, dynamic>);
   }
 
   @override
@@ -57,16 +56,17 @@ class _ChengYaoJianKangState extends State<ChengYaoJianKang> {
         ],
       ),
       floatingActionButton: TextButton(
-          onPressed: () async {
-            ModuleModel obj = await getModules();
-            for (var item in obj.modules!) {
-              loadModules(item);
-            }
-            debugPrint(_res.toString());
-          },
-          child: const Text(
-            '点击测试',
-          )),
+        onPressed: () async {
+          final obj = await getModules();
+          for (final item in obj.modules!) {
+            loadModules(item);
+          }
+          debugPrint(_res.toString());
+        },
+        child: const Text(
+          '点击测试',
+        ),
+      ),
     );
   }
 
@@ -78,7 +78,7 @@ class _ChengYaoJianKangState extends State<ChengYaoJianKang> {
         _res.add(module.name!);
       }
     } else {
-      for (var item in module.dependencies!) {
+      for (final item in module.dependencies!) {
         loadModules(Module()..name = item);
       }
     }
@@ -104,7 +104,7 @@ class _ChengYaoJianKangState extends State<ChengYaoJianKang> {
 }
 
 class DiagonalWidget extends StatelessWidget {
-  const DiagonalWidget({super.key, required this.children});
+  const DiagonalWidget({required this.children, super.key});
 
   final List<Widget> children;
 
@@ -123,8 +123,8 @@ class DiagonalWidget extends StatelessWidget {
 class MyDelegate extends MultiChildLayoutDelegate {
   @override
   void performLayout(Size size) {
-    Offset offset = Offset.zero;
-    for (int i = 0;; i++) {
+    var offset = Offset.zero;
+    for (var i = 0;; i++) {
       if (hasChild(i)) {
         final childSize = layoutChild(i, BoxConstraints.loose(size));
         positionChild(i, offset);
@@ -142,12 +142,12 @@ class MyDelegate extends MultiChildLayoutDelegate {
 }
 
 class Tag extends StatelessWidget {
-  const Tag({super.key, required this.content});
+  const Tag({required this.content, super.key});
   final String content;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ColoredBox(
       color: Colors.red,
       child: Row(
         mainAxisSize: MainAxisSize.min,

@@ -20,13 +20,16 @@ class SimulateClickPage extends StatelessWidget {
             ),
           ),
           TextButton(
-              onPressed: () {
-                GestureBinding.instance.handlePointerEvent(
-                    const PointerDownEvent(position: Offset(50, 300)));
-                GestureBinding.instance.handlePointerEvent(
-                    const PointerUpEvent(position: Offset(50, 300)));
-              },
-              child: const Text('模拟点击')),
+            onPressed: () {
+              GestureBinding.instance.handlePointerEvent(
+                const PointerDownEvent(position: Offset(50, 300)),
+              );
+              GestureBinding.instance.handlePointerEvent(
+                const PointerUpEvent(position: Offset(50, 300)),
+              );
+            },
+            child: const Text('模拟点击'),
+          ),
         ],
       ),
     );

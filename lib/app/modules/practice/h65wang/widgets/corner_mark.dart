@@ -12,12 +12,12 @@ enum CornerMarkPosition {
 // 右上角带有角标
 class CornerMark extends StatelessWidget {
   const CornerMark({
-    super.key,
     required this.child,
     required this.markTitle,
     required this.markTitleSize,
     required this.markBgColor,
     required this.markTitleColor,
+    super.key,
     this.cornerMarkPosition = CornerMarkPosition.topRight,
   });
 
@@ -39,13 +39,14 @@ class CornerMark extends StatelessWidget {
     Alignment transformAlignment = Alignment.center;
     double angle = 0;
     final textSpan = TextSpan(
-        text: markTitle,
-        style: TextStyle(fontSize: markTitleSize, color: markTitleColor));
+      text: markTitle,
+      style: TextStyle(fontSize: markTitleSize, color: markTitleColor),
+    );
     final textPainter =
         TextPainter(text: textSpan, textDirection: TextDirection.ltr)..layout();
-    double w = textPainter.width * 2;
+    final double w = textPainter.width * 2;
 
-    double h = textPainter.height;
+    final double h = textPainter.height;
     //double top = math.sqrt(
     // (w - math.sqrt(h * h + h * h)) * (w - math.sqrt(h * h + h * h)) / 2)
     // 公式简化
@@ -60,7 +61,6 @@ class CornerMark extends StatelessWidget {
         right = null;
         top = offset;
         bottom = null;
-        break;
       case CornerMarkPosition.topRight:
         transformAlignment = Alignment.bottomRight;
         angle = math.pi / 4;
@@ -68,7 +68,6 @@ class CornerMark extends StatelessWidget {
         right = 0;
         top = offset;
         bottom = null;
-        break;
       case CornerMarkPosition.bottomLeft:
         transformAlignment = Alignment.topLeft;
         angle = math.pi / 4;
@@ -76,7 +75,6 @@ class CornerMark extends StatelessWidget {
         right = null;
         top = null;
         bottom = offset;
-        break;
       case CornerMarkPosition.bottomRight:
         transformAlignment = Alignment.topRight;
         angle = -math.pi / 4;
@@ -84,8 +82,9 @@ class CornerMark extends StatelessWidget {
         right = 0;
         top = null;
         bottom = offset;
-        break;
+      // ignore: no_default_cases
       default:
+        throw Exception('无此类型');
     }
 
     return ClipRect(

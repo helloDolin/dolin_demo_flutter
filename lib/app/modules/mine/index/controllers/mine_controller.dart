@@ -1,11 +1,10 @@
 import 'package:dolin/app/constants/app_assets.dart';
+import 'package:dolin/app/routes/app_pages.dart';
+import 'package:dolin/app/services/app_settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-
-import '../../../../routes/app_pages.dart';
-import '../../../../services/app_settings_service.dart';
 
 class MineController extends GetxController {
   final AppSettingsService settings = AppSettingsService.instance;
@@ -13,7 +12,7 @@ class MineController extends GetxController {
 
   @override
   void onInit() {
-    String langCode = Get.locale!.languageCode;
+    final langCode = Get.locale!.languageCode;
     if (langCode == 'zh') {
       curLanguage.value = 'Change to English';
     } else if (langCode == 'en') {
@@ -24,7 +23,7 @@ class MineController extends GetxController {
 
   /// 切换语言
   void changeLang() {
-    String langCode = Get.locale!.languageCode;
+    final langCode = Get.locale!.languageCode;
     if (langCode == 'zh') {
       const locale = Locale('en', 'US');
       Get.updateLocale(locale);
@@ -38,7 +37,7 @@ class MineController extends GetxController {
 
   /// 登录
   void login() {
-    Get.toNamed(Routes.LOGIN);
+    Get.toNamed<void>(Routes.LOGIN);
   }
 
   /// 主题设置
@@ -47,10 +46,10 @@ class MineController extends GetxController {
   }
 
   void checkUpdate() {
-    Get.dialog(
+    Get.dialog<void>(
       AlertDialog(
         title: const Text(
-          "发现新版本 2.0.0",
+          '发现新版本 2.0.0',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 18),
         ),
@@ -65,10 +64,8 @@ class MineController extends GetxController {
             children: [
               Expanded(
                 child: TextButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: const Text("取消"),
+                  onPressed: Get.back<void>,
+                  child: const Text('取消'),
                 ),
               ),
               const SizedBox(
@@ -85,7 +82,7 @@ class MineController extends GetxController {
                       mode: LaunchMode.externalApplication,
                     );
                   },
-                  child: const Text("更新"),
+                  child: const Text('更新'),
                 ),
               ),
             ],
@@ -95,9 +92,9 @@ class MineController extends GetxController {
     );
   }
 
-  void about() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    Get.dialog(
+  Future<void> about() async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    await Get.dialog<void>(
       AboutDialog(
         applicationIcon: Container(
           decoration: BoxDecoration(

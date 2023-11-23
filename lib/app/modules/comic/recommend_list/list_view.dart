@@ -1,20 +1,16 @@
 import 'package:dolin/app/common_widgets/keepalive_wrapper.dart';
 import 'package:dolin/app/common_widgets/page_list/dl_page_list_view.dart';
+import 'package:dolin/app/data/comic/recommend_model.dart';
+import 'package:dolin/app/modules/comic/novel_detail/views/novel_detail_view.dart';
+import 'package:dolin/app/modules/comic/recommend_list/list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
 import 'package:get/get.dart';
 
-import '../../../data/comic/recommend_model.dart';
-import '../novel_detail/views/novel_detail_view.dart';
-import 'list_controller.dart';
-
 class ListView extends StatelessWidget {
+  ListView({super.key}) : controller = Get.put(ListController());
   final ListController controller;
-
-  ListView({Key? key})
-      : controller = Get.put(ListController()),
-        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,7 @@ class ListView extends StatelessWidget {
         loadMore: false,
         showPageLoadding: true,
         itemBuilder: (context, index) {
-          final RecommendModel item = controller.list[index];
+          final item = controller.list[index];
           if (item.categoryId == 57) {
             return _buildBanner(item);
           }
@@ -45,7 +41,6 @@ class ListView extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(child: Text(item.title.toString())),
               SizedBox(
@@ -63,13 +58,15 @@ class ListView extends StatelessWidget {
             crossAxisSpacing: 12,
             itemCount: item.data!.length,
             itemBuilder: (context, index) {
-              final RecommendItemModel obj = item.data![index];
+              final obj = item.data![index];
               return InkWell(
                 onTap: () {
-                  Get.to(() => NovelDetailView(
-                        id: obj.id ?? -1,
-                        title: obj.title ?? '详情',
-                      ));
+                  Get.to<NovelDetailView>(
+                    () => NovelDetailView(
+                      id: obj.id ?? -1,
+                      title: obj.title ?? '详情',
+                    ),
+                  );
                 },
                 borderRadius: const BorderRadius.all(Radius.circular(4)),
                 child: Column(
@@ -115,13 +112,13 @@ class ListView extends StatelessWidget {
     );
   }
 
-  Widget buildShowMore({required Function() onTap}) {
+  Widget buildShowMore({required void Function() onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: const Row(
         children: [
           Text(
-            "查看更多",
+            '查看更多',
             style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
           Icon(Icons.chevron_right, size: 18, color: Colors.grey),
@@ -154,9 +151,9 @@ class ListView extends StatelessWidget {
                         color: Colors.white,
                         shadows: [
                           Shadow(
-                            blurRadius: 6.0,
+                            blurRadius: 6,
                             color: Colors.black45,
-                            offset: Offset(2.0, 2.0),
+                            offset: Offset(2, 2),
                           ),
                         ],
                       ),
@@ -170,25 +167,28 @@ class ListView extends StatelessWidget {
             // controller.openDetail(item.data[i]);
           },
           pagination: SwiperCustomPagination(
-              builder: (context, config) => Align(
-                    alignment: const Alignment(1, 1),
-                    child: Container(
-                      margin: const EdgeInsets.only(right: 0, bottom: 8),
-                      height: 30,
-                      width: 40,
-                      alignment: const Alignment(0.3, 0),
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 0, 0, 0.2),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              bottomLeft: Radius.circular(15))),
-                      child: Text(
-                        '${config.activeIndex + 1}/${config.itemCount}',
-                        style:
-                            const TextStyle(fontSize: 13, color: Colors.white),
-                      ),
-                    ),
-                  )),
+            builder: (context, config) => Align(
+              // ignore: use_named_constants
+              alignment: const Alignment(1, 1),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                height: 30,
+                width: 40,
+                alignment: const Alignment(0.3, 0),
+                decoration: const BoxDecoration(
+                  color: Color.fromRGBO(0, 0, 0, 0.2),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                  ),
+                ),
+                child: Text(
+                  '${config.activeIndex + 1}/${config.itemCount}',
+                  style: const TextStyle(fontSize: 13, color: Colors.white),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -19,9 +19,10 @@ class _FlutterInappwebviewState extends State<FlutterInappwebview> {
       ),
       body: Column(
         children: [
-          _showLoading
-              ? const LinearProgressIndicator()
-              : const SizedBox.shrink(),
+          if (_showLoading)
+            const LinearProgressIndicator()
+          else
+            const SizedBox.shrink(),
           Expanded(
             child: InAppWebView(
               onTitleChanged: (controller, title) {

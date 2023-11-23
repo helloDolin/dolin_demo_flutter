@@ -57,9 +57,7 @@ class _BezierPageState extends State<BezierPage> {
         onPanDown: _onPanDown,
         // onPanEnd: _onPanEnd,
         onPanUpdate: _onPanUpdate,
-        child: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
+        child: SizedBox.expand(
           child: CustomPaint(
             painter: Painter(touchInfo),
           ),
@@ -90,16 +88,17 @@ class Painter extends CustomPainter {
     pos = repaint.points
         .map((e) => e.translate(-size.width / 2, -size.height / 2))
         .toList();
-    Path path = Path();
-    Paint paint = Paint()
+    final Path path = Path();
+    final Paint paint = Paint()
       ..color = Colors.orange
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     if (pos.length < 3) {
       canvas.drawPoints(PointMode.points, pos, _helpPaint..strokeWidth = 8);
     } else {
-      path.moveTo(pos[0].dx, pos[0].dy);
-      path.quadraticBezierTo(pos[1].dx, pos[1].dy, pos[2].dx, pos[2].dy);
+      path
+        ..moveTo(pos[0].dx, pos[0].dy)
+        ..quadraticBezierTo(pos[1].dx, pos[1].dy, pos[2].dx, pos[2].dy);
       canvas.drawPath(path, paint);
       _drawHelp(canvas);
       _drawSelectPos(canvas, size);
@@ -112,17 +111,19 @@ class Painter extends CustomPainter {
     if (selectPos == null) return;
     selectPos = selectPos.translate(-size.width / 2, -size.height / 2);
     canvas.drawCircle(
-        selectPos,
-        10,
-        _helpPaint
-          ..color = Colors.green
-          ..strokeWidth = 2);
+      selectPos,
+      10,
+      _helpPaint
+        ..color = Colors.green
+        ..strokeWidth = 2,
+    );
   }
 
   void _drawHelp(Canvas canvas) {
     _helpPaint.color = Colors.purple;
-    canvas.drawPoints(PointMode.polygon, pos, _helpPaint..strokeWidth = 1);
-    canvas.drawPoints(PointMode.points, pos, _helpPaint..strokeWidth = 8);
+    canvas
+      ..drawPoints(PointMode.polygon, pos, _helpPaint..strokeWidth = 1)
+      ..drawPoints(PointMode.points, pos, _helpPaint..strokeWidth = 8);
   }
 
   @override

@@ -9,32 +9,28 @@ class Log {
     ),
     printer: PrettyPrinter(
       methodCount: 0,
-      errorMethodCount: 8,
-      lineLength: 120,
-      colors: true,
-      printEmojis: true,
       printTime: true,
     ),
   );
 
   /// Debug log
-  static d(String message) {
-    logger.d("${DateTime.now().toString()}\n$message");
+  static void d(String message) {
+    logger.d('${DateTime.now()}\n$message');
   }
 
   /// Info log
-  static i(String message) {
-    logger.i("${DateTime.now().toString()}\n$message");
+  static void i(String message) {
+    logger.i('${DateTime.now()}\n$message');
   }
 
   /// Error log
-  static e(String message, StackTrace stackTrace) {
-    logger.e("${DateTime.now().toString()}\n$message", null, stackTrace);
+  static void e(String message, StackTrace stackTrace) {
+    logger.e('${DateTime.now()}\n$message', null, stackTrace);
   }
 
   /// Warning log
-  static w(String message) {
-    logger.w("${DateTime.now().toString()}\n$message");
+  static void w(String message) {
+    logger.w('${DateTime.now()}\n$message');
   }
 
   static void logPrint(dynamic obj) {

@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 class NovelDetailController extends GetxController {
   RxInt count = 0.obs;
   void share(String url, {String content = '内容'}) {
+    // ignore: inference_failure_on_function_invocation
     showModalBottomSheet(
       context: Get.context!,
       shape: const RoundedRectangleBorder(
@@ -25,9 +26,9 @@ class NovelDetailController extends GetxController {
         children: [
           ListTile(
             leading: const Icon(Icons.copy),
-            title: const Text("复制链接"),
+            title: const Text('复制链接'),
             onTap: () {
-              Get.back();
+              Get.back<void>();
               ClipboardUtil.setDataToast(url);
             },
           ),
@@ -35,27 +36,27 @@ class NovelDetailController extends GetxController {
             visible: content.isNotEmpty,
             child: ListTile(
               leading: const Icon(Icons.copy),
-              title: const Text("复制标题与链接"),
+              title: const Text('复制标题与链接'),
               onTap: () {
-                Get.back();
-                ClipboardUtil.setDataToast("$content\n$url");
+                Get.back<void>();
+                ClipboardUtil.setDataToast('$content\n$url');
               },
             ),
           ),
           ListTile(
             leading: const Icon(Icons.public),
-            title: const Text("浏览器打开"),
+            title: const Text('浏览器打开'),
             onTap: () {
-              Get.back();
+              Get.back<void>();
               launchUrlString(url, mode: LaunchMode.externalApplication);
             },
           ),
           ListTile(
             leading: const Icon(Icons.share),
-            title: const Text("系统分享"),
+            title: const Text('系统分享'),
             onTap: () {
-              Get.back();
-              Share.share(content.isEmpty ? url : "$content\n$url");
+              Get.back<void>();
+              Share.share(content.isEmpty ? url : '$content\n$url');
             },
           ),
         ],

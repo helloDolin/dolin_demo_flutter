@@ -16,16 +16,16 @@ enum TimeKeepStatus {
 
 /// 计时模型
 class TimeRecordModel {
+  const TimeRecordModel({
+    required this.record,
+    required this.addition,
+  });
+
   /// 当前时刻
   final Duration record;
 
   /// 与上一时刻的差值
   final Duration addition;
-
-  const TimeRecordModel({
-    required this.record,
-    required this.addition,
-  });
 }
 
 class TimeKeepingController extends GetxController {
@@ -73,7 +73,7 @@ class TimeKeepingController extends GetxController {
 
   /// 记录
   void onRecoder() {
-    Duration current = duration.value;
+    final Duration current = duration.value;
     Duration addition = duration.value;
     if (records.isNotEmpty) {
       addition = Duration.zero - records.last.record;
@@ -83,12 +83,13 @@ class TimeKeepingController extends GetxController {
 
   /// duration 转字符串
   String durationToString(Duration duration) {
-    int minus = duration.inMinutes % 60;
-    int second = duration.inSeconds % 60;
-    int milliseconds = duration.inMilliseconds % 1000;
-    String commonStr =
+    final int minus = duration.inMinutes % 60;
+    final int second = duration.inSeconds % 60;
+    final int milliseconds = duration.inMilliseconds % 1000;
+    final String commonStr =
         '${minus.toString().padLeft(2, "0")}:${second.toString().padLeft(2, "0")}';
-    String highlightStr = ".${(milliseconds ~/ 10).toString().padLeft(2, "0")}";
+    final String highlightStr =
+        ".${(milliseconds ~/ 10).toString().padLeft(2, "0")}";
     return commonStr + highlightStr;
   }
 

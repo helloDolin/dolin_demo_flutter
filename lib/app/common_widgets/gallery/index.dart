@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-void openGallery(
-    BuildContext context, final int index, final List<String> imgUrls) {
+void openGallery<T>(
+  BuildContext context,
+  int index,
+  List<String> imgUrls,
+) {
   Navigator.push(
     context,
-    MaterialPageRoute(
+    MaterialPageRoute<T>(
       builder: (context) => GalleryPhotoViewWrapper(
         galleryItems: imgUrls,
         backgroundDecoration: const BoxDecoration(
           color: Colors.black,
         ),
         initialIndex: index,
-        scrollDirection: Axis.horizontal,
       ),
     ),
   );
@@ -21,13 +23,13 @@ void openGallery(
 
 class GalleryPhotoViewWrapper extends StatefulWidget {
   GalleryPhotoViewWrapper({
+    required this.galleryItems,
     super.key,
     this.loadingBuilder,
     this.backgroundDecoration,
     this.minScale,
     this.maxScale,
     this.initialIndex = 0,
-    required this.galleryItems,
     this.scrollDirection = Axis.horizontal,
   }) : pageController = PageController(initialPage: initialIndex);
 
@@ -81,28 +83,28 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
                 scrollDirection: widget.scrollDirection,
               ),
               Container(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20),
                 child: Text(
-                  "${currentIndex + 1} / ${widget.galleryItems.length}",
+                  '${currentIndex + 1} / ${widget.galleryItems.length}',
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 17.0,
-                    decoration: null,
+                    fontSize: 17,
                   ),
                 ),
               ),
               Positioned(
-                  right: 20,
-                  top: 100,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.close,
-                      color: Colors.white,
-                    ),
-                  ))
+                right: 20,
+                top: 100,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                  ),
+                ),
+              )
             ],
           ),
         ),

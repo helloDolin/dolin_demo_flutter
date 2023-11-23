@@ -1,8 +1,7 @@
+import 'package:dolin/app/modules/home/detail/detail_controller.dart';
+import 'package:dolin/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../routes/app_pages.dart';
-import 'detail_controller.dart';
 
 class DetailView extends StatefulWidget {
   const DetailView({super.key});
@@ -41,17 +40,21 @@ class _DetailViewState extends State<DetailView> {
             ),
             Obx(() => Text(controller.count.value.toString())),
             TextButton(
-                onPressed: () {
-                  controller.add();
-                },
-                child: const Text('+'))
+              onPressed: () {
+                controller.add();
+              },
+              child: const Text('+'),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(Routes.DETAIL,
-              arguments: id + 1, preventDuplicates: false);
+          Get.toNamed<void>(
+            Routes.DETAIL,
+            arguments: id + 1,
+            preventDuplicates: false,
+          );
         },
         child: const Text('detail'),
       ),

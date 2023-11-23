@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class GalleryView extends StatefulWidget {
   GalleryView({
+    required this.builder,
     super.key,
     this.scrollController,
     this.itemCount,
-    required this.builder,
     this.initialPerRow = 3,
     this.minCrossAxisCount = 1,
     this.maxCrossAxisCount = 7,
@@ -13,21 +13,20 @@ class GalleryView extends StatefulWidget {
   }) : now = DateTime.now();
 
   GalleryView.build({
-    Key? key,
+    required this.builder,
+    super.key,
     this.scrollController,
     this.itemCount,
-    required this.builder,
     this.initialPerRow = 3,
     this.minCrossAxisCount = 1,
     this.maxCrossAxisCount = 7,
     this.duration = const Duration(seconds: 1),
   })  : now = DateTime.now(),
-        assert(minCrossAxisCount < 1, 'minCrossAxisCount 最小值为 1'),
-        super(key: key);
+        assert(minCrossAxisCount < 1, 'minCrossAxisCount 最小值为 1');
 
   final ScrollController? scrollController;
   final int? itemCount;
-  final Function(BuildContext context, int index) builder;
+  final Widget Function(BuildContext context, int index) builder;
   final int initialPerRow;
   final int minCrossAxisCount;
   final int maxCrossAxisCount;
@@ -42,8 +41,8 @@ class _GalleryViewState extends State<GalleryView> {
   late final ScrollController _scrollController =
       widget.scrollController ?? ScrollController();
 
-  double _maxWidth = 0.0;
-  double _size = 0.0; // item size
+  double _maxWidth = 0;
+  double _size = 0; // item size
   double _prevSize = 0;
 
   @override
@@ -77,7 +76,7 @@ class _GalleryViewState extends State<GalleryView> {
     );
   }
 
-  _snapToGrid() {
+  void _snapToGrid() {
     final countPerRow = (_maxWidth / _size)
         .round() // 四舍五入
         .clamp(widget.minCrossAxisCount, widget.maxCrossAxisCount);
@@ -113,13 +112,15 @@ class _GalleryViewState extends State<GalleryView> {
           // 打破上级约束，为数不多的打破父级约束的组件
           maxWidth: double.infinity,
           alignment: Alignment.centerLeft,
-          child: Row(children: [
-            for (int i = 0; i < countPerRow; i++)
-              // 处理最后一行逻辑
-              if (widget.itemCount == null ||
-                  index * countPerRow + i < widget.itemCount!)
-                _buildItem(context, index * countPerRow + i)
-          ]),
+          child: Row(
+            children: [
+              for (int i = 0; i < countPerRow; i++)
+                // 处理最后一行逻辑
+                if (widget.itemCount == null ||
+                    index * countPerRow + i < widget.itemCount!)
+                  _buildItem(context, index * countPerRow + i)
+            ],
+          ),
         );
       },
     );

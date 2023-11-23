@@ -1,8 +1,7 @@
+import 'package:dolin/app/apis/comic/comic.dart';
 import 'package:dolin/app/data/comic/comic_tag_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../apis/comic/comic.dart';
 
 class ComicController extends GetxController with GetTickerProviderStateMixin {
   bool loading = true;
@@ -18,18 +17,19 @@ class ComicController extends GetxController with GetTickerProviderStateMixin {
     super.onInit();
   }
 
-  void mockReq() async {
-    await Future.delayed(const Duration(seconds: 2));
-    tabController = TabController(length: 4, vsync: this);
-    loading = false;
-    update();
+  void mockReq() {
+    Future<void>.delayed(const Duration(seconds: 2)).then((value) {
+      tabController = TabController(length: 4, vsync: this);
+      loading = false;
+      update();
+    });
   }
 
   //  SmartDialog.showLoading();
   //   await Future.delayed(const Duration(seconds: 5));
   //   SmartDialog.dismiss();
 
-  void reqCategores() async {
+  Future<void> reqCategores() async {
     try {
       loading = true;
       error = false;

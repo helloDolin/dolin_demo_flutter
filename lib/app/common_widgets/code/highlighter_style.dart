@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+
 /// create by 张风捷特烈 on 2020-04-15
 /// contact me by email 1981462002@qq.com
 /// 说明:
-
-import 'package:flutter/material.dart';
 
 /// create by 张风捷特烈 on 2020-04-11
 /// contact me by email 1981462002@qq.com
@@ -10,17 +10,51 @@ import 'package:flutter/material.dart';
 
 class HighlighterStyle {
   //句法高亮样式
-  const HighlighterStyle(
-      { //构造函数
-      this.baseStyle, //基础样式
-      this.numberStyle, //数字的样式
-      this.commentStyle, //注释样式
-      this.keywordStyle, //关键字样式
-      this.stringStyle, //字符串样式
-      this.punctuationStyle, //标点符号样式
-      this.classStyle, //类名
-      this.backgroundColor,
-      this.constantStyle});
+  const HighlighterStyle({
+    //构造函数
+    this.baseStyle, //基础样式
+    this.numberStyle, //数字的样式
+    this.commentStyle, //注释样式
+    this.keywordStyle, //关键字样式
+    this.stringStyle, //字符串样式
+    this.punctuationStyle, //标点符号样式
+    this.classStyle, //类名
+    this.backgroundColor,
+    this.constantStyle,
+  });
+  factory HighlighterStyle.fromColors(List<int> colors) => HighlighterStyle(
+        baseStyle: TextStyle(
+          color: Color(colors[0]),
+        ),
+        numberStyle: TextStyle(
+          color: Color(colors[1]),
+        ),
+        commentStyle: TextStyle(
+          color: Color(
+            colors[2],
+          ),
+          fontStyle: FontStyle.italic,
+        ),
+        keywordStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Color(
+            colors[3],
+          ),
+        ),
+        stringStyle: TextStyle(
+          color: Color(colors[4]),
+        ),
+        punctuationStyle: TextStyle(
+          color: Color(colors[5]),
+        ),
+        classStyle: TextStyle(
+          color: Color(colors[6]),
+        ),
+        constantStyle: TextStyle(
+          color: Color(colors[7]),
+        ),
+        backgroundColor: Color(colors[8]),
+      );
 
   static List<int> get lightColor => [
         0xFF000000, //基础
@@ -93,39 +127,6 @@ class HighlighterStyle {
         0xFF268BD2, //常量
         0xFFDDD6C1, // 背景
       ];
-
-  factory HighlighterStyle.fromColors(List<int> colors) => HighlighterStyle(
-        baseStyle: TextStyle(
-          color: Color(colors[0]),
-        ),
-        numberStyle: TextStyle(
-          color: Color(colors[1]),
-        ),
-        commentStyle: TextStyle(
-            color: Color(
-              colors[2],
-            ),
-            fontStyle: FontStyle.italic),
-        keywordStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Color(
-            colors[3],
-          ),
-        ),
-        stringStyle: TextStyle(
-          color: Color(colors[4]),
-        ),
-        punctuationStyle: TextStyle(
-          color: Color(colors[5]),
-        ),
-        classStyle: TextStyle(
-          color: Color(colors[6]),
-        ),
-        constantStyle: TextStyle(
-          color: Color(colors[7]),
-        ),
-        backgroundColor: Color(colors[8]),
-      );
   final TextStyle? baseStyle;
   final TextStyle? numberStyle;
   final TextStyle? commentStyle;

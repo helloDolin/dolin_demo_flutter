@@ -7,7 +7,8 @@ part of 'userModel.dart';
 // **************************************************************************
 
 UserLoginResponseEntity _$UserLoginResponseEntityFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     UserLoginResponseEntity()
       ..accessToken = json['accessToken'] as String?
       ..displayName = json['displayName'] as String?
@@ -16,7 +17,8 @@ UserLoginResponseEntity _$UserLoginResponseEntityFromJson(
           .toList();
 
 Map<String, dynamic> _$UserLoginResponseEntityToJson(
-        UserLoginResponseEntity instance) =>
+  UserLoginResponseEntity instance,
+) =>
     <String, dynamic>{
       'accessToken': instance.accessToken,
       'displayName': instance.displayName,

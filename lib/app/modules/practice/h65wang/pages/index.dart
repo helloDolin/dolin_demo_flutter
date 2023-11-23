@@ -1,16 +1,15 @@
 // ignore_for_file: unused_element
 
+import 'package:dolin/app/modules/practice/h65wang/pages/simulate_click_page.dart';
+import 'package:dolin/app/modules/practice/h65wang/widgets/corner_mark.dart';
+import 'package:dolin/app/modules/practice/h65wang/widgets/countdown_button.dart';
+import 'package:dolin/app/modules/practice/h65wang/widgets/diagonal.dart';
+import 'package:dolin/app/modules/practice/h65wang/widgets/gallery_view.dart';
+import 'package:dolin/app/modules/practice/h65wang/widgets/hollow_text.dart';
+// import '../widgets/magnifier.dart' as magnifier;
+import 'package:dolin/app/modules/practice/h65wang/widgets/wartermark.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widgets/corner_mark.dart';
-import '../widgets/countdown_button.dart';
-import '../widgets/diagonal.dart';
-import '../widgets/gallery_view.dart';
-import '../widgets/hollow_text.dart';
-// import '../widgets/magnifier.dart' as magnifier;
-import '../widgets/wartermark.dart';
-import 'simulate_click_page.dart';
 
 class ChallengePage extends StatelessWidget {
   const ChallengePage({super.key});
@@ -25,10 +24,11 @@ class ChallengePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(
-                onPressed: () {
-                  Get.to(const SimulateClickPage());
-                },
-                child: const Text('模拟点击'))
+              onPressed: () {
+                Get.to<void>(const SimulateClickPage());
+              },
+              child: const Text('模拟点击'),
+            )
           ],
         ),
       ),
@@ -37,26 +37,28 @@ class ChallengePage extends StatelessWidget {
 
   /// ListView 实现 GridView
   LayoutBuilder _buildGrid() {
-    return LayoutBuilder(builder: (context, cons) {
-      const int itemCount = 11;
-      final int rowCount = (11 / 2).ceil();
-      const int perRow = 3;
-      return ListView.builder(
-        itemCount: rowCount,
-        itemBuilder: (context, index) {
-          return Row(
-            children: [
-              for (int i = 0; i < perRow; i++)
-                if (index * perRow + i < itemCount)
-                  SizedBox(
-                    width: cons.maxWidth / perRow,
-                    child: const Item(),
-                  ),
-            ],
-          );
-        },
-      );
-    });
+    return LayoutBuilder(
+      builder: (context, cons) {
+        const itemCount = 11;
+        final rowCount = (11 / 2).ceil();
+        const perRow = 3;
+        return ListView.builder(
+          itemCount: rowCount,
+          itemBuilder: (context, index) {
+            return Row(
+              children: [
+                for (int i = 0; i < perRow; i++)
+                  if (index * perRow + i < itemCount)
+                    SizedBox(
+                      width: cons.maxWidth / perRow,
+                      child: const Item(),
+                    ),
+              ],
+            );
+          },
+        );
+      },
+    );
   }
 
   Center _buildBody() {
@@ -77,10 +79,11 @@ class ChallengePage extends StatelessWidget {
                     // 不参与事件响应
                     // Opacity 为 0 只参与布局，不参与渲染与合成
                     const IgnorePointer(
-                        child: Opacity(
-                      opacity: 0.0,
-                      child: Item(),
-                    )),
+                      child: Opacity(
+                        opacity: 0,
+                        child: Item(),
+                      ),
+                    ),
                     const SizedBox(
                       width: double.infinity,
                     ),
@@ -166,7 +169,6 @@ class ChallengePage extends StatelessWidget {
                           markTitleColor: Colors.white,
                           markTitle: '哈哈哈',
                           markTitleSize: 12,
-                          cornerMarkPosition: CornerMarkPosition.topRight,
                           child: Container(
                             width: 100,
                             height: 100,

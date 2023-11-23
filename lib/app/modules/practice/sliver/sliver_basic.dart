@@ -30,7 +30,6 @@ class SliverBasic extends StatelessWidget {
                 'SliverBasic',
                 style: TextStyle(color: Colors.black),
               ),
-              collapseMode: CollapseMode.parallax,
               stretchModes: const [
                 StretchMode.blurBackground,
                 StretchMode.zoomBackground,
@@ -42,6 +41,7 @@ class SliverBasic extends StatelessWidget {
           const SliverFillRemaining(
             hasScrollBody: false, // 滚动区域不需要改动
             child: Align(
+              // ignore: use_named_constants
               alignment: Alignment(0, 1),
               child: CircularProgressIndicator(),
             ),
@@ -50,13 +50,14 @@ class SliverBasic extends StatelessWidget {
             child: SizedBox(height: 100, child: Placeholder()),
           ),
           SliverPrototypeExtentList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => const Text('data'),
-                childCount: 5,
-              ),
-              prototypeItem: const SizedBox(
-                height: 30,
-              )),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => const Text('data'),
+              childCount: 5,
+            ),
+            prototypeItem: const SizedBox(
+              height: 30,
+            ),
+          ),
           SliverFixedExtentList(
             itemExtent: 50,
             delegate: SliverChildBuilderDelegate(
@@ -84,12 +85,13 @@ class SliverBasic extends StatelessWidget {
               childCount: 50,
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4),
+              crossAxisCount: 4,
+            ),
           ),
           // 相当于 pageView
           SliverFillViewport(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => Container(
+              (context, index) => ColoredBox(
                 color: Colors.primaries[Random().nextInt(18)],
                 child: const Center(
                   child: FlutterLogo(),

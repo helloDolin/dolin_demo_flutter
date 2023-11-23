@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends SuperController
+class HomeController extends SuperController<HomeController>
     with GetSingleTickerProviderStateMixin {
   late TabController tabController;
   late PageController pageController;
@@ -18,8 +18,10 @@ class HomeController extends SuperController
   @override
   void onInit() {
     tabController = TabController(
-        initialIndex: 0, length: categoryList.length, vsync: this);
-    pageController = PageController(initialPage: 0);
+      length: categoryList.length,
+      vsync: this,
+    );
+    pageController = PageController();
     super.onInit();
   }
 

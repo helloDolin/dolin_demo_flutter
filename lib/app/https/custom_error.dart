@@ -1,14 +1,14 @@
 class CustomError implements Exception {
-  final int code;
-  final String message;
   CustomError({
     this.message = '',
     this.code = 0,
   });
+  final int code;
+  final String message;
 
   @override
   String toString() {
-    if (message == "") return "Exception";
-    return "Exception: code $code, $message";
+    if (message == '') return 'Exception';
+    return 'Exception: code $code, $message';
   }
 }

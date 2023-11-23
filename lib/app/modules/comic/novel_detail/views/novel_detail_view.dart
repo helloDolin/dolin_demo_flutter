@@ -1,18 +1,19 @@
+import 'package:dolin/app/modules/comic/novel_detail/controllers/novel_detail_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/novel_detail_controller.dart';
-
 class NovelDetailView extends StatelessWidget {
+  NovelDetailView({
+    required this.id,
+    required this.title,
+    super.key,
+  }) : controller = Get.put(
+          NovelDetailController(),
+          tag: DateTime.now().millisecondsSinceEpoch.toString(),
+        );
   final int id;
   final String title;
   final NovelDetailController controller;
-  NovelDetailView({Key? key, required this.id, required this.title})
-      : controller = Get.put(
-          NovelDetailController(),
-          tag: DateTime.now().millisecondsSinceEpoch.toString(),
-        ),
-        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,22 +84,24 @@ class NovelDetailView extends StatelessWidget {
           children: [
             Expanded(
               child: TextButton.icon(
-                  onPressed: () {
-                    Get.to(() => NovelDetailView(id: 123, title: '123'),
-                        preventDuplicates: false);
-                  },
-                  icon: const Icon(
-                    Icons.details,
-                  ),
-                  label: const Text('自己跳自己')),
+                onPressed: () {
+                  Get.to<NovelDetailView>(
+                    () => NovelDetailView(id: 123, title: '123'),
+                    preventDuplicates: false,
+                  );
+                },
+                icon: const Icon(
+                  Icons.details,
+                ),
+                label: const Text('自己跳自己'),
+              ),
             ),
             Expanded(
               child: TextButton.icon(
-                  onPressed: () {
-                    controller.increment();
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('count + 1')),
+                onPressed: controller.increment,
+                icon: const Icon(Icons.add),
+                label: const Text('count + 1'),
+              ),
             ),
           ],
         ),

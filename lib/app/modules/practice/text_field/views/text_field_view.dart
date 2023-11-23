@@ -1,13 +1,12 @@
+import 'package:dolin/app/common_widgets/dl_appbar.dart';
+import 'package:dolin/app/common_widgets/dl_textfield.dart';
+import 'package:dolin/app/modules/practice/text_field/controllers/text_field_controller.dart';
+import 'package:dolin/app/util/random_color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../common_widgets/dl_appbar.dart';
-import '../../../../common_widgets/dl_textfield.dart';
-import '../../../../util/random_color_util.dart';
-import '../controllers/text_field_controller.dart';
-
 class TextFieldView extends GetView<TextFieldController> {
-  const TextFieldView({Key? key}) : super(key: key);
+  const TextFieldView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,17 +16,19 @@ class TextFieldView extends GetView<TextFieldController> {
       body: ListView(
         children: [
           const Title('自定义 TextField'),
-          Obx(() => SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: DLTextField(
-                  maxLength: 10,
-                  text: controller.inputText.value,
-                  onChanged: (text) {
-                    controller.inputText.value = text;
-                  },
-                ),
-              )),
+          Obx(
+            () => SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: DLTextField(
+                maxLength: 10,
+                text: controller.inputText.value,
+                onChanged: (text) {
+                  controller.inputText.value = text;
+                },
+              ),
+            ),
+          ),
           const SizedBox(
             width: double.infinity,
             height: 50,
@@ -41,7 +42,6 @@ class TextFieldView extends GetView<TextFieldController> {
             height: 50,
             child: DLTextField(
               maxLength: 10,
-              text: '',
             ),
           ),
           const Title('UI 信息'),

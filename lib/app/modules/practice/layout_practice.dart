@@ -39,6 +39,7 @@ class _LayoutPracticeState extends State<LayoutPractice> {
     return ExpansionTile(
       backgroundColor: Colors.blue,
       trailing: Transform.rotate(
+        // ignore: avoid_redundant_argument_values
         alignment: Alignment.center, // 旋转锚点
         angle: _isExpanded ? 0 : math.pi, // 旋转90度
         child: const Icon(
@@ -57,7 +58,8 @@ class _LayoutPracticeState extends State<LayoutPractice> {
       },
       initiallyExpanded: true,
       children: <Widget>[
-        const Text('''核心思想：
+        const Text('''
+核心思想：
 向下传递约束，向上传递尺寸，父级决定位置
 '''),
         ConstrainedBox(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class AppEmptyWidget extends StatelessWidget {
-  final Function()? onRefresh;
-  const AppEmptyWidget({this.onRefresh, Key? key}) : super(key: key);
+  const AppEmptyWidget({this.onRefresh, super.key});
+  final void Function()? onRefresh;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class AppEmptyWidget extends StatelessWidget {
                 repeat: false,
               ),
               const Text(
-                "这里什么都没有",
+                '这里什么都没有',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),

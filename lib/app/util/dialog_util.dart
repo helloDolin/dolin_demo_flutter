@@ -19,7 +19,7 @@ class DialogUtil {
     bool barrierDismissible = true,
     List<Widget>? actions,
   }) async {
-    var result = await Get.dialog(
+    final result = await Get.dialog<bool>(
       AlertDialog(
         title: Text(title),
         content: Container(
@@ -36,12 +36,12 @@ class DialogUtil {
         ),
         actions: [
           TextButton(
-            onPressed: (() => Get.back(result: false)),
-            child: Text(cancel.isEmpty ? "取消" : cancel),
+            onPressed: () => Get.back(result: false),
+            child: Text(cancel.isEmpty ? '取消' : cancel),
           ),
           TextButton(
-            onPressed: (() => Get.back(result: true)),
-            child: Text(confirm.isEmpty ? "确定" : confirm),
+            onPressed: () => Get.back(result: true),
+            child: Text(confirm.isEmpty ? '确定' : confirm),
           ),
           ...?actions,
         ],
@@ -51,18 +51,19 @@ class DialogUtil {
     return result ?? false;
   }
 
-  static void showStatement() async {
-    var text = await rootBundle.loadString("assets/statement.txt");
+  /// 展示声明弹窗
+  static Future<void> showStatement() async {
+    final text = await rootBundle.loadString('assets/statement.txt');
 
-    showAlertDialog(
+    await showAlertDialog(
       text,
       selectable: true,
-      title: "免责声明",
-      confirm: "已阅读并同意",
-      cancel: "退出",
+      title: '免责声明',
+      confirm: '已阅读并同意',
+      cancel: '退出',
       barrierDismissible: false,
     ).then((value) {
-      debugPrint('cur value is ----------- ${value.toString()}');
+      debugPrint('cur value is ----------- $value');
       if (!value) {
         exit(0);
       }

@@ -7,7 +7,7 @@ class MyProviderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BoxModel model = MyProvider.of(context);
+    final BoxModel model = MyProvider.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('MyProviderPage'),
