@@ -4,49 +4,49 @@
 
 analyzer:
   language:
-    strict-casts: true
-    strict-inference: true
-    strict-raw-types: true
+    strict-casts: true # 设置为 true 时，会检查所有的类型转换，确保它们是合适的
+    strict-inference: true # 设置为 true 时，会启用更严格的类型推断，以减少类型错误的可能性
+    strict-raw-types: true # 设置为 true 时，会检查所有的 raw 类型，确保它们是合适的
 
-  errors:
-    close_sinks: ignore
-    missing_required_param: error
-    missing_return: error
-    record_literal_one_positional_no_trailing_comma: error
-    collection_methods_unrelated_type: warning
-    unrelated_type_equality_checks: warning
+  errors: # 定义了错误处理相关的设置
+    close_sinks: ignore # 设置为 ignore 时，不会报告闭包 sink 相关的错误
+    missing_required_param: error # 设置为 error 时，会报告缺少必需参数的错误
+    missing_return: error # 设置为 error 时，会报告缺少返回值的错误
+    record_literal_one_positional_no_trailing_comma: error # 设置为 error 时，会报告record literal中只有一个参数，但没有尾随逗号错误
+    collection_methods_unrelated_type: warning # 设置为 warning 时，会报告集合方法与类型不相关的错误
+    unrelated_type_equality_checks: warning # 设置为 warning 时，会报告与类型不相关的相等检查错误
 
-  exclude:
+  exclude: # 定义了不需要进行分析的文件
     - test/.test_coverage.dart
     - lib/generated_plugin_registrant.dart
 
 linter:
   rules:
-    - always_declare_return_types
-    - always_put_required_named_parameters_first
+    - always_declare_return_types # 声明方法返回类型
+    - always_put_required_named_parameters_first # 将所需的命名参数放在第一位
     - always_use_package_imports # 总是使用绝对路径导入
-    - annotate_overrides
-    - avoid_bool_literals_in_conditional_expressions
-    - avoid_catching_errors
+    - annotate_overrides # 注释被覆盖的成员
+    - avoid_bool_literals_in_conditional_expressions # 避免在条件表达式中使用布尔文字
+    - avoid_catching_errors # 不要显式捕获Error或实现它的类型
     - avoid_double_and_int_checks
     - avoid_dynamic_calls
     - avoid_empty_else
-    - avoid_equals_and_hash_code_on_mutable_classes
-    - avoid_escaping_inner_quotes
+    - avoid_equals_and_hash_code_on_mutable_classes # 避免在未标记为@不可变的类上重载运算符==和hashCode
+    - avoid_escaping_inner_quotes # 通过单引号、双引号转义，避免使用 \ 转义
     - avoid_field_initializers_in_const_classes
     - avoid_final_parameters
-    - avoid_function_literals_in_foreach_calls
-    - avoid_init_to_null
+    - avoid_function_literals_in_foreach_calls # 避免将forEach与函数文字一起使用
+    - avoid_init_to_null # 不要将变量显式初始化为null
     - avoid_js_rounded_ints
-    - avoid_multiple_declarations_per_line
-    - avoid_null_checks_in_equality_operators
-    - avoid_positional_boolean_parameters
+    - avoid_multiple_declarations_per_line # 不要在一行中声明多个变量
+    - avoid_null_checks_in_equality_operators # 不要在自定义==运算符中检查null
+    - avoid_positional_boolean_parameters # 避免使用位置布尔参数
     - avoid_print
     - avoid_private_typedef_functions
     - avoid_redundant_argument_values # 避免冗余参数值，不推荐赋值默认
     - avoid_relative_lib_imports
     - avoid_renaming_method_parameters
-    - avoid_return_types_on_setters
+    - avoid_return_types_on_setters # 不重命名重写方法的参数
     - avoid_returning_null_for_void
     - avoid_returning_this
     - avoid_setters_without_getters
@@ -66,7 +66,7 @@ linter:
     - cascade_invocations # 级联调用
     - cast_nullable_to_non_nullable
     - collection_methods_unrelated_type
-    - combinators_ordering
+    - combinators_ordering # 组合子名称按字母顺序排序
     - comment_references
     - conditional_uri_does_not_exist
     - constant_identifier_names
@@ -79,20 +79,20 @@ linter:
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
-    - eol_at_end_of_file
-    - exhaustive_cases
+    - eol_at_end_of_file # 在文件末尾放一行换行符
+    - exhaustive_cases # 为类枚举中的所有常量定义case子句
     - file_names
     # - flutter_style_todos
-    - hash_and_equals
+    - hash_and_equals # 如果覆盖==，则始终覆盖hashCode
     - implicit_call_tearoffs
     - implementation_imports
-    - implicit_reopen
+    - implicit_reopen 
     - invalid_case_patterns
     - join_return_with_assignment
-    - leading_newlines_in_multiline_strings
+    - leading_newlines_in_multiline_strings # 以换行符开始多行字符串
     - library_annotations
-    - library_names
-    - library_prefixes
+    - library_names # 使用lowercase_with_underscores命名库
+    - library_prefixes # 取别名时也使用lowercase_with_underscores命名
     - library_private_types_in_public_api
     # - lines_longer_than_80_chars # 一行超过 80 字符（屏蔽原因：注释也检测了）
     - literal_only_boolean_expressions
@@ -101,35 +101,35 @@ linter:
     - no_default_cases
     - no_duplicate_case_values
     - no_leading_underscores_for_library_prefixes
-    - no_leading_underscores_for_local_identifiers
+    - no_leading_underscores_for_local_identifiers # 局部变量不应该以 _ 命令变量
     - no_logic_in_create_state
     - no_runtimeType_toString
     - non_constant_identifier_names
     - noop_primitive_operations
     - null_check_on_nullable_type_parameter
-    - null_closures
-    # - omit_local_variable_types # 省略成员类型（不推荐）
+    - null_closures # 不要在需要闭包的地方传递null作为参数
+    # - omit_local_variable_types # 省略局部变量的类型注释（不推荐）
     - one_member_abstracts
-    - only_throw_errors
-    - overridden_fields
+    - only_throw_errors # 只抛出扩展Exception或Error的类的实例 （这个需要注意，之前直接 throw String）
+    - overridden_fields # 不要覆盖父类属性
     - package_api_docs
     - package_names
     - package_prefixed_library_names
     - parameter_assignments
     - prefer_adjacent_string_concatenation
-    - prefer_asserts_in_initializer_lists
-    - prefer_asserts_with_message
-    - prefer_collection_literals
-    - prefer_conditional_assignment
-    - prefer_const_constructors
+    - prefer_asserts_in_initializer_lists # 使用相邻字符串连接字符串文字
+    - prefer_asserts_with_message # 断言需要带有消息
+    - prefer_collection_literals # 推荐字面量集合
+    - prefer_conditional_assignment # PREFER using ??= over testing for null
+    - prefer_const_constructors # 常量构造函数需要 const 修饰
     - prefer_const_constructors_in_immutables
     - prefer_const_declarations
     - prefer_const_literals_to_create_immutables
     - prefer_constructors_over_static_methods
-    - prefer_contains
-    - prefer_final_fields
+    - prefer_contains # Use contains for List and String instances
+    - prefer_final_fields # 私有成员变量用 final 修饰
     - prefer_final_in_for_each
-    - prefer_final_locals
+    - prefer_final_locals # 如果变量声明未重新赋值，则首选final
     - prefer_for_elements_to_map_fromIterable
     - prefer_function_declarations_over_variables
     - prefer_generic_function_type_aliases
@@ -139,30 +139,30 @@ linter:
     - prefer_inlined_adds
     - prefer_int_literals # 推荐字面量
     - prefer_interpolation_to_compose_strings
-    - prefer_is_empty
-    - prefer_is_not_empty
-    - prefer_is_not_operator
+    - prefer_is_empty # Use isEmpty for Iterables and Maps.
+    - prefer_is_not_empty # 同上
+    - prefer_is_not_operator # eg：if (foo is! Foo)
     - prefer_iterable_whereType
-    - prefer_null_aware_method_calls
-    - prefer_null_aware_operators
+    - prefer_null_aware_method_calls # bad:if (f != null) f!() good:f?.call();
+    - prefer_null_aware_operators # bad:v = a == null ? null; : a.b good:v = a?.b;
     - prefer_single_quotes
     - prefer_spread_collections
     - prefer_typing_uninitialized_variables
     - prefer_void_to_null
-    - provide_deprecation_message
+    - provide_deprecation_message # eg:@Deprecated("""asdfasdf""")
     # - public_member_api_docs(公共类、函数需要打注释)
-    - recursive_getters
+    - recursive_getters # 如果返回自身，请用 getter
     - require_trailing_commas # 尾部需要逗号
     - secure_pubspec_urls
     - sized_box_for_whitespace
     - sized_box_shrink_expand
     - slash_for_doc_comments
-    - sort_child_properties_last
+    - sort_child_properties_last # child 放到末尾
     - sort_constructors_first # 构造函数放到首位
     # - sort_pub_dependencies # 排序 pub 依赖（没必要）
-    - sort_unnamed_constructors_first
-    - test_types_in_equals
-    - throw_in_finally
+    - sort_unnamed_constructors_first # 未命名的构造函数放到最首位
+    - test_types_in_equals # Test type arguments in operator ==(Object other).
+    - throw_in_finally # Avoid throw in finally block.
     - tighten_type_of_initializing_formals
     - type_annotate_public_apis
     - type_init_formals
@@ -172,8 +172,8 @@ linter:
     - unnecessary_brace_in_string_interps
     - unnecessary_const
     - unnecessary_constructor_name
-    - unnecessary_getters_setters
-    # - unnecessary_lambdas
+    - unnecessary_getters_setters # 没有必要的 getter、setter（手动实现了一遍确实没必要）
+    # - unnecessary_lambdas eg：good： names.forEach(print);
     - unnecessary_late
     - unnecessary_library_directive
     - unnecessary_new
@@ -182,31 +182,48 @@ linter:
     - unnecessary_null_in_if_null_operators
     - unnecessary_nullable_for_final_variable_declarations
     - unnecessary_overrides
-    - unnecessary_parenthesis
-    - unnecessary_raw_strings
+    - unnecessary_parenthesis # 可以删除不必要的括号
+    - unnecessary_raw_strings # r:原始 
     - unnecessary_statements
-    - unnecessary_string_escapes
+    - unnecessary_string_escapes # Remove unnecessary backslashes（反斜杠、转义符） in strings
     - unnecessary_string_interpolations
-    - unnecessary_this
-    - unnecessary_to_list_in_spreads
+    - unnecessary_this # 同名的时候再显示使用 this
+    - unnecessary_to_list_in_spreads # bad: ...['foo', 'bar', 'baz'].map((String s) => Text(s)).toList(), good:...['foo', 'bar', 'baz'].map((String s) => Text(s)), 学习了 😄
     - unrelated_type_equality_checks
-    - use_build_context_synchronously
+    - use_build_context_synchronously # 不要在异步中使用 context，因为此时 Element 可能已经不是同一个 Element
     - use_colored_box
-    - use_enums
-    - use_full_hex_values_for_flutter_colors
+# enum LogPriority {
+#   error(1, 'Error'),
+#   warning(2, 'Warning'),
+#   log.unknown('Log');
+
+#   final String prefix;
+#   final int priority;
+#   const LogPriority(this.priority, this.prefix);
+#   const LogPriority.unknown(String prefix) : this(-1, prefix);
+# }
+    - use_enums # 使用枚举，而不是使用行为类似枚举的类(看上边例子)
+    - use_full_hex_values_for_flutter_colors # 实例化Color时，首选8位十六进制整数
     - use_function_type_syntax_for_parameters
     - use_if_null_to_convert_nulls_to_bools
     - use_is_even_rather_than_modulo
     - use_key_in_widget_constructors
     - use_late_for_private_fields_and_variables
     - use_named_constants
-    - use_raw_strings
+    - use_raw_strings # eg：var s = r'A string with only \ and $';
     - use_rethrow_when_possible
     - use_setters_to_change_properties
-    - use_string_buffers
-    - use_string_in_part_of_directives
+# String foo() {
+#   final buffer = StringBuffer();
+#   for (int i = 0; i < 10; i++) {
+#     buffer.write('a');
+#   }
+#   return buffer.toString();
+# }
+    - use_string_buffers # 看上边例子
+    - use_string_in_part_of_directives # eg:part of 'douban250.dart';
     - use_super_parameters
     - use_test_throws_matchers
     - use_to_and_as_if_applicable
     - valid_regexps
-    - void_checks
+    - void_checks # Don’t assign to void. 泛型不要传 void

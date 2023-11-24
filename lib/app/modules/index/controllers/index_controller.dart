@@ -24,6 +24,7 @@ class IndexController extends GetxController {
     super.onInit();
   }
 
+  // ignore: use_setters_to_change_properties
   void setCurrentIndex(int index) {
     currentIndex.value = index;
     // 点击底部 tab 时找到对应页面的 controller 然后发起请求，实现 viewWillAppear

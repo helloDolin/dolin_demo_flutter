@@ -61,6 +61,7 @@ class CornerMark extends StatelessWidget {
         right = null;
         top = offset;
         bottom = null;
+
       case CornerMarkPosition.topRight:
         transformAlignment = Alignment.bottomRight;
         angle = math.pi / 4;
@@ -68,6 +69,7 @@ class CornerMark extends StatelessWidget {
         right = 0;
         top = offset;
         bottom = null;
+
       case CornerMarkPosition.bottomLeft:
         transformAlignment = Alignment.topLeft;
         angle = math.pi / 4;
@@ -75,6 +77,7 @@ class CornerMark extends StatelessWidget {
         right = null;
         top = null;
         bottom = offset;
+
       case CornerMarkPosition.bottomRight:
         transformAlignment = Alignment.topRight;
         angle = -math.pi / 4;
@@ -82,9 +85,9 @@ class CornerMark extends StatelessWidget {
         right = 0;
         top = null;
         bottom = offset;
-      // ignore: no_default_cases
-      default:
-        throw Exception('无此类型');
+
+      case null:
+        throw Exception('位置类型必传');
     }
 
     return ClipRect(

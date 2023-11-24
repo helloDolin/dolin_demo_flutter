@@ -12,7 +12,7 @@ int totalPV = 0;
 
 class MyObserver extends NavigatorObserver {
   @override
-  void didPush(Route route, Route? previousRoute) {
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     totalPV++; // 累加PV
   }
