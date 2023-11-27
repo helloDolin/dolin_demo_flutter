@@ -28,7 +28,7 @@ class Coordinate {
 
   void paint(Canvas canvas, Size size) {
     canvas.save(); // 不影响外部的使用
-    // 画布中心点移到中心点
+    // 画布起点移到中心
     // 重点：坐标系(0,0)点为中心点
     canvas.translate(size.width / 2, size.height / 2);
 

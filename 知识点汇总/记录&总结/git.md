@@ -29,6 +29,9 @@ def git_is_clean():
 	process = git-lfs filter-process
 	required = true
 
+# 删除最近一个提交节点
+git reset --hard HEAD^  # 删除最近的提交并丢弃更改
+git push origin HEAD --force  # 强制推送更改到远程仓库
 
 # 合并多个提交为一个：
 // n 为节点个数

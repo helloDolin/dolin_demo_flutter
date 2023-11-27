@@ -125,6 +125,9 @@ class _CountdownButtonState extends State<CountdownButton>
 }
 
 class BorderPainter extends CustomPainter {
+  // 最高效地触发画板重绘的方式是:
+  // 继承自 CustomPainter，在构造函数中对父类 repaint属性 进行赋值，repaint是一个可监听对象，当对象变化时会触发画布的重绘。
+  // 继承自 Listenable 实现 CustomPainter，让该类自己执行对自己的更新。
   BorderPainter(this.btnWidth, this.btnHeight, this.btnRadius, this.animation)
       : super(repaint: animation) {
     shape = RRect.fromRectAndRadius(
@@ -147,6 +150,7 @@ class BorderPainter extends CustomPainter {
       ..relativeLineTo(0, -btnHeight + 2 * btnRadius)
       ..relativeArcToPoint(Offset(btnRadius, -btnRadius), radius: radius)
       ..close();
+    // 通过path.computeMetrics()，可以获取一个可迭代PathMetrics类对象 它迭代出的是PathMetric对象，也就是每个路径的测量信息
     pathMetric = path.computeMetrics().single;
 
     debugPrint('BorderPainter 构造函数');

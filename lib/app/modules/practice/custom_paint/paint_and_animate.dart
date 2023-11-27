@@ -1,7 +1,8 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:dolin/app/modules/practice/custom_paint/tool/coordinate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Page extends StatefulWidget {
   const Page({super.key});
@@ -11,25 +12,45 @@ class Page extends StatefulWidget {
 }
 
 class _PageState extends State<Page> with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
+  late AnimationController _ac;
+  late Animation<double> _speedAnimation;
+
+  ui.Image? _img;
+
+  // 读取 assets 中的图片
+  Future<ui.Image>? loadImageFromAssets(String path) async {
+    final ByteData data = await rootBundle.load(path);
+    final Uint8List bytes =
+        data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    return decodeImageFromList(bytes);
+  }
+
+  Future<void> _loadImage() async {
+    _img = await loadImageFromAssets('assets/images/logo.png');
+    setState(() {});
+  }
 
   @override
   void initState() {
-    // 第一帧绘制结束回调
-    WidgetsBinding.instance.addPostFrameCallback((Duration d) {
-      debugPrint('第一帧回调$d');
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadImage();
     });
+
     // AnimationController 的构造器中需要传入TickerProvider对象可以将 State 对象混入SingleTickerProviderStateMixin 来成为该对象
-    _ctrl =
-        AnimationController(duration: const Duration(seconds: 3), vsync: this)
-          ..forward()
-          ..repeat();
+    _ac = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+    _speedAnimation = CurveTween(curve: Curves.easeIn).animate(_ac);
+    _ac
+      ..forward()
+      ..repeat();
     super.initState();
   }
 
   @override
   void dispose() {
-    _ctrl.dispose();
+    _ac.dispose();
     super.dispose();
   }
 
@@ -41,7 +62,7 @@ class _PageState extends State<Page> with SingleTickerProviderStateMixin {
       ),
       body: SizedBox.expand(
         child: CustomPaint(
-          painter: PaperPainter(_ctrl),
+          painter: PaperPainter(_ac, _img, _speedAnimation),
         ),
       ),
     );
@@ -51,9 +72,13 @@ class _PageState extends State<Page> with SingleTickerProviderStateMixin {
 class PaperPainter extends CustomPainter {
   // 重点：CustomPainter 中有一个 _repaint 的 Listenable 对象。当监听到这个对象的变化时，画板会触发重绘，这是触发重绘的最高效的方式。
   // 传入 Listenable 可监听对象
-  PaperPainter(this.progress) : super(repaint: progress);
+  PaperPainter(this.progress, this.img, this.speed) : super(repaint: progress);
   // 定义成员变量
   final Animation<double> progress;
+  final Animation<double> speed;
+
+  ui.Image? img;
+
   Coordinate coordinate = Coordinate();
 
   @override
@@ -75,20 +100,31 @@ class PaperPainter extends CustomPainter {
       ..addOval(Rect.fromCenter(center: Offset.zero, width: 50, height: 50))
       ..addOval(Rect.fromCenter(center: Offset.zero, width: 200, height: 200));
 
-    final PathMetrics pathMetrics = path.computeMetrics();
+    final ui.PathMetrics pathMetrics = path.computeMetrics();
     for (final element in pathMetrics) {
-      final Tangent? tangent = element
-          .getTangentForOffset(element.length * progress.value); // 使用动画器的值
-      if (tangent == null) continue;
-      canvas.drawCircle(
-        tangent.position,
-        5,
-        Paint()..color = Colors.deepOrange,
+      final ui.Tangent? tangent =
+          element.getTangentForOffset(element.length * speed.value); // 使用动画器的值
+      if (tangent == null || img == null) continue;
+      // canvas.drawCircle(
+      //   tangent.position,
+      //   5,
+      //   Paint()..color = Colors.deepOrange,
+      // );
+      canvas.drawImage(
+        img!,
+        Offset(
+          tangent.position.dx - imgW / 2,
+          tangent.position.dy - imgH / 2,
+        ),
+        Paint(),
       );
     }
 
     canvas.drawPath(path, paint);
   }
+
+  double get imgW => img?.width.toDouble() ?? 0;
+  double get imgH => img?.height.toDouble() ?? 0;
 
   @override
   bool shouldRepaint(covariant PaperPainter oldDelegate) {
