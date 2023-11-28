@@ -61,6 +61,10 @@ TextSelection.collapsed(
     offset: _textEditingNumController
         .text.length);
 ```
+# Inkwell 和 GestureDetector 区别
+1. 一个有水波纹效果（自定义 widget 需要嵌套 Ink），一个没有
+2. GestureDetector 支持的手势更丰富
+3. Inkwell 响应范围更大，如 child 为 container 且设置 margin，InkWell margin 区域也会响应而 GestureDetector 不会
 # 带水波纹效果按钮
 ```dart
 // Inkwell 在包裹 container 且有颜色有圆角时，水波纹效果仅在圆角与区域外有效
