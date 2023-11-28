@@ -8,6 +8,10 @@ class HighlightText extends StatelessWidget {
     required this.textStyle,
     required this.highlightStyle,
     super.key,
+    this.multiLine = false,
+    this.caseSensitive = true,
+    this.unicode = false,
+    this.dotAll = false,
   });
 
   /// 文本
@@ -22,6 +26,11 @@ class HighlightText extends StatelessWidget {
   /// 关键字样式
   final TextStyle highlightStyle;
 
+  final bool multiLine;
+  final bool caseSensitive;
+  final bool unicode;
+  final bool dotAll;
+
   @override
   Widget build(BuildContext context) {
     return RichText(
@@ -30,10 +39,23 @@ class HighlightText extends StatelessWidget {
   }
 
   InlineSpan formSpan(String src, String pattern) {
+    if (pattern.isEmpty || src.isEmpty) {
+      return TextSpan(text: src, style: textStyle);
+    }
     final List<TextSpan> span = [];
     // 使用正则表达式匹配
-    final RegExp regExp = RegExp(pattern);
-    // 此函数回调 match 和 nonMatch 完美😄
+    RegExp regExp;
+    try {
+      regExp = RegExp(
+        pattern,
+        multiLine: multiLine,
+        caseSensitive: caseSensitive,
+        unicode: unicode,
+        dotAll: dotAll,
+      );
+    } catch (e) {
+      return TextSpan(text: src, style: textStyle);
+    } // 此函数回调 match 和 nonMatch 完美😄
     src.splitMapJoin(
       regExp,
       onMatch: (Match match) {
