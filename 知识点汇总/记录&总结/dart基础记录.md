@@ -1,3 +1,32 @@
+# iOS 17 启动不起来(升级 SDK 后可解)
+1. 执行 flutter clean、flutter pub get 
+2. 进入到 .ios 目录，执行 pod install 
+3. XCode 启动 The Dart VM service is listening on http://127.0.0.1:51968/JLaBUkoZ2TU=/ 出现这个后执行 flutter attach
+4. 
+```yaml
+{
+  "name": "flutter_module(attach)",
+  "request": "attach",
+  "type": "dart",
+  "vmServiceUri": "http://127.0.0.1:52479/BWGD75IIgJc=/",
+  // "observatoryUri":"http://127.0.0.1:53009/KAeHfWwt3Lo=/",
+}
+```
+
+## 升级 sdk 后，iOS 无法启动
+如升级到 3.13.9，挨个执行如下命令
+
+sudo xattr -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/usbmuxd/iproxy
+sudo spctl --master-disable
+sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevice_id
+sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevicename
+sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevicescreenshot
+sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevicesyslog
+sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/ideviceinfo
+
+# 查看三方库依赖关系
+flutter pub deps
+
 # TextFormField
 ```dart
 TextFormField(

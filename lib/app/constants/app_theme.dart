@@ -5,6 +5,15 @@ import 'package:underline_indicator/underline_indicator.dart';
 
 class AppTheme {
   static ThemeData dark = ThemeData(
+    dividerColor: Colors.white,
+    // 主内容文字样式
+    textTheme: const TextTheme(
+      displayMedium: TextStyle(color: Color(0xffA9B7C6), fontSize: 14),
+    ),
+    // 输入框填充色
+    inputDecorationTheme: const InputDecorationTheme(
+      fillColor: Color(0xff45494A),
+    ),
     scaffoldBackgroundColor: Colors.black,
     brightness: Brightness.dark,
     splashColor: Colors.transparent,

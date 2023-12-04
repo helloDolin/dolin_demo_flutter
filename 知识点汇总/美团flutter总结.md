@@ -12,6 +12,9 @@
 ## 创建 iOS OC、Android java 项目
 flutter create -i objc -a java dolin_demo_flutter
 
+## 创建 package
+flutter create --template=package components
+
 ## dart practice
 dart create project_name
 
