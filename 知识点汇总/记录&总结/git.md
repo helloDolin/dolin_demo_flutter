@@ -36,7 +36,7 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 # 合并多个提交为一个：
 // n 为节点个数
 git reset --soft HEAD~n
-git commit -m "新的提交信息"
+git commit -m "feat:"
 
 // 推送到远程分支
 git push origin 分支名 --force
@@ -44,6 +44,11 @@ git push origin develop --force
 
 git push origin shaolin/predict_trends --force
 git push origin shaolin/shell_market --force
+
+# 冲突
+<<< 当前更改
+====
+>>>> 传入的更改
 
 # git 配置
 
