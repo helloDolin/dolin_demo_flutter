@@ -1,3 +1,8 @@
+# Image fit
+如果在 Image.network 中不指定 fit 属性，它的默认行为是按照图片的原始尺寸显示，并尽量在给定的框内展示整个图片。
+
+这个默认行为被称为 BoxFit.contain，它会尽量保持图片原始比例，同时确保图片完整地展示在给定的容器内。如果图片比例与容器不匹配，可能会在容器周围留有空白。
+
 # iOS 17 启动不起来(升级 SDK 后可解)
 1. 执行 flutter clean、flutter pub get 
 2. 进入到 .ios 目录，执行 pod install 

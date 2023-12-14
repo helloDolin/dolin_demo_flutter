@@ -17,6 +17,9 @@ class MovieListController extends GetxController {
   RxList<Douban250> data = <Douban250>[].obs;
 
   int skip = 0;
+  final int pageSize = 10;
+  int curPage = 1;
+  bool canLoad = true;
 
   void onRefresh() {
     reqData(isRefresh: true).then((_) {
@@ -24,12 +27,15 @@ class MovieListController extends GetxController {
         ..refreshCompleted()
         ..resetNoData();
     }).catchError((_) {
-      refreshController.refreshFailed();
+      refreshController
+        ..refreshFailed()
+        ..resetNoData();
     });
   }
 
   void onLoading() {
-    if (data.length % pageSize == 0) {
+    // data.length % pageSize == 0
+    if (canLoad) {
       reqData().then((_) {
         refreshController.loadComplete();
       }).catchError((_) {
@@ -43,13 +49,20 @@ class MovieListController extends GetxController {
   Future<void> reqData({bool isRefresh = false}) async {
     if (isRefresh) {
       skip = 0;
+      curPage = 1;
+
       data.clear();
     } else {
       skip += pageSize;
+      curPage++;
     }
 
     final res = await HomeAPI.movieList(source, pageSize, skip);
     data.addAll(res);
+    canLoad = res.length == pageSize;
+    if (!canLoad && !isRefresh) {
+      refreshController.loadNoData();
+    }
     update();
   }
 
