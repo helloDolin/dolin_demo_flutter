@@ -1,3 +1,16 @@
+# scroll 滚动到顶部、底部
+```
+scrollController.animateTo(
+  scrollController.position.minScrollExtent,
+  duration: const Duration(milliseconds: 300),
+  curve: Curves.easeInOut,
+);
+
+scrollController.animateTo(
+  scrollController.position.maxScrollExtent,
+  duration: const Duration(milliseconds: 300),
+  curve: Curves.easeInOut,
+);
 # Image fit
 如果在 Image.network 中不指定 fit 属性，它的默认行为是按照图片的原始尺寸显示，并尽量在给定的框内展示整个图片。
 

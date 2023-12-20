@@ -36,19 +36,28 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 # 合并多个提交为一个：
 // n 为节点个数
 git reset --soft HEAD~n
-git commit -m "feat:"
+git commit -m "fix：支付成功后，再次请求详情接口"
 
 // 推送到远程分支
 git push origin 分支名 --force
 git push origin develop --force
 
 git push origin shaolin/predict_trends --force
-git push origin shaolin/shell_market --force
+git push origin shaolin/prop --force
 
 # 冲突
 <<< 当前更改
 ====
 >>>> 传入的更改
+
+# 从版本控制中移除某个文件但保留在工作目录中
+git rm --cached model.dart
+git commit -m "Remove secret.txt from tracking"
+
+# 恢复追踪
+git add secret.txt
+git commit -m "Re-add secret.txt to tracking"
+
 
 # git 配置
 
