@@ -47,7 +47,7 @@ dependencies:
   share_plus: 7.0.0
   decimal: 2.3.2
   flutter_native_splash: 2.2.19
-  intl: ^0.18.1
+  intl: ^0.18.0
   expandable: 5.0.1
 
   # 插件练习

@@ -1,3 +1,18 @@
+# Flutter 为何无法抓包
+Flutter 不会主动使用系统代理
+
+# clamp
+```dart
+int min = 10;
+int max = 15;
+print(6.clamp(min, max)); // 10
+print(9.clamp(min, max)); // 10
+print(14.clamp(min, max)); // 14
+print(16.clamp(min, max)); // 15
+print(18.clamp(min, max)); // 15
+
+```
+
 # scroll 滚动到顶部、底部
 ```
 scrollController.animateTo(

@@ -36,13 +36,13 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 # 合并多个提交为一个：
 // n 为节点个数
 git reset --soft HEAD~n
-git commit -m "fix：支付成功后，再次请求详情接口"
+git commit -m "feat: carousel 逻辑 mock"
 
 // 推送到远程分支
 git push origin 分支名 --force
 git push origin develop --force
 
-git push origin shaolin/predict_trends --force
+git push origin shaolin/newbie_draw --force
 git push origin shaolin/prop --force
 
 # 冲突
