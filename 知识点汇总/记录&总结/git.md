@@ -29,14 +29,67 @@ def git_is_clean():
 	process = git-lfs filter-process
 	required = true
 
+# 删除 git 管理
+rm -rf .git
+
+# stash
+git stash list
+
+git stash drop stash@{n} // n 为 stash 的索引
+git stash drop // 删除最近的
+## 应用最近的 stash
+git stash apply
+
+## 应用并删除最近的
+git stash pop
+
+## 应用特定的 stash
+git stash apply stash@{n}
+
+## 清空所有 stash
+git stash clear
+
+# 撤回 rebase
+```git
+git rebase --abort
+```
+## 撤回前
+flutter_aiera git:(shaolin/overtimeRecovery) git status
+On branch shaolin/overtimeRecovery
+Your branch is up to date with 'origin/shaolin/overtimeRecovery'.
+
+Last commands done (5 commands done):
+   pick c61b5de feat:UI 微调
+   pick c3ffd49 fix:寄售置顶已失效、已使用时不可点击
+  (see more in file .git/rebase-merge/done)
+Next commands to do (4 remaining commands):
+   pick c61b5de feat:UI 微调
+   pick bd2c83f fix:后端返回道具数量为 0 时，按钮不可点击
+  (use "git rebase --edit-todo" to view and edit)
+You are currently editing a commit while rebasing branch 'shaolin/overtimeRecovery' on '229d77e'.
+  (use "git commit --amend" to amend the current commit)
+  (use "git rebase --continue" once you are satisfied with your changes)
+
+## 撤回后
+flutter_aiera git:(shaolin/overtimeRecovery) git rebase --abort
+➜  flutter_aiera git:(shaolin/overtimeRecovery) git status
+On branch shaolin/material_fate
+Your branch is up to date with 'origin/shaolin/material_fate'.
+
+nothing to commit, working tree clean
+
+# cherry-pick
+git cherry-pick 80d02674068ba712c0583f76a0824325785de0b7
+
 # 删除最近一个提交节点
 git reset --hard HEAD^  # 删除最近的提交并丢弃更改
 git push origin HEAD --force  # 强制推送更改到远程仓库
 
 # 合并多个提交为一个：
 // n 为节点个数
-git reset --soft HEAD~n
-git commit -m "feat: carousel 逻辑 mock"
+git reset --soft HEAD~3
+git commit -m "feat: 框架搭建 + tabbar"
+git push origin HEAD --force
 
 // 推送到远程分支
 git push origin 分支名 --force

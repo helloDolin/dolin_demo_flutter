@@ -1,3 +1,23 @@
+# 函数
+```dart
+// 函数类型
+typedef Operation = num Function(num);
+
+num add(num a, num b, Operation op) {
+  return op(a) + op(b);
+}
+
+num square(num a) {
+  return a * a;
+}
+
+// 第三个参数需满足 Operation 类型
+add(2, 5, square);
+
+// 第三个参数传 lambda 函数
+add(2, 5, (num n) => n * n);
+```
+
 # Flutter 为何无法抓包
 Flutter 不会主动使用系统代理
 
@@ -270,6 +290,23 @@ Widget build(BuildContext context) {
     body: Container(),
   );
 }
+
+// 使用的方案
+```dart
+AnnotatedRegion(
+  value: SystemUiOverlayStyle(
+    // Status bar color for android
+    statusBarColor: statusBarColor(),
+    statusBarIconBrightness: statusBarIconBrightness(),
+    // Only honored in iOS
+    statusBarBrightness: iosStatusBarBrightness,
+  ),
+  child: Material(
+    color: Colors.transparent,
+    child: pageScaffold(context),
+  ),
+);
+```
 ```
 
 # resizeToAvoidBottomInset 
