@@ -24,6 +24,7 @@ flutter create -t plugin flutter_plugin_practice --platform=android,ios -a java 
 在 example 目录下 build
 /Users/liaoshaolin/Desktop/dolin_demo_flutter/flutter_plugin_practice/example
 flutter build ios --no-codesign 
+flutter build apk
 
 调试需要再 example 目录下打开
 

@@ -67,6 +67,7 @@ class AppPages {
           name: _Paths.LOGIN,
           page: () => const LoginView(),
           binding: LoginBinding(),
+          transition: Transition.fadeIn, // 转场动画
         ),
         GetPage(
           name: _Paths.SETTINGS,
