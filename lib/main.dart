@@ -131,10 +131,6 @@ class Root extends StatelessWidget {
   }
 }
 
-void main() {
-  DLAPPDefend().run(const Root());
-}
-
 void write(String text, {bool isError = false}) {
   Future.microtask(() => debugPrint('** $text. isError: [$isError]'));
 }
@@ -142,4 +138,8 @@ void write(String text, {bool isError = false}) {
 class Messages extends Translations {
   @override
   Map<String, Map<String, String>> get keys => AppTranslation.translations;
+}
+
+void main() {
+  DLAPPDefend().run(const Root());
 }

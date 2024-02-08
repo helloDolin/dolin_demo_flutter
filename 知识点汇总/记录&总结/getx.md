@@ -5,4 +5,8 @@ Rx<FilterBtnStatus> unitStatus = FilterBtnStatus.down.obs; // 枚举
 RxList<MarqueeInfo> marqueeInfos = <MarqueeInfo>[].obs; // 列表
 final RxList<NoticeUiData> _noticProjectListController = RxList.empty(); // 列表
 ```
-
+# 监听 rx 变量变化：
+```dart
+RxBool rightsItemSelect = false.obs;
+rightsItemSelect.listen((res) { });
+```

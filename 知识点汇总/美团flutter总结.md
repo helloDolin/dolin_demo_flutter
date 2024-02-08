@@ -20,8 +20,8 @@ dart create project_name
 
 ## 生命周期
 State：创建（插入视图树）、更新（在视图树中存在）、销毁（从视图树中移除） （图片示例 https://www.jianshu.com/p/0c776fc06a01 ）
-
-当一个State对象依赖的InheritedWidget发生变化时（比如，语言环境、主题等），didChangeDependencies方法会被调用
+ 
+当一个 State 对象依赖的 InheritedWidget 发生变化时（比如，语言环境、主题等），didChangeDependencies方法会被调用
 
 didChangeDependencies：State 对象的依赖关系发生变化后，Flutter 会回调这个方
 法，随后触发组件构建。哪些情况下 State 对象的依赖关系会发生变化呢？典型的场景

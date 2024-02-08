@@ -1,3 +1,187 @@
+# newbie_draw
+* 枚举和 model 配合
+* Future then 和 await 不要同时使用
+* json list 解析加上 try catch，防止后端异常数据格式或其他返回
+```dart
+class Request with BaseRemoteSource {
+  /// 活动列表
+  Future<List<ActivityListItem>> activityList() {
+    final dioReq = dioClient.post(
+      '/aiera/v2/hotdog/newbie_draw/activity_list',
+    );
+    return callApiWithErrorParser(dioReq).then((res) {
+      try {
+        ActivityListModel obj = ActivityListModel.fromJson(res.data);
+        return obj.data ?? [];
+      } catch (e) {
+        logger.e(e.toString());
+        return [];
+      }
+    });
+  }
+
+  /// 邀请记录列表
+  Future<List<RecordListItem>> recordList({int page = 1, int pageSize = 10}) {
+    final dioReq = dioClient.post(
+      '/aiera/v2/hotdog/newbie_draw/record_list',
+      data: {
+        'page': page,
+        'page_size': pageSize,
+      },
+    );
+    return callApiWithErrorParser(dioReq).then((res) {
+      try {
+        RecordListModel obj = RecordListModel.fromJson(res.data);
+        return obj.data ?? [];
+      } catch (e) {
+        logger.e(e.toString());
+        return [];
+      }
+    });
+  }
+
+  /// 邀请人信息
+  Future<UserInfoModel?> userInfo() {
+    final dioReq = dioClient.post(
+      '/aiera/v2/hotdog/newbie_draw/user_info',
+    );
+    return callApiWithErrorParser(dioReq).then(
+      (res) => res.data['code'] == 0
+          ? UserInfoModel.fromJson(res.data['data'])
+          : null,
+    );
+  }
+}
+```
+
+# prop
+```dart
+// web url encode
+String originalUrl = 'https://www.example.com/搜索/编码测试';
+String encodedUrl = Uri.encodeFull(originalUrl);
+```
+
+# predict_trends
+* 
+```yaml
+# 每次更新打 tag 可获取最新包，或者是 commit hash(提交记录哈希值)
+# 确保最新可 /Users/bd/.pub-cache/git/k_chart-36712b6b6cfba2a52043f51f7bae5c33b3e4852e 删除后 get，再打开看是否有最新代码
+k_chart:
+  git:
+    url: https://github.com/helloDolin/k_chart.git
+    ref: 0.0.2
+```
+* 原生端 pop 时，需要手动释放 timer
+* list 拼装为 list 套 list，利用带排序的 Map，key 为 时间，value 为 [] （flutter_sticky_header）
+```dart
+List<HistoryInfo> listData = [];
+
+void _buildData() {
+  // 组装数据（LinkedHashMap：有序 map）
+  listData.clear();
+  LinkedHashMap<String, List<HistoryListItem>> groupData = LinkedHashMap();
+  for (HistoryListItem element in _resData) {
+    if (!groupData.containsKey(element.beatsTime)) {
+      groupData[element.beatsTime] = [];
+    }
+    groupData[element.beatsTime]!.add(element);
+  }
+
+  List<HistoryInfo> temp = [];
+  groupData.forEach((key, value) {
+    HistoryInfo obj = HistoryInfo();
+    obj.beatsTime = key;
+    obj.historyList = value;
+    temp.add(obj);
+  });
+  listData.addAll(temp);
+}
+
+/// 拼装展示用的模型
+class HistoryInfo {
+  String? beatsTime;
+  List<HistoryListItem>? historyList;
+}
+```
+* publish_to: none 消除 git 或 本地引用的警告
+
+# shell_market
+* ScreenUtil 导致 Scaffold 键盘无法弹起（需要设置 useInheritedMediaQuery: true,） 
+* num、double 转 int， .toInt()，直接截取不会四舍五入
+* 多个 Future 执行，如果不 await 也是乱序的，不用使用 Future.wait(),Future.wait()更适合 group 的场景
+```dart
+// 下拉刷新时记得执行 resetNoData
+  final int pageSize = 10;
+  int curPage = 1;
+  List<OtherListItem> listData = [];
+  bool canLoad = true;
+
+void onRefresh() {
+  reqData(isRefresh: true).then((_) {
+    refreshController.refreshCompleted();
+    refreshController.resetNoData();
+  }).catchError((_) {
+    refreshController.refreshFailed();
+    refreshController.resetNoData();
+  });
+}
+
+void onLoading() {
+  if (canLoad) {
+    reqData(isRefresh: false).then((_) {
+      refreshController.loadComplete();
+    }).catchError((_) {
+      refreshController.loadFailed();
+    });
+  } else {
+    refreshController.loadNoData();
+  }
+}
+
+Future<void> reqData({bool isRefresh = false}) async {
+  if (isRefresh) {
+    curPage = 1;
+    listData.clear();
+  } else {
+    curPage++;
+  }
+
+  List<PropListItem> res = await callDataService(
+    req.propList(curPage, pageSize),
+    onStart: () {},
+    onComplete: () {},
+  );
+  listData.addAll(res);
+  canLoad = res.length == pageSize;
+  // 下拉刷新时不展示没有数据了
+  if (!canLoad && !isRefresh) {
+    refreshController.loadNoData();
+  }
+  update();
+}
+```
+
+# 分页
+是否最后一页求余方式是否有问题？有问题，求余为 0，页数刚好为 pagesize 的倍数会出问题
+当前页不满一页也有问题：假设 size 为 10，距离刚好 30 条数据，会造成多调用一次上拉加载更多动作的接口
+
+# 获取图片宽高等信息
+```dart
+final image = Image.network(img);
+Completer<ui.Image> completer = Completer<ui.Image>();
+image.image
+    .resolve(const ImageConfiguration())
+    .addListener(ImageStreamListener((ImageInfo info, bool _) {
+  completer.complete(info.image);
+}));
+
+ui.Image info = await completer.future;
+int width = info.width;
+int height = info.height;
+containerTopPadding = Get.width / (width / height) - 60;
+update();
+```
+
 # 函数
 ```dart
 // 函数类型
@@ -34,7 +218,7 @@ print(18.clamp(min, max)); // 15
 ```
 
 # scroll 滚动到顶部、底部
-```
+```dart
 scrollController.animateTo(
   scrollController.position.minScrollExtent,
   duration: const Duration(milliseconds: 300),
@@ -46,36 +230,11 @@ scrollController.animateTo(
   duration: const Duration(milliseconds: 300),
   curve: Curves.easeInOut,
 );
+```
 # Image fit
 如果在 Image.network 中不指定 fit 属性，它的默认行为是按照图片的原始尺寸显示，并尽量在给定的框内展示整个图片。
 
 这个默认行为被称为 BoxFit.contain，它会尽量保持图片原始比例，同时确保图片完整地展示在给定的容器内。如果图片比例与容器不匹配，可能会在容器周围留有空白。
-
-# iOS 17 启动不起来(升级 SDK 后可解)
-1. 执行 flutter clean、flutter pub get 
-2. 进入到 .ios 目录，执行 pod install 
-3. XCode 启动 The Dart VM service is listening on http://127.0.0.1:51968/JLaBUkoZ2TU=/ 出现这个后执行 flutter attach
-4. 
-```yaml
-{
-  "name": "flutter_module(attach)",
-  "request": "attach",
-  "type": "dart",
-  "vmServiceUri": "http://127.0.0.1:52479/BWGD75IIgJc=/",
-  // "observatoryUri":"http://127.0.0.1:53009/KAeHfWwt3Lo=/",
-}
-```
-
-## 升级 sdk 后，iOS 无法启动
-如升级到 3.13.9，挨个执行如下命令
-
-sudo xattr -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/usbmuxd/iproxy
-sudo spctl --master-disable
-sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevice_id
-sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevicename
-sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevicescreenshot
-sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/idevicesyslog
-sudo xattr -r -d com.apple.quarantine /Users/bd/dev/flutter_sdk/3.13.9/bin/cache/artifacts/libimobiledevice/ideviceinfo
 
 # 查看三方库依赖关系
 flutter pub deps
@@ -146,7 +305,6 @@ TextSelection.collapsed(
 # Inkwell 和 GestureDetector 区别
 1. 一个有水波纹效果（自定义 widget 需要嵌套 Ink），一个没有
 2. GestureDetector 支持的手势更丰富
-3. Inkwell 响应范围更大，如 child 为 container 且设置 margin，InkWell margin 区域也会响应而 GestureDetector 不会
 # 带水波纹效果按钮
 ```dart
 // Inkwell 在包裹 container 且有颜色有圆角时，水波纹效果仅在圆角与区域外有效

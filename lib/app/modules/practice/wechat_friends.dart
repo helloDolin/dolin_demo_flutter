@@ -48,6 +48,7 @@ class _WechatFriendsState extends State<WechatFriends>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    // 必须在 didChangeDependencies 订阅
     Global.routerObserver
         .subscribe(this, ModalRoute.of(context)! as PageRoute); // 路由订阅
   }
