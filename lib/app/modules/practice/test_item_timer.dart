@@ -18,7 +18,7 @@ class _TestItemTimerState extends State<TestItemTimer> {
     testArr = List.generate(100, (index) => index + 10);
 
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      print(timer.tick);
+      debugPrint('timer:${timer.tick}');
       // list 中所有数据 -1
       for (var i = 0; i < testArr.length; i++) {
         if (testArr[i] > 0) {
@@ -38,28 +38,29 @@ class _TestItemTimerState extends State<TestItemTimer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('item_timer'),
-        ),
-        body: ListView.separated(
-          separatorBuilder: (context, index) {
-            return const SizedBox(
-              height: 10,
-            );
-          },
-          itemBuilder: (context, index) {
-            int num = testArr[index];
-            return Item(
-              countdown: num,
-            );
-          },
-          itemCount: testArr.length,
-        ));
+      appBar: AppBar(
+        title: const Text('item_timer'),
+      ),
+      body: ListView.separated(
+        separatorBuilder: (context, index) {
+          return const SizedBox(
+            height: 10,
+          );
+        },
+        itemBuilder: (context, index) {
+          final int num = testArr[index];
+          return Item(
+            countdown: num,
+          );
+        },
+        itemCount: testArr.length,
+      ),
+    );
   }
 }
 
 class Item extends StatelessWidget {
-  const Item({super.key, required this.countdown});
+  const Item({required this.countdown, super.key});
   final int countdown;
 
   @override
