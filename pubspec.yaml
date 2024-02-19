@@ -84,7 +84,7 @@ flutter:
     - assets/json/
 
   uses-material-design: true
-  fonts:
+  fonts: # 配置字体，可配置多个，支持ttf和otf,ttc等字体资源
     - family: iconFonts
       fonts:
         - asset: assets/fonts/iconfont.ttf

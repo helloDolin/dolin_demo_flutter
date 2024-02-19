@@ -100,7 +100,7 @@ class TimeKeepingView extends GetView<TimeKeepingController> {
         width: radius * 2,
         height: radius * 2,
         child: CustomPaint(
-          painter: Painter(
+          painter: StopwatchPainter(
             duration: controller.duration.value,
             radius: radius,
             textStyle: TextStyle(
@@ -161,8 +161,8 @@ const double _kScaleWidthRate = 0.04;
 const _kStrokeWidthRate = 0.8 / 135.0;
 const _kIndicatorRadiusRate = 0.03;
 
-class Painter extends CustomPainter {
-  Painter({
+class StopwatchPainter extends CustomPainter {
+  StopwatchPainter({
     required this.radius,
     required this.duration,
     this.secondDuration = Duration.zero,
@@ -269,7 +269,7 @@ class Painter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant Painter oldDelegate) {
+  bool shouldRepaint(covariant StopwatchPainter oldDelegate) {
     return oldDelegate.duration != duration ||
         oldDelegate.textStyle != textStyle ||
         oldDelegate.themeColor != themeColor ||

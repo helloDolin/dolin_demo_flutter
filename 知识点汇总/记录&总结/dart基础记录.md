@@ -1,3 +1,12 @@
+# factory 关键字
+在Dart语言中，factory关键字用于创建一个工厂构造函数。工厂构造函数与普通构造函数的区别在于，它们可以返回一个已经存在的实例，或者返回一个子类的实例，而不必每次都创建新的实例
+
+使用场景如下：
+
+1. 单例模式：通过工厂构造函数返回相同的实例，以确保在应用程序中只有一个实例存在。
+2. 缓存实例：在工厂构造函数中检查是否已经存在相同属性的实例，如果存在则返回该实例，否则创建新的实例并缓存起来。
+3. 返回子类实例：根据一些条件在工厂构造函数中决定返回哪个子类的实例。
+
 # newbie_draw
 * 枚举和 model 配合
 * Future then 和 await 不要同时使用
@@ -465,9 +474,8 @@ AnnotatedRegion(
   ),
 );
 ```
-```
 
-# resizeToAvoidBottomInset 
+# Scaffold resizeToAvoidBottomInset 属性
 是一个布尔值属性，用于控制当键盘弹出时，Scaffold是否会自动调整自身的大小以避免被底部插入（即避免键盘覆盖底部内容）
  
 # RefreshConfiguration.copyAncestor
@@ -497,6 +505,21 @@ ValueNotifier<bool> commitBtnEnabled = ValueNotifier(false); 控制刷新颗粒�
 ```dart
 // Listenable 还可以 merge，简直 666
 Listenable.merge([controller, controller])
+
+// eg:
+ValueNotifier<Duration> _duration = ValueNotifier(Duration.zero);
+
+Widget buildStopwatchPanel() {
+  double radius = MediaQuery.of(context).size.shortestSide / 2 * 0.75;
+  return ValueListenableBuilder<Duration>( 
+      valueListenable: _duration,
+      builder: (_, value, __) => StopwatchWidget(
+            radius: radius,
+            duration: value,
+            themeColor: Theme.of(context).primaryColor,
+            secondDuration: _secondDuration,
+          ));
+}
 ```
 
 # Flutter 异步结束回调（类 iOS 并发 group 功能）
