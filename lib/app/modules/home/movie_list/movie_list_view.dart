@@ -11,7 +11,9 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MovieListView extends StatelessWidget {
   MovieListView({required this.source, super.key})
-      : movieListController = MovieListController(source);
+      : movieListController = MovieListController(
+          source,
+        ); // 相当于 tag 的方式（[GETX] Instance "MovieListController" with tag "Imdb" has been initialized）
   final MovieListController movieListController;
   final String source;
 

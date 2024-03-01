@@ -1,3 +1,126 @@
+# charming
+* GetX 快速进入进出页面 Controller 没有释放解决：使用 statefull 在 dispose 时 手动释放
+```dart
+late LoginController controller;
+
+@override
+void initState() {
+  super.initState();
+  controller = Get.put(LoginController());
+}
+
+@override
+void dispose() {
+  Get.delete<LoginController>();
+  super.dispose();
+}
+```
+* 藏品动画效果
+```dart
+AnimatedBuilder _buildTestAnimation() {
+    return AnimatedBuilder(
+      animation: controller.ac,
+      builder: (context, child) {
+        // print(controller.ac.value);
+        return Transform(
+          alignment: Alignment.center,
+          // angle: controller.ac.value * 0.2, // 调整振幅
+          // transform: Matrix4.identity()
+          //   // ..setEntry(3, 2, 0.01) // 设置投影参数，实现立体效果
+          //   ..rotateY(0.1 * pi * controller.ac.value), // 绕y轴旋转
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.0005) // 设置投影参数，实现立体效果,最后一个值越大立体感越强
+            ..rotateY(pi / 8 * sin(2 * pi * controller.ac.value)), // 旋转 25 度
+          child: Image.asset(
+            'assets/images/bitcoin_bull.jpg', // 替换为你的图片路径
+            width: 629,
+            height: 360,
+          ),
+        );
+      },
+    );
+  }
+```
+* 画全屏 UI 时，需要需要先规划好区域（抽签结果页，登录页，底部按钮需要 Spacer() 撑开）
+* 安卓 GridView 配合 pull_to_refresh_flutter3，给 padding 的话，上拉加载更多显示有问题
+* 安卓底部没有完全展示修改
+```dart
+SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+systemNavigationBarColor: systemNavigationBarColor,
+systemNavigationBarDividerColor: systemNavigationBarDividerColor,
+```
+* 安卓的 .9 图，到 Flutter 这边为 centerSlice
+* TabBar 和 TabBarView 不是非要成对出现
+* 自定义 TabBar 的 indicator
+```dart
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class TriangleTabIndicator extends Decoration {
+  final Color color;
+
+  const TriangleTabIndicator({required this.color});
+
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return _TrianglePainter(color);
+  }
+}
+
+class _TrianglePainter extends BoxPainter {
+  final Paint _paint;
+
+  _TrianglePainter(Color color) : _paint = Paint()..color = color;
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    final Rect rect = offset & configuration.size!;
+    final double triangleSize = 12.w;
+    // 三角形起点坐标
+    final double startX = configuration.size!.width + rect.left;
+    final double startY = configuration.size!.height - 12.w;
+    final Path path = Path()
+      ..moveTo(startX, startY)
+      ..lineTo(startX - triangleSize, startY)
+      ..lineTo(startX, startY - triangleSize)
+      ..close();
+    // canvas.drawRect(rect, Paint()..color = Colors.blue);
+    canvas.drawPath(path, _paint);
+  }
+}
+```
+* 自定义 TabBarView 的 physics
+```dart
+TabBarView(
+  physics: const CustomTabBarViewScrollPhysics(),
+  controller: controller.tabController,
+  children: const [
+    KeepAliveWrapper(child: TabPropView()),
+    KeepAliveWrapper(child: TabOtherView()),
+    KeepAliveWrapper(child: TabBoxView()),
+  ],
+)
+
+class CustomTabBarViewScrollPhysics extends ScrollPhysics {
+  const CustomTabBarViewScrollPhysics({ScrollPhysics? parent})
+      : super(parent: parent);
+
+  @override
+  CustomTabBarViewScrollPhysics applyTo(ScrollPhysics? ancestor) {
+    return CustomTabBarViewScrollPhysics(parent: buildParent(ancestor)!);
+  }
+
+  @override
+  SpringDescription get spring => const SpringDescription(
+        mass: 50,
+        stiffness: 100,
+        damping: 0.8,
+      );
+}
+```
+
+
+
 # factory 关键字
 在Dart语言中，factory关键字用于创建一个工厂构造函数。工厂构造函数与普通构造函数的区别在于，它们可以返回一个已经存在的实例，或者返回一个子类的实例，而不必每次都创建新的实例
 
@@ -132,6 +255,8 @@ void onRefresh() {
   }).catchError((_) {
     refreshController.refreshFailed();
     refreshController.resetNoData();
+    // 接口掉失败需要触发 bool get showEmpty => requested && listData.isEmpty; 逻辑
+    update();
   });
 }
 
@@ -411,13 +536,27 @@ try {
 }
 ```
 
-# 监听 TabController index 打印两次
-看源码：在动画开始前 notify 一次，动画结束后 notify 一次。所以调用了两次
-所以在监听 index 前加上判断：
+# 监听 TabController index 打印两次 + 监听 TabController 动画
+
 ```dart
+// 看源码：在动画开始前 notify 一次，动画结束后 notify 一次。所以调用了两次
+// 所以在监听 index 前加上判断：
 if (tabController.indexIsChanging) {
     print("监听切换tab ${tabController.index} ");
 }
+
+// 监听 TabController 动画
+tabController.animation!.addListener(() {
+    tabIsChanging.value =
+        tabController.animation!.value != tabController.index;
+    if (!tabIsChanging.value) {
+      if (tabController.index == 0) {
+        rightTopBtn.value = RightTopBtn.history;
+      } else if (tabController.index == 1) {
+        rightTopBtn.value = RightTopBtn.boxBitch;
+      }
+    }
+  });
 ```
 
 # AnnotatedRegion 
