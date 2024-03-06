@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+/// 已用 GetX 方式替代
 class TabListView extends StatefulWidget {
   const TabListView({required this.source, super.key});
   final String source;

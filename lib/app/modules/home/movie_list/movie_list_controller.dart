@@ -1,6 +1,5 @@
 import 'package:dolin/app/apis/home/home.dart';
 import 'package:dolin/app/data/home/douban250.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -11,7 +10,6 @@ class MovieListController extends GetxController {
   final String source;
 
   late RefreshController refreshController;
-  late ScrollController scrollController;
 
   RxBool isShowUpIcon = false.obs;
   RxList<Douban250> data = <Douban250>[].obs;
@@ -69,24 +67,13 @@ class MovieListController extends GetxController {
   @override
   void onInit() {
     refreshController = RefreshController();
-    scrollController = ScrollController();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels > 200 &&
-          isShowUpIcon.value == false) {
-        isShowUpIcon.value = true;
-      }
-      if (scrollController.position.pixels < 200 &&
-          isShowUpIcon.value == true) {
-        isShowUpIcon.value = false;
-      }
-    });
+
     super.onInit();
   }
 
   @override
   void onClose() {
     refreshController.dispose();
-    scrollController.dispose();
     super.onClose();
   }
 

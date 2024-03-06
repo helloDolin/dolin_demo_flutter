@@ -6,10 +6,84 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
+  StickyTabBarDelegate({required this.child});
+  final TabBar child;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return ColoredBox(
+      color: Colors.white,
+      child: child,
+    );
+  }
+
+  @override
+  double get maxExtent => child.preferredSize.height;
+
+  @override
+  double get minExtent => child.preferredSize.height;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return true;
+  }
+}
+
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 230,
+              pinned: true,
+              flexibleSpace: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: Image.network(
+                  'https://img1.baidu.com/it/u=1758123523,2376227049&fm=253&fmt=auto&app=138&f=JPEG?w=848&h=500',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: StickyTabBarDelegate(
+                child: TabBar(
+                  controller: controller.tabController,
+                  tabs: controller.categoryList
+                      .map(
+                        (map) => Tab(
+                          text: map['title'],
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+          ];
+        },
+        body: TabBarView(
+          controller: controller.tabController,
+          children: controller.categoryList.map((map) {
+            return Expanded(
+              child: MovieListView(
+                source: map['source']!,
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+
     return Scaffold(
       // drawer: 从左边抽出
       // endDrawer: 从右边抽出

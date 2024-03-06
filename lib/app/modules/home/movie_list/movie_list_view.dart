@@ -1,7 +1,6 @@
 import 'package:dolin/app/common_widgets/gallery/index.dart';
 import 'package:dolin/app/common_widgets/keepalive_wrapper.dart';
 import 'package:dolin/app/constants/app_assets.dart';
-import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:dolin/app/data/home/douban250.dart';
 import 'package:dolin/app/modules/home/movie_list/movie_list_controller.dart';
 import 'package:flutter/material.dart';
@@ -24,47 +23,22 @@ class MovieListView extends StatelessWidget {
         init: movieListController,
         tag: source,
         builder: (controller) {
-          return Stack(
-            children: [
-              SmartRefresher(
-                enablePullUp: true,
-                controller: controller.refreshController,
-                onRefresh: controller.onRefresh,
-                onLoading: controller.onLoading,
-                child: ListView.separated(
-                  controller: controller.scrollController,
-                  separatorBuilder: (context, index) => Container(
-                    height: 10,
-                    color: const Color.fromARGB(21, 102, 215, 164),
-                  ),
-                  itemBuilder: (c, i) {
-                    return Item(model: controller.data[i], index: i);
-                  },
-                  itemCount: controller.data.length,
-                ),
+          return SmartRefresher(
+            enablePullUp: true,
+            controller: controller.refreshController,
+            onRefresh: controller.onRefresh,
+            onLoading: controller.onLoading,
+            child: ListView.separated(
+              padding: EdgeInsets.zero,
+              separatorBuilder: (context, index) => Container(
+                height: 10,
+                color: const Color.fromARGB(21, 102, 215, 164),
               ),
-              Obx(
-                () => Positioned(
-                  bottom: 20,
-                  right: 20,
-                  child: controller.isShowUpIcon.value
-                      ? IconButton(
-                          onPressed: () {
-                            controller.scrollController.animateTo(
-                              -20,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.bounceInOut,
-                            );
-                          },
-                          icon: const Icon(
-                            AppFonts.back2Top,
-                            size: 50,
-                          ),
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ),
-            ],
+              itemBuilder: (c, i) {
+                return Item(model: controller.data[i], index: i);
+              },
+              itemCount: controller.data.length,
+            ),
           );
         },
       ),
