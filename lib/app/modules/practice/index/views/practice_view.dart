@@ -113,7 +113,7 @@ class PracticeView extends GetView<PracticeController> {
               Card('Time-Keeping', () {
                 Get.toNamed(Routes.TIME_KEEPING);
               }),
-              Card('TextField', () {
+              Card('DLTextField', () {
                 Get.toNamed(Routes.TEXT_FIELD);
               }),
               Card('Dart 温故知新', () {
@@ -149,7 +149,7 @@ class PracticeView extends GetView<PracticeController> {
                     strings: {
                       'cancel': '取消',
                       'flash_on': '打开闪光灯',
-                      'flash_off': '关闭闪光灯'
+                      'flash_off': '关闭闪光灯',
                     },
                   );
 
@@ -544,7 +544,7 @@ class ExpandableWidget extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ...children
+            ...children,
           ],
         ),
       ),
@@ -594,7 +594,7 @@ class Card extends StatelessWidget {
               title,
               style: TextStyle(color: titleColor),
             ),
-            if (child != null) child!
+            if (child != null) child!,
           ],
         ),
       ),

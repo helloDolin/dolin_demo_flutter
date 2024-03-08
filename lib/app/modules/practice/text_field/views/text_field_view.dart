@@ -12,28 +12,24 @@ class TextFieldView extends GetView<TextFieldController> {
     return Scaffold(
       // extendBodyBehindAppBar: true,
       // extendBody: true,
-      appBar: const DLAppBar(title: 'test'),
+      appBar: const DLAppBar(title: 'DLTextField'),
       body: ListView(
         children: [
-          const Title('自定义 TextField'),
-          Obx(
-            () => SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: DLTextField(
-                maxLength: 10,
-                text: controller.inputText.value,
-                onChanged: (text) {
-                  controller.inputText.value = text;
-                },
-              ),
-            ),
+          const Title('自定义 TextField -- 1'),
+          DLTextField(
+            maxLength: 10,
+            text: controller.inputText.value,
+            onChanged: (text) {
+              controller.inputText.value = text;
+            },
           ),
+          const Title('自定义 TextField -- 2'),
           const SizedBox(
             width: double.infinity,
             height: 50,
             child: DLTextField(
               maxLength: 10,
+              autofocus: true,
               text: '嘿嘿',
             ),
           ),
@@ -45,7 +41,7 @@ class TextFieldView extends GetView<TextFieldController> {
             ),
           ),
           const Title('UI 信息'),
-          Text(controller.uiInfo.value)
+          Text(controller.uiInfo.value),
         ],
       ),
     );
