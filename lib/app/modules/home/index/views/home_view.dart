@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:dolin/app/modules/home/index/controllers/home_controller.dart';
 import 'package:dolin/app/modules/home/movie_list/movie_list_view.dart';
@@ -43,14 +45,18 @@ class HomeView extends GetView<HomeController> {
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              expandedHeight: 230,
+              expandedHeight: 190,
               pinned: true,
-              flexibleSpace: SizedBox(
-                width: double.infinity,
-                height: double.infinity,
-                child: Image.network(
-                  'https://img1.baidu.com/it/u=1758123523,2376227049&fm=253&fmt=auto&app=138&f=JPEG?w=848&h=500',
-                  fit: BoxFit.cover,
+              flexibleSpace: ImageFiltered(
+                imageFilter: ImageFilter.blur(
+                  sigmaX: 2,
+                  sigmaY: 2,
+                ),
+                child: SizedBox.expand(
+                  child: Image.asset(
+                    'assets/images/btc_2_the_moon.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -74,10 +80,8 @@ class HomeView extends GetView<HomeController> {
         body: TabBarView(
           controller: controller.tabController,
           children: controller.categoryList.map((map) {
-            return Expanded(
-              child: MovieListView(
-                source: map['source']!,
-              ),
+            return MovieListView(
+              source: map['source']!,
             );
           }).toList(),
         ),
