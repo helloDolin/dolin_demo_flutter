@@ -11,7 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   cached_network_image: 3.2.3 # 磁盘缓存 img
   get: 4.6.5 # getx
-  flutter_screenutil: 5.7.0 # 屏幕适配
+  flutter_screenutil: 5.9.0 # 屏幕适配
   dio: 5.1.0
   dio_cookie_manager: 3.0.0
   cookie_jar: 4.0.1

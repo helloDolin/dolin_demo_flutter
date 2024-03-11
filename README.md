@@ -49,6 +49,12 @@ Framework • revision 796c8ef792 (4 weeks ago) • 2023-06-13 15:51:02 -0700
 Engine • revision 45f6e00911
 Tools • Dart 3.0.5 • DevTools 2.23.1
 
+### 2024年03月08日17:27:37
+Flutter 3.19.1 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision abb292a07e (2 weeks ago) • 2024-02-20 14:35:05 -0800
+Engine • revision 04817c99c9
+Tools • Dart 3.3.0 • DevTools 2.31.1
+
 ## 使用到的接口定义文档
 https://github.com/iiiiiii1/douban-imdb-api
 
