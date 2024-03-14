@@ -62,9 +62,11 @@ class PracticeView extends GetView<PracticeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Card('scrollable_list_tab_scroller', () {
-                Get.to(const ScrollableListTabPage(
-                  title: 'scrollable_list_tab_scroller',
-                ));
+                Get.to(
+                  const ScrollableListTabPage(
+                    title: 'scrollable_list_tab_scroller',
+                  ),
+                );
               }),
               Card('时光轴', () {
                 Get.to(const TimeLinePage());
