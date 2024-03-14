@@ -7,6 +7,7 @@ import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:dolin/app/common_widgets/keepalive_wrapper.dart';
 import 'package:dolin/app/modules/debug/log/log.dart';
 import 'package:dolin/app/modules/practice/animate.dart';
+import 'package:dolin/app/modules/practice/animate_list_page.dart';
 import 'package:dolin/app/modules/practice/arena_practice.dart';
 import 'package:dolin/app/modules/practice/async_practice.dart';
 import 'package:dolin/app/modules/practice/custom_paint/bezier_study.dart';
@@ -61,6 +62,9 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('AnimatedListPage', () {
+                Get.to(const AnimatedListPage());
+              }),
               Card('scrollable_list_tab_scroller', () {
                 Get.to(
                   const ScrollableListTabPage(
