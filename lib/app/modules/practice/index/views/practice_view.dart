@@ -25,6 +25,7 @@ import 'package:dolin/app/modules/practice/key.dart';
 import 'package:dolin/app/modules/practice/layout_practice.dart';
 import 'package:dolin/app/modules/practice/my_provider_page.dart';
 import 'package:dolin/app/modules/practice/radius_%20summary.dart';
+import 'package:dolin/app/modules/practice/scrollable_list_tab_scroller.dart';
 import 'package:dolin/app/modules/practice/sliver/sliver_app_bar_and_sliver_list.dart';
 import 'package:dolin/app/modules/practice/sliver/sliver_basic.dart';
 import 'package:dolin/app/modules/practice/stream/stream.dart';
@@ -60,6 +61,11 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('scrollable_list_tab_scroller', () {
+                Get.to(const ScrollableListTabPage(
+                  title: 'scrollable_list_tab_scroller',
+                ));
+              }),
               Card('时光轴', () {
                 Get.to(const TimeLinePage());
               }),
