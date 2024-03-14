@@ -49,7 +49,10 @@ dependencies:
   flutter_native_splash: 2.2.19
   intl: ^0.18.0
   expandable: 5.0.1
-
+  wrapper: ^1.0.2
+  scrollable_list_tab_scroller: ^1.1.2
+  dash_painter: ^1.0.2
+  
   # 插件练习
   flutter_plugin_practice:
     path: ./flutter_plugin_practice

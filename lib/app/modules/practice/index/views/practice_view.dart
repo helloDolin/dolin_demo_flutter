@@ -29,6 +29,7 @@ import 'package:dolin/app/modules/practice/sliver/sliver_app_bar_and_sliver_list
 import 'package:dolin/app/modules/practice/sliver/sliver_basic.dart';
 import 'package:dolin/app/modules/practice/stream/stream.dart';
 import 'package:dolin/app/modules/practice/stream/stream_game.dart';
+import 'package:dolin/app/modules/practice/time_line.dart';
 import 'package:dolin/app/modules/practice/webview/flutter_inappwebview.dart';
 import 'package:dolin/app/modules/practice/webview/webview_flutter.dart';
 import 'package:dolin/app/modules/practice/wechat_friends.dart';
@@ -59,6 +60,9 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('时光轴', () {
+                Get.to(const TimeLinePage());
+              }),
               Card('手撕 Provider', () {
                 Get.to(() => const MyProviderPage());
               }),

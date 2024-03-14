@@ -370,9 +370,6 @@ scrollController.animateTo(
 
 这个默认行为被称为 BoxFit.contain，它会尽量保持图片原始比例，同时确保图片完整地展示在给定的容器内。如果图片比例与容器不匹配，可能会在容器周围留有空白。
 
-# 查看三方库依赖关系
-flutter pub deps
-
 # TextFormField
 ```dart
 TextFormField(

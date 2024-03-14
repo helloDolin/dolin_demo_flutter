@@ -87,8 +87,8 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 
 # 合并多个提交为一个：
 // n 为节点个数
-git reset --soft HEAD~3
-git commit -m "feat: 框架搭建 + tabbar"
+git reset --soft HEAD~7
+git commit -m "feat: 转赠联调"
 git push origin HEAD --force
 
 // 推送到远程分支
@@ -122,3 +122,17 @@ git config user.name
 
 git config user.name 'helloDolin'
 git config user.email '366688603@qq.com'
+
+# 提交规范
+属性	     描述
+feat		新功能
+fix			修改bug
+docs		文档修改
+style		格式修改
+refactor	重构
+perf		性能提升
+test		测试
+build		构建系统
+ci			对CI配置文件修改
+chore		修改构建流程、或者增加依赖库、工具
+revert		回滚版本
