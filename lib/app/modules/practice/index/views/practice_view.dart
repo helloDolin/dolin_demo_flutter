@@ -10,6 +10,7 @@ import 'package:dolin/app/modules/practice/animate.dart';
 import 'package:dolin/app/modules/practice/animate_list_page.dart';
 import 'package:dolin/app/modules/practice/arena_practice.dart';
 import 'package:dolin/app/modules/practice/async_practice.dart';
+import 'package:dolin/app/modules/practice/chewie_demo.dart';
 import 'package:dolin/app/modules/practice/custom_paint/bezier_study.dart';
 import 'package:dolin/app/modules/practice/custom_paint/cake.dart';
 import 'package:dolin/app/modules/practice/custom_paint/charts.dart';
@@ -62,6 +63,9 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('chewie', () {
+                Get.to(const ChewieDemo());
+              }),
               Card('AnimatedListPage', () {
                 Get.to(const AnimatedListPage());
               }),

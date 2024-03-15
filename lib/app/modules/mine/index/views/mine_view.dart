@@ -6,6 +6,7 @@ import 'package:dolin/app/util/dialog_util.dart';
 import 'package:dolin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 class MineView extends GetView<MineController> {
   const MineView({super.key});
@@ -95,43 +96,65 @@ class MineView extends GetView<MineController> {
     );
   }
 
-  Container _group1() {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 12,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(width: 0.5, color: Colors.cyan),
-        color: const Color(0xFF0B82F1).withAlpha(15),
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-      ),
-      child: Column(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.sunny),
-            title: Text(LocaleKeys.mine_show_theme.tr),
-            trailing: const Icon(
-              Icons.chevron_right,
-              color: Colors.grey,
+  Widget _group1() {
+    return ShowCaseWidget(
+      builder: Builder(
+        builder: (context) {
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) => ShowCaseWidget.of(context).startShowCase([
+              controller.key1,
+              controller.key2,
+            ]),
+          );
+          return Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 12,
             ),
-            onTap: () {
-              controller.setTheme();
-            },
-          ),
-          const Divider(height: 0.5),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: Text(LocaleKeys.mine_more_setting.tr),
-            trailing: const Icon(
-              Icons.chevron_right,
-              color: Colors.grey,
+            decoration: BoxDecoration(
+              border: Border.all(width: 0.5, color: Colors.cyan),
+              color: const Color(0xFF0B82F1).withAlpha(15),
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
-            onTap: () {
-              Get.toNamed<void>(Routes.SETTINGS);
-            },
-          ),
-        ],
+            child: Column(
+              children: [
+                Showcase(
+                  key: controller.key1,
+                  // title: 'Menu',
+                  description: '点击这里切换主题',
+                  child: ListTile(
+                    leading: const Icon(Icons.sunny),
+                    title: Text(LocaleKeys.mine_show_theme.tr),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      color: Colors.grey,
+                    ),
+                    onTap: () {
+                      controller.setTheme();
+                    },
+                  ),
+                ),
+                const Divider(height: 0.5),
+                Showcase(
+                  key: controller.key2,
+                  title: '设置',
+                  description: '点击这里切进行设置',
+                  child: ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: Text(LocaleKeys.mine_more_setting.tr),
+                    trailing: const Icon(
+                      Icons.chevron_right,
+                      color: Colors.grey,
+                    ),
+                    onTap: () {
+                      Get.toNamed<void>(Routes.SETTINGS);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

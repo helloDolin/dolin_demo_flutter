@@ -136,3 +136,6 @@ build		构建系统
 ci			对CI配置文件修改
 chore		修改构建流程、或者增加依赖库、工具
 revert		回滚版本
+
+# 删除 git 管理
+rm -rf .git

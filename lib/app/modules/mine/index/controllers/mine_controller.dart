@@ -9,17 +9,8 @@ import 'package:url_launcher/url_launcher_string.dart';
 class MineController extends GetxController {
   final AppSettingsService settings = AppSettingsService.instance;
   RxString curLanguage = ''.obs;
-
-  @override
-  void onInit() {
-    final langCode = Get.locale!.languageCode;
-    if (langCode == 'zh') {
-      curLanguage.value = 'Change to English';
-    } else if (langCode == 'en') {
-      curLanguage.value = '切换为中文';
-    }
-    super.onInit();
-  }
+  final GlobalKey key1 = GlobalKey();
+  final GlobalKey key2 = GlobalKey();
 
   /// 切换语言
   void changeLang() {
@@ -117,5 +108,16 @@ class MineController extends GetxController {
         applicationLegalese: '@DOLIN',
       ),
     );
+  }
+
+  @override
+  void onInit() {
+    final langCode = Get.locale!.languageCode;
+    if (langCode == 'zh') {
+      curLanguage.value = 'Change to English';
+    } else if (langCode == 'en') {
+      curLanguage.value = '切换为中文';
+    }
+    super.onInit();
   }
 }
