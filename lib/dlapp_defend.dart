@@ -37,6 +37,7 @@ class DLAPPDefend {
 
   /// 初始化服务
   Future<void> initServices() async {
+    // await Get.putAsync(() => GlobalConfigService().init());
     await Get.put<StorageService>(StorageService()).init(); // 注意：put 后 init
     Get.put<UserStore>(UserStore());
 

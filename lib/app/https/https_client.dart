@@ -20,6 +20,7 @@ class HttpsClient {
       // baseUrl: 'https://api.wmdb.tv/api/v1/top',
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 5),
+      // 公共数据，eg：token、version、timestamp、sign、platform、channel
       headers: <String, dynamic>{},
       contentType: 'application/json; charset=utf-8',
       // responseType: ResponseType.json,

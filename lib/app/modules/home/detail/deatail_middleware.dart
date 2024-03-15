@@ -3,6 +3,7 @@ import 'package:dolin/app/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// 中间件
 class DeatailMiddleWare extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
