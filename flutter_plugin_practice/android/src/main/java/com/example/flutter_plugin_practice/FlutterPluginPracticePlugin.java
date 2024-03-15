@@ -27,8 +27,10 @@ public class FlutterPluginPracticePlugin implements FlutterPlugin, MethodCallHan
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     }  else if (call.method.equals("add")) {
-      int a = call.argument(key:"a");
-      int b = call.argument(key:"b")
+      // int a = call.argument(key:"a");
+      // int b = call.argument(key:"b");
+      int a = call.argument("a");
+      int b = call.argument("b");
       int sum = add(a,b);
       result.success(sum);
     } else {
@@ -41,7 +43,7 @@ public class FlutterPluginPracticePlugin implements FlutterPlugin, MethodCallHan
     channel.setMethodCallHandler(null);
   }
 
-  privaten add(int a,int b) {
+  private int add(int a,int b) {
     return a + b;
   }
 }
