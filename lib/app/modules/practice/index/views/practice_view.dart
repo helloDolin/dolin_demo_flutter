@@ -28,7 +28,7 @@ import 'package:dolin/app/modules/practice/layout_practice.dart';
 import 'package:dolin/app/modules/practice/my_provider_page.dart';
 import 'package:dolin/app/modules/practice/radius_%20summary.dart';
 import 'package:dolin/app/modules/practice/scrollable_list_tab_scroller.dart';
-import 'package:dolin/app/modules/practice/sliver/sliver_app_bar_and_sliver_list.dart';
+import 'package:dolin/app/modules/practice/sliver/juejin/page.dart';
 import 'package:dolin/app/modules/practice/sliver/sliver_basic.dart';
 import 'package:dolin/app/modules/practice/stream/stream.dart';
 import 'package:dolin/app/modules/practice/stream/stream_game.dart';
@@ -256,7 +256,7 @@ class PracticeView extends GetView<PracticeController> {
 
   Widget _buildSliverExpandable() {
     return ExpandableWidget(
-      title: 'Sliver Practice',
+      title: 'NestedScrollView + CustomScrollView',
       children: [
         ListTile(
           title: const Text('SliverBasic'),
@@ -266,9 +266,9 @@ class PracticeView extends GetView<PracticeController> {
           trailing: const Icon(Icons.arrow_forward_ios),
         ),
         ListTile(
-          title: const Text('SliverPractice'),
+          title: const Text('仿掘金首页'),
           onTap: () {
-            Get.to(() => const SliverPractice());
+            Get.to(() => const JuejinHomePage());
           },
           trailing: const Icon(Icons.arrow_forward_ios),
         ),

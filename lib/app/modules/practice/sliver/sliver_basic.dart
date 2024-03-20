@@ -8,9 +8,6 @@ class SliverBasic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('SliverBasic'),
-      // ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -20,14 +17,14 @@ class SliverBasic extends StatelessWidget {
             // pinned: true, // 上拉时不消失
             expandedHeight:
                 150, // 一般设置了 expandedHeight，stretch 需要同时设置 stretchModes
-            stretch: true,
+            stretch: true, // 下拉时 flexibleSpace 放大
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
                 'https://img.zcool.cn/community/01014259f069b7a801216a4b278f97.jpg@1280w_1l_2o_100sh.jpg',
                 fit: BoxFit.cover,
               ),
               title: const Text(
-                'SliverBasic',
+                '',
                 style: TextStyle(color: Colors.black),
               ),
               stretchModes: const [
