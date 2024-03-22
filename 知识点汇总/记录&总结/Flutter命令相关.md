@@ -1,6 +1,10 @@
 # 查看所有命令
 flutter
 
+# 根据 .metadata 文件查看当前 flutter 版本
+https://github.com/flutter/flutter/commit/{revision}
+revision 为 .metadata reversion 字段
+
 # 查看当前 flutter 版本
 flutter --version
 
