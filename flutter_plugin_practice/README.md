@@ -19,7 +19,11 @@ https://blog.csdn.net/sinat_17775997/article/details/110438289
 ### 使用的命令：
 
 创建插件：
+
 flutter create -t plugin flutter_plugin_practice --platform=android,ios -a java -i objc
+flutter create -t plugin tencent_kyc --platform=android,ios -a java -i objc
+flutter create -t plugin tencent_kyc --platform=android,ios -a kotlin -i objc
+
 
 在 example 目录下 build
 /Users/liaoshaolin/Desktop/dolin_demo_flutter/flutter_plugin_practice/example

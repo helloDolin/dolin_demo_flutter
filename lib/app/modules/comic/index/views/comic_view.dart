@@ -32,11 +32,6 @@ class ComicView extends GetView<ComicController> {
         return Scaffold(
           appBar: TabAppBar(
             controller: controller.tabController,
-            // tabs: controller.categores
-            //     .map((e) => Tab(
-            //           text: e.tagName,
-            //         ))
-            //     .toList(),
             tabs: const [
               Tab(text: '推荐'),
               Tab(text: '更新'),
@@ -53,8 +48,6 @@ class ComicView extends GetView<ComicController> {
           ),
           body: TabBarView(
             controller: controller.tabController,
-            // children:
-            // controller.categores.map((e) => Text(e.tagName ?? '')).toList(),
             children: [
               recommend_list.ListView(),
               const Text('更新'),

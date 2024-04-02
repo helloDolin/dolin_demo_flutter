@@ -87,8 +87,8 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 
 # 合并多个提交为一个：
 // n 为节点个数
-git reset --soft HEAD~7
-git commit -m "feat: 转赠联调"
+git reset --soft HEAD~4
+git commit -m "feat:人脸识别逻辑调整"
 git push origin HEAD --force
 
 // 推送到远程分支
