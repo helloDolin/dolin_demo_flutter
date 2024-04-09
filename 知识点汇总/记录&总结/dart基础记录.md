@@ -517,6 +517,18 @@ Future<String?> toImage(GlobalKey globalKey, BuildContext ctx) async {
   }
 }
 
+// 使用如下方法更好
+Future<Uint8List?> _getBitsByKey(GlobalKey key) async {
+  RenderObject? boundary = key.currentContext?.findRenderObject();
+  if (boundary != null && boundary is RenderRepaintBoundary) {
+    ui.Image img = await boundary.toImage(pixelRatio: 2);
+    ByteData? byteData = await img.toByteData(format: ui.ImageByteFormat.png);
+    Uint8List? bits = byteData?.buffer.asUint8List();
+    return bits;
+  }
+  return null;
+}
+
 // save
 try {
   String? path = await toImage(globalKey, context);
@@ -531,6 +543,8 @@ try {
     gravity: ToastGravity.CENTER,
   );
 }
+
+// 注：需要在 widget 组件上包裹 RepaintBoundary 并设置 key
 ```
 
 # 监听 TabController index 打印两次 + 监听 TabController 动画
@@ -636,7 +650,7 @@ bool b3 = smallCar
     smallCar.length;
 ```
 
-# ValueListenableBuilder、ListenableBuilder 使用
+# ValueListenableBuilder 、 ListenableBuilder 使用
 ValueNotifier<bool> commitBtnEnabled = ValueNotifier(false); 控制刷新颗粒度
 ```dart
 // Listenable 还可以 merge，简直 666
