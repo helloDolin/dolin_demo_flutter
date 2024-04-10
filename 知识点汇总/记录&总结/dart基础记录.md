@@ -255,7 +255,7 @@ void onRefresh() {
   }).catchError((_) {
     refreshController.refreshFailed();
     refreshController.resetNoData();
-    // 接口掉失败需要触发 bool get showEmpty => requested && listData.isEmpty; 逻辑
+    // 接口失败需要触发 bool get showEmpty => requested && listData.isEmpty; 逻辑
     update();
   });
 }
@@ -297,7 +297,7 @@ Future<void> reqData({bool isRefresh = false}) async {
 
 # 分页
 是否最后一页求余方式是否有问题？有问题，求余为 0，页数刚好为 pagesize 的倍数会出问题
-当前页不满一页也有问题：假设 size 为 10，距离刚好 30 条数据，会造成多调用一次上拉加载更多动作的接口
+当前页不满一页也有问题：假设 size 为 10，刚好 30 条数据，会造成多调用一次上拉加载更多动作的接口
 
 # 获取图片宽高等信息
 ```dart
@@ -439,6 +439,41 @@ TextSelection.collapsed(
 # 带水波纹效果按钮
 ```dart
 // Inkwell 在包裹 container 且有颜色有圆角时，水波纹效果仅在圆角与区域外有效
+// container 不能设置颜色，颜色需要 Ink 组件提供
+// 所以最好还是用 ElevatedButton
+InkWell(
+  splashColor: Colors.yellow,
+  // focusColor: Colors.green,
+  onTap: () {},
+  child: Ink(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8.0), // 可根据需求调整圆角
+    ),
+    child: Container(
+      alignment: Alignment.center,
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+        // color: const Color(0xFFe5e5e5),
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+        border: Border.all(
+          color: const Color(0xFF00FFFF),
+          width: 10,
+        ),
+      ),
+      child: Text(
+        'text',
+        style: TextStyle(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w400,
+          color: const Color(0xFF000000),
+        ),
+      ),
+    ),
+  ),
+)
+
 ElevatedButton(
   onPressed: () {
     Get.back();
@@ -941,7 +976,7 @@ InteractiveViewer（让用户在子组件上执行平移、缩放和旋转等手
 
 # Key
 * 对多子组件中的组件进行交换、移除、增加等变化时，通过添加 Key 让由于元素可以感知变化，保证正确的关系，不至于状态类的混乱
-*key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更新中被识别，这就是 LocalKey 的作用,所以 LocalKey 保证的是 相同父级 组件的身份唯一性
+* key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更新中被识别，这就是 LocalKey 的作用,所以 LocalKey 保证的是 相同父级 组件的身份唯一性
 * 而 GlobalKey 是整个应用中，组件的身份唯一性
 ```dart
 // eg:

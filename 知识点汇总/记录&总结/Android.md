@@ -29,3 +29,9 @@ chmod 777 script.sh
 # flutter 模块依赖
 build.gradle 下
 implementation 'com.example.flutter_module:flutter_release:1703057505_shaolin_prop'
+
+# 包名修改
+android/app/build.gradle
+defaultConfig {
+    applicationId "com.aiear.xxx"
+}
