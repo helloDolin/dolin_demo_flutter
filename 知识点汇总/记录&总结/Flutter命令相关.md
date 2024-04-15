@@ -43,3 +43,6 @@ flutter build ios --release
 
 ## 清除 pub cache
 flutter pub cache clean
+
+## 杀掉 dart 进程
+killall - dart

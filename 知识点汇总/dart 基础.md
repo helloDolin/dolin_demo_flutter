@@ -155,7 +155,6 @@ print(cnNumMap);
 ```dart
 // 首先 List 和 Set 之间可以相互转化。我们前面知道，Set 中的元素是不重复的，所以如果 List 中有重复的元素，通过 toSet 方法转化为 Set 之后，可以去除重复元素，再把 Set 通过 toList 转化为 List ，就可以达到 去重 的需求
 ```
-![image](https://github.com/helloDolin/dolin_demo_flutter/blob/main/map_list_set.drawio.png?raw=true)
 
 # OOP
 面向对象编程，是基于 对象 间的相互协作，来解决问题的一种思考方式。面向对象处理问题的过程中，通过 类 对事物的 数据 和 行为 进行封装，可以让各类事物的职能逻辑更加 "紧凑"，不至于零散地分处各地。这无形中会增加代码结构的稳定性，使其更易维护和拓展

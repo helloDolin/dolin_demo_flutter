@@ -50,7 +50,7 @@ abstract class WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) { }
   // 内存警告回调
   void didHaveMemoryPressure() { }
-  //Accessibility 相关特性回调
+  // Accessibility 相关特性回调
   void didChangeAccessibilityFeatures() {}
 }
 
@@ -95,19 +95,59 @@ await 是采用事件队列的机制实现等待行为的
 
 现有原生开发中一些相对成熟的解决方案，以接口封装的形式在 Dart 层快速搞定
 
-
 MethodChannel ：用于在Dart和平台原生代码之间进行方法调用和响应。它允许Flutter应用程序调用原生平台的方法，并获取返回的结果。一次性通信:如 Flutter 调用 Native 拍照。
 
 EventChannel : 用于在Dart和原生平台之间进行事件流的单向通信。这个通道主要用于从原生平台向Flutter发送事件流（例如传感器数据、原生事件等）。Flutter端可以订阅该通道以接收来自原生端的事件流，并作出相应的处理。持续通信,收到消息后无法回复此次消息,通常用于 Native 向 Dart 的通信,如:手机电量变化,网络变化,陀螺仪,传感器等
 
 BasicMessageChannel ：用于在Dart和原生平台之间传递任意类型的消息。它提供了一种简单的方式来传递序列化后的消息对象。可以用它发送和接收复杂数据类型，比如字符串、数字、Map、List等。可以自定义编解码器，使得在Flutter和原生代码之间传递数据更加灵活。用于传递字符串和半结构化的信息。持续通信,收到消息后可以回复此次消息,如 Native 将遍历到的文件信息陆续传递到 Dart,在比如:Flutter 将从服务端陆续获取到的信息交给 Native 加工,Native 处理完返回等。
 
-这三种Channel之间互相独立，各有用途，但它们在设计上却非常相近。
+这三种 Channel 之间互相独立，各有用途，但它们在设计上却非常相近。
 
-每种Channel均有三个重要成员变量：
-name: String类型，代表Channel的名字，也是其唯一标识符。
-messager：BinaryMessenger类型，代表消息信使，是消息的发送与接收的工具。
-codec: MessageCodec类型或MethodCodec类型，代表消息的编解码器。
+每种 Channel 均有三个重要成员变量：
+name: String 类型，代表 Channel 的名字，也是其唯一标识符。
+messager：BinaryMessenger 类型，代表消息信使，是消息的发送与接收的工具。
+codec: MessageCodec 类型或 MethodCodec 类型，代表消息的编解码器。
+
+```dart
+// eg:MethodChannel
+import 'package:flutter/services.dart';
+
+const MethodChannel _channel = MethodChannel('com.webank.kyc/face');
+
+Future<Map<dynamic, dynamic>> auth(
+  String faceId,
+  String order,
+  String nonce,
+  String sign,
+  String userId,
+  String appId,
+  String licence,
+  String apiVersion,
+) async {
+  final Map<String, dynamic> config = {
+    'faceId': faceId,
+    'order': order,
+    'nonce': nonce,
+    'sign': sign,
+    'userId': userId,
+    'appId': appId,
+    'mode': 'reflect',
+    'type': 'idCard',
+    'licence': licence,
+    'apiVersion': apiVersion,
+    'config': {
+      'showSuccessPage': '0', //是否展示成功页面
+      'showFailurePage': '0', //是否展示失败页面
+      'recordVideo': '0', //是否录制视频
+      'playVoice': '0', //是否播放语音提示
+      'theme': '0', //sdk皮肤设置，0黑色，1白色
+    }
+  };
+  final Map<dynamic, dynamic> result =
+      await _channel.invokeMethod('startFaceService', config);
+  return result;
+}
+```
 
 ## 构建一个复杂 App 都需要什么？
 ![image][app]
@@ -147,6 +187,8 @@ Flutter 实例的初始化成本非常高昂，每启动一个 Flutter 实例，
 
 ## 状态管理
 为了使用 Provider，我们需要解决以下 3 个问题：
+
+消费者模型（提供者、使用者）
 
 资源（即数据状态）如何封装？
 资源放在哪儿，才都能访问得到？注入
@@ -239,7 +281,16 @@ try {
 catch(e) {
   print("This line will never be executed. ");
 }
+
+// 加上 await 后可以捕获异常
+try {
+  await Future.delayed(Duration(seconds: 1))
+      .then((e) => throw StateError('This is a Dart exception in Future.'));
+} catch (e) {
+  print("This line will never be executed. ");
+}
 ```
+
 
 如果我们想集中管理代码中的所有异常，Flutter 也提供了 Zone.runZoned 方法
 
@@ -282,7 +333,7 @@ CPU 与 GPU 在接收到 VSync 信号后，就会计算图形图像，准备渲�
 
 ## 组件化、平台化
 组件的粒度：软件包（Package）、页面、UI 控件，甚至可能是封装了一些函数的模块
-原则：括单一性原则、抽象化原则、稳定性原则、自完备性原则
+原则：包括单一性原则、抽象化原则、稳定性原则、自完备性原则
 
 抽象化原则指的是，组件提供的功能抽象应该尽量稳定，具有高复用度。而稳定的直观表现就是对外暴露的接口很少发生变化，要做到这一点，需要我们提升对功能的抽象总结能力，在组件封装时做好功能抽象和接口设计，将所有可能发生变化的因子都在组件内部做好适配，不要暴露给它的调用方
 
@@ -307,7 +358,6 @@ CPU 与 GPU 在接收到 VSync 信号后，就会计算图形图像，准备渲�
 为了保障可靠交付，我们需要关注从源代码到发布的整个流程，提供一种可靠的发布支撑，确保 App 是以一种可重复的、自动化的方式构建出来的。同时，我们还应该将打包过程提前，将构建频率加快，因为这样不仅可以尽早发现问题，修复成本也会更低，并且能更好地保证代码变更能够顺利发布上线
 
 Travis CI
-
 
 Dart 语言基础语法及常用特性
 Flutter 框架原理和核心设计思想
