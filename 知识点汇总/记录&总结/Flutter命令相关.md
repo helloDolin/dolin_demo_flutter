@@ -41,6 +41,9 @@ flutter build ios-framework --no-debug --no-profile --release
 ## iOS 产物：ipa
 flutter build ios --release
 
+## mac 产物：
+flutter build macos --release
+
 ## 清除 pub cache
 flutter pub cache clean
 

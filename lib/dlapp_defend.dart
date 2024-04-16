@@ -38,12 +38,13 @@ class DLAPPDefend {
   /// 初始化服务
   Future<void> initServices() async {
     // await Get.putAsync(() => GlobalConfigService().init());
-    await Get.put<StorageService>(StorageService()).init(); // 注意：put 后 init
+    await Get.put<StorageService>(StorageService())
+        .init(); // 注意：put 后调用 init 实例方法
     Get.put<UserStore>(UserStore());
 
     /// 初始化设置服务
     // ignore: cascade_invocations
-    Get.put(AppSettingsService());
+    Get.put<AppSettingsService>(AppSettingsService());
   }
 
   /// 设置 debugPrint

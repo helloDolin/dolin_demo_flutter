@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 class HighlightText extends StatelessWidget {
   const HighlightText({
     required this.text,
-    required this.pattern,
+    required this.regPattern,
     required this.textStyle,
     required this.highlightStyle,
     super.key,
@@ -17,8 +17,8 @@ class HighlightText extends StatelessWidget {
   /// 文本
   final String text;
 
-  /// 关键字
-  final String pattern;
+  /// 正则表达式
+  final String regPattern;
 
   /// 文本样式
   final TextStyle textStyle;
@@ -34,7 +34,7 @@ class HighlightText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RichText(
-      text: formSpan(text, pattern),
+      text: formSpan(text, regPattern),
     );
   }
 
