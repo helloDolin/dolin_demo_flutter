@@ -36,7 +36,7 @@ class _TipBoxState extends State<TipBox> {
       child: CompositedTransformTarget(
         link: layerLink,
         child: Image.asset(
-          'assets/images/login/btn_next_enable.png',
+          'assets/images/logo.png',
           width: 80,
           height: 80,
         ),
