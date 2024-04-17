@@ -26,6 +26,7 @@ import 'package:dolin/app/modules/practice/interview/chengyao.dart';
 import 'package:dolin/app/modules/practice/key.dart';
 import 'package:dolin/app/modules/practice/layout_practice.dart';
 import 'package:dolin/app/modules/practice/my_provider_page.dart';
+import 'package:dolin/app/modules/practice/popup.dart';
 import 'package:dolin/app/modules/practice/radius_%20summary.dart';
 import 'package:dolin/app/modules/practice/scrollable_list_tab_scroller.dart';
 import 'package:dolin/app/modules/practice/sliver/juejin/page.dart';
@@ -63,6 +64,9 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('popup(跟随widget)', () {
+                Get.to(const PopupPage());
+              }),
               Card('chewie', () {
                 Get.to(const ChewieDemo());
               }),

@@ -9,8 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  StickyTabBarDelegate({required this.child});
+  StickyTabBarDelegate({required this.child, this.bgColor = Colors.white});
   final TabBar child;
+  final Color bgColor;
 
   @override
   Widget build(
@@ -19,7 +20,7 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
     bool overlapsContent,
   ) {
     return ColoredBox(
-      color: Colors.white,
+      color: bgColor,
       child: child,
     );
   }
@@ -63,6 +64,7 @@ class HomeView extends GetView<HomeController> {
             SliverPersistentHeader(
               pinned: true,
               delegate: StickyTabBarDelegate(
+                bgColor: Colors.transparent,
                 child: TabBar(
                   controller: controller.tabController,
                   tabs: controller.categoryList

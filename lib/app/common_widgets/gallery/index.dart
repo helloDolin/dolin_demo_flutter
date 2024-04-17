@@ -1,4 +1,6 @@
+import 'package:dolin/app/util/photo_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -82,15 +84,33 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
                 onPageChanged: onPageChanged,
                 scrollDirection: widget.scrollDirection,
               ),
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  '${currentIndex + 1} / ${widget.galleryItems.length}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () async {
+                      await saveNetImage(widget.galleryItems[currentIndex]);
+                    },
+                    child: Text(
+                      '保存',
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFFFFFFFF),
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Text(
+                      '${currentIndex + 1} / ${widget.galleryItems.length}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Positioned(
                 right: 20,
@@ -118,7 +138,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
       child: SizedBox(
         child: Image.network(item),
       ),
-      childSize: const Size(300, 300),
+      childSize: Size(ScreenUtil().screenWidth, ScreenUtil().screenHeight),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,
