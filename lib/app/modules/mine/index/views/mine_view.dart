@@ -1,7 +1,6 @@
 import 'package:dolin/app/modules/mine/index/controllers/mine_controller.dart';
 import 'package:dolin/app/modules/practice/webview/flutter_inappwebview.dart';
 import 'package:dolin/app/routes/app_pages.dart';
-import 'package:dolin/app/services/app_settings_service.dart';
 import 'package:dolin/app/services/user.dart';
 import 'package:dolin/app/util/dialog_util.dart';
 import 'package:dolin/generated/locales.g.dart';
@@ -103,11 +102,12 @@ class MineView extends GetView<MineController> {
         builder: (context) {
           WidgetsBinding.instance.addPostFrameCallback(
             (_) {
-              if (AppSettingsService.instance.firstRun) {
+              if (!controller.guideShowed) {
                 ShowCaseWidget.of(context).startShowCase([
                   controller.key1,
                   controller.key2,
                 ]);
+                controller.guideShowed = true;
               }
             },
           );

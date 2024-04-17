@@ -12,6 +12,8 @@ class MineController extends GetxController {
   final GlobalKey key1 = GlobalKey();
   final GlobalKey key2 = GlobalKey();
 
+  bool guideShowed = false; // 新人引导是否已经展示
+
   /// 切换语言
   void changeLang() {
     final langCode = Get.locale!.languageCode;

@@ -64,7 +64,9 @@ class HomeView extends GetView<HomeController> {
             SliverPersistentHeader(
               pinned: true,
               delegate: StickyTabBarDelegate(
-                bgColor: Colors.transparent,
+                bgColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
                 child: TabBar(
                   controller: controller.tabController,
                   tabs: controller.categoryList

@@ -40,9 +40,41 @@ post_install do |installer|
     # add 修改项目配置
     if target.platform_name == :ios
       target.build_configurations.each do |config|
-          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0' # 将 11.0 替换为您需要的目标版本号
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.0' # 将 12.0 替换为您需要的目标版本号
+          config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [ # flutter ios photos permission always return permission denied permanently
+               '$(inherited)',
+               ## dart: PermissionGroup.calendar
+   
+               ## dart: PermissionGroup.reminders
+   
+               ## dart: PermissionGroup.contacts
+   
+               ## dart: PermissionGroup.camera
+               'PERMISSION_CAMERA=1',
+               ## dart: PermissionGroup.microphone
+               'PERMISSION_MICROPHONE=1',
+               ## dart: PermissionGroup.speech
+               'PERMISSION_SPEECH_RECOGNIZER=1',
+               ## dart: PermissionGroup.photos
+               'PERMISSION_PHOTOS=1',
+               ## dart: [PermissionGroup.location, PermissionGroup.locationAlways, PermissionGroup.locationWhenInUse]
+   
+               ## dart: PermissionGroup.notification
+   
+               ## dart: PermissionGroup.mediaLibrary
+               'PERMISSION_MEDIA_LIBRARY=1',
+               ## dart: PermissionGroup.sensors
+   
+               ## dart: PermissionGroup.bluetooth
+   
+               ## dart: PermissionGroup.appTrackingTransparency
+               'PERMISSION_APP_TRACKING_TRANSPARENCY=1',
+               ## dart: PermissionGroup.criticalAlerts
+               'PERMISSION_SENSORS=1'
+         ]
       end
     end
     # add end
   end
 end
+
