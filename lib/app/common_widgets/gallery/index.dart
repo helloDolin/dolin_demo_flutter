@@ -27,7 +27,7 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
   GalleryPhotoViewWrapper({
     required this.galleryItems,
     super.key,
-    this.loadingBuilder,
+    // this.loadingBuilder,
     this.backgroundDecoration,
     this.minScale,
     this.maxScale,
@@ -35,7 +35,7 @@ class GalleryPhotoViewWrapper extends StatefulWidget {
     this.scrollDirection = Axis.horizontal,
   }) : pageController = PageController(initialPage: initialIndex);
 
-  final LoadingBuilder? loadingBuilder;
+  // final LoadingBuilder? loadingBuilder;
   final BoxDecoration? backgroundDecoration;
   final dynamic minScale;
   final dynamic maxScale;
@@ -78,7 +78,18 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: _buildItem,
                 itemCount: widget.galleryItems.length,
-                loadingBuilder: widget.loadingBuilder,
+                loadingBuilder: (context, event) => Center(
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      value: event == null
+                          ? 0
+                          : (event.cumulativeBytesLoaded /
+                              (event.expectedTotalBytes ?? 0)),
+                    ),
+                  ),
+                ),
                 backgroundDecoration: widget.backgroundDecoration,
                 pageController: widget.pageController,
                 onPageChanged: onPageChanged,
@@ -87,7 +98,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  ElevatedButton(
+                  TextButton(
                     onPressed: () async {
                       await saveNetImage(widget.galleryItems[currentIndex]);
                     },

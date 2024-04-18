@@ -75,6 +75,32 @@ class AppTheme {
     inputDecorationTheme: const InputDecorationTheme(
       fillColor: Color(0xff333333),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith(
+          // 根据组件状态设置值
+          (states) => states.contains(MaterialState.disabled)
+              ? const Color(0xFF5e5e5e)
+              : const Color(0xFF333333),
+        ),
+        foregroundColor: MaterialStateProperty.resolveWith(
+          (states) => states.contains(MaterialState.disabled)
+              ? const Color(0xFFABABAB)
+              : Colors.white,
+        ),
+        // 定义按钮在被点击时的覆盖颜色
+        overlayColor: const MaterialStatePropertyAll(Colors.white10),
+        padding: const MaterialStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        textStyle: const MaterialStatePropertyAll(
+          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ),
+    ),
   );
 
   // ThemeData.dark(useMaterial3: false).copyWith
@@ -151,6 +177,30 @@ class AppTheme {
     // 输入框填充色
     inputDecorationTheme: const InputDecorationTheme(
       fillColor: Color(0xffffffff),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith(
+          // 根据组件状态设置值
+          (states) => states.contains(MaterialState.disabled)
+              ? const Color(0xFF5e5e5e)
+              : const Color(0xFFFFFFFF),
+        ),
+        foregroundColor: MaterialStateProperty.resolveWith(
+          (states) => states.contains(MaterialState.disabled)
+              ? const Color(0xFFABABAB)
+              : Colors.black,
+        ),
+        // 定义按钮在被点击时的覆盖颜色
+        overlayColor: const MaterialStatePropertyAll(Colors.white10),
+        padding: const MaterialStatePropertyAll(
+          EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+        ),
+        shape: const MaterialStatePropertyAll(StadiumBorder()),
+        textStyle: const MaterialStatePropertyAll(
+          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ),
     ),
   );
 }
