@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dolin/app/util/photo_util.dart';
+import 'package:dolin/app/util/toast_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
@@ -100,7 +103,14 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      await saveNetImage(widget.galleryItems[currentIndex]);
+                      if (Platform.isAndroid || Platform.isIOS) {
+                        await saveNetImage(widget.galleryItems[currentIndex]);
+                      }
+                      if (Platform.isMacOS ||
+                          Platform.isWindows ||
+                          Platform.isLinux) {
+                        showToast('桌面版暂不支持保存');
+                      }
                     },
                     child: Text(
                       '保存',

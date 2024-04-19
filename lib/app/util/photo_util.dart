@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:dolin/app/util/toast_util.dart';
-import 'package:file_selector/file_selector.dart';
-import 'package:flutter/services.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -40,11 +38,17 @@ Future<void> saveNetImage(String url) async {
 }
 
 /// 保存图片-桌面平台
-Future<void> saveImageDetktop(String fileName, Uint8List list) async {
-  final String? path = await getSavePath(suggestedName: fileName);
-  if (path == null) {
-    return;
-  }
-  final XFile file = XFile.fromData(list, name: fileName);
-  await file.saveTo(path);
+Future<void> saveImageDetktop(String url) async {
+  // 代码有问题暂时注释掉
+  // final response =
+  //     await Dio().get(url, options: Options(responseType: ResponseType.bytes));
+  // final Uint8List uint8List = Uint8List.fromList(response.data as List<int>);
+
+  // final FileSaveLocation? location = await getSaveLocation(suggestedName: url);
+  // final String path = location?.path ?? '';
+  // if (path.isEmpty) {
+  //   return;
+  // }
+  // final XFile file = XFile.fromData(uint8List, name: url);
+  // await file.saveTo(path);
 }
