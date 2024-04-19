@@ -23,7 +23,7 @@ dependencies:
   flutter_inappwebview: 5.8.0 # webView
   webview_flutter: 4.2.3
   animate_do: 3.0.2 # 动画
-  wechat_assets_picker: 8.4.1 # 照片选择
+  # wechat_assets_picker: 8.6.3 # 照片选择
   flutter_staggered_grid_view: 0.6.2 # 瀑布流
   visibility_detector: 0.4.0+2 # 监听 widget 展示到屏幕，埋点用
   pin_code_fields: 7.4.0 # 验证码输入
@@ -62,7 +62,8 @@ dependencies:
 
   permission_handler: ^10.0.0 # 权限
   gallery_saver: ^2.3.2
-  file_selector: ^0.9.2+4 #文件选择
+  file_selector: ^0.9.2+4 # 文件选择
+  desktop_window: ^0.4.0 # 桌面版大小设置
 
   
   # 插件练习

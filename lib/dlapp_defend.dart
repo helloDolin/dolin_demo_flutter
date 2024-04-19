@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:desktop_window/desktop_window.dart';
 import 'package:dolin/app/modules/debug/log/log.dart';
 import 'package:dolin/app/services/app_settings_service.dart';
 import 'package:dolin/app/services/storage_service.dart';
@@ -69,6 +71,13 @@ class DLAPPDefend {
     };
   }
 
+  Future<void> _setupWindowSize() async {
+    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      await DesktopWindow.setWindowSize(const Size(720, 680));
+      await DesktopWindow.setMinWindowSize(const Size(720, 680));
+    }
+  }
+
   /// run zone
   Future<void> _runZone(Widget app) async {
     await runZonedGuarded(
@@ -78,7 +87,7 @@ class DLAPPDefend {
             false; // 开启 debugRepaintRainbowEnabled 时，当重新绘制时，该区域的颜色会发生变化
         WidgetsFlutterBinding.ensureInitialized()
             .addTimingsCallback(onReportTimings); // 设置帧回调函数
-
+        await _setupWindowSize();
         await setSystemUi();
         await Hive.initFlutter();
         await initServices();
