@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const double _kDefaultSpringHeight = 200; // 弹簧默认高度
 const double _kRateOfMove =
     1.5; // 移动距离与形变量比值 (手指向下移动了 15 个逻辑像素，弹簧形变量为 10 个逻辑像素)
-const double _kSpringWidth = 80;
+const double _kSpringWidth = 80; // 弹簧高度
 
 class Spring extends StatefulWidget {
   const Spring({super.key});

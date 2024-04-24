@@ -41,7 +41,7 @@ class ShadowBox extends SingleChildRenderObjectWidget {
     BuildContext context,
     covariant RenderShadowBox renderObject,
   ) {
-    // 有改动时告之，否知 hotreload 无效
+    // 有改动时告之，否则 hotreload 无效
     renderObject.distance = distance;
   }
 }
