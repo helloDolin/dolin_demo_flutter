@@ -45,21 +45,27 @@ class HomeView extends GetView<HomeController> {
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return <Widget>[
-            SliverAppBar(
-              expandedHeight: 190,
-              pinned: true,
-              flexibleSpace: ImageFiltered(
-                imageFilter: ImageFilter.blur(
-                  sigmaX: 2,
-                  sigmaY: 2,
-                ),
-                child: SizedBox.expand(
-                  child: Image.asset(
-                    'assets/images/btc_2_the_moon.jpg',
-                    fit: BoxFit.cover,
+            // 占位，保证切换 tab 时，不受其他滑动的影响
+            SliverOverlapAbsorber(
+              sliver: SliverAppBar(
+                // ignore: avoid_redundant_argument_values
+                forceElevated: false, // 为 true 时会有底部阴影
+                expandedHeight: 190,
+                pinned: true,
+                flexibleSpace: ImageFiltered(
+                  imageFilter: ImageFilter.blur(
+                    sigmaX: 2,
+                    sigmaY: 2,
+                  ),
+                  child: SizedBox.expand(
+                    child: Image.asset(
+                      'assets/images/btc_2_the_moon.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             ),
             SliverPersistentHeader(
               pinned: true,

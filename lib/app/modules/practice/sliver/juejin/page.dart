@@ -28,6 +28,7 @@ class _JuejinHomePageState extends State<JuejinHomePage>
       const SliverSnapHeader(
         child: search_bar.SearchBar(),
       ),
+      // 占位，保证切换 tab 时，不受其他滑动的影响
       SliverOverlapAbsorber(
         sliver: SliverPinnedHeader(
           child: TabBar(
@@ -43,7 +44,9 @@ class _JuejinHomePageState extends State<JuejinHomePage>
             tabs: _tabs.map((String name) => Tab(text: name)).toList(),
           ),
         ),
-        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+          context,
+        ), // 注意传 handle
       ),
     ];
   }
@@ -75,8 +78,9 @@ class _JuejinHomePageState extends State<JuejinHomePage>
   Widget buildScrollPage(String name) {
     return Builder(
       builder: (BuildContext context) => CustomScrollView(
-        key: PageStorageKey<String>(name),
+        key: PageStorageKey<String>(name), // 保持滑动位置
         slivers: <Widget>[
+          // 占位
           SliverOverlapInjector(
             handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
           ),

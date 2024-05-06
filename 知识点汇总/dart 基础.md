@@ -1,3 +1,77 @@
+# Notification
+```dart
+import 'package:flutter/material.dart';
+
+class CountNotification extends Notification {
+  final int count;
+
+  CountNotification(this.count);
+}
+
+class Test extends StatefulWidget {
+  const Test({super.key});
+
+  @override
+  State<Test> createState() => _TestState();
+}
+
+class _TestState extends State<Test> {
+  int _count = 1;
+
+  bool _onCountNotification(CountNotification noti) {
+    print(noti.count);
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener<CountNotification>(
+      onNotification: (notification) {
+        print('😄😄😄');
+        print(notification.count);
+        return false;
+      },
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                _count.toString(),
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFFFFFFFF),
+                ),
+              ),
+              Builder(builder: (ctx) {
+                return TextButton(
+                  child: const Text(
+                    'text',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _count++;
+                      CountNotification(_count).dispatch(ctx);
+                    });
+                  },
+                );
+              })
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
 # 学习过程（理解 + 思考，华丽的词句、流芳的美文是背不完的，重要的是思考和理解）
 * 见（萌芽期）：学习最初在于观察和模仿，发挥主观能动性
 * 识（成长期）：学习先辈传承的知识
