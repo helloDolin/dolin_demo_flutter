@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class TimeUril {
+class TimeUtil {
   static DateFormat ymdFormat = DateFormat('yyyy-MM-dd');
   static DateFormat mdhmFormat = DateFormat('MM-dd HH:mm');
   static DateFormat ymdhmFormat = DateFormat('yyyy-MM-dd HH:mm');

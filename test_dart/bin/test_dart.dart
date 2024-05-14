@@ -88,7 +88,12 @@ class Test extends Base {
   }
 }
 
+void _testDoubleNumOverflow() {
+  print(double.parse('0.5263') * 100);
+}
+
 void main(List<String> arguments) async {
+  _testDoubleNumOverflow();
   Test t = Test();
   t.can();
   print(t.a);
