@@ -34,13 +34,13 @@
 		</array>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
-        <key>NSAppTransportSecurity</key>
-        <dict>
-            <key>NSAllowsArbitraryLoads</key>
-            <true/>
-            <key>NSAllowsArbitraryLoadsInWebContent</key>
-            <true/>
-        </dict>
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+			<key>NSAllowsArbitraryLoadsInWebContent</key>
+			<true/>
+		</dict>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
 		<key>UILaunchStoryboardName</key>
