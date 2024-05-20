@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'abstract_class.dart';
 import 'enum.dart';
 import 'list.dart';
@@ -92,7 +94,36 @@ void _testDoubleNumOverflow() {
   print(double.parse('0.5263') * 100);
 }
 
+void _testComplete() {
+  final complete1 = Completer<void>();
+  final complete2 = Completer<void>();
+  final complete3 = Completer<void>();
+
+  Future.delayed(Duration(seconds: 3), () {
+    print(1111);
+    complete1.completeError('❌❌❌ error');
+  });
+  Future.delayed(Duration(seconds: 1), () {
+    print(2222);
+    complete2.complete();
+  });
+  Future.delayed(Duration(seconds: 2), () {
+    print(3333);
+    complete3.complete();
+  });
+
+  Future.wait([complete1.future, complete2.future, complete3.future])
+      .then((value) => print(value.length))
+      .whenComplete(() => print('whenComplete'))
+      .catchError((er) {
+    print(er.toString());
+  });
+}
+
 void main(List<String> arguments) async {
+  _testComplete();
+  return;
+
   _testDoubleNumOverflow();
   Test t = Test();
   t.can();
