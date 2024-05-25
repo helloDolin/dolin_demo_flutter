@@ -87,8 +87,8 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 
 # 合并多个提交为一个：
 // n 为节点个数
-git reset --soft HEAD~4
-git commit -m "feat:人脸识别逻辑调整"
+git reset --soft HEAD~3
+git commit -m "feat:多域名切换"
 git push origin HEAD --force
 
 // 推送到远程分支
@@ -136,3 +136,19 @@ build		构建系统
 ci			对CI配置文件修改
 chore		修改构建流程、或者增加依赖库、工具
 revert		回滚版本
+
+# 日志相关
+## 格式化输出
+git log --author="Dolin Liao" --pretty=format:"%h - %an, %ar : %s"
+
+## 指定日期
+git log --author="Dolin Liao" --since="3 month ago"
+
+## 查询并导出
+git log --author="Dolin Liao" --pretty=format:"%h - %an, %ar : %s" > dolin_commits.txt
+
+## 查看提交数量统计
+git shortlog -s -n
+git shortlog -s -n --author="Dolin Liao"
+-s: 简化输出 (Summarize Output)
+-n: 按提交次数排序 (Sort by number of commits)
