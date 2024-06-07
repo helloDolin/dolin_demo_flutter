@@ -62,3 +62,6 @@ https://github.com/iiiiiii1/douban-imdb-api
 此目录下存放工具函数
 ### auto_archive_upload
 iOS 自动打包，自动上传到蒲公英 TODO：飞书、钉钉通知
+
+## 好书推荐：
+https://github.com/helloDolin/books
