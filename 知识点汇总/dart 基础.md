@@ -1,3 +1,8 @@
+# Event Loop
+Flutter 应用的核心是一个事件循环（Event Loop），它是单线程的，但通过管理任务队列来实现并发处理。Dart 的事件循环分为两个主要队列：
+1. 事件队列（Event Queue）：用于处理外部事件，如用户输入、网络请求、文件读写等。
+2. 微任务队列（Microtask Queue）：用于处理需要尽快执行的小任务，优先级高于事件队列中的任务。
+
 # Notification
 ```dart
 import 'package:flutter/material.dart';
