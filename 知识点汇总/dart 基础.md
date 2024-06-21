@@ -2,6 +2,38 @@
 Flutter 应用的核心是一个事件循环（Event Loop），它是单线程的，但通过管理任务队列来实现并发处理。Dart 的事件循环分为两个主要队列：
 1. 事件队列（Event Queue）：用于处理外部事件，如用户输入、网络请求、文件读写等。
 2. 微任务队列（Microtask Queue）：用于处理需要尽快执行的小任务，优先级高于事件队列中的任务。
+```dart
+void main() {
+  print('Start');
+
+  // 添加一个微任务
+  Future.microtask(() => print('Microtask 1'));
+
+  // 添加一个事件
+  Future(() => print('Event 1'));
+
+  // 添加另一个微任务
+  Future.microtask(() => print('Microtask 2'));
+
+  // 添加另一个事件
+  Future(() => print('Event 2'));
+
+  print('End');
+}
+
+// 输出
+Start
+End
+Microtask 1
+Microtask 2
+Event 1
+Event 2
+
+Start 和 End 是同步代码，立即执行。
+Microtask 1 和 Microtask 2 是微任务，在同步代码执行完毕后立即执行。
+Event 1 和 Event 2 是事件，在所有微任务执行完毕后才执行。
+```
+
 
 # Notification
 ```dart

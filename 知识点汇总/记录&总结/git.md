@@ -103,6 +103,8 @@ git push origin shaolin/prop --force
 ====
 >>>> 传入的更改
 
+他人、我的都是针对当前分支来，eg：拉取比人的分支有冲突，那么当前分支就是自己的分支，他人就是他人的
+
 # 从版本控制中移除某个文件但保留在工作目录中
 git rm --cached model.dart
 git commit -m "Remove secret.txt from tracking"

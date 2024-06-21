@@ -132,6 +132,76 @@ class CustomTabBarViewScrollPhysics extends ScrollPhysics {
 
 # newbie_draw
 * 枚举和 model 配合
+```dart
+import 'dart:ui';
+
+/// 活动类型
+enum ActivityType {
+  /// 活动已结束
+  over(
+    3,
+    '活动已结束',
+    'images/newbie_draw/btn_disable_bg.png',
+    Color(0xFFF2D8A9),
+  ),
+
+  /// 活动未开始
+  notBegin(
+    1,
+    '活动未开始',
+    'images/newbie_draw/btn_disable_bg.png',
+    Color(0xFFF2D8A9),
+  ),
+
+  /// 进行中
+  ing(
+    2,
+    '拉人获取更多抽签码',
+    'images/newbie_draw/btn_enable_bg.png',
+    Color(0xFF502F2F),
+  ),
+
+  /// 异常
+  unknown(
+    -1,
+    '--',
+    'images/newbie_draw/btn_disable_bg.png',
+    null,
+  );
+
+  final int value;
+  final String name;
+  final String btnImgUrl;
+  final Color? btnTitleColor;
+  const ActivityType(this.value, this.name, this.btnImgUrl, this.btnTitleColor);
+
+  static ActivityType fromValue(int value) {
+    return values.firstWhere(
+      (element) => element.value == value,
+      orElse: () => ActivityType.unknown,
+    );
+  }
+}
+
+/// null 时为 unknow，其他读后端
+factory ActivityListItem.fromJson(Map<String, dynamic> json) =>
+      ActivityListItem(
+        activityId: json['activity_id'],
+        price: json["price"] ?? 0,
+        productUrl: json["product_url"],
+        productName: json["product_name"],
+        lotteryInfo: json["lottery_info"],
+        leftTime: json["left_time"],
+        activityType: json['status'] == null
+            ? ActivityType.unknown
+            : ActivityType.fromValue(json['status']),
+        codeList: json["code_list"] == null
+            ? []
+            : List<CodeInfo>.from(
+                json["code_list"]!.map((x) => CodeInfo.fromJson(x))),
+        copy: json["copy"],
+      );
+```
 * Future then 和 await 不要同时使用
 * json list 解析加上 try catch，防止后端异常数据格式或其他返回
 ```dart
@@ -314,6 +384,35 @@ int width = info.width;
 int height = info.height;
 containerTopPadding = Get.width / (width / height) - 60;
 update();
+```
+
+# Completer
+```dart
+void _testComplete() {
+  final complete1 = Completer<void>();
+  final complete2 = Completer<void>();
+  final complete3 = Completer<void>();
+
+  Future.delayed(Duration(seconds: 3), () {
+    print(1111);
+    complete1.completeError('❌❌❌ error');
+  });
+  Future.delayed(Duration(seconds: 1), () {
+    print(2222);
+    complete2.complete();
+  });
+  Future.delayed(Duration(seconds: 2), () {
+    print(3333);
+    complete3.complete();
+  });
+
+  Future.wait([complete1.future, complete2.future, complete3.future])
+      .then((value) => print(value.length))
+      .whenComplete(() => print('whenComplete'))
+      .catchError((er) {
+    print(er.toString());
+  });
+}
 ```
 
 # 函数
@@ -972,7 +1071,7 @@ OrientationBuilder
 DefaultTextStyle
 IconTheme
 SingleChildScrollView
-InteractiveViewer（让用户在子组件上执行平移、缩放和旋转等手势操作）
+InteractiveViewer （让用户在子组件上执行平移、缩放和旋转等手势操作）
 
 # Key
 * 对多子组件中的组件进行交换、移除、增加等变化时，通过添加 Key 让由于元素可以感知变化，保证正确的关系，不至于状态类的混乱

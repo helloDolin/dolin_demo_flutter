@@ -121,8 +121,12 @@ void _testComplete() {
 }
 
 void main(List<String> arguments) async {
-  _testComplete();
+  Future.delayed(Duration(seconds: 1)).then((value) => print(456));
+  print('abc');
+  Future(() => print(123));
   return;
+  // _testComplete();
+  // return;
 
   _testDoubleNumOverflow();
   Test t = Test();
