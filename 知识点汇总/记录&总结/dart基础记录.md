@@ -629,7 +629,7 @@ void didChangeMetrics() {
   });
 }
 ```
-# 保存图片到相册
+# 保存 Widget 为图片到相册
 ```dart
 // toImage
 // gallery_saver: ^2.3.2
@@ -1074,7 +1074,7 @@ SingleChildScrollView
 InteractiveViewer （让用户在子组件上执行平移、缩放和旋转等手势操作）
 
 # Key
-* 对多子组件中的组件进行交换、移除、增加等变化时，通过添加 Key 让由于元素可以感知变化，保证正确的关系，不至于状态类的混乱
+* 对多子组件中的组件进行交换、移除、增加等变化时，通过添加 Key 让元素可以感知变化，保证正确的关系，不至于状态类的混乱
 * key 的作用就是为 Widget 确认唯一的身份，可以在多子组件更新中被识别，这就是 LocalKey 的作用,所以 LocalKey 保证的是 相同父级 组件的身份唯一性
 * 而 GlobalKey 是整个应用中，组件的身份唯一性
 ```dart

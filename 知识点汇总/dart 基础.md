@@ -205,7 +205,7 @@ b.ceil(); 		// 向上取整: 4
 b.floor(); 		// 向下取整: 3
 b.round(); 		// 四舍五入取整: 3
 b.truncate();   // 去除小数部位取整: 3
-String v = b.toStringAsFixed(1)); //四舍五入，保留几位小数，返回字符串: 3.3
+String v = b.toStringAsFixed(1); //四舍五入，保留几位小数，返回字符串: 3.3
 
 double result1 = double.parse("3.3");
 int result2 = int.parse("10");
