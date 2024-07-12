@@ -78,6 +78,12 @@ class DLAPPDefend {
     }
   }
 
+  /// 设置 image 缓存策略
+  void setupImageCachePolicy() {
+    PaintingBinding.instance.imageCache.maximumSize = 2000; // 最多 2000 张
+    PaintingBinding.instance.imageCache.maximumSizeBytes = 200 << 20; // 最大 200M
+  }
+
   /// run zone
   Future<void> _runZone(Widget app) async {
     await runZonedGuarded(
@@ -92,6 +98,7 @@ class DLAPPDefend {
         await Hive.initFlutter();
         await initServices();
         setDebugPrint();
+        setupImageCachePolicy();
         setFlutterFrameworkError();
 
         runApp(app);
