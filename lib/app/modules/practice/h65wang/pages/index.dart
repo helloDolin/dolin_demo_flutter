@@ -28,7 +28,7 @@ class ChallengePage extends StatelessWidget {
                 Get.to<void>(const SimulateClickPage());
               },
               child: const Text('模拟点击'),
-            )
+            ),
           ],
         ),
       ),
@@ -95,7 +95,7 @@ class ChallengePage extends StatelessWidget {
                           return const Item();
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
 
@@ -241,7 +241,7 @@ class ChallengePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           );

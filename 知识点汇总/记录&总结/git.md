@@ -99,9 +99,9 @@ git push origin shaolin/newbie_draw --force
 git push origin shaolin/prop --force
 
 # 冲突
-<<< 当前更改
+<<< HEAD 当前更改（当前的分支，合并目标分支） 
 ====
->>>> 传入的更改
+>>>> 传入分支名 传入的更改（合并分支）
 
 他人、我的都是针对当前分支来，eg：拉取比人的分支有冲突，那么当前分支就是自己的分支，他人就是他人的
 
