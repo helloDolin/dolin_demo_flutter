@@ -1,3 +1,19 @@
+# 好用插件记录
+Code Spell Checker
+Image preview
+Draw.io Integration
+Svg Preview
+Postman
+
+Dart Data Class Generator
+vscode-author-generator
+GetX Snippets
+Awesome Flutter Snippets
+Flutter GetX Generator
+
+vscode-json
+vscode-pets
+
 # 账号：
 login.live.com/ 
 [](https://account.microsoft.com/?lang=zh-CN&refd=account.live.com&refp=landing&mkt=ZH-CN)
