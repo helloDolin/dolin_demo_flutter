@@ -115,16 +115,23 @@ git commit -m "Re-add secret.txt to tracking"
 
 
 # git 配置
-
+```shell
+# 全局配置
 git config --global user.name ''
 git config --global user.email ''
 
+# 查看配置
 git config user.email
 git config user.name
 
+# 当前仓库配置
 git config user.name 'helloDolin'
 git config user.email '366688603@qq.com'
 
+# 查看当前仓库配置
+git config --list
+
+```
 # 提交规范
 属性	     描述
 feat		新功能
