@@ -1,3 +1,22 @@
+# CachedNetworkImage border 用法
+```dart
+CachedNetworkImage(
+  imageUrl: data?.image ?? '',
+  width: 60.w,
+  height: 60.w,
+  imageBuilder: (context, imageProvider) => DecoratedBox(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: imageProvider, fit: BoxFit.cover),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+              color: isSelected
+                  ? AppColors.appBtnBgColor
+                  : const Color(0xFFC5C5C5)))),
+  errorWidget: (_, __, ___) => const SizedBox.shrink(),
+)
+```
+
 # charming
 * GetX 快速进入进出页面 Controller 没有释放解决：使用 statefull 在 dispose 时 手动释放
 ```dart
