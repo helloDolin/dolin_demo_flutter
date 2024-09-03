@@ -10,7 +10,8 @@
 勿畏难，勿轻略，让我们在技术路上继续扩大自己的边界，保持学习，持续成长。
 
 ## 创建 iOS OC、Android java 项目
-flutter create -i objc -a java dolin_demo_flutter
+flutter create -i objc -a java poker
+flutter create -i objc -a kotlin poker
 
 ## 创建 package
 flutter create --template=package components
