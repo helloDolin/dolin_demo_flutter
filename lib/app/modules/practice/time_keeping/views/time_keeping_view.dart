@@ -133,7 +133,7 @@ class TimeKeepingView extends GetView<TimeKeepingController> {
                 ),
               FloatingActionButton(
                 backgroundColor: Colors.green,
-                onPressed: controller.onTaggle,
+                onPressed: controller.onToggle,
                 child: controller.running
                     ? const Icon(Icons.pause, color: Colors.white)
                     : const Icon(
@@ -143,12 +143,12 @@ class TimeKeepingView extends GetView<TimeKeepingController> {
               ),
               if (controller.timeKeepStatus.value != TimeKeepStatus.none)
                 GestureDetector(
-                  onTap: controller.onRecoder,
+                  onTap: controller.onRecord,
                   child: Icon(
                     Icons.flag_outlined,
                     color: controller.flagColor,
                   ),
-                )
+                ),
             ],
           ),
         ),
