@@ -1,5 +1,3 @@
-// ignore_for_file: strict_raw_type
-
 import 'dart:async';
 import 'dart:math';
 
@@ -9,11 +7,13 @@ class StreamGame extends StatefulWidget {
   const StreamGame({super.key});
 
   @override
-  State<StreamGame> createState() => _StreamGameState();
+  State<StreamGame> createState() => _CalculateGameState();
 }
 
-class _StreamGameState extends State<StreamGame> {
+class _CalculateGameState extends State<StreamGame> {
+  // 传递键盘输入
   late StreamController inputStreamController = StreamController.broadcast();
+  // 更新分数
   late StreamController scoreController = StreamController.broadcast();
 
   @override
@@ -27,14 +27,12 @@ class _StreamGameState extends State<StreamGame> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: StreamBuilder(
-          stream: scoreController.stream.transform(MyStreamTransformer()),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Text('当前得分为：${snapshot.data}');
-            }
-            return const Text('当前得分为:0');
-          },
+        title: const Text(
+          'Poker算数',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+          ),
         ),
       ),
       body: Column(
@@ -50,19 +48,43 @@ class _StreamGameState extends State<StreamGame> {
               ),
             ),
           ),
+          StreamBuilder(
+            stream: scoreController.stream.transform(MyStreamTransformer()),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(
+                  '当前得分为：${snapshot.data}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                );
+              }
+              return const Text(
+                '当前得分为:0',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFFFFFFFF),
+                ),
+              );
+            },
+          ),
           Align(
             alignment: Alignment.bottomLeft,
-            child: KeyPannel(inputStreamControllerl: inputStreamController),
-          )
+            child: KeyPanel(inputStreamController: inputStreamController),
+          ),
         ],
       ),
     );
   }
 }
 
-class KeyPannel extends StatelessWidget {
-  const KeyPannel({required this.inputStreamControllerl, super.key});
-  final StreamController inputStreamControllerl;
+/// 键盘
+class KeyPanel extends StatelessWidget {
+  const KeyPanel({required this.inputStreamController, super.key});
+  final StreamController inputStreamController;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +97,7 @@ class KeyPannel extends StatelessWidget {
         children: List.generate(9, (index) {
           return InkWell(
             onTap: () {
-              inputStreamControllerl.add(index + 1);
+              inputStreamController.add(index + 1);
             },
             child: Container(
               alignment: Alignment.center,
@@ -89,6 +111,7 @@ class KeyPannel extends StatelessWidget {
   }
 }
 
+/// 谜题
 class Puzzle extends StatefulWidget {
   const Puzzle({
     required this.inputStream,
@@ -182,7 +205,6 @@ class MyStreamTransformer implements StreamTransformer {
     return _c.stream;
   }
 
-  //
   @override
   StreamTransformer<RS, RT> cast<RS, RT>() => StreamTransformer.castFrom(this);
 }

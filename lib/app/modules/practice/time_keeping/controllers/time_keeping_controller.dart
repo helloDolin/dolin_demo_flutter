@@ -48,7 +48,7 @@ class TimeKeepingController extends GetxController {
   Color get flagColor => running ? activeColor : inactiveColor; // 记录颜色
 
   /// 启动 or 暂停
-  void onTaggle() {
+  void onToggle() {
     if (none) {
       timeKeepStatus.value = TimeKeepStatus.running;
       _ticker.start();
@@ -72,7 +72,7 @@ class TimeKeepingController extends GetxController {
   }
 
   /// 记录
-  void onRecoder() {
+  void onRecord() {
     final Duration current = duration.value;
     Duration addition = duration.value;
     if (records.isNotEmpty) {
