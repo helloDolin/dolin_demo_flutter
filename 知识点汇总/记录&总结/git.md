@@ -134,6 +134,7 @@ git config --list
 ```
 # 提交规范
 属性	     描述
+
 feat		新功能
 fix			修改bug
 docs		文档修改
