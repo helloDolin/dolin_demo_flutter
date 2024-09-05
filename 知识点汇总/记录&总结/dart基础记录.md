@@ -1,3 +1,150 @@
+# 自定义 tabbar Indicator
+```dart
+// eg:1
+import 'package:flutter/material.dart';
+
+class CustomTabBarIndicator extends Decoration {
+  @override
+  MyPainter createBoxPainter([VoidCallback? onChanged]) {
+    return MyPainter(this, onChanged);
+  }
+}
+
+class MyPainter extends BoxPainter {
+  final CustomTabBarIndicator decoration;
+
+  MyPainter(this.decoration, VoidCallback? onChanged) : super(onChanged);
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    Paint paint = Paint()
+      ..color = const Color(0xFF2F281D)
+      ..style = PaintingStyle.fill;
+
+    double realX = offset.dx + configuration.size!.width + 2,
+        realY = offset.dy + configuration.size!.height;
+
+    Path path = Path()
+      ..moveTo(realX, realY) // 右下角
+      ..lineTo(realX, realY - 12) // 右上角
+      ..lineTo(realX - 12, realY) // 左下角
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+}
+
+
+// eg2:
+/// @author shaolin
+/// @email 366688603@qq.com
+/// @create date 2024-04-28 15:11:33
+/// @modify date 2024-04-28 15:11:33
+/// @desc [自定义 tab 指示器]
+///
+
+import 'package:flutter/material.dart';
+import 'package:myth/app/constants/app_colors.dart';
+
+/// 自定义 tab 指示器
+class CustomTabIndicator extends Decoration {
+  const CustomTabIndicator({
+    this.strokeCap = StrokeCap.round,
+    this.borderSide =
+        const BorderSide(width: 4.0, color: AppColors.textColorPrimary),
+    this.gradient = const LinearGradient(
+      colors: [
+        Color(0xFFFB5D64),
+        Color(0xFF9D2CE8),
+      ],
+    ),
+    this.insets = EdgeInsets.zero,
+  });
+
+  final StrokeCap strokeCap;
+
+  final BorderSide borderSide;
+
+  final EdgeInsetsGeometry insets;
+
+  final Gradient gradient;
+
+  @override
+  Decoration? lerpFrom(Decoration? a, double t) {
+    if (a is CustomTabIndicator) {
+      return CustomTabIndicator(
+        gradient: Gradient.lerp(a.gradient, gradient, t)!,
+        borderSide: BorderSide.lerp(a.borderSide, borderSide, t),
+        insets: EdgeInsetsGeometry.lerp(a.insets, insets, t)!,
+      );
+    }
+    return super.lerpFrom(a, t);
+  }
+
+  @override
+  Decoration? lerpTo(Decoration? b, double t) {
+    if (b is CustomTabIndicator) {
+      return CustomTabIndicator(
+        gradient: Gradient.lerp(gradient, b.gradient, t)!,
+        borderSide: BorderSide.lerp(borderSide, b.borderSide, t),
+        insets: EdgeInsetsGeometry.lerp(insets, b.insets, t)!,
+      );
+    }
+    return super.lerpTo(b, t);
+  }
+
+  @override
+  _UnderlinePainter createBoxPainter([VoidCallback? onChanged]) {
+    return _UnderlinePainter(strokeCap, this, onChanged);
+  }
+}
+
+class _UnderlinePainter extends BoxPainter {
+  _UnderlinePainter(this.strokeCap, this.decoration, VoidCallback? onChanged)
+      : super(onChanged);
+
+  final StrokeCap strokeCap;
+  final CustomTabIndicator decoration;
+
+  BorderSide get borderSide => decoration.borderSide;
+  EdgeInsetsGeometry get insets => decoration.insets;
+  Gradient get gradient => decoration.gradient;
+
+  Rect _indicatorRectFor(Rect rect, TextDirection textDirection) {
+    final Rect indicator = insets.resolve(textDirection).deflateRect(rect);
+    return Rect.fromLTWH(
+      indicator.left,
+      indicator.bottom - borderSide.width,
+      indicator.width,
+      borderSide.width,
+    );
+  }
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    assert(configuration.size != null);
+    final Rect rect = offset & configuration.size!;
+    final TextDirection textDirection = configuration.textDirection!;
+    final Rect indicator =
+        _indicatorRectFor(rect, textDirection).deflate(borderSide.width / 2.0);
+    final Paint paint = borderSide.toPaint()
+      ..strokeCap = strokeCap
+      ..shader = gradient.createShader(indicator);
+    // const double indicatorWidth = 20;
+    // final startX =
+    //     indicator.bottomLeft.dx + (indicator.width - indicatorWidth) / 2;
+    canvas.drawLine(
+      // Offset(startX, indicator.bottomLeft.dy),
+      // Offset(startX + 20, indicator.bottomLeft.dy),
+      indicator.bottomLeft, indicator.bottomRight,
+      paint,
+    );
+  }
+}
+
+```
+
+
 # CachedNetworkImage border 用法
 ```dart
 CachedNetworkImage(
