@@ -1,3 +1,16 @@
+# throttle 函数内用法
+```dart
+// 记录节流函数，保证不创建一个新的代理函数实例，保证其生效
+late VoidCallback throttledFunc;
+
+void test() {
+    print(12312312);
+}
+throttledFunc = test.throttleWithTimeout(timeout: 1000);
+// 调用 throttledFunc 即为调用 test()
+throttledFunc();
+```
+
 # 自定义 tabbar Indicator
 ```dart
 // eg:1
