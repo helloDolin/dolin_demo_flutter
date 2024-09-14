@@ -35,3 +35,9 @@ android/app/build.gradle
 defaultConfig {
     applicationId "com.aiear.xxx"
 }
+
+# 获取公钥、MD5
+
+keytool -list -rfc -keystore key.jks -alias poker -storepass bdpoker
+
+https://www.pgyer.com/8xnmLh

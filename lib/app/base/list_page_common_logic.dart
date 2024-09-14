@@ -40,7 +40,6 @@ mixin ListPageCommonLogic<T> on GetxController {
   }
 
   Future<void> reqData({bool isRefresh = false}) async {
-    requested = true;
     if (isRefresh) {
       curPage = 1;
       listData.clear();
@@ -49,6 +48,7 @@ mixin ListPageCommonLogic<T> on GetxController {
     }
 
     final List<T> res = await reqListData();
+    requested = true; // 请求成功后才算请求过
     listData.addAll(res);
     canLoad = res.length == pageSize;
     if (!canLoad && !isRefresh) {
