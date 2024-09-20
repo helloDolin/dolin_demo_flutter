@@ -155,6 +155,91 @@ class _UnderlinePainter extends BoxPainter {
   }
 }
 
+// eg3:
+import 'dart:ui' as ui;
+
+import 'package:flutter/material.dart';
+
+class CustomTopTabIndicator extends Decoration {
+  final double indicatorHeight;
+  final double indicatorWidth;
+  final ui.Image? image;
+
+  const CustomTopTabIndicator(
+    this.image, {
+    this.indicatorHeight = 30,
+    this.indicatorWidth = 50,
+  });
+
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return _ImagePainter(
+      image,
+      indicatorHeight: indicatorHeight,
+      indicatorWidth: indicatorWidth,
+    );
+  }
+}
+
+class _ImagePainter extends BoxPainter {
+  final double indicatorHeight;
+  final double indicatorWidth;
+  final ui.Image? _image;
+
+  _ImagePainter(
+    this._image, {
+    required this.indicatorHeight,
+    required this.indicatorWidth,
+  });
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    if (_image == null) return; // 确保图片加载完成后再绘制
+
+    final Paint paint = Paint();
+    final Rect rectInfo = offset & configuration.size!;
+    double width = rectInfo.width;
+    final double left = offset.dx + (configuration.size!.width - width) / 2;
+    final double top =
+        offset.dy + (configuration.size!.height - indicatorHeight) / 2;
+
+    final Rect rect = Rect.fromLTWH(left, top, width, indicatorHeight);
+
+    final Rect imageRect = Rect.fromLTWH(
+      0,
+      0,
+      _image!.width.toDouble(),
+      _image!.height.toDouble(),
+    );
+
+    canvas.drawImageRect(_image!, imageRect, rect, paint);
+  }
+}
+
+// 注意：需要确保 ui.Image? image 有值
+// 现在的处理方式：
+ui.Image? image;
+
+void onInit() async {
+    _loadImage();
+    await getCategory();
+    await getActivity();
+    await getProduct();
+    super.onInit();
+}
+
+void _loadImage() async {
+  const imageProvider = AssetImage('assets/images/icon/indicator_bg.png');
+  final completer = Completer<ui.Image>();
+
+  imageProvider.resolve(const ImageConfiguration()).addListener(
+    ImageStreamListener((ImageInfo info, bool _) {
+      completer.complete(info.image);
+    }),
+  );
+
+  image = await completer.future;
+}
 ```
 
 
