@@ -4,6 +4,7 @@ export PATH="/Users/bd/Library/Android/sdk/platform-tools:$PATH"
 
 安装 eg：
 adb install /Users/bd/Downloads/Postern_v3.1.3_apkpure.com.apk
+使用 Android Debug Bridge（ADB）来安装一个 APK 文件到 Android 设备上，是一个用于 Android 设备调试和开发的命令行工具
 
 # jenv
 jenv add /Library/Java/JavaVirtualMachines/jdk-19.0.2.jdk/Contents/Home
