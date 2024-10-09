@@ -36,6 +36,7 @@ import 'package:dolin/app/modules/practice/stream/stream.dart';
 import 'package:dolin/app/modules/practice/stream/stream_game.dart';
 import 'package:dolin/app/modules/practice/time_line.dart';
 import 'package:dolin/app/modules/practice/webview/flutter_inappwebview.dart';
+import 'package:dolin/app/modules/practice/webview/local_html_page.dart';
 import 'package:dolin/app/modules/practice/webview/webview_flutter.dart';
 import 'package:dolin/app/modules/practice/wechat_friends.dart';
 import 'package:dolin/app/routes/app_pages.dart';
@@ -66,9 +67,11 @@ class PracticeView extends GetView<PracticeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Card('center slice', () {
-                Get.to(const CenterSlice(
-                  title: 'img center slice',
-                ));
+                Get.to(
+                  const CenterSlice(
+                    title: 'img center slice',
+                  ),
+                );
               }),
               Card('popup(跟随widget)', () {
                 Get.to(const PopupPage());
@@ -242,6 +245,13 @@ class PracticeView extends GetView<PracticeController> {
           title: const Text('WebviewFlutter'),
           onTap: () {
             Get.to(() => const WebviewFlutter());
+          },
+          trailing: const Icon(Icons.arrow_forward_ios),
+        ),
+        ListTile(
+          title: const Text('LocalWebView'),
+          onTap: () {
+            Get.to(() => const LocalHtmlPage());
           },
           trailing: const Icon(Icons.arrow_forward_ios),
         ),

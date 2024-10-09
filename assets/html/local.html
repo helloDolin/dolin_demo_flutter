@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5 ↔ Flutter 通信</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 2em 0;
+        }
+
+        .section {
+            margin-bottom: 2em;
+        }
+
+        .section h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5em;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1em 0;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.5em 1em;
+            font-size: 1em;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // jumpToIM
+        function jump2IM() {
+            jumpToIM.postMessage('123123');
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- <div class="header">
+        <h1>H5 ↔ Flutter 通信</h1>
+    </div> -->
+
+    <div class="container">
+        <div class="section">
+            <h2>jumpToIM</h2>
+            <button class="button" onclick="jump2IM()">跳转到 IM 会话列表页</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© shaolin 2024年05月15日</p>
+    </div>
+
+</body>
+
+</html>

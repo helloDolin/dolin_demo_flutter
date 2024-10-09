@@ -4,7 +4,7 @@ publish_to: none
 description: Flutter 学习、总结、提高
 
 environment:
-  sdk: '>=3.0.0 <4.0.0' # dart 版本
+  sdk: ">=3.0.0 <4.0.0" # dart 版本
   # flutter: 3.10.0 # sdk 版本(写死 SDK 版本号：避免因为跨 SDK 版本出现的 API 差异进而导致工程问题)
 
 dependencies:
@@ -65,7 +65,6 @@ dependencies:
   file_selector: ^0.9.2+4 # 文件选择
   desktop_window: ^0.4.0 # 桌面版大小设置
 
-  
   # 插件练习
   flutter_plugin_practice:
     path: ./flutter_plugin_practice
@@ -98,6 +97,7 @@ flutter:
     - assets/statement.txt
     - assets/lotties/
     - assets/json/
+    - assets/html/
 
   uses-material-design: true
   fonts: # 配置字体，可配置多个，支持ttf和otf,ttc等字体资源
