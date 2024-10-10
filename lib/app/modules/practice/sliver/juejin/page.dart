@@ -77,12 +77,12 @@ class _JuejinHomePageState extends State<JuejinHomePage>
 
   Widget buildScrollPage(String name) {
     return Builder(
-      builder: (BuildContext context) => CustomScrollView(
+      builder: (BuildContext ctx) => CustomScrollView(
         key: PageStorageKey<String>(name), // 保持滑动位置
         slivers: <Widget>[
           // 占位
           SliverOverlapInjector(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(ctx),
           ),
           SliverPadding(
             padding: const EdgeInsets.all(8),

@@ -9,8 +9,8 @@ class MovieListController extends GetxController {
   MovieListController(this.source);
   final String source;
 
-  late RefreshController refreshController;
-
+  final RefreshController refreshController =
+      RefreshController(initialRefresh: true);
   RxBool isShowUpIcon = false.obs;
   RxList<Douban250> data = <Douban250>[].obs;
 
@@ -65,13 +65,6 @@ class MovieListController extends GetxController {
   }
 
   @override
-  void onInit() {
-    refreshController = RefreshController();
-
-    super.onInit();
-  }
-
-  @override
   void onClose() {
     refreshController.dispose();
     super.onClose();
@@ -79,7 +72,7 @@ class MovieListController extends GetxController {
 
   @override
   void onReady() {
-    refreshController.requestRefresh();
+    // refreshController.requestRefresh();
     super.onReady();
   }
 }

@@ -66,6 +66,12 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('手撕 RenderObject', () {
+                Get.to(const CustomRenderObject());
+              }),
+              Card('手撕 Provider', () {
+                Get.to(() => const MyProviderPage());
+              }),
               Card('center slice', () {
                 Get.to(
                   const CenterSlice(
@@ -92,9 +98,6 @@ class PracticeView extends GetView<PracticeController> {
               Card('时光轴', () {
                 Get.to(const TimeLinePage());
               }),
-              Card('手撕 Provider', () {
-                Get.to(() => const MyProviderPage());
-              }),
               _buildWebViewExpandable(),
               _buildInterViewExpandable(),
               _buildStreamExpandable(),
@@ -111,9 +114,6 @@ class PracticeView extends GetView<PracticeController> {
               }),
               Card('Key 练习', () {
                 Get.to(const KeyPractice());
-              }),
-              Card('手撕 RenderObject', () {
-                Get.to(const CustomRenderObject());
               }),
               Obx(
                 () => AnimatedSwitcher(
@@ -152,11 +152,9 @@ class PracticeView extends GetView<PracticeController> {
               Card('Dart 温故知新', () {
                 Get.to(const DartSummaryPage());
               }),
-              Card('手势竞技场', () {
+              Card('手势', () {
                 Get.to(
-                  const ArenaPage(
-                    title: 'hello',
-                  ),
+                  const ArenaPage(),
                 );
               }),
               Card('异步练习', () {

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dolin/app/common_widgets/keepalive_wrapper.dart';
 import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:dolin/app/modules/home/index/controllers/home_controller.dart';
 import 'package:dolin/app/modules/home/movie_list/movie_list_view.dart';
@@ -90,8 +91,10 @@ class HomeView extends GetView<HomeController> {
         body: TabBarView(
           controller: controller.tabController,
           children: controller.categoryList.map((map) {
-            return MovieListView(
-              source: map['source']!,
+            return KeepAliveWrapper(
+              child: MovieListView(
+                source: map['source']!,
+              ),
             );
           }).toList(),
         ),

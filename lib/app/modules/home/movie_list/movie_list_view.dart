@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dolin/app/common_widgets/gallery/index.dart';
-import 'package:dolin/app/common_widgets/keepalive_wrapper.dart';
-import 'package:dolin/app/constants/app_assets.dart';
 import 'package:dolin/app/data/home/douban250.dart';
 import 'package:dolin/app/modules/home/movie_list/movie_list_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,36 +12,64 @@ class MovieListView extends StatelessWidget {
   MovieListView({required this.source, super.key})
       : movieListController = MovieListController(
           source,
-        ); // 相当于 tag 的方式（[GETX] Instance "MovieListController" with tag "Imdb" has been initialized）
+        );
   final MovieListController movieListController;
   final String source;
 
   @override
   Widget build(BuildContext context) {
-    return KeepAliveWrapper(
-      child: GetBuilder(
-        init: movieListController,
-        tag: source,
-        builder: (controller) {
-          return SmartRefresher(
-            enablePullUp: true,
-            controller: controller.refreshController,
-            onRefresh: controller.onRefresh,
-            onLoading: controller.onLoading,
-            child: ListView.separated(
-              padding: EdgeInsets.zero,
-              separatorBuilder: (context, index) => Container(
-                height: 10,
-                color: const Color.fromARGB(21, 102, 215, 164),
+    return GetBuilder(
+      init: movieListController,
+      // [GETX] Instance "MovieListController" has been created with tag "Douban"
+// [GETX] Instance "MovieListController" has been created with tag "Imdb"
+      tag: source,
+      builder: (controller) {
+        return SmartRefresher(
+          enablePullUp: true,
+          controller: controller.refreshController,
+          onRefresh: controller.onRefresh,
+          onLoading: controller.onLoading,
+          child: CustomScrollView(
+            // 这个设置，很重要，要不然 tabview 会一起滚动，😅
+            key: PageStorageKey<String>(source), // 保持滑动位置,
+            slivers: [
+              // 占位
+              Builder(
+                builder: (ctx) {
+                  return SliverOverlapInjector(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      ctx,
+                    ),
+                  );
+                },
               ),
-              itemBuilder: (c, i) {
-                return Item(model: controller.data[i], index: i);
-              },
-              itemCount: controller.data.length,
-            ),
-          );
-        },
-      ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Item(
+                      model: controller.data[index],
+                      index: index,
+                    );
+                  },
+                  childCount: controller.data.length,
+                ),
+              ),
+            ],
+          ),
+
+          // ListView.separated(
+          //   padding: EdgeInsets.zero,
+          //   separatorBuilder: (context, index) => Container(
+          //     height: 10,
+          //     color: const Color.fromARGB(21, 102, 215, 164),
+          //   ),
+          //   itemBuilder: (c, i) {
+          //     return Item(model: controller.data[i], index: i);
+          //   },
+          //   itemCount: controller.data.length,
+          // ),
+        );
+      },
     );
   }
 }
@@ -67,13 +95,12 @@ class Item extends StatelessWidget {
               height: ScreenUtil().screenWidth * 880 / 540, // 图片尺寸：540 * 880
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: FadeInImage.assetNetwork(
-                  placeholder: AppAssets.placeholderPng,
-                  placeholderFit: BoxFit.cover,
-                  image: model.shareImage,
+                child: CachedNetworkImage(
                   fit: BoxFit.cover,
-                  imageErrorBuilder: (context, error, stackTrace) =>
-                      const SizedBox(
+                  imageUrl: model.shareImage,
+                  placeholder: (context, url) =>
+                      const CupertinoActivityIndicator(),
+                  errorWidget: (context, error, stackTrace) => const SizedBox(
                     child: Text('图片加载失败'),
                   ),
                 ),

@@ -12,21 +12,33 @@ class CustomRenderObject extends StatelessWidget {
       appBar: AppBar(
         title: const Text('CustomRenderObject'),
       ),
-      body: Container(
-        color: Colors.red[200],
-        child: const ShadowBox(
-          // distance: 3,
-          child: Icon(
-            Icons.holiday_village,
-            size: 80,
+      body: Column(
+        children: [
+          const Text(
+            'overflowed by 100 pixels\n主要是由 DebugOverflowIndicatorMixin 控制 \n 100也是手动传的',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF000000),
+            ),
           ),
-        ),
+          const SizedBox(height: 50),
+          Container(
+            color: Colors.red[200],
+            child: const ShadowBox(
+              // distance: 3,
+              child: Icon(
+                Icons.holiday_village,
+                size: 280,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-/// SingleChildRenderObjectWidget 真正可以画到屏幕上的 Widget
 class ShadowBox extends SingleChildRenderObjectWidget {
   const ShadowBox({this.distance = 10, super.key, super.child});
   final double distance;
@@ -41,7 +53,6 @@ class ShadowBox extends SingleChildRenderObjectWidget {
     BuildContext context,
     covariant RenderShadowBox renderObject,
   ) {
-    // 有改动时告之，否则 hotreload 无效
     renderObject.distance = distance;
   }
 }
@@ -73,7 +84,7 @@ class RenderShadowBox extends RenderProxyBox with DebugOverflowIndicatorMixin {
     //     ..color = Colors.red
     //     ..strokeWidth = 1,
     // );
-    context.pushOpacity(offset, 123, (context, offset) {
+    context.pushOpacity(offset, 100, (context, offset) {
       context.paintChild(child!, offset + Offset(distance, distance));
     });
 

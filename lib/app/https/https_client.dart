@@ -18,8 +18,8 @@ class HttpsClient {
   HttpsClient._internal() {
     final BaseOptions options = BaseOptions(
       // baseUrl: 'https://api.wmdb.tv/api/v1/top',
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
       // 公共数据，eg：token、version、timestamp、sign、platform、channel
       headers: <String, dynamic>{},
       contentType: 'application/json; charset=utf-8',
