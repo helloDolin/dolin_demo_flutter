@@ -29,45 +29,19 @@ class MovieListView extends StatelessWidget {
           controller: controller.refreshController,
           onRefresh: controller.onRefresh,
           onLoading: controller.onLoading,
-          child: CustomScrollView(
-            // 这个设置，很重要，要不然 tabview 会一起滚动，😅
-            key: PageStorageKey<String>(source), // 保持滑动位置,
-            slivers: [
-              // 占位
-              Builder(
-                builder: (ctx) {
-                  return SliverOverlapInjector(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                      ctx,
-                    ),
-                  );
-                },
-              ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Item(
-                      model: controller.data[index],
-                      index: index,
-                    );
-                  },
-                  childCount: controller.data.length,
-                ),
-              ),
-            ],
+          child: ListView.separated(
+            key: PageStorageKey<String>(source),
+            physics: const ClampingScrollPhysics(),
+            padding: EdgeInsets.zero,
+            separatorBuilder: (context, index) => Container(
+              height: 10,
+              color: const Color.fromARGB(21, 102, 215, 164),
+            ),
+            itemBuilder: (c, i) {
+              return Item(model: controller.data[i], index: i);
+            },
+            itemCount: controller.data.length,
           ),
-
-          // ListView.separated(
-          //   padding: EdgeInsets.zero,
-          //   separatorBuilder: (context, index) => Container(
-          //     height: 10,
-          //     color: const Color.fromARGB(21, 102, 215, 164),
-          //   ),
-          //   itemBuilder: (c, i) {
-          //     return Item(model: controller.data[i], index: i);
-          //   },
-          //   itemCount: controller.data.length,
-          // ),
         );
       },
     );

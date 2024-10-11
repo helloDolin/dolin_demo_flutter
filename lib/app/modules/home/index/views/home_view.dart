@@ -5,6 +5,7 @@ import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:dolin/app/modules/home/index/controllers/home_controller.dart';
 import 'package:dolin/app/modules/home/movie_list/movie_list_view.dart';
 import 'package:dolin/app/modules/mine/index/views/mine_view.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -40,65 +41,73 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
+
+  Widget _buildScaffoldBody(BuildContext context) {
+    final double statusBarHeight = MediaQuery.paddingOf(context).top;
+    final double pinnedHeaderHeight =
+        // statusBar height
+        statusBarHeight +
+            // pinned SliverAppBar height in header
+            kToolbarHeight;
+    return ExtendedNestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            backgroundColor: Colors.blue,
+            pinned: true,
+            expandedHeight: 190,
+            title: const Text('home'),
+            flexibleSpace: ImageFiltered(
+              imageFilter: ImageFilter.blur(
+                sigmaX: 2,
+                sigmaY: 2,
+              ),
+              child: SizedBox.expand(
+                child: Image.asset(
+                  'assets/images/btc_2_the_moon.jpg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        ];
+      },
+      pinnedHeaderSliverHeightBuilder: () {
+        return pinnedHeaderHeight;
+      },
+      body: Column(
+        children: [
+          TabBar(
+            controller: controller.tabController,
+            tabs: controller.categoryList
+                .map(
+                  (map) => Tab(
+                    text: map['title'],
+                  ),
+                )
+                .toList(),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: controller.tabController,
+              children: controller.categoryList.map((map) {
+                return KeepAliveWrapper(
+                  child: MovieListView(
+                    source: map['source']!,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return <Widget>[
-            // 占位，保证切换 tab 时，不受其他滑动的影响
-            SliverOverlapAbsorber(
-              sliver: SliverAppBar(
-                // ignore: avoid_redundant_argument_values
-                forceElevated: false, // 为 true 时会有底部阴影
-                expandedHeight: 190,
-                pinned: true,
-                flexibleSpace: ImageFiltered(
-                  imageFilter: ImageFilter.blur(
-                    sigmaX: 2,
-                    sigmaY: 2,
-                  ),
-                  child: SizedBox.expand(
-                    child: Image.asset(
-                      'assets/images/btc_2_the_moon.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: StickyTabBarDelegate(
-                bgColor: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.black
-                    : Colors.white,
-                child: TabBar(
-                  controller: controller.tabController,
-                  tabs: controller.categoryList
-                      .map(
-                        (map) => Tab(
-                          text: map['title'],
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ),
-          ];
-        },
-        body: TabBarView(
-          controller: controller.tabController,
-          children: controller.categoryList.map((map) {
-            return KeepAliveWrapper(
-              child: MovieListView(
-                source: map['source']!,
-              ),
-            );
-          }).toList(),
-        ),
-      ),
+      body: _buildScaffoldBody(context),
     );
 
     return Scaffold(
@@ -142,6 +151,65 @@ class HomeView extends GetView<HomeController> {
             Expanded(child: _content()),
           ],
         ),
+      ),
+    );
+  }
+
+  NestedScrollView _buildBodyOld() {
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return <Widget>[
+          // 占位，保证切换 tab 时，不受其他滑动的影响
+          SliverOverlapAbsorber(
+            sliver: SliverAppBar(
+              // ignore: avoid_redundant_argument_values
+              forceElevated: false, // 为 true 时会有底部阴影
+              expandedHeight: 190,
+              pinned: true,
+              flexibleSpace: ImageFiltered(
+                imageFilter: ImageFilter.blur(
+                  sigmaX: 2,
+                  sigmaY: 2,
+                ),
+                child: SizedBox.expand(
+                  child: Image.asset(
+                    'assets/images/btc_2_the_moon.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+          ),
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: StickyTabBarDelegate(
+              bgColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.white,
+              child: TabBar(
+                controller: controller.tabController,
+                tabs: controller.categoryList
+                    .map(
+                      (map) => Tab(
+                        text: map['title'],
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
+          ),
+        ];
+      },
+      body: TabBarView(
+        controller: controller.tabController,
+        children: controller.categoryList.map((map) {
+          return KeepAliveWrapper(
+            child: MovieListView(
+              source: map['source']!,
+            ),
+          );
+        }).toList(),
       ),
     );
   }
