@@ -42,3 +42,40 @@ defaultConfig {
 keytool -list -rfc -keystore key.jks -alias poker -storepass bdpoker
 
 https://www.pgyer.com/8xnmLh
+
+# brew 安装 jdk
+安装 jdk 21
+
+方式一，brew 安装
+brew install openjdk@21   
+
+方式二，手动，比如 brew 安装出来的是 21.0.5，但是我需要 21.0.1 
+https://jdk.java.net/archive/
+去这里下载对应的版本
+
+修改环境变量
+export JAVA_HOME=/Users/bd/dev/jdk/jdk-21.0.1.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+
+# jenv
+jenv versions
+jenv global 17
+
+添加到 jenv 中
+jenv add /opt/homebrew/Cellar/openjdk@17/17.0.13/libexec/openjdk.jdk/Contents/Home
+
+# 解决 poker 打包问题
+1. 复制打包机上的 jdk 包到 jdk 目录下，然后加入到 jenv
+jenv add /Users/bd/dev/jdk/jdk-19.0.2.jdk/Contents/Home
+2. jenv global 19
+✅ 解决
+
+
+# hotdog
+在 package 目录 执行 jenv local 17.0.13
+cat .java-version
+jenv add /Users/bd/dev/jdk/jdk-21.0.1.jdk/Contents/Home
+jenv add /opt/homebrew/Cellar/openjdk@21/21.0.5/libexec/openjdk.jdk/Contents/Home
+❌ 未解决
+
+
