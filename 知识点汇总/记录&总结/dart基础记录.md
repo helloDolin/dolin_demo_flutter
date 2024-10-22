@@ -1,3 +1,146 @@
+# 3.0 元组 官方称之为 Records 特性
+记录类型也可以作为返回值，这样可以解决一个函数返回多值的问题
+```dart
+// eg1:
+var record = ('first1', a: 2, b: true, 'last1', 'last32'); // 声明
+print(record.runtimeType); // (String, String, String, {int a, bool b})
+print(record.$1); // 非命名类型数据可以通过 $index 进行访问
+print(record.$3);
+print(record.a); // 命名类型数据可以通过 名称 进行访问
+print(record.b);
+
+// eg2:
+(int, double, String) recordTest() {
+  return (18, 70.88, 'name');
+}
+
+final res = recordTest();
+print(res.$1); // 18
+print(res.$2); // 70.88
+print(res.$3); // name
+```
+
+# 3.0 base 和 interface 类修饰符
+base 修饰的类在外部 允许继承，不允许实现
+interface 修饰的类在外部 不允许继承，允许实现
+
+# 3.0 - final 类型修饰符
+final 修饰的类可以在一定程度上关闭派生能力
+
+# 3.0 - sealed
+密封类的支持 sealed
+* sealed 修饰的类自动是抽象类，无法被实例化。
+* sealed 修饰的类无法在 [外部] 被 继承 extended, 实现 implemented, 或 混入 with。
+* sealed 修饰的类可以被 switch 选择。（例子如下方的 AuthState），最大的特点是子类型可枚举，所以在编码过程中如果少写一个，编译器就是显示地给出提示。这样可以有效避免漏写的可能，这种从语法层面规避潜藏风险，对代码的健壮性是非常友好的
+
+# Dart 3.0 语法新特性 | switch 匹配加强
+
+switch 可匹配 Patterns
+
+```dart
+// eg1:
+extension DescribeDate on DateTime {
+  void describe() {
+    DateTime now = DateTime.now();
+    Duration diff = this.difference(DateTime(now.year, now.month, now.day));
+    String result = switch (diff) {
+      Duration(inDays: -1 ) => '昨天',
+      Duration(inDays: 0 ) => '今天',
+      Duration(inDays: 1 ) => '明天',
+      Duration(inDays: int d) => d < 0 ? '${d.abs()} 天前' : '$d 天后',
+    };
+    print("$year/$month/$day 是 $result");
+  }
+}
+
+void main() {
+  DateTime(2023, 6, 5).describe();
+  DateTime(2023, 6, 8).describe();
+  DateTime(2023, 6, 9).describe();
+  DateTime(2023, 6, 12).describe();
+}
+
+--->[日志输出]----
+2023/6/5 是 4 天前
+2023/6/8 是 昨天
+2023/6/9 是 今天
+2023/6/12 是 3 天后
+
+// eg2：
+void main(){
+  foo2((1,1)); // 打印 int+int
+  foo2((1,"hello")); // 打印 int+String
+  foo2(5); // 打印 default
+}
+
+// 变量 Patterns
+void foo2(dynamic value){
+  switch (value) {
+    case (int a, String b):
+      print("int+String");
+      break;
+    case (int a, int b):
+      print("int+int");
+      break;
+    default:
+      print("default");
+  }
+}
+
+// eg3:
+int age = 12;
+var isAllow = switch (age) {
+  16 || 17 || 18 => true,
+  _ => false,
+};
+
+// eg4:
+int score = 69;
+var info = switch (score) {
+>=40 && < 60 => 'D',
+== 100 => 'A+',
+>= 90 && < 100 => 'A',
+>= 80 && < 90 => 'B',
+>= 70 && < 80 => 'C',
+_ => 'E',
+};
+
+// _ 可以表示其他未匹配的情况，相当于 default 分支的作用
+
+// eg5:
+sealed class AuthState{} //创建密封类
+
+class AuthLoading extends AuthState{}
+
+class AuthSuccess extends AuthState{
+  final String user;
+  final String token;
+
+  AuthSuccess(this.user, this.token);
+}
+
+class AuthFailure extends AuthState{
+  final String error;
+  AuthFailure(this.error);
+}
+
+String buildByAuthState3(AuthState state){
+  return switch(state){
+  AuthLoading loading => 'AuthLoading View',
+  AuthSuccess success => 'AuthSuccess View:${success.user}',
+  AuthFailure fail => 'AuthFailure View:${fail.error}',
+ };
+}
+
+String buildByAuthState1(AuthState state){
+  return switch(state){
+  AuthLoading _ => 'AuthLoading View',
+  AuthSuccess _ => 'AuthSuccess View:${state.user}',
+  AuthFailure _ => 'AuthFailure View:${state.error}',
+ };
+}
+```
+
 # throttle 函数内用法
 ```dart
 // 记录节流函数，保证不创建一个新的代理函数实例，保证其生效

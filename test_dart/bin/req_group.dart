@@ -7,7 +7,7 @@ Future<void> req2() async {
   await Future.delayed(Duration(seconds: 3), () => print('222222'));
 }
 
-void excuteGroup() {
+void executeGroup() {
   Future.wait([
     req1(),
     req2(),

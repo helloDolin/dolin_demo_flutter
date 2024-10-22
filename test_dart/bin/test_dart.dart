@@ -120,30 +120,47 @@ void _testComplete() {
   });
 }
 
+int get getWillFromBirth2TodayDays {
+  DateTime now = DateTime.now();
+  DateTime birthday = DateTime(2024, 5, 28);
+  Duration diff =
+      now.difference(DateTime(birthday.year, birthday.month, birthday.day));
+  return diff.inDays + 1;
+}
+
+(int, double, String) recordTest() {
+  return (18, 70.88, 'name');
+}
+
 void main(List<String> arguments) async {
-  Future.delayed(Duration(seconds: 1)).then((value) => print(456));
-  print('abc');
-  Future(() => print(123));
-  return;
-  // _testComplete();
+  print(getWillFromBirth2TodayDays);
+  print('================================================');
+
+  _testComplete();
   // return;
 
   _testDoubleNumOverflow();
+  print('================================================');
+
   Test t = Test();
   t.can();
   print(t.a);
+  print('================================================');
 
   print(10 * 2 * 2 * 2 * 2);
-  print(6 >> 2);
+  print(10 << 4);
 
+  print('================================================');
   List a = [1, 2, 3, 4];
   List b = ['a', 'b', 'c', 'd'];
   Map map = Map.fromIterables(a, b);
   print(map);
 
+  print('================================================ 转二进制');
   print(10.toRadixString(2));
   print(20.toRadixString(2));
 
+  print('================================================ &、|、~、^');
   print(65 & 11);
   print(65 | 11);
   print(~65);
@@ -156,15 +173,17 @@ void main(List<String> arguments) async {
   num1 = num1 ^ num2;
   print(num1);
   print('$num1 --- $num2');
+
+  print('================================================ 函数签名作为入参');
   add(2, 5, square);
   add(2, 5, (num n) => n * n);
 
+  print('================================================ enum');
   print(Type.values);
   print(Type.values.firstWhere(
     (element) => element.index == 110,
     orElse: () => Type.d,
   ));
-  // return;
 
   String src = '光绪七年辛巳年八月初三（1881年9月25日），出生于浙江绍兴城内东昌坊新台门周家。幼名阿张，长根，长庚，学名周樟寿。';
   RegExp exp = RegExp(r'(\d{1,4})年(\d{1,2})月(\d{1,2})');
@@ -198,6 +217,9 @@ void main(List<String> arguments) async {
   print(stu is Play);
   print(stu.playName());
 
+  print('===================================== 官方单例举例');
+  print(
+      'https://flutter.cn/community/tutorials/singleton-pattern-in-flutter-n-dart');
   print(Singleton() == Singleton());
   print(identical(Singleton(), Singleton()));
 
@@ -212,5 +234,5 @@ void main(List<String> arguments) async {
 
   // req group
   print('===================================== req group');
-  excuteGroup();
+  executeGroup();
 }
