@@ -69,7 +69,9 @@ dependencies:
   flutter_plugin_practice:
     path: ./flutter_plugin_practice
   json_annotation: 4.8.0
+
   extended_nested_scroll_view: ^6.2.1
+  sliding_up_panel: ^2.0.0+1
 
 
   flutter:

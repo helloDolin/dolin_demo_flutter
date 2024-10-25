@@ -1,3 +1,89 @@
+# 高斯模糊
+```dart
+// 重点、核心：在 Stack 外包一层 ClipRRect
+/*
+ClipRRect 的作用是裁剪子组件的显示区域，确保所有内容，包括 BackdropFilter 的效果，都被限制在指定的圆角矩形内。
+如果不使用 ClipRRect，模糊效果可能会影响到外部区域，这是因为 BackdropFilter 只在绘制时应用效果而不裁剪边界。
+所以，当你需要控制模糊效果的范围时，使用 ClipRRect 是一个很好的解决方案。
+*/
+
+// 合成详情页，返回时高斯模糊会停留，处理这个问题也是加 ClipRRect
+ClipRRect(
+  borderRadius: BorderRadius.circular(100),
+  child: Stack(
+    children: [
+      BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: const SizedBox.shrink(),
+      ),
+      Container(
+        height: 66.w,
+        decoration: BoxDecoration(
+          color: const Color(0xFF000000).withOpacity(0.3),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(100)),
+        ),
+        padding: EdgeInsets.symmetric(
+            horizontal: 15.w, vertical: 13.w),
+        width: double.infinity,
+        child: Row(
+          children: [
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model?.title ?? '',
+                  style: TextStyle(
+                    color: const Color(0xFFFFFFFF),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18.sp,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Spacer(),
+                Text(
+                  subTitle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      color: const Color(0xFF9F9F9F),
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            )),
+            RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '¥',
+                    style: TextStyle(
+                      color: const Color(0xFF3AFFEB),
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextSpan(
+                    text: model?.price ?? '',
+                    style: TextStyle(
+                      color: const Color(0xFF3AFFEB),
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  ),
+),
+```
+
 # 3.0 元组 官方称之为 Records 特性
 记录类型也可以作为返回值，这样可以解决一个函数返回多值的问题
 ```dart

@@ -30,6 +30,7 @@ import 'package:dolin/app/modules/practice/my_provider_page.dart';
 import 'package:dolin/app/modules/practice/popup.dart';
 import 'package:dolin/app/modules/practice/radius_%20summary.dart';
 import 'package:dolin/app/modules/practice/scrollable_list_tab_scroller.dart';
+import 'package:dolin/app/modules/practice/sliding_up_panel_page.dart';
 import 'package:dolin/app/modules/practice/sliver/juejin/page.dart';
 import 'package:dolin/app/modules/practice/sliver/sliver_basic.dart';
 import 'package:dolin/app/modules/practice/stream/stream.dart';
@@ -66,6 +67,9 @@ class PracticeView extends GetView<PracticeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Card('SlidingUpPanelPage', () {
+                Get.to(const SlidingUpPanelPage());
+              }),
               Card('手撕 RenderObject', () {
                 Get.to(const CustomRenderObject());
               }),
