@@ -82,6 +82,22 @@ ClipRRect(
     ],
   ),
 ),
+
+// 图片的话用这个
+AspectRatio(
+  aspectRatio: 1 / 1.2,
+  child: Obx(() => ImageFiltered(
+        imageFilter: ImageFilter.blur(
+          sigmaX: 10,
+          sigmaY: 10,
+        ),
+        child: CachedNetworkImage(
+          imageUrl: controller.blurImgUrl,
+          fit: BoxFit.cover,
+          errorWidget: (_, __, ___) => const SizedBox.expand(),
+        ),
+      )),
+),
 ```
 
 # 3.0 元组 官方称之为 Records 特性
