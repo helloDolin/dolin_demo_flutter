@@ -1,3 +1,7 @@
+# 版本号
+安卓 + 号前为 version name + 后 为 version number，有时候会校验 version number
+version: 1.1.0+110 # +号面逻辑：version 去掉 0，eg：1.1.0 那么 + 后为 110
+
 # mac 安装 apk
 环境变量配置,eg:
 export PATH="/Users/bd/Library/Android/sdk/platform-tools:$PATH"

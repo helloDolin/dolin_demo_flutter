@@ -1,3 +1,77 @@
+# Safe
+```dart
+  Stack _buildBody(BuildContext context) {
+    return Stack(
+      children: [
+        Column(
+          children: [
+            SizedBox(height: MediaQuery.paddingOf(context).top),
+            AspectRatio(
+              aspectRatio: 1,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: CachedNetworkImage(
+                  imageUrl: controller.detailModel.propPic,
+                  fit: BoxFit.cover,
+                  errorWidget: (_, __, ___) => const SizedBox.expand(),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Positioned(
+          top: MediaQuery.paddingOf(context).top + Get.width - 39.w,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: _buildBottom(),
+        ),
+        const Positioned(
+          child: BackBtn(),
+        ),
+      ],
+    );
+  }
+/*
+1. extendBody: true,
+2. _buildBottom 结构为
+Expand() 套 ListView，ListView 最后一个元素为
+const SafeArea(
+  top: false,
+  child: SizedBox.shrink(),
+),
+这样子的话，我底部 bottomNavigationBar 随便高度，都不用调整 ListView，且 ListView 有穿过 bottomNavigationBar 的效果 😄
+* /
+```
+
+# 字体遮罩（局部亮光效果）
+```dart
+SizedBox(
+  height: 100.h,
+  child: Padding(
+    padding: EdgeInsets.fromLTRB(68.w, 8.h, 68.w, 0),
+    child: Center(
+      child: ShaderMask(
+        shaderCallback: (Rect bounds) {
+          return const LinearGradient(
+            colors: [
+              Color(0xFFFF9DE2),
+              Colors.white,
+              Color(0xFFFF9DE2),
+            ],
+          ).createShader(bounds);
+        },
+        child: Text(
+          '运气爆棚！升级过程中发生了突变获得了更稀有的奖励',
+          style: TextStyle(fontSize: 16.sp),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    ),
+  ),
+),
+```
+
 # 高斯模糊
 ```dart
 // 重点、核心：在 Stack 外包一层 ClipRRect
