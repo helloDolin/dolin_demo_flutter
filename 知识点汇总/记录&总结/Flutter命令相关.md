@@ -49,3 +49,16 @@ flutter pub cache clean
 
 ## 杀掉 dart 进程
 killall - dart
+
+## 创建项目
+flutter create -i objc -a java project_name
+flutter create -i objc -a kotlin project_name
+
+## 创建 package
+flutter create --template=package package_name
+
+## 创建 dart 项目
+dart create project_name
+
+## 创建 Flutter 模块
+flutter create -t module <module_name>

@@ -9,16 +9,6 @@
 
 勿畏难，勿轻略，让我们在技术路上继续扩大自己的边界，保持学习，持续成长。
 
-## 创建 iOS OC、Android java 项目
-flutter create -i objc -a java poker
-flutter create -i objc -a kotlin poker
-
-## 创建 package
-flutter create --template=package components
-
-## dart practice
-dart create project_name
-
 ## 生命周期
 State：创建（插入视图树）、更新（在视图树中存在）、销毁（从视图树中移除） （图片示例 https://www.jianshu.com/p/0c776fc06a01 ）
  
