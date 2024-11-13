@@ -76,7 +76,7 @@ DEPENDENCIES:
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
-  trunk:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - MTBBarcodeScanner
     - OrderedSet
     - SwiftProtobuf
@@ -150,6 +150,6 @@ SPEC CHECKSUMS:
   wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
   webview_flutter_wkwebview: 4f3e50f7273d31e5500066ed267e3ae4309c5ae4
 
-PODFILE CHECKSUM: c80127498cf8339fa3f24c533e3083dace435f8e
+PODFILE CHECKSUM: 7c27f6b906902e0da6e8d8328cea12336ff18a8c
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.16.2

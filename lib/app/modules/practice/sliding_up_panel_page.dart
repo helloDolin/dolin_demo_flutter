@@ -43,7 +43,7 @@ class SlidingUpPanelPage extends StatelessWidget {
               ),
               const Expanded(
                 child: Center(
-                  child: Text('This is the sliding Widget'),
+                  child: Text('或者用官方提供的 DraggableScrollableSheet'),
                 ),
               ),
             ],

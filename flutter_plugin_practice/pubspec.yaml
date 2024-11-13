@@ -1,7 +1,7 @@
 name: flutter_plugin_practice
 description: A new Flutter plugin project.
 version: 0.0.2
-homepage:
+homepage: "shaolin"
 
 environment:
   sdk: ">=2.19.5 <3.0.0"
