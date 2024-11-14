@@ -11,9 +11,31 @@ adb install /Users/bd/Downloads/Postern_v3.1.3_apkpure.com.apk
 使用 Android Debug Bridge（ADB）来安装一个 APK 文件到 Android 设备上，是一个用于 Android 设备调试和开发的命令行工具
 
 # jenv
-jenv add /Library/Java/JavaVirtualMachines/jdk-19.0.2.jdk/Contents/Home
+安装 jenv： 
+brew install jenv
+然后，确保 jenv 正常工作。将以下内容添加到你的 ~/.zshrc
+export PATH="$HOME/.jenv/bin:$PATH"
+当前 shell 中重新加载 jenv 配置
+eval "$(jenv init -)"
+
+安装 jdk17 ：
+brew install openjdk@17
+
+手动下载：
+https://www.oracle.com/java/technologies/downloads/#jdk21-mac
+
+清除 Gradle 缓存：
+sudo rm -rf ~/.gradle/caches/
+
+jenv add /opt/homebrew/opt/openjdk@17 (brew 方式安装的位置)
+jenv add /Users/bd/dev/jdk/jdk-19.0.2.jdk/Contents/Home
+jenv add /Users/bd/dev/jdk/jdk-21.0.5.jdk/Contents/Home
+
+一直提示 ln: /Users/bd/.jenv/versions/oracle64-19.0.2: No such file or directory
+解决：eval "$(jenv init -)"
+
 jenv versions
-jenv global 19.0
+jenv global 17.0
 java --version
 
 # 给脚本添加执行权限
