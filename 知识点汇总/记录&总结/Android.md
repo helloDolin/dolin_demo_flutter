@@ -24,9 +24,14 @@ brew install openjdk@17
 手动下载：
 https://www.oracle.com/java/technologies/downloads/#jdk21-mac
 
+解压到指定目录
+tar -xvzf jdk-21_macos-aarch64_bin.tar.gz -C /path/to/your/desired/directory
+
+
 清除 Gradle 缓存：
 sudo rm -rf ~/.gradle/caches/
-
+jenv add /Users/bd/dev/jdk/21.0.1
+sudo jenv add /Users/bd/dev/jdk/openjdk@21/21.0.3
 jenv add /opt/homebrew/opt/openjdk@17 (brew 方式安装的位置)
 jenv add /Users/bd/dev/jdk/jdk-19.0.2.jdk/Contents/Home
 jenv add /Users/bd/dev/jdk/jdk-21.0.5.jdk/Contents/Home
@@ -37,6 +42,18 @@ jenv add /Users/bd/dev/jdk/jdk-21.0.5.jdk/Contents/Home
 jenv versions
 jenv global 17.0
 java --version
+
+卸载：
+brew uninstall jenv
+rm -rf .jenv
+注释掉 zshrc 关于 jenv 的东西
+输入 jenv
+zsh: command not found: jenv
+即代表成功
+
+## 查看 java 可执行文件位置
+which java
+
 
 # 给脚本添加执行权限
 chmod +x script.sh
