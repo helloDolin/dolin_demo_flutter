@@ -100,6 +100,9 @@ https://jdk.java.net/archive/
 export JAVA_HOME=/Users/bd/dev/jdk/jdk-21.0.1.jdk/Contents/Home
 export PATH=$JAVA_HOME/bin:$PATH
 
+export JAVA_HOME=/Users/bd/dev/jdk/jdk-21.0.5.jdk/Contents/Home
+export PATH=$JAVA_HOME/bin:$PATH
+
 # jenv
 jenv versions
 jenv global 17
