@@ -133,6 +133,24 @@ int get getWillFromBirth2TodayDays {
 }
 
 void main(List<String> arguments) async {
+  String originalUrl1 =
+      'https://www.baidu.com/s?ie=utf-8&f=3&rsv_bp=1&rsv_idx=1&tn=baidu&wd=%E5%8D%97%E7%BF%94%E6%98%9F%E5%9F%8E%E5%8D%AB%E7%94%9F%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%E7%94%B5%E8%AF%9D&fenlei=256&rsv_pq=0x8da94a7200e5489b&rsv_t=fee23K77MxBG6qGpOj9kSyps1jBtfUp2Z3lzGqfKZFZ9iyvKxwLzV6zxiKc&rqlang=en&rsv_dl=ts_0&rsv_enter=1&rsv_sug3=19&rsv_sug1=10&rsv_sug7=100&rsv_sug2=0&rsv_btype=i&prefixsug=%25E5%258D%2597%25E7%25BF%2594%25E6%2598%259F%25E5%259F%258E&rsp=0&inputT=7937&rsv_sug4=7938';
+  String originalUrl2 = 'https://www.example.com/搜索/编码测试?asdf=123&哈哈=嘿嘿';
+
+  String encodedUrl = Uri.encodeFull(originalUrl2);
+  String newUrl = Uri.decodeFull(encodedUrl);
+  print(newUrl);
+  Uri uri = Uri.parse(newUrl);
+  print(uri.scheme);
+  print(uri.host);
+  print(uri.port);
+  print(uri.path);
+  Map<String, String> queryParams = uri.queryParameters;
+  queryParams.forEach((key, value) {
+    print('$key: $value');
+  });
+  return;
+
   print(getWillFromBirth2TodayDays);
   print('================================================');
 

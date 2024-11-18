@@ -1,4 +1,4 @@
-# Safe
+# ListView 穿过 bottomNavigationBar 效果
 ```dart
   Stack _buildBody(BuildContext context) {
     return Stack(
@@ -47,7 +47,7 @@ const SafeArea(
 # 字体遮罩（局部亮光效果）
 ```dart
 SizedBox(
-  height: 100.h,
+  height: 100,
   child: Padding(
     padding: EdgeInsets.fromLTRB(68.w, 8.h, 68.w, 0),
     child: Center(
@@ -628,50 +628,19 @@ AnimatedBuilder _buildTestAnimation() {
 * 安卓 GridView 配合 pull_to_refresh_flutter3，给 padding 的话，上拉加载更多显示有问题
 * 安卓底部没有完全展示修改
 ```dart
-SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
-systemNavigationBarColor: systemNavigationBarColor,
-systemNavigationBarDividerColor: systemNavigationBarDividerColor,
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  const systemUiOverlayStyle = SystemUiOverlayStyle(
+    systemNavigationBarDividerColor: Colors.transparent,
+    systemNavigationBarColor: Colors.transparent,
+  );
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  runApp(const MyApp());
+}
 ```
+
 * 安卓的 .9 图，到 Flutter 这边为 centerSlice
 * TabBar 和 TabBarView 不是非要成对出现
-* 自定义 TabBar 的 indicator
-```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-class TriangleTabIndicator extends Decoration {
-  final Color color;
-
-  const TriangleTabIndicator({required this.color});
-
-  @override
-  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _TrianglePainter(color);
-  }
-}
-
-class _TrianglePainter extends BoxPainter {
-  final Paint _paint;
-
-  _TrianglePainter(Color color) : _paint = Paint()..color = color;
-
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    final Rect rect = offset & configuration.size!;
-    final double triangleSize = 12.w;
-    // 三角形起点坐标
-    final double startX = configuration.size!.width + rect.left;
-    final double startY = configuration.size!.height - 12.w;
-    final Path path = Path()
-      ..moveTo(startX, startY)
-      ..lineTo(startX - triangleSize, startY)
-      ..lineTo(startX, startY - triangleSize)
-      ..close();
-    // canvas.drawRect(rect, Paint()..color = Colors.blue);
-    canvas.drawPath(path, _paint);
-  }
-}
-```
 * 自定义 TabBarView 的 physics
 ```dart
 TabBarView(
@@ -702,10 +671,8 @@ class CustomTabBarViewScrollPhysics extends ScrollPhysics {
 }
 ```
 
-
-
 # factory 关键字
-在Dart语言中，factory关键字用于创建一个工厂构造函数。工厂构造函数与普通构造函数的区别在于，它们可以返回一个已经存在的实例，或者返回一个子类的实例，而不必每次都创建新的实例
+在 Dart 语言中，factory 关键字用于创建一个工厂构造函数。工厂构造函数与普通构造函数的区别在于，它们可以返回一个已经存在的实例，或者返回一个子类的实例，而不必每次都创建新的实例
 
 使用场景如下：
 

@@ -10,6 +10,11 @@ rbenv versions # 查看系统中所有 ruby 版本即当前使用的版本
 ）
 使用 rbenv 管理 ruby 版本
 
+# 查看最新 ruby 信息
+官网：
+https://www.ruby-lang.org/zh_cn/
+https://www.ruby-lang.org/en/downloads/
+
 # 查看安装进度
 sudo gem install cocoapods -v 
 pod install --verbose

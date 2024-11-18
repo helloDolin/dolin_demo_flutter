@@ -1,6 +1,6 @@
 # 版本号
 安卓 + 号前为 version name + 后 为 version number，有时候会校验 version number
-version: 1.1.0+110 # +号面逻辑：version 去掉 0，eg：1.1.0 那么 + 后为 110
+version: 1.1.0+1101 # +号面逻辑：version 去掉点缀build号，eg：1.1.0 那么 + 后为 110
 
 # mac 安装 apk
 环境变量配置,eg:
@@ -9,6 +9,9 @@ export PATH="/Users/bd/Library/Android/sdk/platform-tools:$PATH"
 安装 eg：
 adb install /Users/bd/Downloads/Postern_v3.1.3_apkpure.com.apk
 使用 Android Debug Bridge（ADB）来安装一个 APK 文件到 Android 设备上，是一个用于 Android 设备调试和开发的命令行工具
+
+# 信任 JDK 路径：
+sudo xattr -r -d com.apple.quarantine /Users/bd/dev/jdk/openjdk-21.0.1
 
 # jenv
 安装 jenv： 
@@ -30,6 +33,8 @@ tar -xvzf jdk-21_macos-aarch64_bin.tar.gz -C /path/to/your/desired/directory
 
 清除 Gradle 缓存：
 sudo rm -rf ~/.gradle/caches/
+
+jenv 添加 jdk
 jenv add /Users/bd/dev/jdk/21.0.1
 sudo jenv add /Users/bd/dev/jdk/openjdk@21/21.0.3
 jenv add /opt/homebrew/opt/openjdk@17 (brew 方式安装的位置)
@@ -102,13 +107,6 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 export JAVA_HOME=/Users/bd/dev/jdk/jdk-21.0.5.jdk/Contents/Home
 export PATH=$JAVA_HOME/bin:$PATH
-
-# jenv
-jenv versions
-jenv global 17
-
-添加到 jenv 中
-jenv add /opt/homebrew/Cellar/openjdk@17/17.0.13/libexec/openjdk.jdk/Contents/Home
 
 # 解决 poker 打包问题
 1. 复制打包机上的 jdk 包到 jdk 目录下，然后加入到 jenv

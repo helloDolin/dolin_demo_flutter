@@ -142,6 +142,7 @@ class _TestState extends State<Test> {
 ## 交互操作
 * 手势
 * 设备
+
 ## 逻辑处理
 * 界面逻辑（eg：有数据、无数据、异常场景显示什么？）
 * 业务逻辑（eg：下单后，库存需要变化）
@@ -151,11 +152,13 @@ class _TestState extends State<Test> {
 ## 可变量
 * 类型 变量名 = 初始值
 * 源码中没有一处用 var 修饰，明确类型对编码者和阅读者都很重要，不要临时偷懒而造成后期的阅读负担
+
 ## 不可变量
 * final：运行期不可变量
 * 编译时常量 const
 * const:编译时常量，使用 const 构造方法的类中，其所有成员属性必须以 final 修饰，有 const 构造的类才能用 const
 * case: 后只能为常量
+
 ## 静态量
 static：只能用于类中
 ```dart
