@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:dolin/app/https/custom_error.dart';
 import 'package:dolin/app/https/custom_interceptor.dart';
 import 'package:dolin/app/services/user.dart';
+import 'package:dolin/app/util/toast_util.dart';
 import 'package:get/get.dart' hide FormData, Response;
 
 // 单例参考官方例子：
@@ -52,11 +53,95 @@ class HttpsClient {
     return headers;
   }
 
+  void handleError(CustomError err, {bool isShowErrorToast = true}) {
+    handleErrorCode(err.code);
+    if (isShowErrorToast && err.message.isNotEmpty) {
+      showToast(err.message);
+    }
+  }
+
+  /// 处理错误 code
+  /// 与服务端协商的 code
+  void handleErrorCode(int code) {
+    switch (code) {
+      case 401:
+        UserStore.to.onLogout();
+      default:
+        break;
+    }
+  }
+
+  /// 创建自定义错误
+  CustomError createCustomError(DioError error) {
+    switch (error.type) {
+      case DioErrorType.cancel:
+        return CustomError(code: -1, message: '请求取消');
+      case DioErrorType.connectionTimeout:
+        return CustomError(code: -1, message: '连接超时');
+      case DioErrorType.sendTimeout:
+        return CustomError(code: -1, message: '请求超时');
+      case DioErrorType.receiveTimeout:
+        return CustomError(code: -1, message: '响应超时');
+      case DioErrorType.unknown:
+        return CustomError(
+          code: error.response?.statusCode ?? -1,
+          message: error.message ?? '',
+        );
+      case DioErrorType.badResponse:
+        {
+          try {
+            final errCode =
+                error.response != null ? error.response!.statusCode! : -1;
+            // String errMsg = error.response.statusMessage;
+            // return CustomError(code: errCode, message: errMsg);
+            switch (errCode) {
+              case 400:
+                return CustomError(code: errCode, message: '请求语法错误');
+              case 401:
+                return CustomError(code: errCode, message: '没有权限');
+              case 403:
+                return CustomError(code: errCode, message: '服务器拒绝执行');
+              case 404:
+                return CustomError(code: errCode, message: '无法连接服务器');
+              case 405:
+                return CustomError(code: errCode, message: '请求方法被禁止');
+              case 500:
+                return CustomError(code: errCode, message: '服务器内部错误');
+              case 502:
+                return CustomError(code: errCode, message: '无效的请求');
+              case 503:
+                return CustomError(code: errCode, message: '服务器挂了');
+              case 505:
+                return CustomError(code: errCode, message: '不支持HTTP协议请求');
+              default:
+                {
+                  // return CustomError(code: errCode, message: "未知错误");
+                  return CustomError(
+                    code: errCode,
+                    message: error.response != null
+                        ? error.response!.statusMessage!
+                        : '',
+                  );
+                }
+            }
+          } on Exception catch (_) {
+            return CustomError(code: -1, message: '未知错误');
+          }
+        }
+      // ignore: no_default_cases
+      default:
+        {
+          return CustomError(code: -1, message: error.message ?? '');
+        }
+    }
+  }
+
   Future<dynamic> get(
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
     bool isShowLoading = true,
+    bool isShowErrorToast = true,
   }) async {
     try {
       final requestOptions = options ?? Options();
@@ -65,6 +150,7 @@ class HttpsClient {
       if (authorization != null) {
         requestOptions.headers!.addAll(authorization);
       }
+
       // if (isShowLoading) {
       //   EasyLoading.show(dismissOnTap: true);
       // }
@@ -75,15 +161,7 @@ class HttpsClient {
       );
       return res.data;
     } on DioError catch (e) {
-      if (e.type == DioErrorType.cancel) {
-        rethrow;
-      }
-      if (e.type == DioErrorType.badResponse) {
-        throw CustomError(message: '请求失败:${e.response?.statusCode ?? -1}');
-      }
-      throw CustomError(
-        message: '请求失败,请检查网络',
-      );
+      handleError(createCustomError(e), isShowErrorToast: isShowErrorToast);
     }
   }
 
@@ -91,6 +169,7 @@ class HttpsClient {
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
+    bool isShowErrorToast = true,
   }) async {
     try {
       final requestOptions = options ?? Options();
@@ -106,13 +185,7 @@ class HttpsClient {
       );
       return res.data;
     } on DioError catch (e) {
-      if (e.type == DioErrorType.cancel) {
-        rethrow;
-      }
-      if (e.type == DioErrorType.badResponse) {
-        throw CustomError(message: '请求失败:${e.response?.statusCode ?? -1}');
-      }
-      throw CustomError(message: '请求失败,请检查网络');
+      handleError(createCustomError(e), isShowErrorToast: isShowErrorToast);
     }
   }
 }
