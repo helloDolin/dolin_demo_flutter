@@ -65,9 +65,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        return Future(() => false);
-      },
+      onWillPop: () => Future(() => false),
       child: Scaffold(
         body: Container(
           decoration: widget.backgroundDecoration,
@@ -145,7 +143,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
                     color: Colors.white,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

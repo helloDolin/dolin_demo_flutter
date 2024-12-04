@@ -2,6 +2,7 @@ import 'package:dolin/app/constants/app_fonts.dart';
 import 'package:dolin/app/modules/index/controllers/index_controller.dart';
 import 'package:dolin/generated/locales.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class IndexView extends GetView<IndexController> {
@@ -22,6 +23,7 @@ class IndexView extends GetView<IndexController> {
           currentIndex: controller.currentIndex.value,
           type: BottomNavigationBarType.fixed,
           onTap: (index) {
+            HapticFeedback.heavyImpact();
             controller.setCurrentIndex(index);
             controller.pageController.jumpToPage(index);
           },

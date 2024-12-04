@@ -73,7 +73,6 @@ dependencies:
   extended_nested_scroll_view: ^6.2.1
   sliding_up_panel: ^2.0.0+1
 
-
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -96,6 +95,12 @@ dev_dependencies:
   flutter_launcher_icons: 0.13.1
 
 flutter:
+  uses-material-design: true
+  # 放开下面注释执行 pub get 即为 module 方式接入项目中是 .ios .android 相反为不带点的目录
+  # module:
+  #   androidX: true
+  #   androidPackage: com.example.flutter_module
+  #   iosBundleIdentifier: com.example.flutterModule
   assets:
     - assets/images/
     - assets/statement.txt
@@ -103,7 +108,6 @@ flutter:
     - assets/json/
     - assets/html/
 
-  uses-material-design: true
   fonts: # 配置字体，可配置多个，支持ttf和otf,ttc等字体资源
     - family: iconFonts
       fonts:
