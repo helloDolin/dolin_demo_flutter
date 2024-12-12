@@ -6,6 +6,7 @@ import 'package:dolin/app/modules/home/index/controllers/home_controller.dart';
 import 'package:dolin/app/modules/home/movie_list/movie_list_view.dart';
 import 'package:dolin/app/modules/mine/index/views/mine_view.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
+import 'package:extended_sliver/extended_sliver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -44,49 +45,52 @@ class HomeView extends GetView<HomeController> {
 
   Widget _buildScaffoldBody(BuildContext context) {
     final double statusBarHeight = MediaQuery.paddingOf(context).top;
-    final double pinnedHeaderHeight =
-        // statusBar height
-        statusBarHeight +
-            // pinned SliverAppBar height in header
-            kToolbarHeight;
+    // final double pinnedHeaderHeight =
+    //     // statusBar height
+    //     statusBarHeight +
+    //         // pinned SliverAppBar height in header
+    //         kToolbarHeight;
     return ExtendedNestedScrollView(
+      onlyOneScrollInBody: true,
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
-          SliverAppBar(
-            backgroundColor: Colors.blue,
-            pinned: true,
-            expandedHeight: 190,
+          // 你可以创建一个SliverAppbar，不用去设置expandedHeight。
+          ExtendedSliverAppbar(
+            leading: const SizedBox.shrink(),
             title: const Text('home'),
-            flexibleSpace: ImageFiltered(
+            statusbarHeight: statusBarHeight,
+            toolbarHeight: kToolbarHeight,
+            toolBarColor: Colors.white,
+            background: ImageFiltered(
               imageFilter: ImageFilter.blur(
                 sigmaX: 2,
                 sigmaY: 2,
               ),
-              child: SizedBox.expand(
-                child: Image.asset(
-                  'assets/images/btc_2_the_moon.jpg',
-                  fit: BoxFit.cover,
-                ),
+              child: Image.asset(
+                'assets/images/btc_2_the_moon.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SliverPinnedToBoxAdapter(
+            child: ColoredBox(
+              color: Colors.white,
+              child: TabBar(
+                controller: controller.tabController,
+                tabs: controller.categoryList
+                    .map(
+                      (map) => Tab(
+                        text: map['title'],
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),
         ];
       },
-      pinnedHeaderSliverHeightBuilder: () {
-        return pinnedHeaderHeight;
-      },
       body: Column(
         children: [
-          TabBar(
-            controller: controller.tabController,
-            tabs: controller.categoryList
-                .map(
-                  (map) => Tab(
-                    text: map['title'],
-                  ),
-                )
-                .toList(),
-          ),
           Expanded(
             child: TabBarView(
               controller: controller.tabController,
