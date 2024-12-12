@@ -1,5 +1,4 @@
 import 'package:dolin/app/modules/mine/index/controllers/mine_controller.dart';
-import 'package:dolin/app/modules/practice/webview/flutter_inappwebview.dart';
 import 'package:dolin/app/routes/app_pages.dart';
 import 'package:dolin/app/services/user.dart';
 import 'package:dolin/app/util/dialog_util.dart';
@@ -208,7 +207,7 @@ class MineView extends GetView<MineController> {
                   const Icon(
                     Icons.chevron_right,
                     color: Colors.grey,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -224,7 +223,7 @@ class MineView extends GetView<MineController> {
         visible: UserStore.to.isLogin.value,
         child: InkWell(
           onTap: () {
-            Get.to<void>(() => const FlutterInappwebview());
+            // Get.to<void>(() => const FlutterInappwebview());
           },
           child: SizedBox(
             height: 100,
@@ -265,7 +264,7 @@ class MineView extends GetView<MineController> {
                   const Icon(
                     Icons.chevron_right,
                     color: Colors.grey,
-                  )
+                  ),
                 ],
               ),
             ),

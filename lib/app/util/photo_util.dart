@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:dolin/app/util/toast_util.dart';
-import 'package:gallery_saver/gallery_saver.dart';
+// import 'package:gallery_saver/gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /// 检查相册权限
@@ -31,10 +31,10 @@ Future<void> saveNetImage(String url) async {
   if (Platform.isIOS && !await checkPhotoPermission()) {
     return;
   }
-  final bool? res = await GallerySaver.saveImage(url);
-  if (res ?? false) {
-    showToast('保存成功');
-  }
+  // final bool? res = await GallerySaver.saveImage(url);
+  // if (res ?? false) {
+  //   showToast('保存成功');
+  // }
 }
 
 /// 保存图片-桌面平台

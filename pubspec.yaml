@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.2
-  cached_network_image: 3.2.3 # 磁盘缓存 img
+  cached_network_image: 3.3.0 # 磁盘缓存 img
   get: 4.6.5 # getx
   flutter_screenutil: 5.9.0 # 屏幕适配
   dio: 5.1.0
@@ -20,7 +20,7 @@ dependencies:
   pull_to_refresh: 2.0.0
   easy_refresh: 3.3.1+2
   underline_indicator: 0.0.4
-  flutter_inappwebview: 5.8.0 # webView
+  # flutter_inappwebview: 6.0.0 # webView
   webview_flutter: 4.2.3
   animate_do: 3.0.2 # 动画
   # wechat_assets_picker: 8.6.3 # 照片选择
@@ -29,8 +29,9 @@ dependencies:
   pin_code_fields: 7.4.0 # 验证码输入
   city_pickers: 1.2.1 # 省市区选择器
   crypto: 3.0.2 # 加密
-  device_info_plus: 8.2.0
-  url_launcher: 6.1.10
+  device_info_plus: ^10.1.2
+  # url_launcher: ^6.1.7
+  # url_launcher_ios: ^6.1.7  
   barcode_scan2: 4.2.4 # 扫码
   uni_links: 0.5.1 # Deep Links (Android) and Universal Links and Custom URL schemes (iOS)
   package_info_plus: 4.2.0
@@ -39,10 +40,10 @@ dependencies:
   logger_flutter_plus: 1.0.5
   hive: 2.2.3
   hive_flutter: 1.1.0
-  path_provider: 2.0.14
+  path_provider: ^2.1.4
   flutter_smart_dialog: 4.9.0+6
   lottie: 2.3.2
-  share_plus: 7.0.0
+  # share_plus: 10.0.0
   decimal: 2.3.2
   flutter_native_splash: 2.2.19
   intl: ^0.18.0
@@ -61,7 +62,8 @@ dependencies:
   video_player: ^2.7.0
 
   permission_handler: ^10.0.0 # 权限
-  gallery_saver: ^2.3.2
+  # gallery_saver: ^2.3.2
+  image_gallery_saver: 2.0.3
   file_selector: ^0.9.2+4 # 文件选择
   desktop_window: ^0.4.0 # 桌面版大小设置
 

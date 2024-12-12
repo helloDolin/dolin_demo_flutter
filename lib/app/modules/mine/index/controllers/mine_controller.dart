@@ -4,7 +4,7 @@ import 'package:dolin/app/services/app_settings_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+// import 'package:url_launcher/url_launcher_string.dart';
 
 class MineController extends GetxController {
   final AppSettingsService settings = AppSettingsService.instance;
@@ -70,10 +70,10 @@ class MineController extends GetxController {
                     elevation: 0,
                   ),
                   onPressed: () {
-                    launchUrlString(
-                      'https://www.baidu.com',
-                      mode: LaunchMode.externalApplication,
-                    );
+                    // launchUrlString(
+                    //   'https://www.baidu.com',
+                    //   mode: LaunchMode.externalApplication,
+                    // );
                   },
                   child: const Text('更新'),
                 ),

@@ -37,21 +37,19 @@ import 'package:dolin/app/modules/practice/sliver/sliver_basic.dart';
 import 'package:dolin/app/modules/practice/stream/stream.dart';
 import 'package:dolin/app/modules/practice/stream/stream_game.dart';
 import 'package:dolin/app/modules/practice/time_line.dart';
-import 'package:dolin/app/modules/practice/webview/flutter_inappwebview.dart';
 import 'package:dolin/app/modules/practice/webview/local_html_page.dart';
 import 'package:dolin/app/modules/practice/webview/webview_flutter.dart';
 import 'package:dolin/app/modules/practice/wechat_friends.dart';
 import 'package:dolin/app/routes/app_pages.dart';
 import 'package:dolin/app/util/random_color_util.dart';
-import 'package:dolin/app/util/toast_util.dart';
 import 'package:dolin/generated/locales.g.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+// import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher_string.dart';
 
 class PracticeView extends GetView<PracticeController> {
   const PracticeView({super.key});
@@ -240,13 +238,13 @@ class PracticeView extends GetView<PracticeController> {
     return ExpandableWidget(
       title: 'webView',
       children: [
-        ListTile(
-          title: const Text('FlutterInappwebview'),
-          onTap: () {
-            Get.to(() => const FlutterInappwebview());
-          },
-          trailing: const Icon(Icons.arrow_forward_ios),
-        ),
+        // ListTile(
+        //   title: const Text('FlutterInappwebview'),
+        //   onTap: () {
+        //     Get.to(() => const FlutterInappwebview());
+        //   },
+        //   trailing: const Icon(Icons.arrow_forward_ios),
+        // ),
         ListTile(
           title: const Text('WebviewFlutter'),
           onTap: () {
@@ -366,9 +364,9 @@ class PracticeView extends GetView<PracticeController> {
         ListTile(
           title: const Text('学习链接'),
           onTap: () {
-            launchUrlString(
-              'https://juejin.cn/book/6844733827265331214/section/6844733827214999565',
-            );
+            // launchUrlString(
+            //   'https://juejin.cn/book/6844733827265331214/section/6844733827214999565',
+            // );
           },
           trailing: const Icon(Icons.arrow_forward_ios),
         ),
@@ -425,30 +423,30 @@ class PracticeView extends GetView<PracticeController> {
       title: 'url_launcher',
       children: [
         Card('打开百度', () async {
-          final uri = Uri.parse('https://www.baidu.com');
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
-          }
+          // final uri = Uri.parse('https://www.baidu.com');
+          // if (await canLaunchUrl(uri)) {
+          //   await launchUrl(uri);
+          // }
         }),
         Card('打电话', () async {
-          final uri = Uri.parse('tel:10086');
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
-          }
+          // final uri = Uri.parse('tel:10086');
+          // if (await canLaunchUrl(uri)) {
+          //   await launchUrl(uri);
+          // }
         }),
         Card('发短信', () async {
-          final uri = Uri.parse('sms:10086');
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
-          }
+          // final uri = Uri.parse('sms:10086');
+          // if (await canLaunchUrl(uri)) {
+          //   await launchUrl(uri);
+          // }
         }),
         Card('打开微信', () async {
-          final uri = Uri.parse('weixin://');
-          if (await canLaunchUrl(uri)) {
-            await launchUrl(uri);
-          } else {
-            showToast('请安装微信');
-          }
+          // final uri = Uri.parse('weixin://');
+          // if (await canLaunchUrl(uri)) {
+          //   await launchUrl(uri);
+          // } else {
+          //   showToast('请安装微信');
+          // }
         }),
         Card('高德地图-导航北大', () async {
           const title = '北京大学';
@@ -458,16 +456,16 @@ class PracticeView extends GetView<PracticeController> {
             '${Platform.isAndroid ? 'android' : 'ios'}amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2&poiname=$title',
           );
           debugPrint(uri.toString());
-          try {
-            if (await canLaunchUrl(uri)) {
-              await launchUrl(uri);
-            } else {
-              showToast('请安装高德地图');
-              debugPrint('无法调起高德地图');
-            }
-          } catch (e) {
-            debugPrint('无法调起高德地图');
-          }
+          // try {
+          //   if (await canLaunchUrl(uri)) {
+          //     await launchUrl(uri);
+          //   } else {
+          //     showToast('请安装高德地图');
+          //     debugPrint('无法调起高德地图');
+          //   }
+          // } catch (e) {
+          //   debugPrint('无法调起高德地图');
+          // }
         }),
       ],
     );
