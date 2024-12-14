@@ -21,8 +21,22 @@ export PATH="$HOME/.jenv/bin:$PATH"
 当前 shell 中重新加载 jenv 配置
 eval "$(jenv init -)"
 
-安装 jdk17 ：
+## 安装 jdk17 ：
 brew install openjdk@17
+
+## 查看 JDK 目录
+/usr/libexec/java_home
+
+## java 版本与 gradle 冲突（创建新项目时提示）
+The configured version of Java detected may conflict with the Gradle version in your new
+Flutter app.
+
+[RECOMMENDED] If so, to keep the default Gradle version 7.6.3, make
+sure to download a compatible Java version
+(Java 11 <= compatible Java version < Java 20).
+You may configure this compatible Java version by running:
+
+flutter config --jdk-dir=/opt/homebrew/Cellar/openjdk@17/17.0.13/libexec/openjdk.jdk/Contents/Home
 
 手动下载：
 https://www.oracle.com/java/technologies/downloads/#jdk21-mac

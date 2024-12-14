@@ -62,3 +62,6 @@ dart create project_name
 
 ## 创建 Flutter 模块
 flutter create -t module <module_name>
+
+## 查看详细信息 如：Java version
+flutter doctor --verbose
