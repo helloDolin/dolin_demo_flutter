@@ -5,6 +5,8 @@ Flutter 应用的核心是一个事件循环（Event Loop），它是单线程�
 
 事件循环是一种用于处理异步任务的编程模型，通过事件队列和回调机制实现并发操作。在 Dart 和 Flutter 中，事件循环模型使得单线程也能高效地处理大量异步任务和用户交互，从而实现流畅的应用体验。
 
+Flutter 的事件循环就像一个聪明的管家，它确保所有任务有序执行：先处理紧急的微任务，再处理普通任务。理解它，你就能写出更流畅的 Flutter 应用！
+
 ```dart
 void main() {
   print('Start');
@@ -24,11 +26,6 @@ void main() {
   print('End');
 }
 
-// 任务的合理分配很重要
-      单值              多值
-同步  Type              Iterable<Type>
-异步  Future<Type>      Stream<Type>
-
 // 输出
 Start
 End
@@ -40,6 +37,11 @@ Event 2
 Start 和 End 是同步代码，立即执行。
 Microtask 1 和 Microtask 2 是微任务，在同步代码执行完毕后立即执行。
 Event 1 和 Event 2 是事件，在所有微任务执行完毕后才执行。
+
+// 任务的合理分配很重要
+      单值              多值
+同步  Type              Iterable<Type>
+异步  Future<Type>      Stream<Type>
 ```
 
 
@@ -435,7 +437,7 @@ Dart 对 implements 关键字的功能加强，迫使派生类必须提供 所�
 * 混入类支持 抽象方法 ，而且同样要求派生类必须实现 抽象方法
 * on 后面可以是普通类，也可以是 mixin，目的是限制 mixin 的使用范围。
 Dart 并不区分 mixin 和普通类在 on 中的用法，因为从语义上看，两者都可以用作约束类型。
-你的代码中，on GetxController 意味着 ListPageCommonLogic 这个 mixin 只能被 GetxController 或其子类混入。
+on GetxController 意味着 ListPageCommonLogic 这个 mixin 只能被 GetxController 或其子类混入。
 
 在 dart 3.0.0 之前， 没有构造方法的 class 可以视为 mixin ， 下面的代码是允许的：
 class A {}
