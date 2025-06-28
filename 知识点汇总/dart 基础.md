@@ -508,7 +508,7 @@ print(list2); // [6, 0, 1, 2, 3, 4, 7]
 
 * part part of ：宿主类，拆分庞大的类，不能在非宿主类中 import，宿主类可以使用非宿主类的成员变量，函数，不论是不是私有
 
-* library 将一个木块 library，方便 import
+* library 将一个模块 library，方便 import
 
 
 
