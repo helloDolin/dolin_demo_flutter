@@ -150,7 +150,7 @@ class _WechatFriendsState extends State<WechatFriends>
                   'https://is3-ssl.mzstatic.com/image/thumb/Purple115/v4/39/21/c9/3921c9ff-eaf0-452b-1a38-880e7b6b9098/source/200x200bb.jpg',
                   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2Fbf6fe5f0-4e5c-4dd1-9545-f58151164f0c%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1683630840&t=4b13e03de5df78801080a829a8f815f3',
                   'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F8f92d2dc-7f0f-498b-b295-e878b2f8d83e%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1683630840&t=360880e0100225a1576860bd28fdddeb',
-                  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F925460f4-2e50-4adb-85eb-f48d5dbdba35%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1683630840&t=5e10b6b9bdb940b2181eb09cfbd1f683'
+                  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F925460f4-2e50-4adb-85eb-f48d5dbdba35%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1683630840&t=5e10b6b9bdb940b2181eb09cfbd1f683',
                 ],
               ),
               const SafeArea(child: SizedBox.shrink()),
@@ -227,8 +227,7 @@ class _WechatFriendsState extends State<WechatFriends>
                             .map(
                               (e) => InkWell(
                                 onTap: () {
-                                  openGallery<void>(
-                                    context,
+                                  goToImageViewer<void>(
                                     photoUrlList.indexOf(e),
                                     photoUrlList,
                                   );
@@ -246,7 +245,7 @@ class _WechatFriendsState extends State<WechatFriends>
                             .toList(),
                       );
                     },
-                  )
+                  ),
                 ],
                 const SizedBox(
                   height: 10,
@@ -254,7 +253,7 @@ class _WechatFriendsState extends State<WechatFriends>
                 _menu('3分钟前'),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -331,7 +330,7 @@ class _WechatFriendsState extends State<WechatFriends>
                       ),
                     );
                   },
-                )
+                ),
               ],
             ),
           ),
@@ -380,7 +379,7 @@ class _WechatFriendsState extends State<WechatFriends>
                       color: Colors.cyanAccent,
                       offset: Offset(3, 3),
                       blurRadius: 1,
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -401,7 +400,7 @@ class _WechatFriendsState extends State<WechatFriends>
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -429,7 +428,7 @@ class _WechatFriendsState extends State<WechatFriends>
               key: btnKey,
               child: const Icon(Icons.more_horiz_outlined),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -87,8 +87,8 @@ git push origin HEAD --force  # 强制推送更改到远程仓库
 
 # 合并多个提交为一个：
 // n 为节点个数
-git reset --soft HEAD~3
-git commit -m "feat:多域名切换"
+git reset --soft HEAD~1
+git commit -m "feat:个人信息页 mock（+ image_picker iOS原生侧 info.plist 编辑）"
 git push origin HEAD --force
 
 // 推送到远程分支

@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 
 const double kBallWidth = 60;
 
-late OverlayEntry _overlayEntry;
+OverlayEntry? _overlayEntry;
 RxDouble offsetX = (ScreenUtil().screenWidth - kBallWidth).obs;
 RxDouble offsetY = (ScreenUtil().screenHeight / 2).obs;
 
 void insertDevView() {
+  _overlayEntry?.remove();
   _overlayEntry = OverlayEntry(
     builder: (BuildContext context) {
       return AnimatedPositioned(
@@ -47,7 +48,7 @@ void insertDevView() {
       );
     },
   );
-  Overlay.of(Get.overlayContext!).insert(_overlayEntry);
+  Overlay.of(Get.overlayContext!).insert(_overlayEntry!);
 }
 
 class FloatBall extends StatelessWidget {

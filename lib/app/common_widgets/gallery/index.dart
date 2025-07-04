@@ -1,28 +1,25 @@
 import 'dart:io';
 
-import 'package:dolin/app/util/photo_util.dart';
-import 'package:dolin/app/util/toast_util.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-void openGallery<T>(
-  BuildContext context,
+void goToImageViewer<T>(
   int index,
   List<String> imgUrls,
 ) {
-  Navigator.push(
-    context,
-    MaterialPageRoute<T>(
-      builder: (context) => GalleryPhotoViewWrapper(
-        galleryItems: imgUrls,
-        backgroundDecoration: const BoxDecoration(
-          color: Colors.black,
-        ),
-        initialIndex: index,
+  Get.to(
+    GalleryPhotoViewWrapper(
+      galleryItems: imgUrls,
+      backgroundDecoration: const BoxDecoration(
+        color: Colors.black,
       ),
+      initialIndex: index,
     ),
+    transition: Transition.noTransition,
   );
 }
 
@@ -64,13 +61,13 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future(() => false),
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: Container(
           decoration: widget.backgroundDecoration,
           constraints: BoxConstraints.expand(
-            height: MediaQuery.of(context).size.height,
+            height: ScreenUtil().screenHeight,
           ),
           child: Stack(
             alignment: Alignment.bottomRight,
@@ -96,48 +93,11 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
                 onPageChanged: onPageChanged,
                 scrollDirection: widget.scrollDirection,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () async {
-                      if (Platform.isAndroid || Platform.isIOS) {
-                        await saveNetImage(widget.galleryItems[currentIndex]);
-                      }
-                      if (Platform.isMacOS ||
-                          Platform.isWindows ||
-                          Platform.isLinux) {
-                        showToast('桌面版暂不支持保存');
-                      }
-                    },
-                    child: Text(
-                      '保存',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: const Color(0xFFFFFFFF),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    child: Text(
-                      '${currentIndex + 1} / ${widget.galleryItems.length}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               Positioned(
                 right: 20,
                 top: 100,
                 child: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
+                  onTap: Get.back,
                   child: const Icon(
                     Icons.close,
                     color: Colors.white,
@@ -152,16 +112,27 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
   }
 
   PhotoViewGalleryPageOptions _buildItem(BuildContext context, int index) {
-    final item = widget.galleryItems[index];
+    final String obj = widget.galleryItems[index];
+    final bool isWebPhoto =
+        obj.startsWith('https://') || obj.startsWith('http://');
+    final bool isFilePhoto = obj.startsWith('file://');
+    assert(isWebPhoto || isFilePhoto, '目前只支持网络和本地');
+
     return PhotoViewGalleryPageOptions.customChild(
       child: SizedBox(
-        child: Image.network(item),
+        child: isWebPhoto
+            ? CachedNetworkImage(
+                imageUrl: obj,
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+              )
+            : Image.file(File(obj)),
       ),
       childSize: Size(ScreenUtil().screenWidth, ScreenUtil().screenHeight),
-      initialScale: PhotoViewComputedScale.contained,
-      minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
-      maxScale: PhotoViewComputedScale.covered * 4.1,
-      heroAttributes: PhotoViewHeroAttributes(tag: item),
+      initialScale: PhotoViewComputedScale.contained, //完全包在视图内（看到全图）
+      minScale: 0.5,
+      maxScale: 3.0,
+      heroAttributes: PhotoViewHeroAttributes(tag: obj),
     );
   }
 }

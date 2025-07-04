@@ -173,7 +173,7 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        openGallery<void>(context, 0, [model.shareImage]);
+        goToImageViewer<void>(0, [model.shareImage]);
       },
       child: SizedBox(
         width: double.infinity,
